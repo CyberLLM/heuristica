@@ -76,3 +76,9 @@ li {
   font-size: 0.98em;
   letter-spacing: 0.5px;
 }
+
+.workshop-desc ul {
+  columns: 1 !important;
+  -webkit-columns: 1 !important;
+  -moz-columns: 1 !important;
+}

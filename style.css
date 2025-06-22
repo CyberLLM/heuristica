@@ -1,25 +1,78 @@
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: Arial, sans‑serif; line-height:1.6; color:#333; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f7fbfc;
+  margin: 0;
+  color: #22394d;
+}
 
-/* Header */
-header { background:#f9f9f9; padding:10px 20px; }
-.nav { display:flex; justify-content:space-between; align-items:center; max-width:900px; margin:auto; }
-.nav .logo { font-weight:bold; font-size:1.2em; }
-.nav a { margin-left:15px; text-decoration:none; color:#333; }
+.nav {
+  background: #e3edf2;
+  padding: 20px 0 0 0;
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-/* Hero */
-.hero { background:#e5f5f9; text-align:center; padding:60px 20px; }
-.hero h1 { margin-bottom:10px; font-size:1.8em; }
-.hero p { margin-bottom:20px; }
-.btn { background:#007acc; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; }
+.nav a {
+  text-decoration: none;
+  color: #22394d;
+  background: #f6fafd;
+  padding: 15px 34px 16px 34px;
+  font-weight: 600;
+  border-right: 1px solid #c6d2da;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 0;
+}
 
-/* Services */
-.services { text-align:center; padding:40px 20px; }
-.services h2 { margin-bottom:20px; font-size:1.6em; }
-.services ul { list-style:none; }
-.services li { margin-bottom:10px; }
+.nav a:last-child {
+  border-right: none;
+}
 
-/* Footer */
-footer { background:#333; color:#fff; text-align:center; padding:20px 10px; }
-footer a { color:#fff; text-decoration:underline; }
+.nav a.active,
+.nav a:hover {
+  background: #222;
+  color: #fff;
+}
+
+.container {
+  max-width: 900px;
+  margin: 36px auto 0 auto;
+  background: #fff;
+  padding: 38px 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #e0e5eb;
+}
+
+h1 {
+  font-size: 1.6em;
+  color: #22394d;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  margin: 24px 0 0 0;
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 750px) {
+  .container { padding: 16px 4px; }
+  ul { columns: 1; }
+}
+
+.footer {
+  background: #7c97a5;
+  color: #fff;
+  text-align: center;
+  padding: 16px 8px;
+  margin-top: 40px;
+  font-size: 0.98em;
+  letter-spacing: 0.5px;
+}

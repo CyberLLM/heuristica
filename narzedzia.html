@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Narzędzia | HEURISTICA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .tools-list {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0;
+      list-style: none;
+    }
+    .tools-list li {
+      margin: 0 0 12px 0;
+      text-align: center;
+      font-size: 1.22em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      letter-spacing: 0.5px;
+      border-top: 1px solid #aaa;
+      border-bottom: 1px solid #aaa;
+      padding: 8px 0;
+      transition: background 0.2s;
+    }
+    .tools-list li a {
+      display: block;
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      padding: 8px 0;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tools-list li a:hover, .tools-list li.active a {
+      background: #242829;
+      color: #fff;
+    }
+    .tool-desc {
+      max-width: 800px;
+      margin: 32px auto;
+      background: #f6f9fb;
+      border-radius: 8px;
+      box-shadow: 0 1px 7px #eee;
+      padding: 32px 28px;
+      font-size: 1.08em;
+      line-height: 1.6;
+      display: none;
+    }
+    .tool-desc.active {
+      display: block;
+    }
+    .tool-desc h2 {
+      font-size: 1.4em;
+      margin-bottom: 16px;
+      color: #22394d;
+    }
+    .tool-content {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+    .tool-image {
+      flex: 0 0 200px;
+      max-width: 200px;
+    }
+    .tool-image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .tool-text {
+      flex: 1;
+    }
+    .tool-text ul {
+      columns: 1 !important;
+      -webkit-columns: 1 !important;
+      -moz-columns: 1 !important;
+      margin-top: 15px;
+    }
+    .tool-text li {
+      margin-bottom: 8px;
+    }
+    .order-form {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #e8f1f6;
+      border-radius: 8px;
+      padding: 32px 28px;
+      border: 2px solid #c6d7e0;
+    }
+    .order-form h3 {
+      color: #22394d;
+      margin-bottom: 16px;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+    .form-group {
+      flex: 1;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #d0d0d0;
+      border-radius: 4px;
+      font-size: 0.95em;
+      box-sizing: border-box;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #22394d;
+      outline: none;
+    }
+    .form-group input.required {
+      border-color: #e74c3c;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .checkbox-row {
+      margin: 16px 0;
+    }
+    .checkbox-row input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    .submit-btn {
+      background: #d4a574;
+      color: white;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .submit-btn:hover {
+      background: #c19660;
+    }
+    .form-note {
+      color: #666;
+      font-size: 0.9em;
+      margin-top: 16px;
+      line-height: 1.4;
+    }
+    @media (max-width: 750px) {
+      .tool-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .tool-image {
+        flex: none;
+        max-width: 100%;
+        text-align: center;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html" class="active">Narzędzia</a>
+    <a href="klienci.html">Klienci</a>
+    <a href="inspiracje.html">Inspiracje</a>
+  </div>
+
+  <ul class="tools-list">
+    <li><a href="#karty-inwencji" onclick="showTool('karty-inwencji', 'Karty Inwencji')">KARTY INWENCJI</a></li>
+    <li><a href="#karty-opowiesci" onclick="showTool('karty-opowiesci', 'Karty Opowieści')">KARTY OPOWIEŚCI</a></li>
+    <li><a href="#karty-transformacji" onclick="showTool('karty-transformacji', 'Karty Transformacji')">KARTY TRANSFORMACJI</a></li>
+    <li><a href="#vita-inspira" onclick="showTool('vita-inspira', 'Vita Inspira')">VITA INSPIRA</a></li>
+    <li><a href="#ko-kartki" onclick="showTool('ko-kartki', 'Ko-Kartki')">KO-KARTKI</a></li>
+    <li><a href="#fakapki" onclick="showTool('fakapki', 'Fakapki')">FAKAPKI</a></li>
+    <li><a href="#personality" onclick="showTool('personality', 'PersonaliTY')">PERSONALITY</a></li>
+  </ul>
+
+  <div class="tool-desc active" id="karty-inwencji">
+    <h2>KARTY INWENCJI</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_inwencji.jpg" alt="Karty Inwencji">
+      </div>
+      <div class="tool-text">
+        <p><b>Narzędzie do stymulowania kreatywności i generowania innowacyjnych pomysłów.</b></p>
+        <p>Karty Inwencji to zestaw kart zawierających różnorodne techniki kreatywnego myślenia. Idealne do warsztatów strategicznych, sesji burzy mózgów i pracy nad nowymi koncepcjami. Treść poszczególnych kart powstała w oparciu o przegląd najskuteczniejszych metody pracy kreatywnej oraz sprawdzonych sposobów postępowania z problemami. Znajdują się więc tutaj metody inspirowane uniwersalnymi zjawiskami psychologicznymi, technikami pracy inżynierów i wynalazców, czy konkretne przykłady odkryć lub wynalazków.
+
+Znajdziesz tu więc adaptację stworzonej przez twórcę „burzy mózgów” Alexa Osobrne’a metody SCAMPER, technikę pracy stosowaną przez Walta Disneya, Piramidę Skojarzeń - technikę opracowaną przez pedagoga Janusza Kujawskiego, uproszczoną metodę CIRCEPT (A. Kaufmann, M. Fuster, A. Drevet), elementy TRIZ (H. Altszuller), czy Kwiat Lotosu – metodę, którą opracował Yasuo Matsumura – japoński konsultanta ds. zarządzania.</p>
+        
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Generowanie nowych pomysłów produktowych i usługowych</li>
+          <li>Przełamywanie twórczych ograniczeń</li>
+          <li>Stymulowanie kreatywnego podejścia do problemów</li>
+          <li>Facilitacja warsztatów kreatywnych</li>
+          <li>Rozwijanie kompetencji innowacyjnych</li>
+        </ul>
+        <p><b>Format:</b> Zestaw 50 kart w etui</p>
+        <p><b>Cena:</b> 190 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="karty-opowiesci">
+    <h2>KARTY OPOWIEŚCI</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_opowiesci.jpg" alt="Karty Opowieści">
+      </div>
+      <div class="tool-text">
+        <p><b>Profesjonalne narzędzie do budowania skutecznych narracji biznesowych.</b></p>
+        <p>Karty Opowieści pomagają w konstruowaniu angażujących historii, które przekonują, inspirują i pozostają w pamięci. Niezbędne dla każdego, kto chce opanować sztukę storytellingu w biznesie.</p>
+        <p>Karty powstały w oparciu o przegląd sprawdzonych struktur i modeli narracyjnych – powtarzających się w najbardziej angażujących i wciągających historiach. Teoria „monomitu” Josepha Cambella (zainspirowana psychologią Carla Gustawa Junga) stanowiła wyjściową bazę do ich opracowania. Najważniejsze fazy podróży Bohatera, oraz kilka etapów pośrednich w symboliczny sposób zostały tu przedstawione na poszczególnych kartach. Jednak do pracy z nimi i pełnego wykorzystania ich potencjału potrzebna jest przede wszystkim Twoja wyobraźnia!</p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Tworzenie przekonujących prezentacji biznesowych</li>
+          <li>Budowanie narracji marki i produktu</li>
+          <li>Przygotowywanie wystąpień publicznych</li>
+          <li>Warsztaty storytellingowe</li>
+          <li>Komunikacja wewnętrzna i change management</li>
+        </ul>
+        
+        <p><b>Format:</b> Zestaw 18 kart opowieści, karta 'mocne pytania" + 20 stronicowy manual</p>
+        <p><b>Cena:</b>195 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="karty-transformacji">
+    <h2>KARTY TRANSFORMACJI</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_transformacji.jpg" alt="Karty Transformacji">
+      </div>
+      <div class="tool-text">
+        <p><b>Narzędzie wspierające procesy zmian organizacyjnych i osobistych.</b></p>
+        <p>Karty Transformacji, które stworzyliśmy wspólnie z Gabrielą Borowczyk sprawdzają się w indywidualnych procesach coachingowych, czy mentoringowych, jak i w pracy grupowej jako narzędzie ułatwiające warsztaty, facylitacje, coaching grupowy lub coaching zespołów.</p>
+        <p>Komplet zawiera 22 karty systemowe, 4 karty strukturyzujące oraz kartę pytań pomocniczych w formacie 8x15cm, instrukcję z propozycjami metod pracy oraz etui.</p>
+        <p>Praca z kartami opiera się głównie na budowaniu wolnych skojarzeń  – twórczym i intuicyjnym wydobywaniu wszelkich treści, jakie pojawiają się w kontekście danego pojęcia – w wymiarze pozytywnym znajdują się w górnej – żółtej -  części karty. W części dolnej – czarnej - znajdują się z kolei znaczenia wymiaru negatywnego. Autorzy przygotowali też pomocne arkusze pracy, tzw. UNIWERSA, które można pobrać na podanych  w instrukcji stronach.</p>
+        <p>Każda karta systemowa zawiera metaforę wizualną pojęcia wiodącego (np. WOLNOŚĆ, DOŚWIADCZENIE, NAPIĘCIE, INTUICJA, ZAWIESZENIE, itp).</p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Facilitacja procesów change management</li>
+          <li>Warsztaty rozwoju osobistego i zawodowego</li>
+          <li>Planowanie transformacji organizacyjnej</li>
+          <li>Coaching zespołowy i indywidualny</li>
+          <li>Sesje strategiczne dotyczące przyszłości organizacji</li>
+        </ul>
+        <p><b>Format:</b> Zestaw kart z pytaniami i ćwiczeniami transformacyjnymi</p>
+        <p><b>Cena:</b> 195 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="vita-inspira">
+    <h2>VITA INSPIRA</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_vita_inspira.jpg" alt="Vita Inspira">
+      </div>
+      <div class="tool-text">
+        <p>Dlaczego VITA INSPIRA? Bo życie inspiruje. Zwłaszcza, jeśli było to życie i dokonania wielkich twórców, artystów, wynalazców, naukowców, działaczy społecznych czy przywódców. I tak powstały te karty - dzięki inspiracji płynącej z biografii, sposobu życia i dzieł tworzonych przez pięćdziesiąt wielkich osobowości.</p>
+        <p>Vita Inspira to zestaw wspierający proces samopoznania i planowania ścieżki rozwoju. Idealny dla coachów, trenerów i wszystkich, którzy chcą głębiej zrozumieć swoje aspiracje i możliwości.</p>
+        <p>50 kart, a każda z nich przedstawia portret jednej postaci poniżej zaś znajdują się myśli inspirowane jej życiem i dorobkiem oraz zestaw wartości wynikających z biogramu postaci.</p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Praca z wartościami i praca z metaforą</li>
+          <li>Warsztaty kreatywne</li>
+          <li>Psychoterapia i psychoedukacja</li>
+          <li>Inspiracja dla procesu "problem solving"</li>
+          <li>Proces onboardingu w organizacjach</li>
+          <li>Oryginalny sposób na przybliżenie młodzieży ważnych postaci historycznych</li>
+        </ul>
+        
+        <p><b>Format:</b>50 kart + instrukcja w etui.</p>
+        <p><b>Cena:</b>185 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="ko-kartki">
+    <h2>KO-KARTKI</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_kokartki.jpg" alt="Ko-Kartki">
+      </div>
+      <div class="tool-text">
+        <p><b>Kreatywne narzędzie do komunikacji i budowania relacji w zespole.</b></p>
+        <p>Ko-Kartki to innowacyjny sposób na wzmacnianie więzi w zespole, wyrażanie uznania i budowanie pozytywnej atmosfery pracy. Proste w użyciu, a jednocześnie niezwykle skuteczne.</p>
+        <p>Karty świetnie się sprawdzają we wszystkich procesach grupowych. Mogą być więc używane przez trenerów, coachów grupowych i coachów zespołów, facylitatorów, nauczycieli i terapeutów. Poza pracą w grupie karty mogą być stosowane indywidualnie, np. w ćwiczeniach kreatywności (myślenie bisocjacyjne, płynność myślenia) – przykłady takiego zastosowania znajdują się w ulotce.</p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Team building i integracja zespołów</li>
+          <li>Wyrażanie uznania i wdzięczności</li>
+          <li>Feedback i komunikacja zwrotna</li>
+          <li>Budowanie kultury organizacyjnej</li>
+          <li>Warsztaty komunikacyjne</li>
+        </ul>
+        
+        <p><b>Format:</b> 35 kart + ulotka instruktażowa w etui</p>
+        <p><b>Cena:</b>90 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="fakapki">
+    <h2>FAKAPKI</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_fakapki.jpg" alt="Fakapki">
+      </div>
+      <div class="tool-text">
+        <p><b>Bo każda wpadka to... okazja do rozwoju!</b></p>
+        <p>FAKAPKI to innowacyjne narzędzie warsztatowe, które w kreatywny sposób podchodzi do tematyki zarządzania sytuacjami kryzysowymi, budowania odporności zespołowej i rozwoju kompetencji liderskich. Talia składa się z trzech rodzajów kart, które wspólnie tworzą kompleksowe narzędzie do pracy z zespołami.</p>
+        <p>Co znajdziesz w talii FAKAPEK?</p>
+        <p>Karty Wpadek - bo któż nie miał w życiu zawodowym momentu "ups..."?. W tej partii znajdziesz rzeczywiste scenariusze kryzysowe.</p>
+        <p>Karty Reakcji - od "zrzućmy to na stażystę" po "medytację zbiorową". Ta część zawiera różnorodne sposoby odpowiedzi na sytuacje kryzysowe.</p>
+        <p>Karty Złotych Myśli – czyli mądrości, które sprawiają, że nawet największa wtopa wydaje się... nieco znośniejsza. Tu znajdziesz inspirujące cytaty i refleksje na temat zarządzania kryzysowego.</p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Warsztaty z zarządzania kryzysowego</li>
+          <li>Szkolenia z komunikacji w sytuacjach trudnych</li>
+          <li>Sesje team buildingowe</li>
+          <li>Coaching indywidualny i grupowy</li>
+          <li>Rozwój kompetencji liderskich</li>
+        </ul>
+        
+        <p><b>Format:</b> 64 karty + ulotka instruktażowa w etui</p>
+        <p><b>Cena:</b>195 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-desc" id="personality">
+    <h2>PERSONALITY</h2>
+    <div class="tool-content">
+      <div class="tool-image">
+        <img src="img/karty_personality.jpg" alt="PersonaliTY">
+      </div>
+      <div class="tool-text">
+        <p><b>PersonaliTY - Odkrywaj siebie na nowo.</b></p>
+        <p>Każda karta w zestawie PersonaliTY przedstawia unikalną parę obrazów ukazujących alternatywne sytuacje i zachowania symbolizujące nasze osobiste preferencje. Obrazom towarzyszy pytanie na temat danej skłonności. W ten sposób karty prowokując do zastanowienia się nad własnymi preferencjami i wyborami życiowymi, co staje się inspiracją do głębokiej refleksji i samopoznania, otwierając drogę do lepszego zrozumienia siebie i innych.</p>
+        <p>Talia zawiera 50 kart z obrazami i pytaniami, które podzielone zostały na bloki tematyczne związane z kolejnymi grupami preferencji (+ 5 kart z nazwą bloku). Każdy blok oznaczony jest innym kolorem i symbolem:</p>
+        <p>- Preferencje społeczne</p>
+        <p>- Preferencje poznawcze</p>
+        <p>- Preferencje emocjonalne</p>
+        <p>- Preferencje behawioralne</p>
+        <p>- Preferencje konsumenckie </p>
+        <b>Zastosowania:</b>
+        <ul>
+          <li>Rozwój osobisty i zawodowy</li>
+          <li>Wzbogacanie procesów coachingowych</li>
+          <li>Ułatwienie komunikacji w zespołach</li>
+          <li>Pogłębianie samoświadomości i empatii</li>
+          <li>Inspiracja do twórczego myślenia i rozwiązywania problemów</li>
+        </ul>
+        
+        <p><b>Format:</b> 55 kart (135 x 87mm) w etui + ulotka instruktażowa</p>
+        <p><b>Cena:</b>195 zł (VAT wliczony)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-form">
+    <h3>Formularz zamówienia - wprowadź dane i liczbę zestawów: <span id="product-name">Karty Inwencji</span></h3>
+    <form action="mailto:staniszewski@heuristica.pl" method="post" enctype="text/plain">
+      <input type="hidden" id="product-field" name="produkt" value="Karty Inwencji">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" name="imie_nazwisko" placeholder="Imię i nazwisko: *" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email *" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="number" name="ilosc" placeholder="Ilość zestawów:" min="1" value="1">
+        </div>
+        <div class="form-group">
+          <input type="text" name="adres_wysylki" placeholder="Adres wysyłki:">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" name="ulica" placeholder="Ulica:">
+        </div>
+        <div class="form-group">
+          <input type="text" name="kod_pocztowy" placeholder="Kod pocztowy:">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" name="miejscowosc" placeholder="Miejscowość:">
+      </div>
+      
+      <div class="checkbox-row">
+        <input type="checkbox" name="faktura_vat" id="faktura_vat">
+        <label for="faktura_vat">Jeśli potrzebujesz fakturę VAT wypełnij również poniższe pola:</label>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" name="nazwa_firmy" placeholder="Nazwa firmy:">
+        </div>
+        <div class="form-group">
+          <input type="text" name="adres_dzialalnosci" placeholder="Adres działalności:">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <input type="text" name="nip" placeholder="NIP:">
+        </div>
+        <div class="form-group">
+          <textarea name="uwagi" placeholder="Uwagi:"></textarea>
+        </div>
+      </div>
+      
+      <button type="submit" class="submit-btn">Wyślij</button>
+      
+      <div class="form-note">
+        <strong>Wyślij formularz zamówienia, otrzymasz informacje o płatności.</strong><br><br>
+        <strong>Ważne:</strong> w polu "Uwagi" wpisz czy:
+        <ol>
+            <li>Wybierasz dostawę poprzez paczkomat - jeśli tak, to podaj jego Nr lub adres.</li>
+            <li>Wybierasz przesyłkę kurierską -  podaj nr telefonu dla kuriera lub powiadomienia SMS.</li>
+            <li>Do podanych cen należy doliczyć cenę wysyłki: + 12 zł (Paczkomat) lub 15 zł (kurier)  - ilość: 1 do 3 zestawów
+            <li>ilość: od 5 do 10 zestawów: + 16 zł (Paczkomat) lub 20 zł (kurier)</li>
+        </ol>
+        <strong>Zapoznaj się z regulaminem sklepu. <a href="regulamin.html">heuristica.pl/regulamin.html</strong><br><br>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function showTool(toolId, productName) {
+      // Ukryj wszystkie opisy
+      const allDescs = document.querySelectorAll('.tool-desc');
+      allDescs.forEach(desc => desc.classList.remove('active'));
+      
+      // Usuń aktywną klasę z linków
+      const allLinks = document.querySelectorAll('.tools-list li');
+      allLinks.forEach(link => link.classList.remove('active'));
+      
+      // Pokaż wybrany opis
+      document.getElementById(toolId).classList.add('active');
+      
+      // Dodaj aktywną klasę do klikniętego linka
+      event.target.parentElement.classList.add('active');
+      
+      // Zaktualizuj nazwę produktu w formularzu
+      document.getElementById('product-name').textContent = productName;
+      document.getElementById('product-field').value = productName;
+      
+      return false;
+    }
+  </script>
+
+  <div class="footer">
+    (C) 2025 Heuristica. Marek Staniszewski
+  </div>
+</body>
+</html>

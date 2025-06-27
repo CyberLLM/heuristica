@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inspiracje | HEURISTICA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .inspiration-list {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0;
+      list-style: none;
+    }
+    .inspiration-list li {
+      margin: 0 0 12px 0;
+      text-align: center;
+      font-size: 1.22em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      letter-spacing: 0.5px;
+      border-top: 1px solid #aaa;
+      border-bottom: 1px solid #aaa;
+      padding: 8px 0;
+      transition: background 0.2s;
+    }
+    .inspiration-list li a {
+      display: block;
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      padding: 8px 0;
+      transition: background 0.2s, color 0.2s;
+    }
+    .inspiration-list li a:hover, .inspiration-list li.active a {
+      background: #242829;
+      color: #fff;
+    }
+    .inspiration-desc {
+      max-width: 900px;
+      margin: 32px auto;
+      background: #f6f9fb;
+      border-radius: 8px;
+      box-shadow: 0 1px 7px #eee;
+      padding: 32px 28px;
+      font-size: 1.08em;
+      line-height: 1.6;
+      display: none;
+    }
+    .inspiration-desc.active {
+      display: block;
+    }
+    .inspiration-desc h2 {
+      font-size: 1.4em;
+      margin-bottom: 16px;
+      color: #22394d;
+      text-align: center;
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .book-item {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .book-cover {
+      width: 120px;
+      height: 180px;
+      margin: 0 auto 15px;
+      border-radius: 5px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+    }
+    .book-title {
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #22394d;
+      margin-bottom: 8px;
+    }
+    .book-details {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .book-btn {
+      background: #38547c;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .book-btn:hover {
+      background: #2a3f5c;
+    }
+    .intro-text {
+      background: #e8f1f6;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      font-style: italic;
+      text-align: center;
+    }
+    
+    /* Nowe style dla webinarów */
+    .webinar-item {
+      margin-bottom: 40px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .webinar-title {
+      color: #22394d;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+    
+    /* Nowe style dla artykułów */
+    .article-item {
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #38547c;
+    }
+    .article-title {
+      color: #22394d;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .article-source {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    .article-link {
+      display: inline-block;
+      background: #38547c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .article-link:hover {
+      background: #2a3f5c;
+      color: white;
+    }
+    
+    @media (max-width: 750px) {
+      .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+      }
+      .book-cover {
+        width: 100px;
+        height: 150px;
+      }
+      .webinar-item {
+        padding: 15px;
+      }
+      .article-item {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html">Narzędzia</a>
+    <a href="klienci.html">Klienci</a>
+    <a href="inspiracje.html" class="active">Inspiracje</a>
+    <a href="kontakt.html">Kontakt</a>
+  </div>
+
+  <h1 style="text-align:center; margin:38px 0 12px;">Inspiracje:</h1>
+
+  <ul class="inspiration-list">
+    <li class="active"><a href="#moje-ksiazki">MOJE KSIĄŻKI</a></li>
+    <li><a href="#artykuly-ai">AI - ARTYKUŁY</a></li>
+    <li><a href="#webinary">WEBINARY</a></li>
+    <li><a href="#inne">INNE</a></li>
+  </ul>
+
+  <div class="inspiration-desc active" id="moje-ksiazki">
+    <h2>Zapraszam do lektury moich książek</h2>
+    
+    <div class="intro-text">
+      Raz na jakiś czas przeglądam notatki, refleksje, przemyślenia i dzielę się nimi w formie książkowej. Jeśli chcesz poznać bliżej moje poglądy i opinie na temat biznesu, marketingu, komunikacji czy samorozwoju, to zachęcam Cię do sięgnięcia po jedną z pozycji, które napisałem.<br>
+      <strong>Miłej lektury!</strong>
+    </div>
+
+    <div class="books-grid">
+      <div class="book-item">
+        <img src="img/atlas-strategiczny.png" alt="Atlas Strategiczny" class="book-cover">
+        <div class="book-title">ATLAS STRATEGICZNY</div>
+        <div class="book-details">
+          Wyd. Onepress<br>
+          2009
+        </div>
+        <a href="https://onepress.pl/ksiazki/atlas-strategiczny-inspiracje-dla-menedzera-marek-staniszewski,atlas.htm#format/e" class="book-btn">Zajrzyj do środka</a>
+      </div>
+
+      <div class="book-item">
+        <img src="img/strategiczny-podstep.png" alt="Strategiczny Podstęp" class="book-cover">
+        <div class="book-title">STRATEGICZNY PODSTĘP</div>
+        <div class="book-details">
+          Wyd. Onepress<br>
+          2009
+        </div>
+        <a href="https://onepress.pl/ksiazki/strategiczny-podstep-umiejetnosc-wygrywania-w-biznesie-marek-staniszewski,strapo.htm#format/e" class="book-btn">Zajrzyj do środka</a>
+      </div>
+
+      <div class="book-item">
+        <img src="img/portret-klienta.png" alt="Portret Klienta" class="book-cover">
+        <div class="book-title">PORTRET KLIENTA</div>
+        <div class="book-details">
+          Wyd. Onepress<br>
+          2009
+        </div>
+        <a href="https://onepress.pl/ksiazki/portret-klienta-poznaj-jego-potrzeby-by-sprzedac-wiecej-i-drozej-dorota-staniszewska-marek-staniszewski,portre.htm#format/e" class="book-btn">Zajrzyj do środka</a>
+      </div>
+
+      <div class="book-item">
+        <img src="img/tak-na-marginesie.png" alt="Tak na marginesie strategii" class="book-cover">
+        <div class="book-title">TAK NA MARGINESIE STRATEGII</div>
+        <div class="book-details">
+          Słowa i Myśli; 2016<br>
+        </div>
+        <a href="https://www.znak.com.pl/p/tak-na-marginesie-strategii-marek-staniszewski-65366" class="book-btn">Zajrzyj do środka</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="inspiration-desc" id="artykuly-ai">
+    <h2>ARTYKUŁY NT. AI</h2>
+    <p>Publikacje i artykuły dotyczące sztucznej inteligencji w marketingu i biznesie.</p>
+    
+    <div id="articles-container">
+      <!-- Artykuły będą tutaj wstawiane automatycznie przez JavaScript -->
+    </div>
+  </div>
+
+  <div class="inspiration-desc" id="webinary">
+    <h2>WEBINARY</h2>
+    <p>Nagrania z webinarów i prezentacji online z cyklu "Promptologia" i innych wydarzeń.</p>
+    
+    <div id="webinars-container">
+      <!-- Webinary będą tutaj wstawiane automatycznie przez JavaScript -->
+    </div>
+  </div>
+
+  <div class="inspiration-desc" id="inne">
+    <h2>INNE</h2>
+    <p>Dodatkowe materiały inspirujące i wartościowe treści.</p>
+    <p><em>Sekcja w przygotowaniu...</em></p>
+  </div>
+
+  <script>
+    // ==========================================
+    // MODUŁ KONFIGURACJI WEBINARÓW
+    // ==========================================
+    
+    const webinars = [
+      {
+        title: "Czego nas uczą sztuczne sieci neuronowe o tym... jak się uczyć? [Promptologia]",
+        youtubeId: "Z88qpgBSb4w"
+      },
+      {
+        title: "Chatboty – jak budować i zarządzać strukturą wiedzy w Custom GPT?",
+        youtubeId: "JbnBAkbmYs4"
+      },
+      {
+        title: "ChatGPT & Excel – związek burzliwy i twórczy (!) Webinar z cyklu \"Promptologia\"",
+        youtubeId: "u3_d4fX-lQ4"
+      },
+      {
+        title: "Halucynacje w LLM Webinar z cyklu \"Promptologia\"",
+        youtubeId: "mRD1_cb0R3w"
+      },
+      {
+        title: "AI jako wsparcie w produkcji video [Promptologia]",
+        youtubeId: "Hj7adGWt8rs"
+      },
+      {
+        title: " ChatGPT w badaniach rynkowych [Promptologia]",
+        youtubeId: "mzprwBLB6yA"
+      },
+      {
+        title: "Agenci Ai w reklamie",
+        youtubeId: "thw2a3zcRh8"
+      },
+      {
+        title: "Sztuczne sieci neuronowe - czym są i jak działają [Promptologia]",
+        youtubeId: "XSppE-Rlud8"
+      }
+    ];
+
+    // ==========================================
+    // MODUŁ KONFIGURACJI ARTYKUŁÓW
+    // ==========================================
+    
+    const articles = [
+      {
+        title: "Sztuczna inteligencja nie jest doskonała. Co zrobić, żeby była przydatna?",
+        source: "Marketing przy kawie",
+        url: "https://marketingprzykawie.pl/wywiady/sztuczna-inteligencja-nie-jest-doskonala-co-zrobic-zeby-byla-przydatna/"
+      },
+      {
+        title: "Kultura zjada AI na śniadanie, czyli w jaki sposób zmieniać się tak, aby nic nie zmienić",
+        source: "Marketing przy kawie",
+        url: "https://marketingprzykawie.pl/artykuly/wdrozenia-ai-sie-opozniaja-bo-kultura-zjada-ai-na-sniadanie/"
+      },
+      {
+        title: "Jak zachować spójność postaci przy generowaniu obrazów w AI [PORADNIK]",
+        source: "Nowy Marketing",
+        url: "https://nowymarketing.pl/jak-zachowac-spojnosc-postaci-przy-generowaniu-obrazow-w-ai/"
+      },
+      {
+        title: "A zrób sobie ten animatik. W kwadrans. Bo czemu nie? [PORADNIK]",
+        source: "Nowy Marketing",
+        url: "https://nowymarketing.pl/a-zrob-sobie-ten-animatik-w-kwadrans-bo-czemu-nie-poradnik/"
+      },
+      {
+        title: "Jak DeepSeek zmieni świat marketingu [OPINIE]",
+        source: "Nowy Marketing",
+        url: "https://nowymarketing.pl/jak-deepseek-zmieni-swiat-marketingu-opinie/"
+      },
+      {
+        title: "Czym jest to całe tajemnicze API i jak z niego korzystać?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/czym-jest-ca%C5%82e-tajemnicze-api-i-jak-z-niego-korzysta%C4%87-staniszewski-gpyvf"
+      },
+      {
+        title: "Jak zaprojektować skutecznego chatbota opartego na bazie wiedzy? Czyli o projektowaniu zewnętrznego umysłu słów kilka",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/jak-zaprojektowa%C4%87-skutecznego-chatbota-opartego-na-o-staniszewski-0n7wf/"
+      },
+      {
+        title: "Semantyka dystrybucyjna i badanie brand equity w dużych modelach językowych (LLM)",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/semantyka-dystrybucyjna-i-badanie-brand-equity-w-llm-staniszewski-rddrf/"
+      },
+      {
+        title: "W jaki sposób analizować dane tabelaryczne w ChatGPT – czyli rzecz o wielbłądzie, kebabie i żmii",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/w-jaki-spos%C3%B3b-analizowa%C4%87-dane-tabelaryczne-chatgpt-o-i-staniszewski-gbfxf/"
+      },
+      {
+        title: "Przestrzeń problemu vs przestrzeń rozwiązań (czyli krótka refleksja na temat inwencji, stonóg i AGI)",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/przesta%C5%84-problemu-vs-przestrze%C5%84-rozwi%C4%85za%C5%84-czyli-na-i-agi-marek-frwlf/"
+      },
+      {
+        title: "Zamiana codziennych zadań w prompt frameworks. Czyli w jaki sposób rozkodować intuicję?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/zamiana-codziennych-zada%C5%84-w-prompt-frameworks-czyli-staniszewski-gnfrf/"
+      },
+      {
+        title: "W jaki sposób automatycznie dokonywać transkrypcji wielu plików audio (np. FGI, IDI)?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/w-jaki-spos%C3%B3b-automatycznie-dokonywa%C4%87-transkrypcji-np-staniszewski-yrijc/"
+      },
+      {
+        title: "Technika mapy semantycznej w promptingu",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/technika-mapy-semantycznej-w-promptingu-marek-staniszewski-qykcf/"
+      },
+      {
+        title: "Paradoks genialnego stażysty – idioty. Czyli problem kontekstu w budowaniu asystentów AI",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/paradoks-genialnego-sta%C5%BCysty-idioty-czyli-problem-w-ai-staniszewski-t5l4f/"
+      },
+      {
+        title: "Czy maszyny potrafią być kreatywne? Albo zarzuty pewnej hrabiny…",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/czy-maszyny-potrafi%C4%85-by%C4%87-kreatywne-albo-zarzuty-marek-staniszewski-aqfbf/"
+      },
+      {
+        title: "Synergia AI: współpraca modeli GPT-4 i LLaMA w analizie wieloetapowej",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/synergia-ai-wsp%C3%B3%C5%82praca-modeli-gpt-4-i-llama-w-marek-staniszewski-i4ztf/"
+      },
+      {
+        title: "Jak wygenerować plik prezentacji Power Point (albo nawet dźwięk i video) w ChatGPT?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/jak-wygenerowa%C4%87-plik-prezentacji-power-point-albo-i-w-staniszewski-4qqcf/"
+      },
+      {
+        title: "Prompty to nie wszystko. Czy Twoja firma ma już całościową strategię wdrażania AI?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/prompty-nie-wszystko-czy-twoja-firma-ma-ju%C5%BC-strategi%C4%99-staniszewski-joycf/"
+      },
+      {
+        title: "Segmentacja rynku i ewaluacja atrakcyjności segmentów wspierana LLM",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/segmentacja-rynku-i-ewaluacja-atrakcyjno%C5%9Bci-segment%C3%B3w-staniszewski-uni7f/"
+      },
+      {
+        title: "Przestrzeń sukcesu vs przestrzeń porażki, czyli 'contrastive learning' jako strategia formułowania promptów",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/przestrze%C5%84-sukcesu-vs-pora%C5%BCki-czyli-contrastive-jako-staniszewski-mdsyf/"
+      },
+      {
+        title: "Nie warto inwestować w naukę samych narzędzi, czyli AI z punktu widzenia szkoleniowca",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/nie-warto-inwestowa%C4%87-w-nauk%C4%99-samych-narz%C4%99dzi-czyli-ai-staniszewski-r1ykf/"
+      },
+      {
+        title: "Redukowanie halucynacji i propagacji błędów w LLM poprzez metodę Re-Act",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/redukowanie-halucynacji-i-propagacji-b%C5%82%C4%99d%C3%B3w-w-llm-marek-staniszewski-6tqmf/"
+      },
+      {
+        title: "Na czym polega wyszukiwanie semantyczne?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/na-czym-polega-wyszukiwanie-semantyczne-marek-staniszewski-sr6rf/"
+      },
+      {
+        title: "Fine-tuning dużych modeli językowych - DIY",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/fine-tuning-du%C5%BCych-modeli-j%C4%99zykowych-diy-marek-staniszewski-wcjif/"
+      },
+      {
+        title: "Analiza osobowości i emocji klienta boostowana przez AI",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/analiza-osobowo%C5%9Bci-i-emocji-klienta-boostowana-przez-ai-staniszewski-c3ksf/"
+      },
+      {
+        title: "Przestępcy także korzystają z ChatGPT...",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/przest%C4%99pcy-tak%C5%BCe-korzystaj%C4%85-z-chatgpt-marek-staniszewski-uwobf/"
+      },                
+      {
+        title: "Gadające obrazy, czyli ‘image-to-speech’",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/gadaj%C4%85ce-obrazy-czyli-image-to-speech-marek-staniszewski-4yvtf/"
+      },
+      {
+        title: "Morfologia prompta (cz. I).",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/morfologia-prompta-cz-i-marek-staniszewski-dvpnf/"
+      },
+      {
+        title: "Zautomatyzowana analiza spotów reklamowych",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/zautomatyzowana-analiza-spot%C3%B3w-reklamowych-marek-staniszewski-dwu5f/"
+      },
+      {
+        title: "Jak stworzyć prostą stronę internetową w ChatGPT?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/jak-stworzy%C4%87-prost%C4%85-stron%C4%99-internetow%C4%85-w-chatgpt-marek-staniszewski-vkmqf/"
+      },
+      {
+        title: "10 zastosowań ChatGPT przy strategii marki",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/10-zastosowa%C5%84-chatgpt-przy-strategii-marki-marek-staniszewski-ss0if/"
+      },
+      {
+        title: "Pięć meta-reguł prompt engeeneringu. (jeśli je przeczytasz, to od razu zapomnij)",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/pi%C4%99%C4%87-meta-regu%C5%82-prompt-engeeneringu-je%C5%9Bli-je-od-razu-staniszewski-dsazf/"
+      },
+      {
+        title: "Podgrzewanie pustynnej żaby i ubaw z wombata. Czyli o co właściwie chodzi z tą całą temperaturą w ChatGPT?",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/podgrzewanie-pustynnej-%C5%BCaby-i-ubaw-z-wombata-czyli-o-co-staniszewski/"
+      },
+      {
+        title: "Czy Twój ChatBot naprawdę Cię rozumie? Czyli jawne sekrety prompt inżynierii.",
+        source: "LinkedIn",
+        url: "https://www.linkedin.com/pulse/czy-tw%C3%B3j-chatbot-naprawd%C4%99-ci%C4%99-rozumie-czyli-jawne-marek-staniszewski/"
+      }                                        
+    ];
+    
+    // ==========================================
+    // AUTOMATYCZNE GENEROWANIE WEBINARÓW
+    // ==========================================
+    
+    function generateWebinars() {
+      const container = document.getElementById('webinars-container');
+      
+      webinars.forEach(webinar => {
+        const webinarHTML = `
+          <div class="webinar-item">
+            <h3 class="webinar-title">${webinar.title}</h3>
+            <div class="video-container">
+              <iframe 
+                src="https://www.youtube.com/embed/${webinar.youtubeId}?si=auto-generated" 
+                title="${webinar.title}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        `;
+        container.innerHTML += webinarHTML;
+      });
+    }
+
+    // ==========================================
+    // AUTOMATYCZNE GENEROWANIE ARTYKUŁÓW
+    // ==========================================
+    
+    function generateArticles() {
+      const container = document.getElementById('articles-container');
+      
+      articles.forEach(article => {
+        const articleHTML = `
+          <div class="article-item">
+            <h3 class="article-title">${article.title}</h3>
+            <div class="article-source">${article.source}</div>
+            <a href="${article.url}" target="_blank" class="article-link">Czytaj artykuł</a>
+          </div>
+        `;
+        container.innerHTML += articleHTML;
+      });
+    }
+    
+    // ==========================================
+    // FUNKCJE NAWIGACJI - UPROSZCZONA WERSJA
+    // ==========================================
+    
+    function showInspiration(inspirationId) {
+      console.log('🔍 Funkcja wywołana dla:', inspirationId);
+      
+      // Ukryj wszystkie opisy
+      const allDescs = document.querySelectorAll('.inspiration-desc');
+      console.log('📋 Znaleziono sekcji:', allDescs.length);
+      allDescs.forEach(desc => {
+        desc.classList.remove('active');
+        console.log('❌ Ukryto:', desc.id);
+      });
+      
+      // Usuń aktywną klasę z linków
+      const allLinks = document.querySelectorAll('.inspiration-list li');
+      allLinks.forEach(link => link.classList.remove('active'));
+      
+      // Pokaż wybrany opis
+      const targetDesc = document.getElementById(inspirationId);
+      if (targetDesc) {
+        targetDesc.classList.add('active');
+        console.log('✅ Pokazano sekcję:', inspirationId);
+      } else {
+        console.log('❌ Nie znaleziono sekcji:', inspirationId);
+      }
+      
+      // Aktywuj odpowiedni link
+      const activeLink = document.querySelector(`a[href="#${inspirationId}"]`);
+      if (activeLink) {
+        activeLink.parentElement.classList.add('active');
+        console.log('✅ Aktywowano link');
+      }
+    }
+    
+    // ==========================================
+    // INICJALIZACJA - TESTOWA
+    // ==========================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🚀 DOM załadowany, rozpoczynam inicjalizację...');
+      
+      // Wygeneruj zawartość
+      generateWebinars();
+      generateArticles();
+      console.log('📝 Zawartość wygenerowana');
+      
+      // PROSTY SPOSÓB - onclick bezpośrednio
+      const links = document.querySelectorAll('.inspiration-list a');
+      console.log('🔗 Znaleziono linków:', links.length);
+      
+      links.forEach((link, index) => {
+        console.log(`🔗 Przetwarzam link ${index}:`, link.href);
+        link.onclick = function(e) {
+          e.preventDefault();
+          const inspirationId = this.getAttribute('href').substring(1);
+          console.log('🖱️ Kliknięto:', inspirationId);
+          showInspiration(inspirationId);
+          return false;
+        };
+      });
+      
+      console.log('✅ Inicjalizacja zakończona');
+    });
+  </script>
+
+  <div class="footer">
+    (C) 2025 Heuristica. Marek Staniszewski
+  </div>
+</body>
+</html>

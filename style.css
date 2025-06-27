@@ -82,3 +82,10 @@ li {
   -webkit-columns: 1 !important;
   -moz-columns: 1 !important;
 }
+
+.singlecol {
+  columns: 1 !important;
+  -webkit-columns: 1 !important;
+  -moz-columns: 1 !important;
+}
+

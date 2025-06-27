@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://heuristica.pl/sitemap.xml
+
+# Blokuj niepotrzebne pliki
+Disallow: /img/
+Disallow: *.css
+Disallow: *.js

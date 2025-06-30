@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDHLBXLXT4');
+</script>  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Płatność - Szkolenie AI w Marketingu | HEURISTICA</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Płatność za szkolenie AI w marketingu strategicznym. Bezpieczne płatności przez Przelewy24.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .payment-container {
+      max-width: 600px;
+      margin: 36px auto 0 auto;
+      background: #fff;
+      padding: 38px 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #e0e5eb;
+    }
+    
+    .payment-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e3edf2;
+    }
+    
+    .payment-header h1 {
+      color: #22394d;
+      font-size: 1.6em;
+      margin-bottom: 10px;
+    }
+    
+    .payment-header .price {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #38547c;
+      margin-bottom: 5px;
+    }
+    
+    .payment-header .tax-info {
+      font-size: 0.9em;
+      color: #666;
+    }
+    
+    .product-details {
+      background: #f6f9fb;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+    
+    .product-details h3 {
+      color: #22394d;
+      margin-bottom: 15px;
+      font-size: 1.2em;
+    }
+    
+    .product-details ul {
+      margin: 0;
+      padding-left: 20px;
+      columns: 1 !important;
+      -webkit-columns: 1 !important;
+      -moz-columns: 1 !important;
+    }
+    
+    .product-details li {
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+    
+    .payment-form {
+      background: #e8f1f6;
+      padding: 25px;
+      border-radius: 8px;
+      border: 2px solid #c6d7e0;
+    }
+    
+    .payment-form h3 {
+      color: #22394d;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .form-group {
+      flex: 1;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #22394d;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #d0d0d0;
+      border-radius: 4px;
+      font-size: 0.95em;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #22394d;
+      outline: none;
+    }
+    
+    .form-group input.required {
+      border-color: #e74c3c;
+    }
+    
+    .checkbox-group {
+      margin: 20px 0;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 8px;
+      width: auto;
+    }
+    
+    .checkbox-group label {
+      display: inline;
+      font-weight: normal;
+      font-size: 0.9em;
+    }
+    
+    .checkbox-group a {
+      color: #22394d;
+      text-decoration: underline;
+    }
+    
+    .submit-btn {
+      background: #d4a574;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      display: block;
+      margin: 25px auto 0;
+      transition: background 0.3s;
+    }
+    
+    .submit-btn:hover {
+      background: #c19660;
+    }
+    
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .security-info {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 0.9em;
+      text-align: center;
+    }
+    
+    .security-info img {
+      height: 30px;
+      margin: 0 10px;
+      vertical-align: middle;
+    }
+    
+    .legal-links {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+    
+    .legal-links a {
+      color: #22394d;
+      text-decoration: underline;
+      margin: 0 10px;
+    }
+    
+    @media (max-width: 750px) {
+      .payment-container { 
+        padding: 20px 16px; 
+        margin: 20px 10px 0 10px;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .payment-header .price {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html">Narzędzia</a>
+    <a href="klienci.html">Klienci</a>
+    <a href="inspiracje.html">Inspiracje</a>
+  </div>
+
+  <div class="payment-container">
+    <div class="payment-header">
+      <h1>Szkolenie AI w Marketingu Strategicznym</h1>
+      <div class="price">1700 zł</div>
+      <div class="tax-info">(VAT wliczony)</div>
+    </div>
+
+    <div class="product-details">
+      <h3>Szczegóły szkolenia:</h3>
+      <ul>
+        <li><strong>Format:</strong> Warsztaty w formule stacjonarnej lub online</li>
+        <li><strong>Czas trwania:</strong> Cały dzień (9:00-17:00)</li>
+        <li><strong>Materiały:</strong> Instrukcje, ćwiczenia praktyczne, dostęp do narzędzi AI</li>
+        <li><strong>Certyfikat:</strong> Potwierdzenie uczestnictwa</li>
+        <li><strong>Wsparcie:</strong> 30 dni wsparcia po szkoleniu</li>
+      </ul>
+    </div>
+
+    <form class="payment-form" action="https://secure.przelewy24.pl/trnRequest" method="POST" id="payment-form">
+      <h3>Dane do płatności</h3>
+      
+      <!-- Ukryte pola wymagane przez Przelewy24 -->
+      <input type="hidden" name="p24_merchant_id" value="YOUR_MERCHANT_ID">
+      <input type="hidden" name="p24_pos_id" value="YOUR_POS_ID">
+      <input type="hidden" name="p24_session_id" value="">
+      <input type="hidden" name="p24_amount" value="170000">
+      <input type="hidden" name="p24_currency" value="PLN">
+      <input type="hidden" name="p24_description" value="Szkolenie AI w Marketingu Strategicznym">
+      <input type="hidden" name="p24_url_return" value="https://heuristica.pl/payment-success.html">
+      <input type="hidden" name="p24_url_status" value="">
+      <input type="hidden" name="p24_sign" value="">
+      
+      <!-- DANE OSOBOWE - WYMAGANE -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="p24_client">Imię i nazwisko: *</label>
+          <input type="text" id="p24_client" name="p24_client" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="p24_email">Adres email: *</label>
+          <input type="email" id="p24_email" name="p24_email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon:</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+      </div>
+      
+      <!-- DANE ADRESOWE - OPCJONALNE -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="p24_address">Adres:</label>
+          <input type="text" id="p24_address" name="p24_address">
+        </div>
+        <div class="form-group">
+          <label for="p24_zip">Kod pocztowy:</label>
+          <input type="text" id="p24_zip" name="p24_zip">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="p24_city">Miasto:</label>
+          <input type="text" id="p24_city" name="p24_city">
+        </div>
+        <div class="form-group">
+          <label for="p24_country">Kraj:</label>
+          <select id="p24_country" name="p24_country">
+            <option value="PL">Polska</option>
+            <option value="DE">Niemcy</option>
+            <option value="GB">Wielka Brytania</option>
+            <option value="FR">Francja</option>
+            <option value="US">USA</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- FAKTURA -->
+      <div class="checkbox-group">
+        <input type="checkbox" name="invoice_needed" id="invoice_needed">
+        <label for="invoice_needed">Potrzebuję fakturę VAT</label>
+      </div>
+      
+      <div id="invoice_fields" style="display: none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company_name">Nazwa firmy:</label>
+            <input type="text" id="company_name" name="company_name">
+          </div>
+          <div class="form-group">
+            <label for="nip">NIP:</label>
+            <input type="text" id="nip" name="nip">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="company_address">Adres firmy:</label>
+          <textarea id="company_address" name="company_address" rows="3"></textarea>
+        </div>
+      </div>
+      
+      <!-- REGULAMINY -->
+      <div class="checkbox-group">
+        <input type="checkbox" name="terms_accepted" id="terms_accepted" required>
+        <label for="terms_accepted">
+          Akceptuję <a href="regulamin.html" target="_blank">regulamin</a> oraz 
+          <a href="polityka.html" target="_blank">politykę prywatności</a> *
+        </label>
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" name="przelewy24_terms" id="przelewy24_terms" required>
+        <label for="przelewy24_terms">
+          Akceptuję <a href="https://www.przelewy24.pl/regulamin" target="_blank">regulamin Przelewy24</a> *
+        </label>
+      </div>
+      
+      <button type="submit" class="submit-btn" id="submit-btn" disabled>
+        Przejdź do płatności
+      </button>
+    </form>
+    
+    <div class="security-info">
+      <p><strong>Bezpieczne płatności zapewnia:</strong></p>
+      <img src="https://www.przelewy24.pl/themes/przelewy24/assets/img/base/przelewy24_logo_2022.svg" alt="Przelewy24">
+      <p>Wszystkie dane są szyfrowane i chronione protokołem SSL</p>
+    </div>
+    
+    <div class="legal-links">
+      <a href="regulamin.html">Regulamin</a>
+      <a href="polityka.html">Polityka prywatności</a>
+      <a href="mailto:staniszewski@heuristica.pl">Kontakt</a>
+    </div>
+  </div>
+
+  <script>
+    // Generowanie unikalnego session_id
+    function generateSessionId() {
+      return 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    // Ustawienie session_id
+    document.querySelector('input[name="p24_session_id"]').value = generateSessionId();
+    
+    // Obsługa wyświetlania pól faktury
+    document.getElementById('invoice_needed').addEventListener('change', function() {
+      const invoiceFields = document.getElementById('invoice_fields');
+      if (this.checked) {
+        invoiceFields.style.display = 'block';
+      } else {
+        invoiceFields.style.display = 'none';
+      }
+    });
+    
+    // Walidacja formularza
+    function validateForm() {
+      const termsAccepted = document.getElementById('terms_accepted').checked;
+      const przelewy24Terms = document.getElementById('przelewy24_terms').checked;
+      const email = document.getElementById('p24_email').value.trim();
+      const client = document.getElementById('p24_client').value.trim();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      
+      // Debug - pokaż co jest wypełnione
+      console.log('Walidacja:', {
+        termsAccepted,
+        przelewy24Terms,
+        email: email.length > 0,
+        client: client.length > 0
+      });
+      
+      if (termsAccepted && przelewy24Terms && email.length > 0 && client.length > 0) {
+        submitBtn.disabled = false;
+        submitBtn.style.backgroundColor = '#d4a574';
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.style.backgroundColor = '#ccc';
+      }
+    }
+    
+    // Nasłuchiwanie zmian w formularzu
+    document.addEventListener('DOMContentLoaded', function() {
+      const requiredFields = ['terms_accepted', 'przelewy24_terms', 'p24_email', 'p24_client'];
+      
+      requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.addEventListener('change', validateForm);
+          field.addEventListener('input', validateForm);
+        }
+      });
+      
+      // Walidacja na starcie
+      validateForm();
+    });
+    
+    // Obsługa wysłania formularza
+    document.getElementById('payment-form').addEventListener('submit', function(e) {
+      // Tutaj można dodać dodatkową walidację lub generowanie podpisu
+      // Na potrzeby demonstracji - formularz zostanie wysłany
+      
+      // W rzeczywistej implementacji trzeba będzie:
+      // 1. Wygenerować podpis (p24_sign) na podstawie danych
+      // 2. Ustawić właściwe wartości merchant_id i pos_id
+      // 3. Ewentualnie wysłać dane do własnego backendu najpierw
+    });
+  </script>
+
+  <div class="footer">
+    (C) 2025 Heuristica. Marek Staniszewski
+  </div>
+</body>
+</html>

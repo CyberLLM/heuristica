@@ -27,6 +27,59 @@
   <meta property="og:type" content="website">
   
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* DODATKOWE STYLE DLA NOWEJ SEKCJI USŁUG */
+    .services-single-column {
+      margin: 30px 0;
+      width: 100%;
+      columns: 1 !important;
+      -webkit-columns: 1 !important;
+      -moz-columns: 1 !important;
+    }
+    
+    .service-block {
+      margin-bottom: 25px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    
+    .services-single-column h3 {
+      font-size: 1.3em;
+      margin: 0 0 20px 0;
+      color: #22394d;
+      font-weight: bold;
+    }
+    
+    .service-block h4 {
+      font-size: 1.1em;
+      margin: 0 0 10px 0;
+      color: #22394d;
+      font-weight: bold;
+    }
+    
+    .service-block ul {
+      list-style-type: none;
+      padding-left: 25px;
+      margin: 0 0 15px 0;
+      columns: 1 !important;
+      -webkit-columns: 1 !important;
+      -moz-columns: 1 !important;
+    }
+    
+    .service-block li {
+      position: relative;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    
+    .service-block li:before {
+      content: "•";
+      position: absolute;
+      left: -15px;
+      color: #38547c;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div class="nav">
@@ -52,14 +105,55 @@
     <h2>Wspieramy w znaczącej przemianie</h2>
     <p>Pomagamy firmom, instytucjom i zespołom w skutecznej transformacji – od idei do wdrożenia.
     Tworzymy strategie, szkolimy, wdrażamy narzędzia AI, projektujemy warsztaty, doradzamy liderom.</p>
-        <ul class="singlecol">
-      <li>Warsztaty i szkolenia kompetencji AI w biznesie i marketingu</li>
-      <li>Konfiguracja asystentów AI i tworzenie bazy wiedzy</li>
-      <li>PromptCrafting - projektowanie promptów maksymalizujących skuteczność i precyzję LLM w biznesie</li>    
-      <li>Strategia w czasach niepewności (procesy facylitacyjne)</li>
-      <li>Inwentyka - wspracie w tworzeniu innowacji</li>
-      <li>Storytelling, archetypy marki, consumer insight - warsztatay tematyczne</li>
-    </ul>
+    
+    <!-- LISTA USŁUG - W 1 KOLUMNIE -->
+    <div class="services-single-column">
+      <h3>Zakres usług Heuristica (AI × marketing × strategia)</h3>
+      
+      <div class="service-block">
+        <h4>1. AI Strategy & Advisory</h4>
+        <ul>
+          <li>Projektowanie strategii wykorzystania AI w marketingu i biznesie</li>
+          <li>Warsztaty strategiczne z liderami (AI-Ready Leadership)</li>
+        </ul>
+      </div>
+      
+      <div class="service-block">
+        <h4>2. AI Automation & Assistants</h4>
+        <ul>
+          <li>Budowa i konfiguracja wewnętrznych asystentów GPT (np. dla działów handlowych, HR, marketingu itp.)</li>
+          <li>Projektowanie agentów AI (agentic AI) i chatbotów RAG</li>
+        </ul>
+      </div>
+      
+      <div class="service-block">
+        <h4>3. AI-Driven Market Research</h4>
+        <ul>
+          <li>Automatyzacja analiz konsumenckich i insightów (AI-assisted research)</li>
+          <li>Generatywna segmentacja, persony, potrzeby, predykcja zachowań</li>
+          <li>Analiza opinii (voice of customer) z użyciem LLM i NLP</li>
+        </ul>
+      </div>
+      
+      <div class="service-block">
+        <h4>4. AI Content Intelligence</h4>
+        <ul>
+          <li>Trening zespołów marketingowych w prompt engineeringu i współpracy z LLM</li>
+          <li>Systemy wspierające tworzenie i ocenę treści reklamowych (AI copy-testing, idea scoring)</li>
+          <li>AI do generowania komunikatów i dopasowania do person/buyer journey</li>
+        </ul>
+      </div>
+      
+      <div class="service-block">
+        <h4>5. AI Education & Enablement</h4>
+        <ul>
+          <li>Szkolenia z AI w marketingu i strategii (dla zarządów i zespołów)</li>
+          <li>Projektowanie programów rozwojowych AI-ready (akademie AI)</li>
+          <li>Mentoring dla liderów innowacji</li>
+        </ul>
+      </div>
+    </div>
+    
     <p>Heuristica jest firmą wpisaną do Bazy Usług Rozwojowych PARP. Firma jest również wpisana do Rejestru Instytucji Szkoleniowych (podstawa: Art. 20 ust. 4 z 20.04.14 o promocji zatrudnienia i instytucjach rynku pracy (Dz.U z 2018 r. poz. 1265 i 1149).</p>
     <h3 id="kontakt">Kontakt</h3>
     <p><a href="mailto:staniszewski@heuristica.pl">staniszewski🐒heuristica.pl</a></p>

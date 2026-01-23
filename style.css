@@ -77,6 +77,23 @@ li {
   letter-spacing: 0.5px;
 }
 
+.footer-social {
+  margin-bottom: 10px;
+}
+
+.footer-social a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 1.1em;
+  transition: opacity 0.2s;
+}
+
+.footer-social a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 .workshop-desc ul {
   columns: 1 !important;
   -webkit-columns: 1 !important;

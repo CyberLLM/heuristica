@@ -12,6 +12,9 @@ RewriteRule ^prompting/?$ /prompting.html [L,NC]
 # Redirect /sandbox to /sandbox.html
 RewriteRule ^sandbox/?$ /sandbox.html [L,NC]
 
+# Redirect /embeddings to /embeddings.html
+RewriteRule ^embeddings/?$ /embeddings.html [L,NC]
+
 # Enable compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json

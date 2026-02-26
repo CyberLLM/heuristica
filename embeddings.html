@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embeddingi — Heuristica | Playground wektorów semantycznych</title>
+  <meta name="description" content="Interaktywny playground do eksploracji embeddingów OpenAI. Wizualizacja wektorów, cosine similarity i PCA 2D.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary: #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted: #8B949E;
+      --text-link: #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-green: #3FB950;
+      --tag-paid: #D29922;
+      --tag-red: #f85149;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+    a { color: var(--text-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    .top-nav { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+    .top-nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; color: var(--text-primary); }
+    .nav-logo .logo-mark { width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent-green), #1a5a3d); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #fff; }
+    .nav-title { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); border-left: 1px solid var(--border-color); padding-left: 16px; margin-left: 4px; }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a { color: var(--text-muted); font-size: 13px; }
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* PAGE */
+    .page-layout { max-width: 1000px; margin: 0 auto; padding: 28px 24px 48px; }
+
+    /* REPO HEADER */
+    .repo-path { display: flex; align-items: center; gap: 8px; font-size: 20px; margin-bottom: 14px; }
+    .repo-owner { color: var(--text-link); font-weight: 500; }
+    .repo-separator { color: var(--text-muted); }
+    .repo-name { font-weight: 600; color: var(--text-link); }
+    .repo-badge { font-size: 11px; border: 1px solid var(--border-color); border-radius: 20px; padding: 2px 8px; color: var(--text-muted); font-weight: 400; }
+    .repo-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border-color); padding-bottom: 0; margin-bottom: 20px; }
+    .repo-tab { display: flex; align-items: center; gap: 6px; padding: 8px 14px; font-size: 13px; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .repo-tab:hover { color: var(--text-primary); text-decoration: none; }
+    .repo-tab.active { color: var(--text-primary); border-bottom-color: var(--tag-paid); }
+
+    /* CONTENT CARD */
+    .content-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .content-card h2 {
+      font-size: 16px; font-weight: 700; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .content-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+    .content-card p:last-child { margin-bottom: 0; }
+
+    /* API KEY BAR */
+    .key-bar {
+      display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+      background: var(--bg-tertiary); border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;
+    }
+    .key-bar label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+    .key-bar input[type="password"], .key-bar input[type="text"] {
+      flex: 1; min-width: 180px; background: var(--bg-primary); border: 1px solid var(--border-color);
+      border-radius: 6px; padding: 6px 10px; color: var(--text-primary);
+      font-family: var(--font-mono); font-size: 12px; outline: none;
+    }
+    .key-bar input:focus { border-color: var(--text-link); }
+    .key-bar select {
+      background: var(--bg-primary); border: 1px solid var(--border-color);
+      border-radius: 6px; padding: 6px 10px; color: var(--text-primary); font-size: 13px; outline: none;
+    }
+    .key-bar .key-status { font-size: 11px; color: var(--text-muted); }
+    .key-bar .key-status.ok { color: var(--tag-green); }
+
+    /* FORM ELEMENTS */
+    input[type="text"].embed-input {
+      width: 100%; background: var(--bg-primary); border: 1px solid var(--border-color);
+      border-radius: 6px; padding: 8px 12px; color: var(--text-primary); font-size: 14px; outline: none;
+      font-family: var(--font-body);
+    }
+    input[type="text"].embed-input:focus { border-color: var(--text-link); }
+
+    .btn {
+      padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary { background: var(--accent-green); color: #fff; }
+    .btn-primary:not(:disabled):hover { opacity: 0.85; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
+    .btn-ghost:hover { color: var(--text-primary); }
+
+    /* INPUT ROW */
+    .input-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .input-row input { flex: 1; }
+
+    /* VECTOR HEATMAP */
+    .vector-heatmap {
+      display: flex; flex-wrap: wrap; gap: 3px;
+      margin-bottom: 10px;
+    }
+    .vector-cell {
+      width: 22px; height: 22px; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 8px; cursor: default;
+    }
+    .vector-numbers {
+      font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+      line-height: 1.8; word-break: break-all;
+    }
+    .vector-numbers span { color: var(--text-link); }
+    .vector-stats {
+      display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--text-muted);
+    }
+    .vector-stats strong { color: var(--text-primary); }
+
+    /* SIMILARITY */
+    .similarity-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    @media (max-width: 600px) { .similarity-inputs { grid-template-columns: 1fr; } }
+
+    .similarity-result { margin-top: 4px; }
+    .similarity-score-big {
+      font-family: var(--font-mono); font-size: 48px; font-weight: 700;
+      text-align: center; margin: 12px 0 8px;
+    }
+    .similarity-gauge-wrap { margin-bottom: 8px; }
+    .gauge-track {
+      height: 10px; border-radius: 5px; position: relative;
+      background: linear-gradient(to right, #f85149, #d29922, #3fb950);
+      border: 1px solid var(--border-color);
+    }
+    .gauge-marker {
+      position: absolute; top: -4px; width: 4px; height: 18px;
+      background: #fff; border-radius: 2px; transform: translateX(-50%);
+      box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+    .gauge-labels {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: var(--text-muted); margin-top: 4px;
+    }
+    .similarity-label {
+      text-align: center; font-size: 14px; font-weight: 600; margin-top: 4px;
+    }
+
+    .similarity-scale {
+      margin-top: 14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+      font-size: 11px;
+    }
+    .scale-item { background: var(--bg-tertiary); border-radius: 4px; padding: 6px 8px; text-align: center; }
+    .scale-item .range { font-family: var(--font-mono); color: var(--text-link); margin-bottom: 2px; }
+    .scale-item .desc { color: var(--text-muted); }
+
+    /* PCA */
+    .pca-words {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px; margin-bottom: 14px;
+    }
+    .pca-word-row { display: flex; align-items: center; gap: 6px; }
+    .pca-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .pca-word-row input { flex: 1; }
+
+    .pca-chart-wrap {
+      background: var(--bg-primary); border: 1px solid var(--border-color);
+      border-radius: 6px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 360px;
+    }
+    .pca-chart-wrap svg { display: block; }
+    .pca-placeholder {
+      color: var(--text-muted); font-size: 14px; text-align: center; padding: 40px;
+    }
+
+    /* PYTHON CODE */
+    .code-block { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; }
+    .code-block-header { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border-color); }
+    .code-lang { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); }
+    .copy-btn { font-size: 11px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 2px 6px; }
+    .copy-btn:hover { color: var(--text-primary); }
+    pre { padding: 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; color: #E6EDF3; white-space: pre; }
+    .kw { color: #ff7b72; } .str { color: #a5d6ff; } .num { color: #79c0ff; }
+    .fn { color: #d2a8ff; } .cm { color: #8b949e; }
+
+    /* TWO COL */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ERROR */
+    .error-msg { background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); border-radius: 6px; padding: 8px 14px; font-size: 13px; color: #f85149; margin-top: 10px; }
+
+    /* SPINNER */
+    .spinner { display: inline-block; width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* FOOTER */
+    .readme-footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 13px; color: var(--text-muted); }
+    .site-footer { background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 24px; margin-top: 48px; text-align: center; }
+    .site-footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; }
+    .site-footer-links a { color: var(--text-muted); font-size: 14px; }
+    .site-footer-copy { color: var(--text-muted); font-size: 13px; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-mark">H</span>
+        <span>heuristica</span>
+      </a>
+      <span class="nav-title">/ embeddingi</span>
+    </div>
+    <div class="nav-links">
+      <a href="sandbox.html">Sandbox</a>
+      <a href="ai-tools.html">Narzędzia AI</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page-layout">
+
+  <div class="repo-path">
+    <a href="index.html" class="repo-owner">heuristica</a>
+    <span class="repo-separator">/</span>
+    <span class="repo-name">embeddings-playground</span>
+    <span class="repo-badge">Public</span>
+  </div>
+
+  <div class="repo-tabs">
+    <a href="#wektor" class="repo-tab active"><span>📐</span> Wektor</a>
+    <a href="#similarity" class="repo-tab"><span>🔗</span> Similarity</a>
+    <a href="#pca" class="repo-tab"><span>🗺️</span> PCA 2D</a>
+    <a href="sandbox.html" class="repo-tab"><span>⚗️</span> Sandbox</a>
+    <a href="ai-tools.html" class="repo-tab"><span>🛠️</span> Narzędzia</a>
+  </div>
+
+  <!-- EXPLAINER -->
+  <div class="content-card">
+    <h2>🧬 Czym są embeddingi?</h2>
+    <p>
+      <strong style="color:var(--text-primary)">Embedding</strong> to zamiana tekstu na wektor liczb — długą listę wartości (np. 1536 liczb dla modelu <code style="font-family:var(--font-mono);font-size:12px;color:var(--text-link)">text-embedding-3-small</code>). Model OpenAI "rozumie" znaczenie słowa i koduje je jako punkt w przestrzeni wielowymiarowej.
+    </p>
+    <p>
+      Kluczowa właściwość: <strong style="color:var(--text-primary)">semantycznie podobne teksty mają podobne wektory</strong>. "Kot" i "kotek" będą blisko siebie. "Król" i "królowa" też — a różnica między nimi będzie podobna do różnicy między "mężczyzna" i "kobieta".
+    </p>
+    <p>
+      Embeddingi służą do: wyszukiwania semantycznego, klastrowania dokumentów, wykrywania plagiatów, systemów rekomendacji i RAG (Retrieval-Augmented Generation).
+    </p>
+  </div>
+
+  <!-- API KEY -->
+  <div class="key-bar">
+    <label>🔑 Klucz API</label>
+    <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" oninput="saveKey()">
+    <button onclick="toggleKey()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px">👁</button>
+    <label>Model</label>
+    <select id="embedModel">
+      <option value="text-embedding-3-small" selected>text-embedding-3-small (1536 dim)</option>
+      <option value="text-embedding-3-large">text-embedding-3-large (3072 dim)</option>
+      <option value="text-embedding-ada-002">text-embedding-ada-002 (1536 dim, legacy)</option>
+    </select>
+    <span class="key-status" id="keyStatus">Klucz wysyłany bezpośrednio do OpenAI.</span>
+  </div>
+
+  <!-- SECTION 1: WEKTOR -->
+  <div class="content-card" id="wektor">
+    <h2>📐 Wektor embeddingu</h2>
+    <p>Wpisz dowolny tekst — zobaczysz jego reprezentację wektorową.</p>
+
+    <div class="input-row">
+      <input type="text" class="embed-input" id="vecInput" placeholder='Np. "cat", "machine learning", "Warszawa"' value="cat">
+      <button class="btn btn-primary" id="vecBtn" onclick="doVector()">Generuj</button>
+    </div>
+    <div id="vecError"></div>
+
+    <div id="vecResult" style="display:none">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Heatmapa pierwszych 64 wymiarów (🟢 dodatnie, 🔴 ujemne):</div>
+      <div class="vector-heatmap" id="vecHeatmap"></div>
+      <div class="vector-numbers" id="vecNumbers"></div>
+      <div class="vector-stats" id="vecStats"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 + PYTHON side by side -->
+  <div class="two-col">
+
+    <!-- COSINE SIMILARITY -->
+    <div class="content-card" id="similarity">
+      <h2>🔗 Cosine Similarity</h2>
+      <p>Miara podobieństwa semantycznego między dwoma tekstami (0 = brak, 1 = identyczne).</p>
+
+      <div class="similarity-inputs">
+        <div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Tekst A</div>
+          <input type="text" class="embed-input" id="simA" value="cat">
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Tekst B</div>
+          <input type="text" class="embed-input" id="simB" value="dog">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="simBtn" onclick="doSimilarity()" style="width:100%;margin-bottom:14px">Oblicz podobieństwo</button>
+
+      <div id="simError"></div>
+      <div id="simResult" style="display:none">
+        <div class="similarity-score-big" id="simScore">—</div>
+        <div class="similarity-gauge-wrap">
+          <div class="gauge-track">
+            <div class="gauge-marker" id="gaugeMarker" style="left:50%"></div>
+          </div>
+          <div class="gauge-labels"><span>0 — brak</span><span>0.5</span><span>1 — identyczne</span></div>
+        </div>
+        <div class="similarity-label" id="simLabel"></div>
+      </div>
+
+      <div class="similarity-scale" style="margin-top:16px">
+        <div class="scale-item"><div class="range">0.0–0.3</div><div class="desc">Bardzo różne</div></div>
+        <div class="scale-item"><div class="range">0.3–0.6</div><div class="desc">Różne tematy</div></div>
+        <div class="scale-item"><div class="range">0.6–0.8</div><div class="desc">Podobne</div></div>
+        <div class="scale-item"><div class="range">0.8–1.0</div><div class="desc">Bardzo bliskie</div></div>
+      </div>
+    </div>
+
+    <!-- PYTHON CODE -->
+    <div class="content-card">
+      <h2>🐍 Odpowiednik w Pythonie</h2>
+      <div class="code-block" style="margin-bottom:12px">
+        <div class="code-block-header">
+          <span class="code-lang">python — wektor</span>
+          <button class="copy-btn" onclick="copyEl('pyVec')">Kopiuj</button>
+        </div>
+        <pre id="pyVec"><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+client = OpenAI(api_key=<span class="str">"sk-..."</span>)
+
+<span class="kw">def</span> <span class="fn">get_embedding</span>(text, model=<span class="str">"text-embedding-3-small"</span>):
+    res = client.embeddings.create(input=text, model=model)
+    <span class="kw">return</span> res.data[<span class="num">0</span>].embedding
+
+emb = <span class="fn">get_embedding</span>(<span class="str">"cat"</span>)
+<span class="kw">print</span>(emb[:<span class="num">10</span>], <span class="str">"..."</span>)
+<span class="kw">print</span>(<span class="fn">len</span>(emb))  <span class="cm"># 1536</span></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-lang">python — cosine similarity</span>
+          <button class="copy-btn" onclick="copyEl('pySim')">Kopiuj</button>
+        </div>
+        <pre id="pySim"><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">cosine_similarity</span>(a, b):
+    a, b = np.array(a), np.array(b)
+    <span class="kw">return</span> np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+emb_a = <span class="fn">get_embedding</span>(<span class="str">"cat"</span>)
+emb_b = <span class="fn">get_embedding</span>(<span class="str">"dog"</span>)
+sim = <span class="fn">cosine_similarity</span>(emb_a, emb_b)
+<span class="kw">print</span>(<span class="fn">f</span><span class="str">"Similarity: {sim:.3f}"</span>)</pre>
+      </div>
+    </div>
+
+  </div><!-- /two-col -->
+
+  <!-- SECTION 3: PCA -->
+  <div class="content-card" id="pca">
+    <h2>🗺️ Wizualizacja PCA 2D</h2>
+    <p>Embeddingi mają 1536 wymiarów — nie da się ich narysować bezpośrednio. PCA redukuje je do 2D zachowując relacje między słowami. Przerywane linie = odległości semantyczne.</p>
+
+    <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Słowa / frazy (4–8)</div>
+        <div class="pca-words" id="pcaWords"></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-left:auto">
+        <button class="btn btn-ghost" onclick="addPcaWord()">+ Dodaj</button>
+        <button class="btn btn-primary" id="pcaBtn" onclick="doPCA()">Wizualizuj</button>
+      </div>
+    </div>
+
+    <div class="pca-chart-wrap" id="pcaChart">
+      <div class="pca-placeholder">
+        <div style="font-size:32px;margin-bottom:8px">🗺️</div>
+        Wpisz słowa i kliknij <strong>Wizualizuj</strong>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-lang">python — wizualizacja PCA (matplotlib)</span>
+          <button class="copy-btn" onclick="copyEl('pyPCA')">Kopiuj</button>
+        </div>
+        <pre id="pyPCA"><span class="kw">from</span> sklearn.decomposition <span class="kw">import</span> PCA
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+words = [<span class="str">"king"</span>, <span class="str">"queen"</span>, <span class="str">"man"</span>, <span class="str">"woman"</span>]
+embeddings = [<span class="fn">get_embedding</span>(w) <span class="kw">for</span> w <span class="kw">in</span> words]
+
+pca = PCA(n_components=<span class="num">2</span>)
+pts = pca.fit_transform(embeddings)
+
+<span class="kw">for</span> i <span class="kw">in</span> range(<span class="fn">len</span>(words)):
+    <span class="kw">for</span> j <span class="kw">in</span> range(i+<span class="num">1</span>, <span class="fn">len</span>(words)):
+        plt.plot([pts[i,<span class="num">0</span>], pts[j,<span class="num">0</span>]], [pts[i,<span class="num">1</span>], pts[j,<span class="num">1</span>]],
+                 linestyle=<span class="str">'--'</span>, alpha=<span class="num">0.5</span>, color=<span class="str">'gray'</span>)
+<span class="kw">for</span> i, word <span class="kw">in</span> <span class="fn">enumerate</span>(words):
+    plt.scatter(pts[i,<span class="num">0</span>], pts[i,<span class="num">1</span>], s=<span class="num">150</span>)
+    plt.text(pts[i,<span class="num">0</span>]+<span class="num">0.01</span>, pts[i,<span class="num">1</span>]+<span class="num">0.01</span>, word, fontsize=<span class="num">12</span>)
+plt.title(<span class="str">"Relacje między embeddingami (PCA)"</span>)
+plt.show()</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="readme-footer">
+    <p>Utrzymywane przez <a href="index.html">Heuristica</a> · <a href="sandbox.html">⚗️ Sandbox →</a> · <a href="prompting.html">🧠 Prompting →</a></p>
+    <p style="font-family:var(--font-mono);font-size:12px;margin-top:6px">Ostatnia aktualizacja: 26 lutego 2026</p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-links">
+    <a href="https://www.youtube.com/@marekstaniszewski7424" target="_blank">YouTube</a>
+    <a href="https://www.linkedin.com/in/staniszewskimarek/" target="_blank">LinkedIn</a>
+    <a href="mailto:staniszewski@heuristica.pl">Email</a>
+  </div>
+  <div class="site-footer-copy">© 2026 Heuristica. Marek Staniszewski</div>
+</footer>
+
+<script>
+  // ===== CONSTANTS =====
+  const DOT_COLORS = ['#58A6FF','#3FB950','#FF7B72','#D2A8FF','#FFA657','#63DEDE','#F78166','#A8DAFF'];
+
+  // ===== INIT =====
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = sessionStorage.getItem('oai_key');
+    if (saved) {
+      document.getElementById('apiKey').value = saved;
+      document.getElementById('keyStatus').textContent = '✓ Klucz z sessionStorage';
+      document.getElementById('keyStatus').className = 'key-status ok';
+    }
+    buildPcaWords(['king', 'queen', 'man', 'woman', 'cat', 'dog']);
+  });
+
+  // ===== API KEY =====
+  function saveKey() {
+    const val = document.getElementById('apiKey').value.trim();
+    if (val.startsWith('sk-')) {
+      sessionStorage.setItem('oai_key', val);
+      document.getElementById('keyStatus').textContent = '✓ Klucz zapisany w sessionStorage';
+      document.getElementById('keyStatus').className = 'key-status ok';
+    } else {
+      document.getElementById('keyStatus').textContent = 'Klucz wysyłany bezpośrednio do OpenAI.';
+      document.getElementById('keyStatus').className = 'key-status';
+    }
+  }
+
+  function toggleKey() {
+    const inp = document.getElementById('apiKey');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  }
+
+  // ===== OPENAI EMBEDDING =====
+  async function getEmbedding(text) {
+    const apiKey = document.getElementById('apiKey').value.trim();
+    const model = document.getElementById('embedModel').value;
+    if (!apiKey) throw new Error('Wpisz klucz API OpenAI.');
+
+    const res = await fetch('https://api.openai.com/v1/embeddings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+      body: JSON.stringify({ input: text, model })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
+    return data.data[0].embedding;
+  }
+
+  // ===== COSINE SIMILARITY =====
+  function cosineSim(a, b) {
+    let dot = 0, na = 0, nb = 0;
+    for (let i = 0; i < a.length; i++) { dot += a[i]*b[i]; na += a[i]*a[i]; nb += b[i]*b[i]; }
+    return dot / (Math.sqrt(na) * Math.sqrt(nb));
+  }
+
+  // ===== SECTION 1: VECTOR =====
+  async function doVector() {
+    const text = document.getElementById('vecInput').value.trim();
+    if (!text) return;
+    const btn = document.getElementById('vecBtn');
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+    document.getElementById('vecError').innerHTML = '';
+    document.getElementById('vecResult').style.display = 'none';
+
+    try {
+      const emb = await getEmbedding(text);
+      renderVector(emb, text);
+      document.getElementById('vecResult').style.display = 'block';
+    } catch(e) {
+      document.getElementById('vecError').innerHTML = `<div class="error-msg">⚠ ${e.message}</div>`;
+    } finally {
+      btn.disabled = false; btn.innerHTML = 'Generuj';
+    }
+  }
+
+  function renderVector(emb, label) {
+    const SHOW = 64;
+    const maxAbs = Math.max(...emb.slice(0, SHOW).map(Math.abs));
+
+    // Heatmap
+    const hm = document.getElementById('vecHeatmap');
+    hm.innerHTML = emb.slice(0, SHOW).map((v, i) => {
+      const intensity = Math.round(180 * Math.abs(v) / maxAbs);
+      const bg = v >= 0
+        ? `rgba(63,185,80,${(intensity/255).toFixed(2)})`
+        : `rgba(248,81,73,${(intensity/255).toFixed(2)})`;
+      return `<div class="vector-cell" style="background:${bg};border:1px solid var(--border-color)" title="dim[${i}] = ${v.toFixed(4)}">&nbsp;</div>`;
+    }).join('');
+
+    // First 10 numbers
+    const first10 = emb.slice(0, 10).map(v => `<span>${v.toFixed(4)}</span>`).join(', ');
+    document.getElementById('vecNumbers').innerHTML = `[${first10}, … ] (${emb.length} liczb łącznie)`;
+
+    // Stats
+    const min = Math.min(...emb).toFixed(4);
+    const max = Math.max(...emb).toFixed(4);
+    const norm = Math.sqrt(emb.reduce((s,x) => s+x*x, 0)).toFixed(4);
+    document.getElementById('vecStats').innerHTML =
+      `<span>Wymiary: <strong>${emb.length}</strong></span>` +
+      `<span>Min: <strong>${min}</strong></span>` +
+      `<span>Max: <strong>${max}</strong></span>` +
+      `<span>Norma L2: <strong>${norm}</strong></span>`;
+  }
+
+  // ===== SECTION 2: SIMILARITY =====
+  async function doSimilarity() {
+    const a = document.getElementById('simA').value.trim();
+    const b = document.getElementById('simB').value.trim();
+    if (!a || !b) return;
+    const btn = document.getElementById('simBtn');
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Pobieranie embeddingów…';
+    document.getElementById('simError').innerHTML = '';
+
+    try {
+      const [embA, embB] = await Promise.all([getEmbedding(a), getEmbedding(b)]);
+      const sim = cosineSim(embA, embB);
+      renderSimilarity(sim, a, b);
+      document.getElementById('simResult').style.display = 'block';
+    } catch(e) {
+      document.getElementById('simError').innerHTML = `<div class="error-msg">⚠ ${e.message}</div>`;
+    } finally {
+      btn.disabled = false; btn.innerHTML = 'Oblicz podobieństwo';
+    }
+  }
+
+  function renderSimilarity(sim, a, b) {
+    document.getElementById('simScore').textContent = sim.toFixed(3);
+    const pct = Math.max(0, Math.min(1, sim)) * 100;
+    document.getElementById('gaugeMarker').style.left = pct + '%';
+
+    let color, label;
+    if (sim >= 0.8)      { color = '#3FB950'; label = '🟢 Bardzo podobne semantycznie'; }
+    else if (sim >= 0.6) { color = '#D29922'; label = '🟡 Podobne'; }
+    else if (sim >= 0.3) { color = '#FF7B72'; label = '🟠 Różne tematy'; }
+    else                 { color = '#f85149'; label = '🔴 Bardzo różne'; }
+
+    document.getElementById('simScore').style.color = color;
+    document.getElementById('simLabel').textContent = `"${a}" vs "${b}" — ${label}`;
+  }
+
+  // ===== SECTION 3: PCA =====
+  const DEFAULT_WORDS = ['king', 'queen', 'man', 'woman', 'cat', 'dog'];
+
+  function buildPcaWords(words) {
+    const container = document.getElementById('pcaWords');
+    container.innerHTML = words.map((w, i) => `
+      <div class="pca-word-row" id="pcaRow${i}">
+        <div class="pca-dot" style="background:${DOT_COLORS[i % DOT_COLORS.length]}"></div>
+        <input type="text" class="embed-input" value="${w}" placeholder="słowo ${i+1}" style="font-size:13px;padding:6px 8px">
+        <button onclick="removePcaWord(${i})" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:0 2px">×</button>
+      </div>
+    `).join('');
+  }
+
+  function addPcaWord() {
+    const rows = document.querySelectorAll('#pcaWords .pca-word-row');
+    if (rows.length >= 8) return;
+    const i = rows.length;
+    const div = document.createElement('div');
+    div.className = 'pca-word-row';
+    div.id = `pcaRow${i}`;
+    div.innerHTML = `
+      <div class="pca-dot" style="background:${DOT_COLORS[i % DOT_COLORS.length]}"></div>
+      <input type="text" class="embed-input" placeholder="słowo ${i+1}" style="font-size:13px;padding:6px 8px">
+      <button onclick="removePcaWord(${i})" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px;padding:0 2px">×</button>
+    `;
+    document.getElementById('pcaWords').appendChild(div);
+  }
+
+  function removePcaWord(i) {
+    const row = document.getElementById(`pcaRow${i}`);
+    if (row) row.remove();
+    // re-index
+    document.querySelectorAll('#pcaWords .pca-word-row').forEach((r, idx) => {
+      r.id = `pcaRow${idx}`;
+      r.querySelector('button').setAttribute('onclick', `removePcaWord(${idx})`);
+    });
+  }
+
+  function getPcaWords() {
+    return Array.from(document.querySelectorAll('#pcaWords .pca-word-row input'))
+      .map(inp => inp.value.trim()).filter(Boolean);
+  }
+
+  async function doPCA() {
+    const words = getPcaWords();
+    if (words.length < 2) { alert('Wpisz co najmniej 2 słowa.'); return; }
+    const btn = document.getElementById('pcaBtn');
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Pobieranie…';
+    document.getElementById('pcaChart').innerHTML = '<div class="pca-placeholder"><div class="spinner" style="width:24px;height:24px;border-width:3px"></div><br>Pobieranie embeddingów…</div>';
+
+    try {
+      const embeddings = await Promise.all(words.map(w => getEmbedding(w)));
+      const pts = pca2d(embeddings);
+      renderPCA(words, pts);
+    } catch(e) {
+      document.getElementById('pcaChart').innerHTML = `<div class="pca-placeholder"><div class="error-msg">⚠ ${e.message}</div></div>`;
+    } finally {
+      btn.disabled = false; btn.innerHTML = 'Wizualizuj';
+    }
+  }
+
+  // ===== PCA IMPLEMENTATION =====
+  function pca2d(vectors) {
+    const n = vectors.length;
+    // Center
+    const mean = vectors[0].map((_, j) => vectors.reduce((s, v) => s + v[j], 0) / n);
+    const X = vectors.map(v => v.map((x, j) => x - mean[j]));
+    // Gram matrix G = X @ X^T  (n×n — small!)
+    const G = Array.from({length: n}, (_, i) =>
+      Array.from({length: n}, (_, j) =>
+        X[i].reduce((s, x, k) => s + x * X[j][k], 0)));
+    // Power iteration
+    function powerIter(M, iters = 300) {
+      let v = Array.from({length: M.length}, (_, i) => Math.sin(i + 1)); // deterministic init
+      for (let t = 0; t < iters; t++) {
+        const Mv = M.map(row => row.reduce((s, x, j) => s + x * v[j], 0));
+        const norm = Math.sqrt(Mv.reduce((s, x) => s + x*x, 0)) || 1;
+        v = Mv.map(x => x / norm);
+      }
+      const lambda = v.reduce((s, x, i) => s + x * M[i].reduce((s2, y, j) => s2 + y * v[j], 0), 0);
+      return { v, lambda };
+    }
+    function deflate(M, v, lambda) {
+      return M.map((row, i) => row.map((x, j) => x - lambda * v[i] * v[j]));
+    }
+    const { v: v1, lambda: l1 } = powerIter(G);
+    const G2 = deflate(G, v1, l1);
+    const { v: v2 } = powerIter(G2);
+    // Scale by sqrt of eigenvalue for proper variance representation
+    const s1 = Math.sqrt(Math.abs(l1));
+    const { lambda: l2 } = powerIter(G2);
+    const s2 = Math.sqrt(Math.abs(l2));
+    return vectors.map((_, i) => [v1[i] * s1, v2[i] * s2]);
+  }
+
+  // ===== SVG CHART =====
+  function renderPCA(words, pts) {
+    const W = 700, H = 420, PAD = 60;
+    const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+    const xmin = Math.min(...xs), xmax = Math.max(...xs);
+    const ymin = Math.min(...ys), ymax = Math.max(...ys);
+    const xRange = xmax - xmin || 1, yRange = ymax - ymin || 1;
+
+    const sx = x => PAD + ((x - xmin) / xRange) * (W - 2*PAD);
+    const sy = y => H - PAD - ((y - ymin) / yRange) * (H - 2*PAD);
+
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">`;
+
+    // Background
+    svg += `<rect width="${W}" height="${H}" fill="#0D1117"/>`;
+
+    // Grid lines
+    for (let i = 0; i <= 5; i++) {
+      const gx = PAD + (i/5)*(W-2*PAD);
+      const gy = PAD + (i/5)*(H-2*PAD);
+      svg += `<line x1="${gx}" y1="${PAD}" x2="${gx}" y2="${H-PAD}" stroke="#21262D" stroke-width="1"/>`;
+      svg += `<line x1="${PAD}" y1="${gy}" x2="${W-PAD}" y2="${gy}" stroke="#21262D" stroke-width="1"/>`;
+    }
+
+    // Axes
+    svg += `<line x1="${PAD}" y1="${PAD}" x2="${PAD}" y2="${H-PAD}" stroke="#30363D" stroke-width="1"/>`;
+    svg += `<line x1="${PAD}" y1="${H-PAD}" x2="${W-PAD}" y2="${H-PAD}" stroke="#30363D" stroke-width="1"/>`;
+
+    // Axis labels
+    svg += `<text x="${W/2}" y="${H-8}" fill="#8B949E" font-size="11" font-family="system-ui" text-anchor="middle">Główny komponent 1</text>`;
+    svg += `<text x="14" y="${H/2}" fill="#8B949E" font-size="11" font-family="system-ui" text-anchor="middle" transform="rotate(-90,14,${H/2})">Główny komponent 2</text>`;
+
+    // Title
+    svg += `<text x="${W/2}" y="22" fill="#E6EDF3" font-size="13" font-family="system-ui" text-anchor="middle" font-weight="600">Relacje między embeddingami słów (PCA 2D)</text>`;
+
+    // Dashed lines between all pairs
+    for (let i = 0; i < words.length; i++) {
+      for (let j = i+1; j < words.length; j++) {
+        svg += `<line x1="${sx(xs[i])}" y1="${sy(ys[i])}" x2="${sx(xs[j])}" y2="${sy(ys[j])}" stroke="#8B949E" stroke-width="1" stroke-dasharray="4,4" opacity="0.5"/>`;
+      }
+    }
+
+    // Points + labels
+    words.forEach((word, i) => {
+      const cx = sx(xs[i]), cy = sy(ys[i]);
+      const col = DOT_COLORS[i % DOT_COLORS.length];
+      svg += `<circle cx="${cx}" cy="${cy}" r="8" fill="${col}" stroke="#0D1117" stroke-width="2" opacity="0.9"/>`;
+      // label background
+      const tw = word.length * 7 + 8;
+      svg += `<rect x="${cx+12}" y="${cy-10}" width="${tw}" height="20" rx="3" fill="rgba(22,27,34,0.85)" stroke="${col}" stroke-width="1"/>`;
+      svg += `<text x="${cx+12+tw/2}" y="${cy+4}" fill="#E6EDF3" font-size="12" font-family="'JetBrains Mono',monospace" text-anchor="middle" font-weight="500">${escHtml(word)}</text>`;
+    });
+
+    svg += '</svg>';
+    document.getElementById('pcaChart').innerHTML = svg;
+  }
+
+  // ===== UTILS =====
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function copyEl(id) {
+    const el = document.getElementById(id);
+    navigator.clipboard.writeText(el.innerText || el.textContent).then(() => {
+      const btn = el.parentElement.parentElement.querySelector('.copy-btn');
+      if (btn) { btn.textContent = 'Skopiowano!'; setTimeout(() => btn.textContent = 'Kopiuj', 2000); }
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Heuristica .htaccess
+# Clean URL for AI Tools page
+
+RewriteEngine On
+
+# Redirect /ai-tools to /ai-tools.html
+RewriteRule ^ai-tools/?$ /ai-tools.html [L,NC]
+
+# Enable compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>

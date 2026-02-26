@@ -239,6 +239,13 @@
       margin-top: 5px;
     }
 
+    .param-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
     /* ===== CHAT AREA (MIDDLE) ===== */
     .chat-area {
       display: flex;
@@ -611,6 +618,7 @@
           </div>
           <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7"
             oninput="document.getElementById('tempVal').textContent=this.value; updateCode()">
+          <div class="param-desc">Losowość odpowiedzi. 0 = deterministyczny, 2 = bardzo kreatywny.</div>
         </div>
 
         <div class="field">
@@ -629,6 +637,27 @@
           </div>
           <input type="range" id="topP" min="0" max="1" step="0.1" value="1.0"
             oninput="document.getElementById('topPVal').textContent=parseFloat(this.value).toFixed(1); updateCode()">
+          <div class="param-desc">Próbkowanie jądrowe. Ogranicza pulę tokenów do top P% prawdopodobieństwa.</div>
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Presence penalty</label>
+            <span class="field-value" id="presenceVal">0.0</span>
+          </div>
+          <input type="range" id="presencePenalty" min="-2" max="2" step="0.1" value="0"
+            oninput="document.getElementById('presenceVal').textContent=parseFloat(this.value).toFixed(1); updateCode()">
+          <div class="param-desc">Kara za tokeny, które już się pojawiły. Zachęca do nowych słów i tematów.</div>
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Frequency penalty</label>
+            <span class="field-value" id="frequencyVal">0.0</span>
+          </div>
+          <input type="range" id="frequencyPenalty" min="-2" max="2" step="0.1" value="0"
+            oninput="document.getElementById('frequencyVal').textContent=parseFloat(this.value).toFixed(1); updateCode()">
+          <div class="param-desc">Ogranicza powtarzanie tych samych słów — im częściej token wystąpił, tym mocniejsza kara.</div>
         </div>
       </div>
 
@@ -786,6 +815,8 @@
       const temperature = parseFloat(document.getElementById('temperature').value);
       const maxTokens = parseInt(document.getElementById('maxTokens').value);
       const topP = parseFloat(document.getElementById('topP').value);
+      const presencePenalty = parseFloat(document.getElementById('presencePenalty').value);
+      const frequencyPenalty = parseFloat(document.getElementById('frequencyPenalty').value);
 
       if (!apiKey) {
         showError('Wpisz klucz API OpenAI po lewej stronie.');
@@ -809,7 +840,9 @@
           : [...messages],
         temperature,
         max_tokens: maxTokens,
-        top_p: topP
+        top_p: topP,
+        presence_penalty: presencePenalty,
+        frequency_penalty: frequencyPenalty
       };
 
       // Disable send button, show spinner
@@ -946,6 +979,8 @@
       const temp = document.getElementById('temperature').value;
       const maxTok = document.getElementById('maxTokens').value;
       const topP = parseFloat(document.getElementById('topP').value).toFixed(1);
+      const presence = parseFloat(document.getElementById('presencePenalty').value).toFixed(1);
+      const frequency = parseFloat(document.getElementById('frequencyPenalty').value).toFixed(1);
       const system = document.getElementById('systemPrompt').value.trim() || 'Jesteś pomocnym asystentem.';
       const userMsg = document.getElementById('userInput').value.trim() || 'Twoja wiadomość tutaj...';
 
@@ -961,7 +996,9 @@
         `    ],\n` +
         `    temperature=<span class="num">${temp}</span>,\n` +
         `    max_tokens=<span class="num">${maxTok}</span>,\n` +
-        `    top_p=<span class="num">${topP}</span>\n` +
+        `    top_p=<span class="num">${topP}</span>,\n` +
+        `    presence_penalty=<span class="num">${presence}</span>,\n` +
+        `    frequency_penalty=<span class="num">${frequency}</span>\n` +
         `)\n\n` +
         `<span class="kw">print</span>(response.choices[<span class="num">0</span>].message.content)`;
 
@@ -974,7 +1011,9 @@
         ],
         temperature: parseFloat(temp),
         max_tokens: parseInt(maxTok),
-        top_p: parseFloat(topP)
+        top_p: parseFloat(topP),
+        presence_penalty: parseFloat(presence),
+        frequency_penalty: parseFloat(frequency)
       };
       document.getElementById('jsonCode').textContent = JSON.stringify(jsonObj, null, 2);
     }

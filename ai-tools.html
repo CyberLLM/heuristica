@@ -1039,6 +1039,7 @@
         { name: "Perplexity", url: "https://www.perplexity.ai/", description: "AI wyszukiwarka z cytowaniami źródeł", category: "modele-jezykowe", price: "freemium" },
         { name: "Qwen", url: "https://chat.qwen.ai/", description: "Model językowy od Alibaba", category: "modele-jezykowe", price: "freemium" },
         { name: "Bielik", url: "https://chat.bielik.ai/", description: "Polski model językowy od SpeakLeash", category: "modele-jezykowe", price: "freemium" },
+        { name: "PLLuM", url: "https://pllum.clarin-pl.eu/", description: "Polski model językowy od CLARIN-PL", category: "modele-jezykowe", price: "freemium" },
         { name: "Poe", url: "https://poe.com/", description: "Agregator wielu modeli AI w jednym miejscu", category: "modele-jezykowe", price: "freemium" },
         { name: "You.com", url: "https://you.com/", description: "Agregator modeli i newsów z wyszukiwaniem", category: "modele-jezykowe", price: "freemium" },
         { name: "OpenRouter", url: "https://openrouter.ai/chat", description: "Agregator modeli z dostępem API", category: "modele-jezykowe", price: "freemium" },
@@ -1359,7 +1360,11 @@
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
           searchQuery = e.target.value.trim();
+          currentFilter = null;
           renderTools(null, searchQuery);
+          if (searchQuery) {
+            document.getElementById('toolsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }, 300);
       });
     }

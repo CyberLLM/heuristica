@@ -1084,25 +1084,21 @@
       'rgba(63,210,210,0.22)',
     ];
 
-    let tiktokenEncoder = null;
+    let tiktokenEncode = null;
+    let tiktokenDecode = null;
 
     async function initTiktoken() {
       const status = document.getElementById('tokenizerStatus');
       try {
-        const { init, get_encoding } = await import(
-          'https://cdn.jsdelivr.net/npm/@dqbd/tiktoken@1.0.7/lite/init.js'
-        );
-        await init((imports) =>
-          WebAssembly.instantiateStreaming(
-            fetch('https://cdn.jsdelivr.net/npm/@dqbd/tiktoken@1.0.7/lite/tiktoken_bg.wasm'),
-            imports
-          )
-        );
-        tiktokenEncoder = get_encoding('cl100k_base');
-        status.textContent = '✓ tiktoken cl100k_base — identyczny z GPT-4o';
+        const mod = await import('https://cdn.jsdelivr.net/npm/gpt-tokenizer@2.4.0/+esm');
+        tiktokenEncode = mod.encode;
+        tiktokenDecode = mod.decode;
+        // smoke test
+        tiktokenEncode('test');
+        status.textContent = '✓ gpt-tokenizer cl100k_base — identyczny z GPT-4o';
         status.style.color = 'var(--tag-green)';
       } catch (e) {
-        status.textContent = '⚠ Błąd ładowania tiktoken: ' + e.message;
+        status.textContent = '⚠ Błąd ładowania tokenizera: ' + e.message;
         status.style.color = 'var(--tag-paid)';
       }
     }
@@ -1117,20 +1113,17 @@
         return;
       }
 
-      if (!tiktokenEncoder) {
+      if (!tiktokenEncode) {
         document.getElementById('tokenizerOutput').innerHTML =
-          '<span style="color:var(--text-muted)">⏳ Tiktoken jeszcze się ładuje…</span>';
+          '<span style="color:var(--text-muted)">⏳ Tokenizer jeszcze się ładuje…</span>';
         return;
       }
 
-      const decoder = new TextDecoder('utf-8', { fatal: false });
-      const tokenIds = tiktokenEncoder.encode(text);
-
+      const tokenIds = tiktokenEncode(text);
       document.getElementById('tokenCount').textContent = tokenIds.length;
 
-      const html = Array.from(tokenIds).map((id, i) => {
-        const bytes = tiktokenEncoder.decode(new Uint32Array([id]));
-        const tok = decoder.decode(bytes);
+      const html = tokenIds.map((id, i) => {
+        const tok = tiktokenDecode([id]);
         const bg = TOKEN_COLORS[i % TOKEN_COLORS.length];
         const display = tok
           .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')

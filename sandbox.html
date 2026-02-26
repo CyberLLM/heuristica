@@ -657,6 +657,16 @@
             oninput="document.getElementById('frequencyVal').textContent=parseFloat(this.value).toFixed(1); updateCode()">
           <div class="param-desc">Ogranicza powtarzanie tych samych słów — im częściej token wystąpił, tym mocniejsza kara.</div>
         </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Liczba odpowiedzi (n)</label>
+            <span class="field-value" id="nVal">1</span>
+          </div>
+          <input type="range" id="nParam" min="1" max="5" step="1" value="1"
+            oninput="document.getElementById('nVal').textContent=this.value; updateCode()">
+          <div class="param-desc">Ile wariantów odpowiedzi zwróci model. Przy n &gt; 1 do historii trafia pierwszy wariant.</div>
+        </div>
       </div>
 
       <div class="panel-section" style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border-color)">
@@ -855,6 +865,7 @@
       const topP = parseFloat(document.getElementById('topP').value);
       const presencePenalty = parseFloat(document.getElementById('presencePenalty').value);
       const frequencyPenalty = parseFloat(document.getElementById('frequencyPenalty').value);
+      const n = parseInt(document.getElementById('nParam').value);
 
       if (!apiKey) {
         showError('Wpisz klucz API OpenAI po lewej stronie.');
@@ -880,7 +891,8 @@
         max_tokens: maxTokens,
         top_p: topP,
         presence_penalty: presencePenalty,
-        frequency_penalty: frequencyPenalty
+        frequency_penalty: frequencyPenalty,
+        n
       };
 
       // Disable send button, show spinner
@@ -907,9 +919,19 @@
           throw new Error(data.error?.message || `HTTP ${res.status}`);
         }
 
-        const reply = data.choices[0].message.content;
-        messages.push({ role: 'assistant', content: reply });
-        appendMessage('assistant', reply);
+        const choices = data.choices;
+        const firstReply = choices[0].message.content;
+
+        if (choices.length === 1) {
+          appendMessage('assistant', firstReply);
+        } else {
+          choices.forEach((choice, i) => {
+            appendMessage('assistant', choice.message.content, `Wariant ${i + 1}/${choices.length}`);
+          });
+        }
+
+        // Only first choice goes into conversation history
+        messages.push({ role: 'assistant', content: firstReply });
         lastResponse = data;
 
         // Update stats
@@ -932,12 +954,13 @@
     }
 
     // ===== UI HELPERS =====
-    function appendMessage(role, content) {
+    function appendMessage(role, content, label = null) {
       const area = document.getElementById('messagesArea');
       const div = document.createElement('div');
       div.className = 'message';
+      const roleLabel = label ?? (role === 'user' ? 'Ty' : 'AI');
       div.innerHTML = `
-        <div class="message-role ${role}">${role === 'user' ? 'Ty' : 'AI'}</div>
+        <div class="message-role ${role}">${roleLabel}</div>
         <div class="message-content ${role}">${escapeHtml(content)}</div>
       `;
       area.appendChild(div);
@@ -1019,6 +1042,7 @@
       const topP = parseFloat(document.getElementById('topP').value).toFixed(1);
       const presence = parseFloat(document.getElementById('presencePenalty').value).toFixed(1);
       const frequency = parseFloat(document.getElementById('frequencyPenalty').value).toFixed(1);
+      const n = parseInt(document.getElementById('nParam').value);
       const system = document.getElementById('systemPrompt').value.trim() || 'Jesteś pomocnym asystentem.';
       const userMsg = document.getElementById('userInput').value.trim() || 'Twoja wiadomość tutaj...';
 
@@ -1036,9 +1060,12 @@
         `    max_tokens=<span class="num">${maxTok}</span>,\n` +
         `    top_p=<span class="num">${topP}</span>,\n` +
         `    presence_penalty=<span class="num">${presence}</span>,\n` +
-        `    frequency_penalty=<span class="num">${frequency}</span>\n` +
+        `    frequency_penalty=<span class="num">${frequency}</span>,\n` +
+        `    n=<span class="num">${n}</span>\n` +
         `)\n\n` +
-        `<span class="kw">print</span>(response.choices[<span class="num">0</span>].message.content)`;
+        (n === 1
+          ? `<span class="kw">print</span>(response.choices[<span class="num">0</span>].message.content)`
+          : `<span class="kw">for</span> i, choice <span class="kw">in</span> <span class="fn">enumerate</span>(response.choices):\n    <span class="kw">print</span>(<span class="str">f"Wariant {'{i+1}'}: "</span>, choice.message.content)`);
 
       // JSON body
       const jsonObj = {
@@ -1051,7 +1078,8 @@
         max_tokens: parseInt(maxTok),
         top_p: parseFloat(topP),
         presence_penalty: parseFloat(presence),
-        frequency_penalty: parseFloat(frequency)
+        frequency_penalty: parseFloat(frequency),
+        n
       };
       document.getElementById('jsonCode').textContent = JSON.stringify(jsonObj, null, 2);
     }

@@ -14,7 +14,7 @@
 
   <!-- SEO Meta Tags -->
   <title>Narzędzia AI — Heuristica | Sprawdzone narzędzia do marketingu i nauki</title>
-  <meta name="description" content="Katalog 50+ sprawdzonych narzędzi AI do marketingu, edukacji, tworzenia treści i automatyzacji. Aktualizowany regularnie.">
+  <meta name="description" content="Katalog 100+ sprawdzonych narzędzi AI do marketingu, edukacji, tworzenia treści i automatyzacji. Aktualizowany regularnie.">
   <meta name="keywords" content="narzędzia AI, AI tools, sztuczna inteligencja, marketing AI, automatyzacja, ChatGPT, Midjourney, generowanie treści">
   <meta name="author" content="Marek Staniszewski">
   <meta name="robots" content="index, follow">
@@ -859,7 +859,7 @@
       <div class="file-bar">
         <div class="author-avatar"></div>
         <span class="commit-author">marek</span>
-        <span class="commit-message">Aktualizacja katalogu: nowe narzędzia do wideo i audio</span>
+        <span class="commit-message">Dodano 108 narzędzi AI w 11 kategoriach</span>
         <span class="commit-date" id="lastUpdate">2026-02-26</span>
       </div>
 
@@ -1020,124 +1020,160 @@
   <!-- MAIN JAVASCRIPT -->
   <script>
     // ===== TOOLS DATA =====
-    // Dane narzędzi - w produkcji przenieść do data/tools.json
+    // Pełna lista narzędzi AI - 108 pozycji
     const toolsData = {
       categories: [
-        {
-          id: "grafika",
-          name: "Generowanie grafik",
-          emoji: "🎨",
-          color: "#E91E63"
-        },
-        {
-          id: "wideo",
-          name: "Generowanie i edycja wideo",
-          emoji: "🎬",
-          color: "#9C27B0"
-        },
-        {
-          id: "copywriting",
-          name: "Copywriting i treści",
-          emoji: "✍️",
-          color: "#2196F3"
-        },
-        {
-          id: "nauka",
-          name: "Narzędzia naukowe",
-          emoji: "🎓",
-          color: "#4CAF50"
-        },
-        {
-          id: "detekcja",
-          name: "Detekcja AI i plagiatu",
-          emoji: "🔍",
-          color: "#FF9800"
-        },
-        {
-          id: "monitoring",
-          name: "Monitoring i analityka",
-          emoji: "📊",
-          color: "#607D8B"
-        },
-        {
-          id: "prompting",
-          name: "Prompting i produktywność",
-          emoji: "🧠",
-          color: "#00BCD4"
-        },
-        {
-          id: "automatyzacja",
-          name: "Automatyzacja i agenci",
-          emoji: "⚙️",
-          color: "#795548"
-        },
-        {
-          id: "audio",
-          name: "Audio i muzyka",
-          emoji: "🎤",
-          color: "#673AB7"
-        }
+        { id: "modele-jezykowe", name: "Modele językowe i chatboty", emoji: "💬", color: "#6366F1" },
+        { id: "grafika", name: "Generowanie grafik", emoji: "🎨", color: "#EC4899" },
+        { id: "wideo", name: "Video i animacje", emoji: "🎬", color: "#8B5CF6" },
+        { id: "audio", name: "Audio i muzyka", emoji: "🎤", color: "#06B6D4" },
+        { id: "copywriting", name: "Copywriting i treści", emoji: "✍️", color: "#10B981" },
+        { id: "nauka", name: "Narzędzia naukowe", emoji: "🎓", color: "#F59E0B" },
+        { id: "prezentacje", name: "Prezentacje i wizualizacje", emoji: "📊", color: "#EF4444" },
+        { id: "detekcja", name: "Detekcja AI i bezpieczeństwo", emoji: "🔍", color: "#F97316" },
+        { id: "automatyzacja", name: "Automatyzacja i agenci", emoji: "⚙️", color: "#84CC16" },
+        { id: "prompting", name: "Prompting i developer", emoji: "🧠", color: "#0EA5E9" },
+        { id: "katalogi", name: "Katalogi i zasoby", emoji: "📚", color: "#A855F7" }
       ],
       tools: [
+        // === MODELE JĘZYKOWE ===
+        { name: "ChatGPT", url: "https://chatgpt.com/", description: "Najpopularniejszy chatbot AI od OpenAI", category: "modele-jezykowe", price: "freemium" },
+        { name: "Claude", url: "https://claude.ai/", description: "Asystent AI od Anthropic do pisania i analizy", category: "modele-jezykowe", price: "freemium" },
+        { name: "DeepSeek", url: "https://chat.deepseek.com/", description: "Chiński model językowy z silnymi możliwościami", category: "modele-jezykowe", price: "freemium" },
+        { name: "GLM / Z.AI", url: "https://chat.z.ai/", description: "Model językowy z zaawansowanymi funkcjami", category: "modele-jezykowe", price: "freemium" },
+        { name: "Kimi", url: "https://www.kimi.com/", description: "Asystent AI z długim kontekstem", category: "modele-jezykowe", price: "freemium" },
+        { name: "Gemini", url: "https://gemini.google.com/app", description: "Model multimodalny od Google", category: "modele-jezykowe", price: "freemium" },
+        { name: "Google AI Studio", url: "https://aistudio.google.com/apps", description: "Tworzenie aplikacji AI z modelami Google", category: "modele-jezykowe", price: "freemium" },
+        { name: "NotebookLM", url: "https://notebooklm.google/", description: "Research assistant od Google z analizą dokumentów", category: "modele-jezykowe", price: "freemium" },
+        { name: "Perplexity", url: "https://www.perplexity.ai/", description: "AI wyszukiwarka z cytowaniami źródeł", category: "modele-jezykowe", price: "freemium" },
+        { name: "Qwen", url: "https://chat.qwen.ai/", description: "Model językowy od Alibaba", category: "modele-jezykowe", price: "freemium" },
+        { name: "Bielik", url: "https://chat.bielik.ai/", description: "Polski model językowy od SpeakLeash", category: "modele-jezykowe", price: "freemium" },
+        { name: "Poe", url: "https://poe.com/", description: "Agregator wielu modeli AI w jednym miejscu", category: "modele-jezykowe", price: "freemium" },
+        { name: "You.com", url: "https://you.com/", description: "Agregator modeli i newsów z wyszukiwaniem", category: "modele-jezykowe", price: "freemium" },
+        { name: "OpenRouter", url: "https://openrouter.ai/chat", description: "Agregator modeli z dostępem API", category: "modele-jezykowe", price: "freemium" },
+
         // === GRAFIKA ===
-        { name: "Midjourney", url: "https://midjourney.com", description: "Najwyższa jakość generowanych grafik i ilustracji", category: "grafika", price: "paid" },
-        { name: "DALL·E 3", url: "https://openai.com/dall-e-3", description: "Generowanie obrazów z tekstu przez OpenAI", category: "grafika", price: "paid" },
-        { name: "Ideogram", url: "https://ideogram.ai", description: "Doskonałe renderowanie tekstu na obrazach", category: "grafika", price: "freemium" },
-        { name: "Leonardo AI", url: "https://leonardo.ai", description: "Grafiki do gier i koncepcyjne, modele fine-tuned", category: "grafika", price: "freemium" },
-        { name: "Stable Diffusion", url: "https://stability.ai", description: "Open-source model do generowania obrazów", category: "grafika", price: "freemium" },
-        { name: "Canva AI", url: "https://canva.com", description: "Generowanie grafik w popularnym narzędziu design", category: "grafika", price: "freemium" },
+        { name: "Midjourney", url: "https://www.midjourney.com/home", description: "Najwyższa jakość generowanych grafik i ilustracji", category: "grafika", price: "paid" },
+        { name: "DALL·E 3 / Bing Create", url: "https://www.bing.com/images/create", description: "Generowanie obrazów przez OpenAI i Bing", category: "grafika", price: "freemium" },
+        { name: "Adobe Firefly", url: "https://firefly.adobe.com/", description: "Generatywna grafika z funkcją wypełnienia", category: "grafika", price: "freemium" },
+        { name: "Ideogram", url: "https://ideogram.ai/t/trending", description: "Świetne renderowanie tekstu na obrazach", category: "grafika", price: "freemium" },
+        { name: "Leonardo AI", url: "https://app.leonardo.ai/ai-generations", description: "Grafiki do gier, koncepcyjne, modele fine-tuned", category: "grafika", price: "freemium" },
+        { name: "Stable Diffusion", url: "https://stablediffusionweb.com/", description: "Open-source model do generowania obrazów", category: "grafika", price: "freemium" },
+        { name: "PIXLR", url: "https://pixlr.com/image-generator/", description: "Generator obrazów z edycją online", category: "grafika", price: "freemium" },
+        { name: "Lovart AI", url: "https://www.lovart.ai/home", description: "Design materiałów graficznych i brand", category: "grafika", price: "freemium" },
+        { name: "LogoAI", url: "https://www.logoai.com/make", description: "Generowanie logotypów i identyfikacji", category: "grafika", price: "freemium" },
+        { name: "Namelix", url: "https://namelix.com/app/", description: "Generowanie nazw firm i logo", category: "grafika", price: "freemium" },
+        { name: "Fotor", url: "https://www.fotor.com/images/create", description: "Opakowania produktów i grafiki", category: "grafika", price: "freemium" },
+        { name: "Nano Banana", url: "https://nanobanana.ai/", description: "Kreatywne generowanie grafik", category: "grafika", price: "freemium" },
+        { name: "Packify", url: "https://www.packify.ai/", description: "Opakowania, zmiana tła produktów", category: "grafika", price: "freemium" },
+        { name: "Adobe Express", url: "https://new.express.adobe.com/", description: "Projektowanie opakowań i grafik", category: "grafika", price: "freemium" },
+        { name: "Exactly", url: "https://exactly.ai/", description: "Obrazy w stylu rysunkowym", category: "grafika", price: "freemium" },
+        { name: "3Daily", url: "https://app.3daily.ai/editor", description: "Generowanie postaci 3D", category: "grafika", price: "freemium" },
+        { name: "D-ID", url: "https://studio.d-id.com/", description: "Tworzenie awatarów AI wideo", category: "grafika", price: "paid" },
+        { name: "NVIDIA Playground", url: "https://build.nvidia.com/stabilityai/stable-diffusion-3-medium", description: "Playground do modeli graficznych NVIDIA", category: "grafika", price: "freemium" },
+        { name: "Flux Icon Kit", url: "https://huggingface.co/strangerzonehf/Flux-Icon-Kit-LoRA", description: "Generowanie ikon na HuggingFace", category: "grafika", price: "freemium" },
+        { name: "Freepik", url: "https://www.freepik.com/", description: "Różne modele do grafiki i video", category: "grafika", price: "freemium" },
 
         // === WIDEO ===
-        { name: "Runway", url: "https://runwayml.com", description: "Gen-2: generowanie wideo z tekstu i obrazu", category: "wideo", price: "paid" },
-        { name: "Pika Labs", url: "https://pika.art", description: "Generowanie i edycja wideo AI", category: "wideo", price: "freemium" },
-        { name: "HeyGen", url: "https://heygen.com", description: "AI avatary i generowanie wideo z awatarem", category: "wideo", price: "paid" },
-        { name: "Synthesia", url: "https://synthesia.io", description: "Wideo z awatarami AI do treningów i marketingu", category: "wideo", price: "paid" },
-        { name: "Descript", url: "https://descript.com", description: "Edycja wideo przez edycję transkrypcji", category: "wideo", price: "freemium" },
-
-        // === COPYWRITING ===
-        { name: "Writesonic", url: "https://writesonic.com", description: "Generowanie treści marketingowych i artykułów", category: "copywriting", price: "freemium" },
-        { name: "Jasper", url: "https://jasper.ai", description: "Asystent AI do content marketingu", category: "copywriting", price: "paid" },
-        { name: "Copy.ai", url: "https://copy.ai", description: "Generowanie tekstów reklamowych i marketingowych", category: "copywriting", price: "freemium" },
-        { name: "Rytr", url: "https://rytr.me", description: "AI writer do różnorodnych treści", category: "copywriting", price: "freemium" },
-        { name: "Claude", url: "https://claude.ai", description: "Asystent AI do pisania i analizy", category: "copywriting", price: "freemium" },
-
-        // === NAUKA ===
-        { name: "Elicit", url: "https://elicit.com", description: "AI research assistant do literatury naukowej", category: "nauka", price: "freemium" },
-        { name: "Consensus", url: "https://consensus.app", description: "Wyszukiwarka badań naukowych z AI", category: "nauka", price: "freemium" },
-        { name: "Semantic Scholar", url: "https://semanticscholar.org", description: "Baza publikacji naukowych z AI", category: "nauka", price: "free" },
-        { name: "Research Rabbit", url: "https://researchrabbit.ai", description: "Odkrywanie i organizowanie badań naukowych", category: "nauka", price: "free" },
-        { name: "Perplexity", url: "https://perplexity.ai", description: "AI wyszukiwarka z cytowaniami", category: "nauka", price: "freemium" },
-
-        // === DETEKCJA ===
-        { name: "GPTZero", url: "https://gptzero.me", description: "Detekcja tekstu generowanego przez AI", category: "detekcja", price: "freemium" },
-        { name: "Originality.AI", url: "https://originality.ai", description: "Detekcja AI i plagiatu dla twórców treści", category: "detekcja", price: "paid" },
-        { name: "Copyleaks", url: "https://copyleaks.com", description: "Wykrywanie plagiatu i treści AI", category: "detekcja", price: "paid" },
-        { name: "Hive Moderation", url: "https://hivemoderation.com", description: "Detekcja treści generowanych przez AI", category: "detekcja", price: "paid" },
-
-        // === MONITORING ===
-        { name: "Brand24", url: "https://brand24.com", description: "Monitoring marki i social listening", category: "monitoring", price: "paid" },
-        { name: "Mention", url: "https://mention.com", description: "Monitoring wzmianek o marce w sieci", category: "monitoring", price: "freemium" },
-        { name: "Sprout Social", url: "https://sproutsocial.com", description: "Zarządzanie social media z AI", category: "monitoring", price: "paid" },
-
-        // === PROMPTING ===
-        { name: "TypingMind", url: "https://typingmind.com", description: "Interfejs do ChatGPT z biblioteką promptów", category: "prompting", price: "freemium" },
-        { name: "PromptBase", url: "https://promptbase.com", description: "Marketplace z promptami do AI", category: "prompting", price: "freemium" },
-        { name: "OpenAI Playground", url: "https://platform.openai.com/playground", description: "Testowanie i tworzenie promptów GPT", category: "prompting", price: "paid" },
-        { name: "Anthropic Console", url: "https://console.anthropic.com", description: "Playground do testowania Claude", category: "prompting", price: "freemium" },
-
-        // === AUTOMATYZACJA ===
-        { name: "n8n", url: "https://n8n.io", description: "Open-source automatyzacja workflow z AI", category: "automatyzacja", price: "freemium" },
-        { name: "Zapier", url: "https://zapier.com", description: "Automatyzacja integracji z AI actions", category: "automatyzacja", price: "freemium" },
-        { name: "Make", url: "https://make.com", description: "Platforma automatyzacji z integracjami AI", category: "automatyzacja", price: "freemium" },
-        { name: "LangChain", url: "https://langchain.com", description: "Framework do budowania aplikacji AI", category: "automatyzacja", price: "free" },
-        { name: "AutoGPT", url: "https://github.com/Significant-Gravitas/AutoGPT", description: "Autonomiczne agenty AI", category: "automatyzacja", price: "free" },
+        { name: "Runway", url: "https://runwayml.com/", description: "Gen-2: generowanie wideo z tekstu i obrazu", category: "wideo", price: "paid" },
+        { name: "Pika", url: "https://pika.art/", description: "Generowanie i edycja wideo AI", category: "wideo", price: "freemium" },
+        { name: "HeyGen", url: "https://app.heygen.com/home", description: "AI avatary i generowanie wideo z awatarem", category: "wideo", price: "paid" },
+        { name: "Luma", url: "https://lumalabs.ai", description: "Generowanie wideo i 3D", category: "wideo", price: "freemium" },
+        { name: "Hedra", url: "https://www.hedra.com/", description: "Generowanie wideo z postaciami", category: "wideo", price: "freemium" },
+        { name: "Hailuo", url: "https://hailuoai.video/", description: "Generowanie wideo AI", category: "wideo", price: "freemium" },
+        { name: "Vozo", url: "https://www.vozo.ai/", description: "Synchronizacja ruchu ust w wideo", category: "wideo", price: "freemium" },
+        { name: "Higgsfield", url: "https://higgsfield.ai/create/video", description: "Obrazy i video z zaawansowaną kontrolą", category: "wideo", price: "freemium" },
+        { name: "Hunyuan", url: "https://hunyuanvideoai.com/", description: "Generowanie wideo przez Tencent", category: "wideo", price: "freemium" },
+        { name: "Vidu", url: "https://www.vidu.studio/create/img2video", description: "Konwersja obrazów na wideo", category: "wideo", price: "freemium" },
+        { name: "Veed", url: "https://www.veed.io/", description: "Filmy, awatary, dubbing, transkrypcje", category: "wideo", price: "freemium" },
+        { name: "CapCut", url: "https://www.capcut.com/", description: "Studio montażu wideo od ByteDance", category: "wideo", price: "freemium" },
+        { name: "Clideo", url: "https://clideo.com/editor/", description: "Studio montażowe online", category: "wideo", price: "freemium" },
+        { name: "Avataar", url: "https://creator.avataar.ai/", description: "Zaawansowane 3D i wideo", category: "wideo", price: "paid" },
+        { name: "NVIDIA 3D Effects", url: "https://build.nvidia.com/shutterstock/edify-shutterstock-3d-txt23d-2pt7b", description: "Generowanie prototypów 3D", category: "wideo", price: "freemium" },
 
         // === AUDIO ===
-        { name: "ElevenLabs", url: "https://elevenlabs.io", description: "Najlepsza synteza głosu i klonowanie", category: "audio", price: "freemium" },
-        { name: "Suno AI", url: "https://suno.ai", description: "Generowanie muzyki z tekstu", category: "audio", price: "freemium" },
-        { name: "Udio", url: "https://udio.com", description: "Tworzenie piosenek i muzyki z AI", category: "audio", price: "freemium" },
-        { name: "Murf AI", url: "https://murf.ai", description: "Synteza mowy do wideo i prezentacji", category: "audio", price: "paid" },
-        { name: "Adobe Podcast", url: "https://podcast.adobe.com", description: "Enhance audio - poprawa jakości nagrania", category: "audio", price: "free" }
+        { name: "ElevenLabs", url: "https://elevenlabs.io/speech-synthesis", description: "Najlepsza synteza głosu i klonowanie", category: "audio", price: "freemium" },
+        { name: "LiveKit", url: "https://playground.livekit.io/?preset=helpful-ai", description: "Asystent głosowy w czasie rzeczywistym", category: "audio", price: "freemium" },
+        { name: "Fireflies", url: "https://fireflies.ai/", description: "Transkrypcje spotkań i notatki", category: "audio", price: "freemium" },
+        { name: "SpinachAI", url: "https://www.spinach.ai/", description: "Transkrypcje spotkań z zapisem w CRM", category: "audio", price: "freemium" },
+        { name: "WhisperScribe", url: "https://app.whisperscri.be/", description: "Transkrypcje spotkań", category: "audio", price: "freemium" },
+        { name: "Otter.ai", url: "https://otter.ai/", description: "Transkrypcje live (głównie angielski)", category: "audio", price: "freemium" },
+        { name: "Loom", url: "https://www.loom.com/", description: "Screen recording z transkrypcjami", category: "audio", price: "freemium" },
+        { name: "Audiolizer", url: "https://audiolizer.cloud/galery", description: "Zamiana artykułów w audiobook", category: "audio", price: "freemium" },
+        { name: "Metaview", url: "https://www.metaview.ai/", description: "Inteligentne notatki ze spotkań", category: "audio", price: "freemium" },
+        { name: "Suno AI", url: "https://app.suno.ai/", description: "Generowanie piosenek z tekstu", category: "audio", price: "freemium" },
+        { name: "Audiogen", url: "https://app.audiogen.co/", description: "Generowanie efektów dźwiękowych", category: "audio", price: "freemium" },
+        { name: "Udio", url: "https://www.udio.com/", description: "Tworzenie piosenek i muzyki AI", category: "audio", price: "freemium" },
+        { name: "Landr", url: "https://app.landr.com/", description: "Mastering muzyki online", category: "audio", price: "freemium" },
+        { name: "Play.ai", url: "https://play.ai/", description: "Agent głosowy AI", category: "audio", price: "freemium" },
+        { name: "Narakeet", url: "https://www.narakeet.com/tools/", description: "Tekst na mowę, wiele języków", category: "audio", price: "freemium" },
+
+        // === COPYWRITING ===
+        { name: "Writesonic", url: "https://app.writesonic.com/", description: "Pisanie artykułów z workflow SEO", category: "copywriting", price: "freemium" },
+        { name: "Rytr", url: "https://rytr.me/", description: "AI writer do różnorodnych treści", category: "copywriting", price: "freemium" },
+        { name: "Aithor", url: "https://aithor.com/pl-pl/editor", description: "Pisanie artykułów po polsku", category: "copywriting", price: "freemium" },
+        { name: "Copy.ai", url: "https://www.copy.ai/", description: "Generowanie tekstów reklamowych i marketingowych", category: "copywriting", price: "freemium" },
+        { name: "Quillbot", url: "https://quillbot.com/", description: "Parafrazy artykułów naukowych + humanizacja", category: "copywriting", price: "freemium" },
+
+        // === NAUKA ===
+        { name: "Samwell", url: "https://www.samwell.ai/", description: "Eseje i prace naukowe z przypisami", category: "nauka", price: "freemium" },
+        { name: "Scite", url: "https://scite.ai/", description: "Artykuły naukowe z cytowaniami", category: "nauka", price: "paid" },
+        { name: "Papergen", url: "https://app.papergen.ai/", description: "Artykuły naukowe, podsumowania", category: "nauka", price: "freemium" },
+        { name: "Thesify", url: "https://app.thesify.ai/", description: "Recenzje prac naukowych (7 dni free)", category: "nauka", price: "paid" },
+        { name: "Consensus", url: "https://consensus.app", description: "Wyszukiwarka badań naukowych z AI", category: "nauka", price: "freemium" },
+        { name: "Elicit", url: "https://elicit.com/", description: "AI research assistant do literatury", category: "nauka", price: "freemium" },
+        { name: "Reddit Answers", url: "https://www.reddit.com/", description: "Wtyczka AI do zasobów Reddit", category: "nauka", price: "freemium" },
+        { name: "JuliusAI", url: "https://julius.ai/", description: "Analityka danych w Python", category: "nauka", price: "freemium" },
+        { name: "Webhunt", url: "https://www.webhound.ai/", description: "Publiczne dane zamieniane w dataset", category: "nauka", price: "freemium" },
+
+        // === PREZENTACJE ===
+        { name: "MyMap", url: "https://www.mymap.ai/visualstory", description: "Wizualne storytelling i mapy", category: "prezentacje", price: "freemium" },
+        { name: "Gamma", url: "https://gamma.app/", description: "Generowanie prezentacji z AI", category: "prezentacje", price: "freemium" },
+        { name: "Tome", url: "https://tome.app/", description: "Prezentacje AI z storytellingiem", category: "prezentacje", price: "freemium" },
+        { name: "Simplified", url: "https://app.simplified.com/ai", description: "AI do prezentacji i grafiki", category: "prezentacje", price: "freemium" },
+        { name: "SlideSpeak", url: "https://app.slidespeak.co/presentation", description: "API do prezentacji PowerPoint", category: "prezentacje", price: "freemium" },
+        { name: "Tom's Planner", url: "https://plan.tomsplanner.com/", description: "Harmonogramy i planowanie projektów", category: "prezentacje", price: "freemium" },
+        { name: "Mapify", url: "https://mapify.so/app/new", description: "Mapy myśli AI", category: "prezentacje", price: "freemium" },
+        { name: "Edrawmax", url: "https://www.edrawmax.com/app/ai", description: "Generowanie diagramów AI", category: "prezentacje", price: "freemium" },
+
+        // === DETEKCJA ===
+        { name: "GPTZero", url: "https://gptzero.me/", description: "Detekcja tekstu generowanego przez AI", category: "detekcja", price: "freemium" },
+        { name: "Copyleaks", url: "https://app.copyleaks.com/", description: "Wykrywanie plagiatu i treści AI", category: "detekcja", price: "paid" },
+        { name: "Originality.AI", url: "https://originality.ai/", description: "Detekcja AI i plagiatu dla twórców", category: "detekcja", price: "paid" },
+        { name: "Sójka", url: "https://guard.bielik.ai/testuj.html", description: "Bezpieczeństwo tekstów polskich", category: "detekcja", price: "freemium" },
+
+        // === AUTOMATYZACJA ===
+        { name: "Make", url: "https://eu2.make.com/", description: "Automatyzacja procesów (alternatywa Zapier)", category: "automatyzacja", price: "freemium" },
+        { name: "Taskade", url: "https://www.taskade.com/", description: "Tworzenie prostych agentów no-code", category: "automatyzacja", price: "freemium" },
+        { name: "Manus", url: "https://manus.im/app/", description: "Agent AI do zadań autonomicznych", category: "automatyzacja", price: "freemium" },
+        { name: "Chatbase", url: "https://www.chatbase.co/", description: "Tworzenie chatbotów na własnych danych", category: "automatyzacja", price: "freemium" },
+        { name: "Zebra AI", url: "https://app.zebra-ai.com", description: "Interaktywne dashboardy i analityka", category: "automatyzacja", price: "freemium" },
+        { name: "Ajelix", url: "https://portal.ajelix.com/", description: "Wizualizacja danych Excel/BI", category: "automatyzacja", price: "freemium" },
+        { name: "Sana", url: "https://sana.ai", description: "Podsumowania dokumentów AI", category: "automatyzacja", price: "freemium" },
+        { name: "Lovable", url: "https://lovable.dev/", description: "Tworzenie aplikacji i stron www", category: "automatyzacja", price: "freemium" },
+        { name: "Bold", url: "https://bold.new", description: "Szybkie tworzenie aplikacji web", category: "automatyzacja", price: "freemium" },
+        { name: "DeepFace", url: "https://colab.research.google.com/drive/1k0kRDsHhAvXthLU-Bq-a8aGRczdFAp3y", description: "Analiza twarzy w Google Colab", category: "automatyzacja", price: "freemium" },
+
+        // === PROMPTING ===
+        { name: "OpenAI Playground", url: "https://platform.openai.com/playground", description: "Testowanie i tworzenie promptów GPT", category: "prompting", price: "paid" },
+        { name: "Optymalizacja promptów OpenAI", url: "https://platform.openai.com/chat/edit?models=gpt-5&optimize=true", description: "Narzędzie do optymalizacji promptów", category: "prompting", price: "freemium" },
+        { name: "Anthropic Console", url: "https://console.anthropic.com/", description: "Playground do testowania Claude", category: "prompting", price: "freemium" },
+        { name: "Biblioteka promptów Anthropic", url: "https://docs.anthropic.com/en/prompt-library/library", description: "Oficjalna biblioteka promptów Claude", category: "prompting", price: "freemium" },
+        { name: "Neuron Prompt Library", url: "https://neuron-prompt-library.lovable.app/", description: "Biblioteka promptów społeczności", category: "prompting", price: "freemium" },
+        { name: "Chatbeat", url: "https://app.chatbeat.com/", description: "Analiza słów kluczowych w LLM", category: "prompting", price: "freemium" },
+        { name: "Replicate", url: "https://replicate.com/", description: "Playground + API do modeli AI", category: "prompting", price: "freemium" },
+        { name: "Akademia OpenAI", url: "https://academy.openai.com/home", description: "Kursy i materiały edukacyjne OpenAI", category: "prompting", price: "freemium" },
+
+        // === KATALOGI ===
+        { name: "Futurepedia", url: "https://www.futurepedia.io/", description: "Agregator najlepszych narzędzi AI", category: "katalogi", price: "freemium" },
+        { name: "HuggingFace", url: "https://huggingface.co/spaces", description: "Społeczność i modele open-source", category: "katalogi", price: "freemium" },
+        { name: "LM Arena", url: "https://lmarena.ai/leaderboard", description: "Ranking modeli językowych", category: "katalogi", price: "freemium" },
+        { name: "Chatbot Arena", url: "https://chat.lmsys.org/", description: "Porównywanie modeli w blind testach", category: "katalogi", price: "freemium" },
+        { name: "TAPoR", url: "https://tapor.ca/home", description: "Opisy i recenzje narzędzi AI", category: "katalogi", price: "freemium" },
+        { name: "DigitalFirst", url: "https://www.digitalfirst.ai/", description: "Kampanie reklamowe AI", category: "katalogi", price: "freemium" },
+        { name: "Adaily", url: "https://www.adaily.co/", description: "Najlepsze kampanie reklamowe", category: "katalogi", price: "freemium" },
+        { name: "Allen AI", url: "https://allenai.org/", description: "Artykuły i badania o AI", category: "katalogi", price: "freemium" },
+        { name: "Prompty Edukacyjne", url: "https://hd3ns092ns.notion.site/1b3dc3333315802a9e99cafedb321048", description: "Kolekcja promptów edukacyjnych", category: "katalogi", price: "freemium" }
       ]
     };
 

@@ -603,12 +603,10 @@
       <div class="panel-section">
         <div class="panel-section-title">⚙️ Model</div>
         <div class="field">
-          <select id="model" onchange="updateCode()">
-            <option value="gpt-4o">gpt-4o</option>
-            <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
-            <option value="gpt-4-turbo">gpt-4-turbo</option>
-            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+          <select id="model" onchange="updateCode(); updateModelBadge()">
+            <option value="" disabled selected>— wpisz klucz API —</option>
           </select>
+          <div class="param-desc" id="modelsStatus">Modele zaciągną się automatycznie po wpisaniu klucza.</div>
         </div>
 
         <div class="field">
@@ -783,6 +781,7 @@
         document.getElementById('apiKey').value = saved;
         document.getElementById('keyStatus').textContent = '✓ Klucz wczytany z sessionStorage';
         document.getElementById('keyStatus').className = 'key-ok';
+        fetchModels(saved);
       }
       updateCode();
       updateModelBadge();
@@ -795,9 +794,48 @@
         sessionStorage.setItem('oai_key', val);
         document.getElementById('keyStatus').textContent = '✓ Klucz zapisany w sessionStorage (tylko ta karta)';
         document.getElementById('keyStatus').className = 'key-ok';
+        fetchModels(val);
       } else {
         document.getElementById('keyStatus').textContent = 'Klucz wysyłany bezpośrednio do OpenAI. Nie trafia na żaden serwer.';
         document.getElementById('keyStatus').className = 'key-warning';
+      }
+    }
+
+    // ===== FETCH MODELS =====
+    async function fetchModels(apiKey) {
+      const status = document.getElementById('modelsStatus');
+      const select = document.getElementById('model');
+      status.textContent = 'Pobieranie modeli...';
+
+      try {
+        const res = await fetch('https://api.openai.com/v1/models', {
+          headers: { 'Authorization': `Bearer ${apiKey}` }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        // Filter to chat-capable models only, sort by name
+        const chatModels = data.data
+          .filter(m => m.id.startsWith('gpt-') || m.id.startsWith('o1') || m.id.startsWith('o3'))
+          .map(m => m.id)
+          .sort();
+
+        const preferred = ['gpt-4o', 'gpt-4o-mini', 'o3-mini', 'gpt-4-turbo', 'gpt-3.5-turbo'];
+
+        // Build options: preferred first, then rest
+        const top = chatModels.filter(id => preferred.includes(id));
+        const rest = chatModels.filter(id => !preferred.includes(id));
+        const ordered = [...top, ...rest];
+
+        select.innerHTML = ordered.map((id, i) =>
+          `<option value="${id}"${i === 0 ? ' selected' : ''}>${id}</option>`
+        ).join('');
+
+        status.textContent = `✓ Załadowano ${ordered.length} modeli`;
+        updateModelBadge();
+        updateCode();
+      } catch (err) {
+        status.textContent = '⚠ Nie udało się pobrać modeli: ' + err.message;
       }
     }
 

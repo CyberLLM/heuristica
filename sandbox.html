@@ -714,6 +714,7 @@
         <button class="right-tab active" onclick="switchTab('stats', this)">📊 Statystyki</button>
         <button class="right-tab" onclick="switchTab('python', this)">🐍 Python</button>
         <button class="right-tab" onclick="switchTab('json', this)">{ } JSON</button>
+        <button class="right-tab" onclick="switchTab('response', this)">📤 Response</button>
       </div>
 
       <div class="right-panel-content">
@@ -771,6 +772,22 @@
               <button class="copy-btn" onclick="copyCode('jsonCode')">Kopiuj</button>
             </div>
             <pre id="jsonCode"></pre>
+          </div>
+        </div>
+
+        <!-- RESPONSE TAB -->
+        <div class="tab-pane" id="tab-response">
+          <div class="field" style="margin-bottom:10px">
+            <select id="responseView" onchange="renderResponseTab()">
+              <option value="full">response — pełna odpowiedź</option>
+            </select>
+          </div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang" id="responseViewLabel">response</span>
+              <button class="copy-btn" onclick="copyCode('responseCode')">Kopiuj</button>
+            </div>
+            <pre id="responseCode" style="color:#8B949E;font-style:italic">Brak odpowiedzi — wyślij najpierw wiadomość.</pre>
           </div>
         </div>
 
@@ -933,6 +950,8 @@
         // Only first choice goes into conversation history
         messages.push({ role: 'assistant', content: firstReply });
         lastResponse = data;
+        updateResponseSelect(data.choices.length);
+        renderResponseTab();
 
         // Update stats
         if (data.usage) {
@@ -1032,6 +1051,34 @@
       document.querySelectorAll('.right-tab').forEach(b => b.classList.remove('active'));
       document.getElementById('tab-' + name).classList.add('active');
       btn.classList.add('active');
+    }
+
+    // ===== RESPONSE TAB =====
+    function updateResponseSelect(choicesCount) {
+      const sel = document.getElementById('responseView');
+      sel.innerHTML = '<option value="full">response — pełna odpowiedź</option>';
+      for (let i = 0; i < choicesCount; i++) {
+        sel.innerHTML += `<option value="${i}">response.choices[${i}].message.content</option>`;
+      }
+    }
+
+    function renderResponseTab() {
+      if (!lastResponse) return;
+      const view = document.getElementById('responseView').value;
+      const pre = document.getElementById('responseCode');
+      const label = document.getElementById('responseViewLabel');
+      pre.style.color = '';
+      pre.style.fontStyle = '';
+
+      if (view === 'full') {
+        pre.textContent = JSON.stringify(lastResponse, null, 2);
+        label.textContent = 'response';
+      } else {
+        const idx = parseInt(view);
+        const content = lastResponse.choices[idx]?.message?.content ?? '(brak)';
+        pre.textContent = content;
+        label.textContent = `response.choices[${idx}].message.content`;
+      }
     }
 
     // ===== CODE GENERATION =====

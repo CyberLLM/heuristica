@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO Meta Tags -->
+  <title>Narzędzia AI — Heuristica | Sprawdzone narzędzia do marketingu i nauki</title>
+  <meta name="description" content="Katalog 50+ sprawdzonych narzędzi AI do marketingu, edukacji, tworzenia treści i automatyzacji. Aktualizowany regularnie.">
+  <meta name="keywords" content="narzędzia AI, AI tools, sztuczna inteligencja, marketing AI, automatyzacja, ChatGPT, Midjourney, generowanie treści">
+  <meta name="author" content="Marek Staniszewski">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="🤖 Awesome AI Tools — Heuristica">
+  <meta property="og:description" content="Sprawdzone narzędzia AI. Darmowe i płatne. Testowane przez praktyka.">
+  <meta property="og:image" content="https://heuristica.pl/img/og-ai-tools.png">
+  <meta property="og:url" content="https://heuristica.pl/ai-tools">
+  <meta property="og:type" content="website">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://heuristica.pl/ai-tools">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary: #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted: #8B949E;
+      --text-link: #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-free: #3FB950;
+      --tag-free-bg: rgba(63, 185, 80, 0.15);
+      --tag-freemium: #58A6FF;
+      --tag-freemium-bg: rgba(88, 166, 255, 0.12);
+      --tag-paid: #D29922;
+      --tag-paid-bg: rgba(210, 153, 34, 0.15);
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--text-link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== TOP NAVIGATION ===== */
+    .top-nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .top-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-search {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      width: 200px;
+      outline: none;
+    }
+
+    .nav-search:focus {
+      border-color: var(--text-link);
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-search {
+        display: none;
+      }
+      .nav-links {
+        gap: 16px;
+        font-size: 13px;
+      }
+    }
+
+    /* ===== LAYOUT ===== */
+    .page-layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 296px;
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        order: -1;
+      }
+    }
+
+    /* ===== REPO HEADER ===== */
+    .repo-header {
+      margin-bottom: 16px;
+    }
+
+    .repo-path {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .repo-owner {
+      color: var(--text-link);
+      font-size: 20px;
+    }
+
+    .repo-separator {
+      color: var(--text-muted);
+      font-size: 20px;
+    }
+
+    .repo-name {
+      color: var(--text-link);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .repo-badge {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .repo-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0;
+    }
+
+    .repo-tab {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .repo-tab:hover {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .repo-tab.active {
+      color: var(--text-primary);
+      border-bottom-color: #f78166;
+      font-weight: 600;
+    }
+
+    .repo-tab .count {
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      padding: 0 7px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .stat-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--text-muted);
+    }
+
+    .stat-btn.starred {
+      background: rgba(210, 153, 34, 0.1);
+      border-color: var(--tag-paid);
+      color: var(--tag-paid);
+    }
+
+    .stat-btn .count {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* ===== FILE BAR (COMMIT BAR) ===== */
+    .file-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px 6px 0 0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green), #4ECDC4);
+    }
+
+    .commit-author {
+      font-weight: 600;
+      color: var(--text-link);
+    }
+
+    .commit-message {
+      color: var(--text-muted);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .commit-date {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* ===== README CONTENT ===== */
+    .readme-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      padding: 32px;
+    }
+
+    .readme-content h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .awesome-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, #FC6076, #FF9A44, #EF9D43);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .readme-content blockquote {
+      border-left: 4px solid var(--accent-green);
+      padding-left: 16px;
+      margin: 16px 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .readme-content .author-line {
+      color: var(--text-muted);
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .readme-content .author-line a {
+      color: var(--text-link);
+    }
+
+    .readme-content hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 24px 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      columns: 2;
+      column-gap: 40px;
+      margin: 16px 0;
+    }
+
+    .toc a {
+      color: var(--text-link);
+      font-size: 14px;
+      display: block;
+      padding: 2px 0;
+    }
+
+    @media (max-width: 600px) {
+      .toc {
+        columns: 1;
+      }
+    }
+
+    /* Section Headers */
+    .readme-content h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 32px 0 16px 0;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Tools Tables */
+    .tools-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+
+    .tools-table thead {
+      background: var(--bg-tertiary);
+    }
+
+    .tools-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tools-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .tools-table tr:hover {
+      background: rgba(88, 166, 255, 0.04);
+    }
+
+    .tools-table .tool-name {
+      font-weight: 600;
+      color: var(--text-link);
+      font-family: var(--font-mono);
+      font-size: 14px;
+    }
+
+    .tools-table .tool-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Price Tags */
+    .price-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+    }
+
+    .price-tag.free {
+      background: var(--tag-free-bg);
+      color: var(--tag-free);
+    }
+
+    .price-tag.freemium {
+      background: var(--tag-freemium-bg);
+      color: var(--tag-freemium);
+    }
+
+    .price-tag.paid {
+      background: var(--tag-paid-bg);
+      color: var(--tag-paid);
+    }
+
+    /* Price Legend */
+    .price-legend {
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 24px 0;
+    }
+
+    .price-legend h4 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .price-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .price-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .readme-footer {
+      text-align: center;
+      padding: 24px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 32px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sidebar-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .sidebar-box h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .sidebar-box p a {
+      color: var(--text-link);
+    }
+
+    /* Topics */
+    .topics-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .topic-tag {
+      background: rgba(42, 122, 91, 0.2);
+      color: #6fd3a5;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .topic-tag:hover {
+      background: rgba(42, 122, 91, 0.35);
+      text-decoration: none;
+    }
+
+    /* Category Stats */
+    .category-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .category-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .category-stat-item .count {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    /* Pricing Progress */
+    .pricing-progress {
+      margin-top: 8px;
+    }
+
+    .progress-bar {
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg-tertiary);
+    }
+
+    .progress-segment {
+      height: 100%;
+    }
+
+    .progress-segment.free {
+      background: var(--tag-free);
+    }
+
+    .progress-segment.freemium {
+      background: var(--tag-freemium);
+    }
+
+    .progress-segment.paid {
+      background: var(--tag-paid);
+    }
+
+    .progress-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .progress-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+
+    .progress-legend-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Kurator */
+    .kurator-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .kurator-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green), #4ECDC4);
+      flex-shrink: 0;
+    }
+
+    .kurator-info {
+      font-size: 13px;
+    }
+
+    .kurator-info .name {
+      font-weight: 600;
+      color: var(--text-link);
+    }
+
+    .kurator-info .title {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* ===== FOOTER (SITE) ===== */
+    .site-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 24px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .site-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+
+    .site-footer-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .site-footer-copy {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ===== SEARCH RESULTS ===== */
+    .search-info {
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .search-info.active {
+      display: block;
+    }
+
+    .search-info .query {
+      color: var(--text-link);
+      font-family: var(--font-mono);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 48px;
+      color: var(--text-muted);
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      .top-nav, .sidebar, .stats-bar, .repo-tabs, .site-footer {
+        display: none !important;
+      }
+      .page-layout {
+        display: block;
+      }
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .readme-content {
+        background: #fff;
+        border: none;
+      }
+      .tools-table {
+        page-break-inside: avoid;
+      }
+      .price-tag {
+        border: 1px solid currentColor;
+      }
+    }
+
+    /* ===== MOBILE ADJUSTMENTS ===== */
+    @media (max-width: 600px) {
+      .page-layout {
+        padding: 16px;
+      }
+      .readme-content {
+        padding: 16px;
+      }
+      .readme-content h1 {
+        font-size: 22px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tools-table {
+        font-size: 13px;
+      }
+      .tools-table th:nth-child(3),
+      .tools-table td:nth-child(3) {
+        display: none;
+      }
+      .repo-path {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-mark">H</span>
+        <span>heuristica</span>
+      </a>
+      <input type="text" class="nav-search" placeholder="Szukaj narzędzi..." id="searchInput">
+      <div class="nav-links">
+        <a href="kim.html">O mnie</a>
+        <a href="uslugi.html">Warsztaty</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="page-layout">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- REPO HEADER -->
+      <div class="repo-header">
+        <div class="repo-path">
+          <a href="index.html" class="repo-owner">heuristica</a>
+          <span class="repo-separator">/</span>
+          <span class="repo-name">awesome-ai-tools</span>
+          <span class="repo-badge">Public</span>
+        </div>
+        <div class="repo-tabs">
+          <a href="#" class="repo-tab active">
+            <span>📁</span> Katalog
+          </a>
+          <a href="mailto:staniszewski@heuristica.pl?subject=Propozycja narzędzia AI" class="repo-tab">
+            <span>💡</span> Zasugeruj
+          </a>
+          <a href="#changelog" class="repo-tab">
+            <span>📝</span> Changelog
+          </a>
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="stats-bar">
+        <button class="stat-btn" id="starBtn" onclick="toggleStar()">
+          <span>⭐</span> Star <span class="count" id="starCount">42</span>
+        </button>
+        <button class="stat-btn" onclick="shareUrl()">
+          <span>🔗</span> Udostępnij
+        </button>
+        <button class="stat-btn" onclick="window.print()">
+          <span>📥</span> Eksportuj PDF
+        </button>
+      </div>
+
+      <!-- FILE BAR -->
+      <div class="file-bar">
+        <div class="author-avatar"></div>
+        <span class="commit-author">marek</span>
+        <span class="commit-message">Aktualizacja katalogu: nowe narzędzia do wideo i audio</span>
+        <span class="commit-date" id="lastUpdate">2026-02-26</span>
+      </div>
+
+      <!-- README CONTENT -->
+      <article class="readme-content">
+        <h1>
+          🤖 Awesome AI Tools
+          <span class="awesome-badge">★ awesome</span>
+        </h1>
+
+        <blockquote>
+          Sprawdzone narzędzia AI do marketingu, edukacji, tworzenia treści i automatyzacji.
+          Kurator: Marek Staniszewski — AI Consultant & Brand Strategist.
+        </blockquote>
+
+        <p class="author-line">
+          <strong>Autor:</strong> <a href="kim.html">Marek @ Heuristica</a> · AI Consultant & Brand Strategist
+        </p>
+
+        <hr>
+
+        <!-- TABLE OF CONTENTS -->
+        <h2>📑 Spis treści</h2>
+        <div class="toc" id="toc">
+          <!-- Generated dynamically -->
+        </div>
+
+        <hr>
+
+        <!-- SEARCH INFO -->
+        <div class="search-info" id="searchInfo">
+          Wyniki wyszukiwania dla: <span class="query" id="searchQuery"></span>
+          <button onclick="clearSearch()" style="margin-left: 10px; background: none; border: 1px solid var(--border-color); color: var(--text-muted); padding: 2px 8px; border-radius: 4px; cursor: pointer;">Wyczyść</button>
+        </div>
+
+        <!-- TOOLS CONTAINER -->
+        <div id="toolsContainer">
+          <!-- Tools will be loaded dynamically -->
+          <p style="color: var(--text-muted); text-align: center; padding: 40px;">
+            Ładowanie narzędzi...
+          </p>
+        </div>
+
+        <!-- PRICE LEGEND -->
+        <div class="price-legend">
+          <h4>💰 Legenda cenowa</h4>
+          <div class="price-legend-grid">
+            <div class="price-legend-item">
+              <span class="price-tag free">Free</span>
+              <span>Narzędzie całkowicie bezpłatne</span>
+            </div>
+            <div class="price-legend-item">
+              <span class="price-tag freemium">Freemium</span>
+              <span>Podstawowe funkcje gratis, premium płatne</span>
+            </div>
+            <div class="price-legend-item">
+              <span class="price-tag paid">Paid</span>
+              <span>Narzędzie płatne (może mieć trial)</span>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- FOOTER -->
+        <div class="readme-footer" id="changelog">
+          <p>Utrzymywane przez <a href="index.html">Heuristica</a></p>
+          <p style="font-family: var(--font-mono); font-size: 12px; margin-top: 8px;">
+            Ostatnia aktualizacja: <span id="updateDate">26 lutego 2026</span>
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <!-- ABOUT -->
+      <div class="sidebar-box">
+        <h3>ℹ️ About</h3>
+        <p>
+          Kuratorowana lista sprawdzonych narzędzi AI.
+          Tworzona przez praktyka dla praktyków.
+          <br><br>
+          <a href="index.html">heuristica.pl</a>
+        </p>
+      </div>
+
+      <!-- TOPICS -->
+      <div class="sidebar-box">
+        <h3>🏷️ Topics</h3>
+        <div class="topics-list">
+          <span class="topic-tag">ai-tools</span>
+          <span class="topic-tag">marketing</span>
+          <span class="topic-tag">education</span>
+          <span class="topic-tag">generative-ai</span>
+          <span class="topic-tag">polish</span>
+          <span class="topic-tag">productivity</span>
+        </div>
+      </div>
+
+      <!-- CATEGORY STATS -->
+      <div class="sidebar-box">
+        <h3>📊 Kategorie</h3>
+        <div class="category-stats" id="categoryStats">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- PRICING DISTRIBUTION -->
+      <div class="sidebar-box">
+        <h3>💰 Cennik</h3>
+        <div class="pricing-progress" id="pricingProgress">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- KURATOR -->
+      <div class="sidebar-box">
+        <h3>👤 Kurator</h3>
+        <div class="kurator-box">
+          <div class="kurator-avatar"></div>
+          <div class="kurator-info">
+            <a href="kim.html" class="name">Marek</a>
+            <div class="title">AI Consultant & Brand Strategist</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="https://www.youtube.com/@marekstaniszewski7424" target="_blank">YouTube</a>
+      <a href="https://www.linkedin.com/in/staniszewskimarek/" target="_blank">LinkedIn</a>
+      <a href="mailto:staniszewski@heuristica.pl">Email</a>
+    </div>
+    <div class="site-footer-copy">
+      © 2026 Heuristica. Marek Staniszewski
+    </div>
+  </footer>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Awesome AI Tools - Heuristica",
+    "description": "Katalog sprawdzonych narzędzi AI do marketingu, edukacji i automatyzacji",
+    "url": "https://heuristica.pl/ai-tools",
+    "author": {
+      "@type": "Person",
+      "name": "Marek Staniszewski"
+    }
+  }
+  </script>
+
+  <!-- MAIN JAVASCRIPT -->
+  <script>
+    // ===== TOOLS DATA =====
+    // Dane narzędzi - w produkcji przenieść do data/tools.json
+    const toolsData = {
+      categories: [
+        {
+          id: "grafika",
+          name: "Generowanie grafik",
+          emoji: "🎨",
+          color: "#E91E63"
+        },
+        {
+          id: "wideo",
+          name: "Generowanie i edycja wideo",
+          emoji: "🎬",
+          color: "#9C27B0"
+        },
+        {
+          id: "copywriting",
+          name: "Copywriting i treści",
+          emoji: "✍️",
+          color: "#2196F3"
+        },
+        {
+          id: "nauka",
+          name: "Narzędzia naukowe",
+          emoji: "🎓",
+          color: "#4CAF50"
+        },
+        {
+          id: "detekcja",
+          name: "Detekcja AI i plagiatu",
+          emoji: "🔍",
+          color: "#FF9800"
+        },
+        {
+          id: "monitoring",
+          name: "Monitoring i analityka",
+          emoji: "📊",
+          color: "#607D8B"
+        },
+        {
+          id: "prompting",
+          name: "Prompting i produktywność",
+          emoji: "🧠",
+          color: "#00BCD4"
+        },
+        {
+          id: "automatyzacja",
+          name: "Automatyzacja i agenci",
+          emoji: "⚙️",
+          color: "#795548"
+        },
+        {
+          id: "audio",
+          name: "Audio i muzyka",
+          emoji: "🎤",
+          color: "#673AB7"
+        }
+      ],
+      tools: [
+        // === GRAFIKA ===
+        { name: "Midjourney", url: "https://midjourney.com", description: "Najwyższa jakość generowanych grafik i ilustracji", category: "grafika", price: "paid" },
+        { name: "DALL·E 3", url: "https://openai.com/dall-e-3", description: "Generowanie obrazów z tekstu przez OpenAI", category: "grafika", price: "paid" },
+        { name: "Ideogram", url: "https://ideogram.ai", description: "Doskonałe renderowanie tekstu na obrazach", category: "grafika", price: "freemium" },
+        { name: "Leonardo AI", url: "https://leonardo.ai", description: "Grafiki do gier i koncepcyjne, modele fine-tuned", category: "grafika", price: "freemium" },
+        { name: "Stable Diffusion", url: "https://stability.ai", description: "Open-source model do generowania obrazów", category: "grafika", price: "freemium" },
+        { name: "Canva AI", url: "https://canva.com", description: "Generowanie grafik w popularnym narzędziu design", category: "grafika", price: "freemium" },
+
+        // === WIDEO ===
+        { name: "Runway", url: "https://runwayml.com", description: "Gen-2: generowanie wideo z tekstu i obrazu", category: "wideo", price: "paid" },
+        { name: "Pika Labs", url: "https://pika.art", description: "Generowanie i edycja wideo AI", category: "wideo", price: "freemium" },
+        { name: "HeyGen", url: "https://heygen.com", description: "AI avatary i generowanie wideo z awatarem", category: "wideo", price: "paid" },
+        { name: "Synthesia", url: "https://synthesia.io", description: "Wideo z awatarami AI do treningów i marketingu", category: "wideo", price: "paid" },
+        { name: "Descript", url: "https://descript.com", description: "Edycja wideo przez edycję transkrypcji", category: "wideo", price: "freemium" },
+
+        // === COPYWRITING ===
+        { name: "Writesonic", url: "https://writesonic.com", description: "Generowanie treści marketingowych i artykułów", category: "copywriting", price: "freemium" },
+        { name: "Jasper", url: "https://jasper.ai", description: "Asystent AI do content marketingu", category: "copywriting", price: "paid" },
+        { name: "Copy.ai", url: "https://copy.ai", description: "Generowanie tekstów reklamowych i marketingowych", category: "copywriting", price: "freemium" },
+        { name: "Rytr", url: "https://rytr.me", description: "AI writer do różnorodnych treści", category: "copywriting", price: "freemium" },
+        { name: "Claude", url: "https://claude.ai", description: "Asystent AI do pisania i analizy", category: "copywriting", price: "freemium" },
+
+        // === NAUKA ===
+        { name: "Elicit", url: "https://elicit.com", description: "AI research assistant do literatury naukowej", category: "nauka", price: "freemium" },
+        { name: "Consensus", url: "https://consensus.app", description: "Wyszukiwarka badań naukowych z AI", category: "nauka", price: "freemium" },
+        { name: "Semantic Scholar", url: "https://semanticscholar.org", description: "Baza publikacji naukowych z AI", category: "nauka", price: "free" },
+        { name: "Research Rabbit", url: "https://researchrabbit.ai", description: "Odkrywanie i organizowanie badań naukowych", category: "nauka", price: "free" },
+        { name: "Perplexity", url: "https://perplexity.ai", description: "AI wyszukiwarka z cytowaniami", category: "nauka", price: "freemium" },
+
+        // === DETEKCJA ===
+        { name: "GPTZero", url: "https://gptzero.me", description: "Detekcja tekstu generowanego przez AI", category: "detekcja", price: "freemium" },
+        { name: "Originality.AI", url: "https://originality.ai", description: "Detekcja AI i plagiatu dla twórców treści", category: "detekcja", price: "paid" },
+        { name: "Copyleaks", url: "https://copyleaks.com", description: "Wykrywanie plagiatu i treści AI", category: "detekcja", price: "paid" },
+        { name: "Hive Moderation", url: "https://hivemoderation.com", description: "Detekcja treści generowanych przez AI", category: "detekcja", price: "paid" },
+
+        // === MONITORING ===
+        { name: "Brand24", url: "https://brand24.com", description: "Monitoring marki i social listening", category: "monitoring", price: "paid" },
+        { name: "Mention", url: "https://mention.com", description: "Monitoring wzmianek o marce w sieci", category: "monitoring", price: "freemium" },
+        { name: "Sprout Social", url: "https://sproutsocial.com", description: "Zarządzanie social media z AI", category: "monitoring", price: "paid" },
+
+        // === PROMPTING ===
+        { name: "TypingMind", url: "https://typingmind.com", description: "Interfejs do ChatGPT z biblioteką promptów", category: "prompting", price: "freemium" },
+        { name: "PromptBase", url: "https://promptbase.com", description: "Marketplace z promptami do AI", category: "prompting", price: "freemium" },
+        { name: "OpenAI Playground", url: "https://platform.openai.com/playground", description: "Testowanie i tworzenie promptów GPT", category: "prompting", price: "paid" },
+        { name: "Anthropic Console", url: "https://console.anthropic.com", description: "Playground do testowania Claude", category: "prompting", price: "freemium" },
+
+        // === AUTOMATYZACJA ===
+        { name: "n8n", url: "https://n8n.io", description: "Open-source automatyzacja workflow z AI", category: "automatyzacja", price: "freemium" },
+        { name: "Zapier", url: "https://zapier.com", description: "Automatyzacja integracji z AI actions", category: "automatyzacja", price: "freemium" },
+        { name: "Make", url: "https://make.com", description: "Platforma automatyzacji z integracjami AI", category: "automatyzacja", price: "freemium" },
+        { name: "LangChain", url: "https://langchain.com", description: "Framework do budowania aplikacji AI", category: "automatyzacja", price: "free" },
+        { name: "AutoGPT", url: "https://github.com/Significant-Gravitas/AutoGPT", description: "Autonomiczne agenty AI", category: "automatyzacja", price: "free" },
+
+        // === AUDIO ===
+        { name: "ElevenLabs", url: "https://elevenlabs.io", description: "Najlepsza synteza głosu i klonowanie", category: "audio", price: "freemium" },
+        { name: "Suno AI", url: "https://suno.ai", description: "Generowanie muzyki z tekstu", category: "audio", price: "freemium" },
+        { name: "Udio", url: "https://udio.com", description: "Tworzenie piosenek i muzyki z AI", category: "audio", price: "freemium" },
+        { name: "Murf AI", url: "https://murf.ai", description: "Synteza mowy do wideo i prezentacji", category: "audio", price: "paid" },
+        { name: "Adobe Podcast", url: "https://podcast.adobe.com", description: "Enhance audio - poprawa jakości nagrania", category: "audio", price: "free" }
+      ]
+    };
+
+    // ===== STATE =====
+    let currentFilter = null;
+    let searchQuery = '';
+    let starCount = parseInt(localStorage.getItem('starCount') || '42');
+    let isStarred = localStorage.getItem('isStarred') === 'true';
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+      updateStarCount();
+      renderTools();
+      renderSidebar();
+      setupSearch();
+    });
+
+    // ===== RENDER TOOLS =====
+    function renderTools(filterCategory = null, search = '') {
+      const container = document.getElementById('toolsContainer');
+      let tools = toolsData.tools;
+      let categories = toolsData.categories;
+
+      // Filter by category
+      if (filterCategory) {
+        categories = categories.filter(c => c.id === filterCategory);
+      }
+
+      // Filter by search
+      if (search) {
+        const searchLower = search.toLowerCase();
+        tools = tools.filter(t =>
+          t.name.toLowerCase().includes(searchLower) ||
+          t.description.toLowerCase().includes(searchLower) ||
+          t.category.toLowerCase().includes(searchLower)
+        );
+      }
+
+      // Show search info
+      const searchInfo = document.getElementById('searchInfo');
+      if (search) {
+        searchInfo.classList.add('active');
+        document.getElementById('searchQuery').textContent = search;
+      } else {
+        searchInfo.classList.remove('active');
+      }
+
+      // Check if no results
+      if (tools.length === 0) {
+        container.innerHTML = `
+          <div class="no-results">
+            <p style="font-size: 48px; margin-bottom: 16px;">🔍</p>
+            <p>Nie znaleziono narzędzi pasujących do kryteriów.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Render
+      let html = '';
+
+      categories.forEach(category => {
+        const categoryTools = tools.filter(t => t.category === category.id);
+
+        if (categoryTools.length === 0) return;
+
+        html += `
+          <section id="${category.id}">
+            <h2>${category.emoji} ${category.name}</h2>
+            <table class="tools-table">
+              <thead>
+                <tr>
+                  <th>Narzędzie</th>
+                  <th>Opis</th>
+                  <th>Cena</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${categoryTools.map(tool => `
+                  <tr>
+                    <td><a href="${tool.url}" target="_blank" rel="noopener" class="tool-name">${tool.name}</a></td>
+                    <td class="tool-desc">${tool.description}</td>
+                    <td><span class="price-tag ${tool.price}">${getPriceLabel(tool.price)}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </section>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function getPriceLabel(price) {
+      const labels = {
+        free: 'Free',
+        freemium: 'Freemium',
+        paid: 'Paid'
+      };
+      return labels[price] || price;
+    }
+
+    // ===== RENDER SIDEBAR =====
+    function renderSidebar() {
+      // Table of Contents
+      const toc = document.getElementById('toc');
+      toc.innerHTML = toolsData.categories.map(c =>
+        `<a href="#${c.id}">${c.emoji} ${c.name}</a>`
+      ).join('');
+
+      // Category Stats
+      const categoryStats = document.getElementById('categoryStats');
+      categoryStats.innerHTML = toolsData.categories.map(c => {
+        const count = toolsData.tools.filter(t => t.category === c.id).length;
+        return `
+          <div class="category-stat-item" onclick="filterByCategory('${c.id}')" style="cursor: pointer;">
+            <span class="category-dot" style="background: ${c.color};"></span>
+            <span>${c.name}</span>
+            <span class="count">${count}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Pricing Progress
+      const pricingProgress = document.getElementById('pricingProgress');
+      const total = toolsData.tools.length;
+      const freeCount = toolsData.tools.filter(t => t.price === 'free').length;
+      const freemiumCount = toolsData.tools.filter(t => t.price === 'freemium').length;
+      const paidCount = toolsData.tools.filter(t => t.price === 'paid').length;
+
+      const freePct = Math.round((freeCount / total) * 100);
+      const freemiumPct = Math.round((freemiumCount / total) * 100);
+      const paidPct = Math.round((paidCount / total) * 100);
+
+      pricingProgress.innerHTML = `
+        <div class="progress-bar">
+          <div class="progress-segment free" style="width: ${freePct}%;" title="Free: ${freePct}%"></div>
+          <div class="progress-segment freemium" style="width: ${freemiumPct}%;" title="Freemium: ${freemiumPct}%"></div>
+          <div class="progress-segment paid" style="width: ${paidPct}%;" title="Paid: ${paidPct}%"></div>
+        </div>
+        <div class="progress-legend">
+          <div class="progress-legend-item">
+            <span class="dot" style="background: var(--tag-free);"></span>
+            Free ${freePct}%
+          </div>
+          <div class="progress-legend-item">
+            <span class="dot" style="background: var(--tag-freemium);"></span>
+            Freemium ${freemiumPct}%
+          </div>
+          <div class="progress-legend-item">
+            <span class="dot" style="background: var(--tag-paid);"></span>
+            Paid ${paidPct}%
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== FILTER BY CATEGORY =====
+    function filterByCategory(categoryId) {
+      if (currentFilter === categoryId) {
+        currentFilter = null;
+        renderTools();
+      } else {
+        currentFilter = categoryId;
+        renderTools(categoryId);
+      }
+      document.getElementById(categoryId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ===== SEARCH =====
+    function setupSearch() {
+      const input = document.getElementById('searchInput');
+      let debounceTimer;
+
+      input.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          searchQuery = e.target.value.trim();
+          renderTools(null, searchQuery);
+        }, 300);
+      });
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      renderTools();
+    }
+
+    // ===== STAR BUTTON =====
+    function toggleStar() {
+      isStarred = !isStarred;
+      if (isStarred) {
+        starCount++;
+      } else {
+        starCount--;
+      }
+      localStorage.setItem('starCount', starCount);
+      localStorage.setItem('isStarred', isStarred);
+      updateStarCount();
+    }
+
+    function updateStarCount() {
+      const btn = document.getElementById('starBtn');
+      const count = document.getElementById('starCount');
+      count.textContent = starCount;
+
+      if (isStarred) {
+        btn.classList.add('starred');
+      } else {
+        btn.classList.remove('starred');
+      }
+    }
+
+    // ===== SHARE =====
+    function shareUrl() {
+      const url = window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Link skopiowany do schowka!');
+        });
+      } else {
+        prompt('Skopiuj link:', url);
+      }
+    }
+  </script>
+</body>
+</html>

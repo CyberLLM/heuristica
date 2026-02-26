@@ -1,0 +1,367 @@
+{
+  "categories": [
+    {
+      "id": "grafika",
+      "name": "Generowanie grafik",
+      "emoji": "🎨",
+      "color": "#E91E63"
+    },
+    {
+      "id": "wideo",
+      "name": "Generowanie i edycja wideo",
+      "emoji": "🎬",
+      "color": "#9C27B0"
+    },
+    {
+      "id": "copywriting",
+      "name": "Copywriting i treści",
+      "emoji": "✍️",
+      "color": "#2196F3"
+    },
+    {
+      "id": "nauka",
+      "name": "Narzędzia naukowe",
+      "emoji": "🎓",
+      "color": "#4CAF50"
+    },
+    {
+      "id": "detekcja",
+      "name": "Detekcja AI i plagiatu",
+      "emoji": "🔍",
+      "color": "#FF9800"
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring i analityka",
+      "emoji": "📊",
+      "color": "#607D8B"
+    },
+    {
+      "id": "prompting",
+      "name": "Prompting i produktywność",
+      "emoji": "🧠",
+      "color": "#00BCD4"
+    },
+    {
+      "id": "automatyzacja",
+      "name": "Automatyzacja i agenci",
+      "emoji": "⚙️",
+      "color": "#795548"
+    },
+    {
+      "id": "audio",
+      "name": "Audio i muzyka",
+      "emoji": "🎤",
+      "color": "#673AB7"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Midjourney",
+      "url": "https://midjourney.com",
+      "description": "Najwyższa jakość generowanych grafik i ilustracji",
+      "category": "grafika",
+      "price": "paid"
+    },
+    {
+      "name": "DALL·E 3",
+      "url": "https://openai.com/dall-e-3",
+      "description": "Generowanie obrazów z tekstu przez OpenAI",
+      "category": "grafika",
+      "price": "paid"
+    },
+    {
+      "name": "Ideogram",
+      "url": "https://ideogram.ai",
+      "description": "Doskonałe renderowanie tekstu na obrazach",
+      "category": "grafika",
+      "price": "freemium"
+    },
+    {
+      "name": "Leonardo AI",
+      "url": "https://leonardo.ai",
+      "description": "Grafiki do gier i koncepcyjne, modele fine-tuned",
+      "category": "grafika",
+      "price": "freemium"
+    },
+    {
+      "name": "Stable Diffusion",
+      "url": "https://stability.ai",
+      "description": "Open-source model do generowania obrazów",
+      "category": "grafika",
+      "price": "freemium"
+    },
+    {
+      "name": "Canva AI",
+      "url": "https://canva.com",
+      "description": "Generowanie grafik w popularnym narzędziu design",
+      "category": "grafika",
+      "price": "freemium"
+    },
+
+    {
+      "name": "Runway",
+      "url": "https://runwayml.com",
+      "description": "Gen-2: generowanie wideo z tekstu i obrazu",
+      "category": "wideo",
+      "price": "paid"
+    },
+    {
+      "name": "Pika Labs",
+      "url": "https://pika.art",
+      "description": "Generowanie i edycja wideo AI",
+      "category": "wideo",
+      "price": "freemium"
+    },
+    {
+      "name": "HeyGen",
+      "url": "https://heygen.com",
+      "description": "AI avatary i generowanie wideo z awatarem",
+      "category": "wideo",
+      "price": "paid"
+    },
+    {
+      "name": "Synthesia",
+      "url": "https://synthesia.io",
+      "description": "Wideo z awatarami AI do treningów i marketingu",
+      "category": "wideo",
+      "price": "paid"
+    },
+    {
+      "name": "Descript",
+      "url": "https://descript.com",
+      "description": "Edycja wideo przez edycję transkrypcji",
+      "category": "wideo",
+      "price": "freemium"
+    },
+
+    {
+      "name": "Writesonic",
+      "url": "https://writesonic.com",
+      "description": "Generowanie treści marketingowych i artykułów",
+      "category": "copywriting",
+      "price": "freemium"
+    },
+    {
+      "name": "Jasper",
+      "url": "https://jasper.ai",
+      "description": "Asystent AI do content marketingu",
+      "category": "copywriting",
+      "price": "paid"
+    },
+    {
+      "name": "Copy.ai",
+      "url": "https://copy.ai",
+      "description": "Generowanie tekstów reklamowych i marketingowych",
+      "category": "copywriting",
+      "price": "freemium"
+    },
+    {
+      "name": "Rytr",
+      "url": "https://rytr.me",
+      "description": "AI writer do różnorodnych treści",
+      "category": "copywriting",
+      "price": "freemium"
+    },
+    {
+      "name": "Claude",
+      "url": "https://claude.ai",
+      "description": "Asystent AI do pisania i analizy",
+      "category": "copywriting",
+      "price": "freemium"
+    },
+
+    {
+      "name": "Elicit",
+      "url": "https://elicit.com",
+      "description": "AI research assistant do literatury naukowej",
+      "category": "nauka",
+      "price": "freemium"
+    },
+    {
+      "name": "Consensus",
+      "url": "https://consensus.app",
+      "description": "Wyszukiwarka badań naukowych z AI",
+      "category": "nauka",
+      "price": "freemium"
+    },
+    {
+      "name": "Semantic Scholar",
+      "url": "https://semanticscholar.org",
+      "description": "Baza publikacji naukowych z AI",
+      "category": "nauka",
+      "price": "free"
+    },
+    {
+      "name": "Research Rabbit",
+      "url": "https://researchrabbit.ai",
+      "description": "Odkrywanie i organizowanie badań naukowych",
+      "category": "nauka",
+      "price": "free"
+    },
+    {
+      "name": "Perplexity",
+      "url": "https://perplexity.ai",
+      "description": "AI wyszukiwarka z cytowaniami",
+      "category": "nauka",
+      "price": "freemium"
+    },
+
+    {
+      "name": "GPTZero",
+      "url": "https://gptzero.me",
+      "description": "Detekcja tekstu generowanego przez AI",
+      "category": "detekcja",
+      "price": "freemium"
+    },
+    {
+      "name": "Originality.AI",
+      "url": "https://originality.ai",
+      "description": "Detekcja AI i plagiatu dla twórców treści",
+      "category": "detekcja",
+      "price": "paid"
+    },
+    {
+      "name": "Copyleaks",
+      "url": "https://copyleaks.com",
+      "description": "Wykrywanie plagiatu i treści AI",
+      "category": "detekcja",
+      "price": "paid"
+    },
+    {
+      "name": "Hive Moderation",
+      "url": "https://hivemoderation.com",
+      "description": "Detekcja treści generowanych przez AI",
+      "category": "detekcja",
+      "price": "paid"
+    },
+
+    {
+      "name": "Brand24",
+      "url": "https://brand24.com",
+      "description": "Monitoring marki i social listening",
+      "category": "monitoring",
+      "price": "paid"
+    },
+    {
+      "name": "Mention",
+      "url": "https://mention.com",
+      "description": "Monitoring wzmianek o marce w sieci",
+      "category": "monitoring",
+      "price": "freemium"
+    },
+    {
+      "name": "Sprout Social",
+      "url": "https://sproutsocial.com",
+      "description": "Zarządzanie social media z AI",
+      "category": "monitoring",
+      "price": "paid"
+    },
+
+    {
+      "name": "TypingMind",
+      "url": "https://typingmind.com",
+      "description": "Interfejs do ChatGPT z biblioteką promptów",
+      "category": "prompting",
+      "price": "freemium"
+    },
+    {
+      "name": "PromptBase",
+      "url": "https://promptbase.com",
+      "description": "Marketplace z promptami do AI",
+      "category": "prompting",
+      "price": "freemium"
+    },
+    {
+      "name": "OpenAI Playground",
+      "url": "https://platform.openai.com/playground",
+      "description": "Testowanie i tworzenie promptów GPT",
+      "category": "prompting",
+      "price": "paid"
+    },
+    {
+      "name": "Anthropic Console",
+      "url": "https://console.anthropic.com",
+      "description": "Playground do testowania Claude",
+      "category": "prompting",
+      "price": "freemium"
+    },
+
+    {
+      "name": "n8n",
+      "url": "https://n8n.io",
+      "description": "Open-source automatyzacja workflow z AI",
+      "category": "automatyzacja",
+      "price": "freemium"
+    },
+    {
+      "name": "Zapier",
+      "url": "https://zapier.com",
+      "description": "Automatyzacja integracji z AI actions",
+      "category": "automatyzacja",
+      "price": "freemium"
+    },
+    {
+      "name": "Make",
+      "url": "https://make.com",
+      "description": "Platforma automatyzacji z integracjami AI",
+      "category": "automatyzacja",
+      "price": "freemium"
+    },
+    {
+      "name": "LangChain",
+      "url": "https://langchain.com",
+      "description": "Framework do budowania aplikacji AI",
+      "category": "automatyzacja",
+      "price": "free"
+    },
+    {
+      "name": "AutoGPT",
+      "url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "description": "Autonomiczne agenty AI",
+      "category": "automatyzacja",
+      "price": "free"
+    },
+
+    {
+      "name": "ElevenLabs",
+      "url": "https://elevenlabs.io",
+      "description": "Najlepsza synteza głosu i klonowanie",
+      "category": "audio",
+      "price": "freemium"
+    },
+    {
+      "name": "Suno AI",
+      "url": "https://suno.ai",
+      "description": "Generowanie muzyki z tekstu",
+      "category": "audio",
+      "price": "freemium"
+    },
+    {
+      "name": "Udio",
+      "url": "https://udio.com",
+      "description": "Tworzenie piosenek i muzyki z AI",
+      "category": "audio",
+      "price": "freemium"
+    },
+    {
+      "name": "Murf AI",
+      "url": "https://murf.ai",
+      "description": "Synteza mowy do wideo i prezentacji",
+      "category": "audio",
+      "price": "paid"
+    },
+    {
+      "name": "Adobe Podcast",
+      "url": "https://podcast.adobe.com",
+      "description": "Enhance audio - poprawa jakości nagrania",
+      "category": "audio",
+      "price": "free"
+    }
+  ],
+  "metadata": {
+    "lastUpdate": "2026-02-26",
+    "curator": "Marek Staniszewski",
+    "total": 44
+  }
+}

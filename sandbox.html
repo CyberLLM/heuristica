@@ -744,9 +744,29 @@
             </div>
           </div>
 
-          <div style="font-size:11px;color:var(--text-muted);line-height:1.6">
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.6;margin-bottom:12px">
             <strong style="color:var(--text-primary)">Co to są tokeny?</strong><br>
             1 token ≈ 0,75 słowa. GPT-4o-mini kosztuje ok. $0.15 / 1M tokenów wejściowych.
+          </div>
+
+          <!-- TOKENIZER -->
+          <div style="border-top:1px solid var(--border-color);padding-top:12px">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:8px">
+              🔬 Tokenizer
+            </div>
+            <textarea id="tokenizerInput" rows="3"
+              placeholder="Wpisz dowolny tekst..."
+              oninput="tokenize()"
+              style="width:100%;font-size:12px;resize:vertical;margin-bottom:8px"></textarea>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">
+              Tokenów: <strong id="tokenCount" style="color:var(--text-primary)">0</strong>
+              &nbsp;·&nbsp; Znaków: <strong id="charCount" style="color:var(--text-primary)">0</strong>
+            </div>
+            <div id="tokenizerOutput"
+              style="font-family:var(--font-mono);font-size:12px;line-height:1.8;word-break:break-all;min-height:32px"></div>
+            <div id="tokenizerStatus" style="font-size:10px;color:var(--text-muted);margin-top:6px">
+              ⏳ Ładowanie tiktoken (cl100k_base)…
+            </div>
           </div>
         </div>
 
@@ -812,6 +832,7 @@
       }
       updateCode();
       updateModelBadge();
+      initTiktoken();
     });
 
     // ===== API KEY =====
@@ -1051,6 +1072,73 @@
       document.querySelectorAll('.right-tab').forEach(b => b.classList.remove('active'));
       document.getElementById('tab-' + name).classList.add('active');
       btn.classList.add('active');
+    }
+
+    // ===== TOKENIZER (tiktoken cl100k_base via WASM) =====
+    const TOKEN_COLORS = [
+      'rgba(88,166,255,0.22)',
+      'rgba(63,185,80,0.22)',
+      'rgba(210,153,34,0.22)',
+      'rgba(188,99,255,0.22)',
+      'rgba(255,123,114,0.22)',
+      'rgba(63,210,210,0.22)',
+    ];
+
+    let tiktokenEncoder = null;
+
+    async function initTiktoken() {
+      const status = document.getElementById('tokenizerStatus');
+      try {
+        const { init, get_encoding } = await import(
+          'https://cdn.jsdelivr.net/npm/@dqbd/tiktoken@1.0.7/lite/init.js'
+        );
+        await init((imports) =>
+          WebAssembly.instantiateStreaming(
+            fetch('https://cdn.jsdelivr.net/npm/@dqbd/tiktoken@1.0.7/lite/tiktoken_bg.wasm'),
+            imports
+          )
+        );
+        tiktokenEncoder = get_encoding('cl100k_base');
+        status.textContent = '✓ tiktoken cl100k_base — identyczny z GPT-4o';
+        status.style.color = 'var(--tag-green)';
+      } catch (e) {
+        status.textContent = '⚠ Błąd ładowania tiktoken: ' + e.message;
+        status.style.color = 'var(--tag-paid)';
+      }
+    }
+
+    function tokenize() {
+      const text = document.getElementById('tokenizerInput').value;
+      document.getElementById('charCount').textContent = text.length;
+
+      if (!text) {
+        document.getElementById('tokenizerOutput').innerHTML = '';
+        document.getElementById('tokenCount').textContent = '0';
+        return;
+      }
+
+      if (!tiktokenEncoder) {
+        document.getElementById('tokenizerOutput').innerHTML =
+          '<span style="color:var(--text-muted)">⏳ Tiktoken jeszcze się ładuje…</span>';
+        return;
+      }
+
+      const decoder = new TextDecoder('utf-8', { fatal: false });
+      const tokenIds = tiktokenEncoder.encode(text);
+
+      document.getElementById('tokenCount').textContent = tokenIds.length;
+
+      const html = Array.from(tokenIds).map((id, i) => {
+        const bytes = tiktokenEncoder.decode(new Uint32Array([id]));
+        const tok = decoder.decode(bytes);
+        const bg = TOKEN_COLORS[i % TOKEN_COLORS.length];
+        const display = tok
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/ /g, '·').replace(/\n/g, '↵');
+        return `<span style="background:${bg};border-radius:3px;padding:1px 4px;margin:1px;display:inline-block;cursor:default" title="id: ${id}">${display}</span>`;
+      }).join('');
+
+      document.getElementById('tokenizerOutput').innerHTML = html;
     }
 
     // ===== RESPONSE TAB =====

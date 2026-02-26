@@ -293,11 +293,6 @@
       border-color: var(--text-muted);
     }
 
-    .stat-btn.starred {
-      background: rgba(210, 153, 34, 0.1);
-      border-color: var(--tag-paid);
-      color: var(--tag-paid);
-    }
 
     .stat-btn .count {
       font-family: var(--font-mono);
@@ -844,10 +839,7 @@
 
       <!-- STATS BAR -->
       <div class="stats-bar">
-        <button class="stat-btn" id="starBtn" onclick="toggleStar()">
-          <span>⭐</span> Star <span class="count" id="starCount">42</span>
-        </button>
-        <button class="stat-btn" onclick="shareUrl()">
+<button class="stat-btn" onclick="shareUrl()">
           <span>🔗</span> Udostępnij
         </button>
         <button class="stat-btn" onclick="window.print()">
@@ -872,11 +864,10 @@
 
         <blockquote>
           Sprawdzone narzędzia AI do marketingu, edukacji, tworzenia treści i automatyzacji.
-          Kurator: Marek Staniszewski — AI Consultant & Brand Strategist.
         </blockquote>
 
         <p class="author-line">
-          <strong>Autor:</strong> <a href="kim.html">Marek @ Heuristica</a> · AI Consultant & Brand Strategist
+          <strong>Autor:</strong> <a href="kim.html">Marek Staniszewski</a> · AI Consultant & Brand Strategist
         </p>
 
         <hr>
@@ -1199,12 +1190,8 @@
     // ===== STATE =====
     let currentFilter = null;
     let searchQuery = '';
-    let starCount = parseInt(localStorage.getItem('starCount') || '42');
-    let isStarred = localStorage.getItem('isStarred') === 'true';
-
     // ===== INITIALIZATION =====
     document.addEventListener('DOMContentLoaded', () => {
-      updateStarCount();
       renderTools();
       renderSidebar();
       setupSearch();
@@ -1383,30 +1370,6 @@
       renderTools();
     }
 
-    // ===== STAR BUTTON =====
-    function toggleStar() {
-      isStarred = !isStarred;
-      if (isStarred) {
-        starCount++;
-      } else {
-        starCount--;
-      }
-      localStorage.setItem('starCount', starCount);
-      localStorage.setItem('isStarred', isStarred);
-      updateStarCount();
-    }
-
-    function updateStarCount() {
-      const btn = document.getElementById('starBtn');
-      const count = document.getElementById('starCount');
-      count.textContent = starCount;
-
-      if (isStarred) {
-        btn.classList.add('starred');
-      } else {
-        btn.classList.remove('starred');
-      }
-    }
 
     // ===== SHARE =====
     function shareUrl() {

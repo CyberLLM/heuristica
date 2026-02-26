@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Sandbox — Heuristica | Playground OpenAI API</title>
+  <meta name="description" content="Interaktywny playground do testowania OpenAI API. Reguluj temperaturę, wybieraj model, testuj prompty — bez instalacji.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary: #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted: #8B949E;
+      --text-link: #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-green: #3FB950;
+      --tag-paid: #D29922;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--text-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== NAV ===== */
+    .top-nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .top-nav-inner {
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .nav-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-color);
+      padding-left: 16px;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* ===== PLAYGROUND LAYOUT ===== */
+    .playground {
+      display: grid;
+      grid-template-columns: 270px 1fr 300px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ===== CONFIG PANEL (LEFT) ===== */
+    .config-panel {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .panel-section {
+      margin-bottom: 8px;
+    }
+
+    .panel-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .field-row label { margin-bottom: 0; }
+
+    .field-value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-link);
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 7px 10px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--text-link);
+    }
+
+    select option { background: var(--bg-secondary); }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--text-link);
+      cursor: pointer;
+    }
+
+    .api-key-wrap {
+      position: relative;
+    }
+
+    .api-key-wrap input {
+      padding-right: 36px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0;
+    }
+
+    .toggle-visibility:hover { color: var(--text-primary); }
+
+    .key-warning {
+      font-size: 11px;
+      color: var(--tag-paid);
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    .key-ok {
+      font-size: 11px;
+      color: var(--tag-green);
+      margin-top: 5px;
+    }
+
+    /* ===== CHAT AREA (MIDDLE) ===== */
+    .chat-area {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .chat-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .chat-header-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .system-prompt-wrap {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-tertiary);
+      flex-shrink: 0;
+    }
+
+    .system-prompt-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .system-prompt-wrap textarea {
+      font-size: 13px;
+      resize: none;
+      min-height: 60px;
+      max-height: 120px;
+      line-height: 1.5;
+    }
+
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      display: flex;
+      gap: 10px;
+    }
+
+    .message-role {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      width: 70px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .message-role.user { color: var(--text-link); }
+    .message-role.assistant { color: var(--tag-green); }
+
+    .message-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+
+    .message-content.user { background: rgba(88, 166, 255, 0.05); border-color: rgba(88, 166, 255, 0.2); }
+    .message-content.assistant { background: rgba(63, 185, 80, 0.05); border-color: rgba(63, 185, 80, 0.2); }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    .empty-state .icon { font-size: 40px; }
+
+    .input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      flex-shrink: 0;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .input-row textarea {
+      flex: 1;
+      resize: none;
+      min-height: 42px;
+      max-height: 140px;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 10px 12px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary { background: var(--accent-green); color: #fff; }
+    .btn-primary:not(:disabled):hover { opacity: 0.85; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); }
+    .btn-ghost:hover { color: var(--text-primary); border-color: var(--text-muted); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+
+    .input-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ===== RIGHT PANEL (CODE + STATS) ===== */
+    .right-panel {
+      background: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .right-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .right-tab {
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .right-tab.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--text-link);
+    }
+
+    .right-tab:hover:not(.active) { color: var(--text-primary); }
+
+    .right-panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .stat-val {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .stat-card.full { grid-column: 1 / -1; }
+
+    /* Code block */
+    .code-block {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .code-lang {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .copy-btn {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .copy-btn:hover { color: var(--text-primary); }
+
+    pre {
+      padding: 14px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: #E6EDF3;
+      white-space: pre;
+    }
+
+    .kw { color: #ff7b72; }   /* keywords */
+    .str { color: #a5d6ff; }  /* strings */
+    .num { color: #79c0ff; }  /* numbers */
+    .fn { color: #d2a8ff; }   /* functions */
+    .cm { color: #8b949e; }   /* comments */
+    .var { color: #ffa657; }  /* variables */
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error */
+    .error-msg {
+      background: rgba(248, 81, 73, 0.1);
+      border: 1px solid rgba(248, 81, 73, 0.3);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #f85149;
+      margin: 12px 16px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .playground { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+      .config-panel { border-right: none; border-bottom: 1px solid var(--border-color); max-height: 280px; }
+      .right-panel { border-top: 1px solid var(--border-color); max-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div style="display:flex;align-items:center;gap:12px">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-mark">H</span>
+          <span>heuristica</span>
+        </a>
+        <span class="nav-title">/ AI Sandbox</span>
+      </div>
+      <div class="nav-links">
+        <a href="ai-tools.html">Narzędzia AI</a>
+        <a href="prompting.html">Prompting</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PLAYGROUND -->
+  <div class="playground">
+
+    <!-- LEFT: CONFIG PANEL -->
+    <div class="config-panel">
+
+      <div class="panel-section">
+        <div class="panel-section-title">🔑 Klucz API</div>
+        <div class="field">
+          <div class="api-key-wrap">
+            <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" oninput="saveKey()">
+            <button class="toggle-visibility" onclick="toggleKey()" title="Pokaż/ukryj klucz">👁</button>
+          </div>
+          <div class="key-warning" id="keyStatus">Klucz wysyłany bezpośrednio do OpenAI. Nie trafia na żaden serwer.</div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-section-title">⚙️ Model</div>
+        <div class="field">
+          <select id="model" onchange="updateCode()">
+            <option value="gpt-4o">gpt-4o</option>
+            <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+            <option value="gpt-4-turbo">gpt-4-turbo</option>
+            <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Temperatura</label>
+            <span class="field-value" id="tempVal">0.7</span>
+          </div>
+          <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7"
+            oninput="document.getElementById('tempVal').textContent=this.value; updateCode()">
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Max tokens</label>
+            <span class="field-value" id="tokensVal">1000</span>
+          </div>
+          <input type="range" id="maxTokens" min="100" max="4000" step="100" value="1000"
+            oninput="document.getElementById('tokensVal').textContent=this.value; updateCode()">
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label>Top P</label>
+            <span class="field-value" id="topPVal">1.0</span>
+          </div>
+          <input type="range" id="topP" min="0" max="1" step="0.1" value="1.0"
+            oninput="document.getElementById('topPVal').textContent=parseFloat(this.value).toFixed(1); updateCode()">
+        </div>
+      </div>
+
+      <div class="panel-section" style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border-color)">
+        <button class="btn btn-ghost btn-sm" style="width:100%" onclick="clearConversation()">🗑 Wyczyść rozmowę</button>
+      </div>
+
+    </div>
+
+    <!-- MIDDLE: CHAT -->
+    <div class="chat-area">
+
+      <div class="chat-header">
+        <span class="chat-header-title">💬 Rozmowa</span>
+        <span id="modelBadge" style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);background:var(--bg-tertiary);padding:3px 8px;border-radius:20px;border:1px solid var(--border-color)">gpt-4o-mini</span>
+      </div>
+
+      <div class="system-prompt-wrap">
+        <div class="system-prompt-label">System prompt</div>
+        <textarea id="systemPrompt" rows="2" placeholder="Np. Jesteś pomocnym asystentem. Odpowiadasz po polsku." oninput="updateCode()">Jesteś pomocnym asystentem AI. Odpowiadasz zwięźle i po polsku.</textarea>
+      </div>
+
+      <div class="messages-area" id="messagesArea">
+        <div class="empty-state" id="emptyState">
+          <span class="icon">💬</span>
+          <span>Wpisz wiadomość i wyślij</span>
+          <span style="font-size:12px">Potrzebujesz klucza API OpenAI</span>
+        </div>
+      </div>
+
+      <div id="errorArea"></div>
+
+      <div class="input-area">
+        <div class="input-row">
+          <textarea id="userInput" rows="1" placeholder="Wpisz wiadomość..." onkeydown="handleEnter(event)" oninput="autoResize(this); updateCode()"></textarea>
+          <button class="btn btn-primary" id="sendBtn" onclick="sendMessage()">Wyślij ↵</button>
+        </div>
+        <div class="input-hint">Enter — wyślij &nbsp;·&nbsp; Shift+Enter — nowa linia</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: STATS + CODE -->
+    <div class="right-panel">
+      <div class="right-tabs">
+        <button class="right-tab active" onclick="switchTab('stats', this)">📊 Statystyki</button>
+        <button class="right-tab" onclick="switchTab('python', this)">🐍 Python</button>
+        <button class="right-tab" onclick="switchTab('json', this)">{ } JSON</button>
+      </div>
+
+      <div class="right-panel-content">
+
+        <!-- STATS TAB -->
+        <div class="tab-pane active" id="tab-stats">
+          <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+              <div class="stat-label">Prompt tokens</div>
+              <div class="stat-val" id="stat-prompt">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Output tokens</div>
+              <div class="stat-val" id="stat-completion">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Łącznie tokenów</div>
+              <div class="stat-val" id="stat-total">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Czas odpowiedzi</div>
+              <div class="stat-val" id="stat-time">—</div>
+            </div>
+            <div class="stat-card full">
+              <div class="stat-label">Model</div>
+              <div class="stat-val" style="font-size:13px" id="stat-model">—</div>
+            </div>
+          </div>
+
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.6">
+            <strong style="color:var(--text-primary)">Co to tokeny?</strong><br>
+            1 token ≈ 0,75 słowa. GPT-4o-mini kosztuje ok. $0.15 / 1M tokenów wejściowych.
+          </div>
+        </div>
+
+        <!-- PYTHON TAB -->
+        <div class="tab-pane" id="tab-python">
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">python</span>
+              <button class="copy-btn" onclick="copyCode('pythonCode')">Kopiuj</button>
+            </div>
+            <pre id="pythonCode"></pre>
+          </div>
+          <div style="font-size:11px;color:var(--text-muted);line-height:1.6">
+            Instalacja: <code style="font-family:var(--font-mono);color:var(--text-link)">pip install openai</code>
+          </div>
+        </div>
+
+        <!-- JSON TAB -->
+        <div class="tab-pane" id="tab-json">
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">json (request body)</span>
+              <button class="copy-btn" onclick="copyCode('jsonCode')">Kopiuj</button>
+            </div>
+            <pre id="jsonCode"></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /playground -->
+
+  <script>
+    // ===== STATE =====
+    let messages = [];
+    let lastResponse = null;
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = sessionStorage.getItem('oai_key');
+      if (saved) {
+        document.getElementById('apiKey').value = saved;
+        document.getElementById('keyStatus').textContent = '✓ Klucz wczytany z sessionStorage';
+        document.getElementById('keyStatus').className = 'key-ok';
+      }
+      updateCode();
+      updateModelBadge();
+    });
+
+    // ===== API KEY =====
+    function saveKey() {
+      const val = document.getElementById('apiKey').value.trim();
+      if (val.startsWith('sk-')) {
+        sessionStorage.setItem('oai_key', val);
+        document.getElementById('keyStatus').textContent = '✓ Klucz zapisany w sessionStorage (tylko ta karta)';
+        document.getElementById('keyStatus').className = 'key-ok';
+      } else {
+        document.getElementById('keyStatus').textContent = 'Klucz wysyłany bezpośrednio do OpenAI. Nie trafia na żaden serwer.';
+        document.getElementById('keyStatus').className = 'key-warning';
+      }
+    }
+
+    function toggleKey() {
+      const input = document.getElementById('apiKey');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // ===== SEND MESSAGE =====
+    async function sendMessage() {
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const userText = document.getElementById('userInput').value.trim();
+      const systemText = document.getElementById('systemPrompt').value.trim();
+      const model = document.getElementById('model').value;
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const maxTokens = parseInt(document.getElementById('maxTokens').value);
+      const topP = parseFloat(document.getElementById('topP').value);
+
+      if (!apiKey) {
+        showError('Wpisz klucz API OpenAI po lewej stronie.');
+        return;
+      }
+      if (!userText) return;
+
+      // Add user message to state and UI
+      messages.push({ role: 'user', content: userText });
+      appendMessage('user', userText);
+      document.getElementById('userInput').value = '';
+      autoResize(document.getElementById('userInput'));
+      hideEmpty();
+      clearError();
+
+      // Build request
+      const body = {
+        model,
+        messages: systemText
+          ? [{ role: 'system', content: systemText }, ...messages]
+          : [...messages],
+        temperature,
+        max_tokens: maxTokens,
+        top_p: topP
+      };
+
+      // Disable send button, show spinner
+      const btn = document.getElementById('sendBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Czekam...';
+
+      const startTime = performance.now();
+
+      try {
+        const res = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(body)
+        });
+
+        const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error?.message || `HTTP ${res.status}`);
+        }
+
+        const reply = data.choices[0].message.content;
+        messages.push({ role: 'assistant', content: reply });
+        appendMessage('assistant', reply);
+        lastResponse = data;
+
+        // Update stats
+        if (data.usage) {
+          document.getElementById('stat-prompt').textContent = data.usage.prompt_tokens;
+          document.getElementById('stat-completion').textContent = data.usage.completion_tokens;
+          document.getElementById('stat-total').textContent = data.usage.total_tokens;
+          document.getElementById('stat-model').textContent = data.model;
+        }
+        document.getElementById('stat-time').textContent = elapsed + 's';
+
+        updateCode();
+
+      } catch (err) {
+        showError('Błąd: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Wyślij ↵';
+      }
+    }
+
+    // ===== UI HELPERS =====
+    function appendMessage(role, content) {
+      const area = document.getElementById('messagesArea');
+      const div = document.createElement('div');
+      div.className = 'message';
+      div.innerHTML = `
+        <div class="message-role ${role}">${role === 'user' ? 'Ty' : 'AI'}</div>
+        <div class="message-content ${role}">${escapeHtml(content)}</div>
+      `;
+      area.appendChild(div);
+      area.scrollTop = area.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function hideEmpty() {
+      const el = document.getElementById('emptyState');
+      if (el) el.remove();
+    }
+
+    function showError(msg) {
+      document.getElementById('errorArea').innerHTML = `<div class="error-msg">⚠️ ${msg}</div>`;
+    }
+
+    function clearError() {
+      document.getElementById('errorArea').innerHTML = '';
+    }
+
+    function clearConversation() {
+      messages = [];
+      const area = document.getElementById('messagesArea');
+      area.innerHTML = `<div class="empty-state" id="emptyState">
+        <span class="icon">💬</span>
+        <span>Wpisz wiadomość i wyślij</span>
+        <span style="font-size:12px">Potrzebujesz klucza API OpenAI</span>
+      </div>`;
+      clearError();
+      document.getElementById('stat-prompt').textContent = '—';
+      document.getElementById('stat-completion').textContent = '—';
+      document.getElementById('stat-total').textContent = '—';
+      document.getElementById('stat-time').textContent = '—';
+      document.getElementById('stat-model').textContent = '—';
+      updateCode();
+    }
+
+    function handleEnter(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+    }
+
+    function updateModelBadge() {
+      document.getElementById('modelBadge').textContent = document.getElementById('model').value;
+    }
+
+    document.getElementById('model').addEventListener('change', () => {
+      updateModelBadge();
+      updateCode();
+    });
+
+    // ===== TABS =====
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.right-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // ===== CODE GENERATION =====
+    function updateCode() {
+      const model = document.getElementById('model').value;
+      const temp = document.getElementById('temperature').value;
+      const maxTok = document.getElementById('maxTokens').value;
+      const topP = parseFloat(document.getElementById('topP').value).toFixed(1);
+      const system = document.getElementById('systemPrompt').value.trim() || 'Jesteś pomocnym asystentem.';
+      const userMsg = document.getElementById('userInput').value.trim() || 'Twoja wiadomość tutaj...';
+
+      // Python code
+      document.getElementById('pythonCode').innerHTML =
+        `<span class="kw">from</span> openai <span class="kw">import</span> OpenAI\n\n` +
+        `client = OpenAI(api_key=<span class="str">"sk-..."</span>)\n\n` +
+        `response = client.chat.completions.create(\n` +
+        `    model=<span class="str">"${model}"</span>,\n` +
+        `    messages=[\n` +
+        `        {<span class="str">"role"</span>: <span class="str">"system"</span>, <span class="str">"content"</span>: <span class="str">"${escHtml(system)}"</span>},\n` +
+        `        {<span class="str">"role"</span>: <span class="str">"user"</span>,   <span class="str">"content"</span>: <span class="str">"${escHtml(userMsg)}"</span>},\n` +
+        `    ],\n` +
+        `    temperature=<span class="num">${temp}</span>,\n` +
+        `    max_tokens=<span class="num">${maxTok}</span>,\n` +
+        `    top_p=<span class="num">${topP}</span>\n` +
+        `)\n\n` +
+        `<span class="kw">print</span>(response.choices[<span class="num">0</span>].message.content)`;
+
+      // JSON body
+      const jsonObj = {
+        model,
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: userMsg }
+        ],
+        temperature: parseFloat(temp),
+        max_tokens: parseInt(maxTok),
+        top_p: parseFloat(topP)
+      };
+      document.getElementById('jsonCode').textContent = JSON.stringify(jsonObj, null, 2);
+    }
+
+    function escHtml(s) {
+      return s.replace(/"/g, '\\"').replace(/</g, '&lt;').replace(/>/g, '&gt;').substring(0, 60) + (s.length > 60 ? '...' : '');
+    }
+
+    function copyCode(id) {
+      const el = document.getElementById(id);
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btns = document.querySelectorAll('.copy-btn');
+        btns.forEach(b => { if (b.onclick?.toString().includes(id)) b.textContent = 'Skopiowano!'; });
+        setTimeout(() => btns.forEach(b => b.textContent = 'Kopiuj'), 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

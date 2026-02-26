@@ -9,6 +9,9 @@ RewriteRule ^ai-tools/?$ /ai-tools.html [L,NC]
 # Redirect /prompting to /prompting.html
 RewriteRule ^prompting/?$ /prompting.html [L,NC]
 
+# Redirect /sandbox to /sandbox.html
+RewriteRule ^sandbox/?$ /sandbox.html [L,NC]
+
 # Enable compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json

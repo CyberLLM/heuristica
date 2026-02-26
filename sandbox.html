@@ -839,6 +839,16 @@
   </div><!-- /playground -->
 
   <script>
+    // ===== MODEL CAPABILITY HELPERS =====
+    function usesCompletionTokens(model) {
+      // o1/o3/o4/gpt-5 and newer use max_completion_tokens
+      return /^(o[1-9]|gpt-5)/i.test(model);
+    }
+    function isReasoningModel(model) {
+      // Reasoning models don't support temperature, top_p, presence/frequency_penalty
+      return /^o[1-9]/i.test(model);
+    }
+
     // ===== STATE =====
     let messages = [];
     let lastResponse = null;
@@ -943,18 +953,21 @@
       clearError();
 
       // Build request
+      const tokenKey = usesCompletionTokens(model) ? 'max_completion_tokens' : 'max_tokens';
       const body = {
         model,
         messages: systemText
           ? [{ role: 'system', content: systemText }, ...messages]
           : [...messages],
-        temperature,
-        max_tokens: maxTokens,
-        top_p: topP,
-        presence_penalty: presencePenalty,
-        frequency_penalty: frequencyPenalty,
+        [tokenKey]: maxTokens,
         n
       };
+      if (!isReasoningModel(model)) {
+        body.temperature = temperature;
+        body.top_p = topP;
+        body.presence_penalty = presencePenalty;
+        body.frequency_penalty = frequencyPenalty;
+      }
 
       // Disable send button, show spinner
       const btn = document.getElementById('sendBtn');
@@ -1267,11 +1280,12 @@
         `        {<span class="str">"role"</span>: <span class="str">"system"</span>, <span class="str">"content"</span>: <span class="str">"${escHtml(system)}"</span>},\n` +
         `        {<span class="str">"role"</span>: <span class="str">"user"</span>,   <span class="str">"content"</span>: <span class="str">"${escHtml(userMsg)}"</span>},\n` +
         `    ],\n` +
-        `    temperature=<span class="num">${temp}</span>,\n` +
-        `    max_tokens=<span class="num">${maxTok}</span>,\n` +
-        `    top_p=<span class="num">${topP}</span>,\n` +
-        `    presence_penalty=<span class="num">${presence}</span>,\n` +
-        `    frequency_penalty=<span class="num">${frequency}</span>,\n` +
+        (isReasoningModel(model) ? '' : `    temperature=<span class="num">${temp}</span>,\n`) +
+        `    ${usesCompletionTokens(model) ? 'max_completion_tokens' : 'max_tokens'}=<span class="num">${maxTok}</span>,\n` +
+        (isReasoningModel(model) ? '' :
+          `    top_p=<span class="num">${topP}</span>,\n` +
+          `    presence_penalty=<span class="num">${presence}</span>,\n` +
+          `    frequency_penalty=<span class="num">${frequency}</span>,\n`) +
         `    n=<span class="num">${n}</span>\n` +
         `)\n\n` +
         (n === 1
@@ -1279,19 +1293,19 @@
           : `<span class="kw">for</span> i, choice <span class="kw">in</span> <span class="fn">enumerate</span>(response.choices):\n    <span class="kw">print</span>(<span class="str">f"Wariant {'{i+1}'}: "</span>, choice.message.content)`);
 
       // JSON body
-      const jsonObj = {
-        model,
-        messages: [
+      const jsonObj = { model, messages: [
           { role: 'system', content: system },
           { role: 'user', content: userMsg }
         ],
-        temperature: parseFloat(temp),
-        max_tokens: parseInt(maxTok),
-        top_p: parseFloat(topP),
-        presence_penalty: parseFloat(presence),
-        frequency_penalty: parseFloat(frequency),
+        [usesCompletionTokens(model) ? 'max_completion_tokens' : 'max_tokens']: parseInt(maxTok),
         n
       };
+      if (!isReasoningModel(model)) {
+        jsonObj.temperature = parseFloat(temp);
+        jsonObj.top_p = parseFloat(topP);
+        jsonObj.presence_penalty = parseFloat(presence);
+        jsonObj.frequency_penalty = parseFloat(frequency);
+      }
       document.getElementById('jsonCode').textContent = JSON.stringify(jsonObj, null, 2);
     }
 

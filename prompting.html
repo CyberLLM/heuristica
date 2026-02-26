@@ -404,6 +404,18 @@
       color: var(--text-muted);
     }
 
+    /* ===== PYRAMID ===== */
+    .pyramid-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0 8px;
+    }
+
+    .pyramid-wrap svg {
+      max-width: 560px;
+      width: 100%;
+    }
+
     /* ===== TIP BOX ===== */
     .tip-box {
       background: rgba(42, 122, 91, 0.1);
@@ -493,7 +505,10 @@
         <span class="repo-badge">Public</span>
       </div>
       <div class="repo-tabs">
-        <a href="#zasady" class="repo-tab active">
+        <a href="#anatomia" class="repo-tab active">
+          <span>🔺</span> Anatomia
+        </a>
+        <a href="#zasady" class="repo-tab">
           <span>🧠</span> Zasady
         </a>
         <a href="#markdown" class="repo-tab">
@@ -525,6 +540,48 @@
       <p class="author-line">
         <strong>Autor:</strong> <a href="kim.html">Marek Staniszewski</a> · AI Consultant & Brand Strategist
       </p>
+
+      <hr>
+
+      <!-- ANATOMIA -->
+      <h2 id="anatomia">🔺 Anatomia promptu</h2>
+
+      <p>Składniki skutecznego promptu — od kluczowych (góra) do opcjonalnych (dół):</p>
+
+      <div class="pyramid-wrap">
+        <svg viewBox="0 0 600 430" xmlns="http://www.w3.org/2000/svg">
+          <!-- Inverted triangle -->
+          <path d="M 30,20 L 570,20 L 300,410 Z" fill="none" stroke="#8B949E" stroke-width="2"/>
+
+          <!-- Labels -->
+          <text x="32" y="48" fill="#E6EDF3" font-size="13" font-family="system-ui,sans-serif" font-weight="600">Kluczowe:</text>
+          <text x="32" y="402" fill="#8B949E" font-size="13" font-family="system-ui,sans-serif">Opcjonalne:</text>
+
+          <!-- [persona] -->
+          <rect x="220" y="28" width="160" height="34" rx="4" fill="#c62828"/>
+          <text x="300" y="50" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[persona]</text>
+
+          <!-- [kontekst] -->
+          <rect x="223" y="80" width="154" height="34" rx="4" fill="#6a1fa2"/>
+          <text x="300" y="102" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[kontekst]</text>
+
+          <!-- [zadanie] -->
+          <rect x="230" y="132" width="140" height="34" rx="4" fill="#b5006a"/>
+          <text x="300" y="154" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[zadanie]</text>
+
+          <!-- [przykłady] -->
+          <rect x="237" y="184" width="126" height="34" rx="4" fill="#2e7d32"/>
+          <text x="300" y="206" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[przykłady]</text>
+
+          <!-- [format] -->
+          <rect x="244" y="236" width="112" height="34" rx="4" fill="#1565c0"/>
+          <text x="300" y="258" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[format]</text>
+
+          <!-- [styl] -->
+          <rect x="258" y="294" width="84" height="34" rx="4" fill="#d500a0"/>
+          <text x="300" y="316" fill="white" font-size="14" font-family="'JetBrains Mono',monospace" text-anchor="middle">[styl]</text>
+        </svg>
+      </div>
 
       <hr>
 

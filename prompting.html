@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO Meta Tags -->
+  <title>Zasady Promptowania — Heuristica | Jak pisać skuteczne prompty AI</title>
+  <meta name="description" content="Praktyczny przewodnik po zasadach promptowania AI. Jak pisać skuteczne prompty, używać ról, delimiterów i formatowania Markdown. Autor: Marek Staniszewski.">
+  <meta name="keywords" content="promptowanie, prompt engineering, zasady promptów, ChatGPT prompty, jak pisać prompty, AI instrukcje, Markdown AI">
+  <meta name="author" content="Marek Staniszewski">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="🧠 Zasady Promptowania — Heuristica">
+  <meta property="og:description" content="Praktyczny przewodnik: jak pisać skuteczne prompty AI.">
+  <meta property="og:url" content="https://heuristica.pl/prompting">
+  <meta property="og:type" content="website">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://heuristica.pl/prompting">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary: #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted: #8B949E;
+      --text-link: #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-free: #3FB950;
+      --tag-free-bg: rgba(63, 185, 80, 0.15);
+      --tag-freemium: #58A6FF;
+      --tag-freemium-bg: rgba(88, 166, 255, 0.12);
+      --tag-paid: #D29922;
+      --tag-paid-bg: rgba(210, 153, 34, 0.15);
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--text-link);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    /* ===== TOP NAVIGATION ===== */
+    .top-nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .top-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    /* ===== PAGE LAYOUT ===== */
+    .page-layout {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* ===== REPO HEADER ===== */
+    .repo-header {
+      margin-bottom: 20px;
+    }
+
+    .repo-path {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .repo-owner {
+      color: var(--text-link);
+      font-weight: 500;
+    }
+
+    .repo-separator { color: var(--text-muted); }
+
+    .repo-name {
+      font-weight: 600;
+      color: var(--text-link);
+    }
+
+    .repo-badge {
+      font-size: 11px;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2px 8px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .repo-tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0;
+    }
+
+    .repo-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .repo-tab:hover {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .repo-tab.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--tag-paid);
+    }
+
+    /* ===== FILE BAR ===== */
+    .file-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px 6px 0 0;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .author-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+    }
+
+    .commit-author { color: var(--text-primary); font-weight: 600; }
+    .commit-message { color: var(--text-muted); flex: 1; }
+    .commit-date { color: var(--text-muted); font-size: 12px; margin-left: auto; }
+
+    /* ===== README CONTENT ===== */
+    .readme-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      padding: 32px;
+    }
+
+    .readme-content h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .readme-content h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 36px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .readme-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--text-primary);
+    }
+
+    .readme-content blockquote {
+      border-left: 4px solid var(--accent-green);
+      padding: 12px 20px;
+      margin: 16px 0 24px;
+      background: var(--bg-tertiary);
+      border-radius: 0 6px 6px 0;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .readme-content p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .readme-content hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 28px 0;
+    }
+
+    /* ===== PROMPTING RULES TABLE ===== */
+    .rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .rules-table th {
+      background: var(--bg-tertiary);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border-color);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .rules-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .rules-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rules-table tr:hover td {
+      background: var(--bg-tertiary);
+    }
+
+    .rule-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      width: 32px;
+      text-align: center;
+    }
+
+    .rule-text {
+      color: var(--text-primary);
+      font-weight: 500;
+      min-width: 200px;
+    }
+
+    .rule-example {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .rule-example code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 6px;
+      color: #79c0ff;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .rule-example .bad {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    .rule-example .arrow {
+      color: var(--accent-green);
+      margin: 0 4px;
+    }
+
+    /* ===== MARKDOWN SECTION ===== */
+    .md-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .md-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+    }
+
+    .md-card h4 {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .md-card .syntax {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #79c0ff;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .md-card .result {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== TIP BOX ===== */
+    .tip-box {
+      background: rgba(42, 122, 91, 0.1);
+      border: 1px solid rgba(42, 122, 91, 0.4);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .tip-box strong {
+      color: #3FB950;
+    }
+
+    /* ===== README FOOTER ===== */
+    .readme-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== SITE FOOTER ===== */
+    .site-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 24px;
+      margin-top: 48px;
+      text-align: center;
+    }
+
+    .site-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+
+    .site-footer-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .site-footer-copy {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+      .page-layout { padding: 16px; }
+      .readme-content { padding: 16px; }
+      .rules-table th:first-child,
+      .rules-table td:first-child { display: none; }
+      .md-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-mark">H</span>
+        <span>heuristica</span>
+      </a>
+      <div class="nav-links">
+        <a href="kim.html">O mnie</a>
+        <a href="uslugi.html">Warsztaty</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="page-layout">
+
+    <!-- REPO HEADER -->
+    <div class="repo-header">
+      <div class="repo-path">
+        <a href="index.html" class="repo-owner">heuristica</a>
+        <span class="repo-separator">/</span>
+        <span class="repo-name">prompting-guide</span>
+        <span class="repo-badge">Public</span>
+      </div>
+      <div class="repo-tabs">
+        <a href="#zasady" class="repo-tab active">
+          <span>🧠</span> Zasady
+        </a>
+        <a href="#markdown" class="repo-tab">
+          <span>✍️</span> Markdown
+        </a>
+        <a href="ai-tools.html" class="repo-tab">
+          <span>🛠️</span> Narzędzia AI
+        </a>
+      </div>
+    </div>
+
+    <!-- FILE BAR -->
+    <div class="file-bar">
+      <div class="author-avatar"></div>
+      <span class="commit-author">marek</span>
+      <span class="commit-message">Zasady promptowania i formatowania Markdown</span>
+      <span class="commit-date">2026-02-26</span>
+    </div>
+
+    <!-- README CONTENT -->
+    <article class="readme-content">
+
+      <h1>🧠 Przewodnik po Promptowaniu</h1>
+
+      <blockquote>
+        Praktyczne zasady pisania skutecznych promptów dla modeli językowych AI.
+      </blockquote>
+
+      <p class="author-line">
+        <strong>Autor:</strong> <a href="kim.html">Marek Staniszewski</a> · AI Consultant & Brand Strategist
+      </p>
+
+      <hr>
+
+      <!-- ZASADY -->
+      <h2 id="zasady">📋 Zasady ogólne</h2>
+
+      <div class="tip-box">
+        <strong>Tip:</strong> Dobry prompt to precyzyjna instrukcja, nie grzeczna prośba. Im konkretniej, tym lepszy wynik.
+      </div>
+
+      <table class="rules-table">
+        <thead>
+          <tr>
+            <th class="rule-num">#</th>
+            <th>Zasada</th>
+            <th>Przykład</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rule-num">01</td>
+            <td class="rule-text">Nie musisz być uprzejmy wobec LLM</td>
+            <td class="rule-example">
+              <span class="bad">„Czy mógłbyś mi powiedzieć, jaka jest stolica Francji?"</span>
+              <span class="arrow">→</span>
+              <code>Jaka jest stolica Francji?</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">02</td>
+            <td class="rule-text">Integruj zamierzonych odbiorców w poleceniu</td>
+            <td class="rule-example">
+              <code>Napisz artykuł o globalnym ociepleniu dla ekspertów klimatycznych.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">03</td>
+            <td class="rule-text">Rozłóż skomplikowane zadania na ciąg prostszych poleceń</td>
+            <td class="rule-example">
+              <span class="bad">„Opisz proces fotosyntezy"</span>
+              <span class="arrow">→</span>
+              <code>1. Co to jest fotosynteza? 2. Jakie są etapy fotosyntezy?</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">04</td>
+            <td class="rule-text">Stosuj afirmatywne dyrektywy</td>
+            <td class="rule-example">
+              <span class="bad">„Nie zapomnij o kluczowych faktach..."</span>
+              <span class="arrow">→</span>
+              <code>Podaj kluczowe fakty dotyczące II wojny światowej.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">05</td>
+            <td class="rule-text">Implementuj polecenia oparte na przykładach</td>
+            <td class="rule-example">
+              <code>Jak napisać e-mail z prośbą o spotkanie? Oto przykład: [treść przykładowego e-maila]</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">06</td>
+            <td class="rule-text">Zacznij polecenie od <code>###Instrukcja###</code></td>
+            <td class="rule-example">
+              <code>###Instrukcja### Napisz krótki esej na temat korzyści z energii odnawialnej.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">07</td>
+            <td class="rule-text">Włączaj frazy „Twoim zadaniem jest" i „Musisz"</td>
+            <td class="rule-example">
+              <code>Twoim zadaniem jest przeprowadzić analizę rynku smartfonów.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">08</td>
+            <td class="rule-text">Użyj słów prowadzących (Chain of Thought)</td>
+            <td class="rule-example">
+              <code>Myśl krok po kroku, jak rozwiązać równanie kwadratowe.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">09</td>
+            <td class="rule-text">Pozwól modelowi zadawać pytania</td>
+            <td class="rule-example">
+              <code>Od teraz zadawaj mi pytania, jeśli będziesz potrzebować dodatkowych informacji.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">10</td>
+            <td class="rule-text">Przypisz rolę modelowi językowemu</td>
+            <td class="rule-example">
+              <code>Jako asystent do spraw zdrowia, podaj pięć korzyści z regularnego ćwiczenia.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">11</td>
+            <td class="rule-text">Używaj delimiterów</td>
+            <td class="rule-example">
+              <code>###Pytanie### Jaka jest różnica między RNA a DNA? ###Odpowiedź###</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">12</td>
+            <td class="rule-text">Łącz Chain of Thought z podejściem few-shot</td>
+            <td class="rule-example">
+              <code>Jak obliczyć BMI? Pomyśl o wzorze, a następnie podaj kroki obliczeniowe.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">13</td>
+            <td class="rule-text">Używaj primerów wyjściowych</td>
+            <td class="rule-example">
+              <code>Napisz opowiadanie zaczynające się od słów: „Pewnego razu w małym miasteczku..."</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">14</td>
+            <td class="rule-text">Wyraźnie określaj wymagania</td>
+            <td class="rule-example">
+              <code>Potrzebuję listy 10 najlepszych uniwersytetów w Europie wraz z krótkim opisem każdego.</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">15</td>
+            <td class="rule-text">Dodaj fallback („out") na wypadek braku pewności</td>
+            <td class="rule-example">
+              <code>Jeśli nie znasz odpowiedzi, napisz: „Nie posiadam wystarczających informacji."</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="rule-num">16</td>
+            <td class="rule-text">Pisanie w stylu przykładu — dołącz konkretne instrukcje</td>
+            <td class="rule-example">
+              <code>Napisz artykuł podobny do [przykładu]. Użyj prostego języka i podaj 3 główne korzyści.</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <!-- MARKDOWN -->
+      <h2 id="markdown">✍️ Znaczniki Markdown</h2>
+
+      <p>Formatowanie odpowiedzi modelu — używaj w promptach, żeby kontrolować strukturę wyniku.</p>
+
+      <div class="md-grid">
+
+        <div class="md-card">
+          <h4>Nagłówki</h4>
+          <code class="syntax"># Nagłówek H1</code>
+          <code class="syntax">## Nagłówek H2</code>
+          <code class="syntax">### Nagłówek H3</code>
+          <span class="result">Organizowanie treści na poziomy</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Wyróżnienia</h4>
+          <code class="syntax">**tekst** lub __tekst__</code>
+          <code class="syntax">*tekst* lub _tekst_</code>
+          <code class="syntax">***tekst***</code>
+          <span class="result"><strong>Pogrubienie</strong> · <em>Kursywa</em> · <strong><em>Oba</em></strong></span>
+        </div>
+
+        <div class="md-card">
+          <h4>Przekreślenie</h4>
+          <code class="syntax">~~tekst~~</code>
+          <span class="result"><s>Przekreślony tekst</s> — przydatne do zaznaczania zmian</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Linki</h4>
+          <code class="syntax">[tekst linku](URL)</code>
+          <span class="result">Wstawianie hiperłączy do dodatkowych zasobów</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Podział treści</h4>
+          <code class="syntax">---</code>
+          <span class="result">Wizualny separator sekcji</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Tabela</h4>
+          <code class="syntax">| Kol 1 | Kol 2 |</code>
+          <code class="syntax">|-------|-------|</code>
+          <code class="syntax">| dane  | dane  |</code>
+          <span class="result">Strukturyzowanie danych w wiersze i kolumny</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Lista punktowana</h4>
+          <code class="syntax">- element</code>
+          <code class="syntax">- element</code>
+          <span class="result">Nieuporządkowane wyliczenia</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Lista numerowana</h4>
+          <code class="syntax">1. pierwszy krok</code>
+          <code class="syntax">2. drugi krok</code>
+          <span class="result">Instrukcje krok po kroku</span>
+        </div>
+
+        <div class="md-card">
+          <h4>Blok kodu</h4>
+          <code class="syntax">```python</code>
+          <code class="syntax">kod tutaj</code>
+          <code class="syntax">```</code>
+          <span class="result">Formatowanie kodu z podświetlaniem składni</span>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <div class="readme-footer">
+        <p>Utrzymywane przez <a href="index.html">Heuristica</a> · <a href="ai-tools.html">Zobacz też: Narzędzia AI →</a></p>
+        <p style="font-family: var(--font-mono); font-size: 12px; margin-top: 8px;">
+          Ostatnia aktualizacja: 26 lutego 2026
+        </p>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-links">
+      <a href="https://www.youtube.com/@marekstaniszewski7424" target="_blank">YouTube</a>
+      <a href="https://www.linkedin.com/in/staniszewskimarek/" target="_blank">LinkedIn</a>
+      <a href="mailto:staniszewski@heuristica.pl">Email</a>
+    </div>
+    <div class="site-footer-copy">
+      © 2026 Heuristica. Marek Staniszewski
+    </div>
+  </footer>
+
+</body>
+</html>

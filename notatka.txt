@@ -1,0 +1,55 @@
+# Prompting - zasady ogólne i przykłady:
+
+Zasada	Przykłady
+Nie musisz być uprzejmy wobec LLM.	Zamiast: „Czy mógłbyś mi powiedzieć, jaka jest stolica Francji?”, użyj: „Jaka jest stolica Francji?”
+Integruj zamierzonych odbiorców w poleceniu.	„Napisz artykuł o globalnym ociepleniu dla ekspertów klimatycznych”.
+Rozłóż skomplikowane zadania na ciąg prostszych poleceń.	Zamiast: „Opisz proces fotosyntezy”, użyj: „1. Co to jest fotosynteza? 2. Jakie są etapy fotosyntezy?”
+Stosuj afirmatywne dyrektywy.	Zamiast: „Nie zapomnij o kluczowych faktach dotyczących II wojny światowej”, użyj: „Podaj kluczowe fakty dotyczące II wojny światowej”.
+Implementuj polecenia oparte na przykładach.	„Jak napisać e-mail z prośbą o spotkanie? Oto przykład: [treść przykładowego e-maila]”.
+Zacznij polecenie od „###Instrukcja###”.	„###Instrukcja### Napisz krótki esej na temat korzyści z energii odnawialnej”.
+Włączaj frazy „Twoim zadaniem jest” i „Musisz”.	„Twoim zadaniem jest przeprowadzić analizę rynku smartfonów”.
+Użyj słów prowadzących.	„Myśl krok po kroku, jak rozwiązać równanie kwadratowe”.
+Pozwól modelowi zadawać pytania.	„Od teraz chciałbym, abyś zadawał mi pytania, jeśli będziesz potrzebować dodatkowych informacji do odpowiedzi”.
+Przypisz rolę dużym modelom językowym.	„Jako asystent do spraw zdrowia, podaj mi pięć korzyści płynących z regularnego ćwiczenia”.
+Używaj delimiterów.	„###Pytanie### Jaka jest różnica między RNA a DNA? ###Odpowiedź###”.
+Łącz metodę Łańcucha Myśli z podejściem kilku-strzałowym.	„Jak obliczyć BMI? Pomyśl o wzorze, a następnie podaj kroki obliczeniowe”.
+Używaj primerów wyjściowych.	„Napisz opowiadanie zaczynające się od słów: „Pewnego razu w małym miasteczku...””.
+Wyraźnie określaj wymagania w poleceniach.	„Potrzebuję listy dziesięciu najlepszych uniwersytetów w Europie wraz z krótkim opisem każdego z nich”.
+Fallback („out”)
+	Jeśli znasz odpowiedź, odpowiedz szczegółowo. W przypadku braku pewności, użyj frazy: "Niestety, nie posiadam wystarczających informacji, aby odpowiedzieć na to pytanie."
+
+Aby napisać tekst podobny do podanego przykładu, dołącz konkretne instrukcje.	„Napisz artykuł na temat zdrowego odżywiania, podobny do artykułu, który przeczytałeś w magazynie „Zdrowie i Ty”. Użyj prostego języka i podaj trzy główne korzyści”.
+
+# Znaczniki Markdown
+
+# Przykład różnego formatowania
+Stwórz propozycję jednej nazwy produktu: soku z marchwi
+podaj jako:
+**nazwa**
+*nazwa*
+***nazwa***
+~~nazwa~~
+# nazwa
+## nazwa
+### nazwa
+
+---
+Wybrane znaczniki Markdown, które możesz wykorzystywać do generowania odpowiedzi w różnych formatach:
+
+1. Nagłówki: Użyj # dla największych nagłówków, ## dla podnagłówków itd. Pozwala to na łatwe organizowanie treści.
+2. Pogrubienie: Użyj **tekst** lub __tekst__ do pogrubienia tekstu.
+3. Kursywa: Użyj *tekst* lub _tekst_ do kursywy, co jest przydatne do podkreślania lub lekkiego wyróżnienia tekstu.
+4. Linki: Użyj [tekst linku](URL) do wstawiania hiperłączy, co jest przydatne do kierowania użytkowników do dodatkowych zasobów.
+5. Przekreślenie: Użyj ~~tekst~~ do przekreślenia tekstu,
+6. Podział linii: Użyj --- do tworzenia wizualnego podziału w treści.
+7. Tabela:
+
+| Kolumna 1 | Kolumna 2 | Kolumna 3 |
+|-----------|-----------|-----------|
+| Wiersz 1  | Dane 1.2  | Dane 1.3  |
+| Wiersz 2  | Dane 2.2  | Dane 2.3  |
+| Wiersz 3  | Dane 3.2  | Dane 3.3  |
+| Wiersz 4  | Dane 4.2  | Dane 4.3  |
+
+
+

@@ -15,6 +15,15 @@ RewriteRule ^sandbox/?$ /sandbox.html [L,NC]
 # Redirect /embeddings to /embeddings.html
 RewriteRule ^embeddings/?$ /embeddings.html [L,NC]
 
+# Redirect main pages
+RewriteRule ^kim/?$ /kim.html [L,NC]
+RewriteRule ^uslugi/?$ /uslugi.html [L,NC]
+RewriteRule ^klienci/?$ /klienci.html [L,NC]
+RewriteRule ^inspiracje/?$ /inspiracje.html [L,NC]
+RewriteRule ^narzedzia/?$ /narzedzia.html [L,NC]
+RewriteRule ^polityka/?$ /polityka.html [L,NC]
+RewriteRule ^regulamin/?$ /regulamin.html [L,NC]
+
 # Enable compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json

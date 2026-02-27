@@ -477,6 +477,28 @@
 
     .stat-card.full { grid-column: 1 / -1; }
 
+    /* ESG */
+    .esg-section {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+    .esg-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tag-green);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+    .esg-val { color: var(--tag-green) !important; }
+    .esg-note {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      text-align: right;
+    }
+
     /* Code block */
     .code-block {
       background: var(--bg-primary);
@@ -771,6 +793,26 @@
             </div>
           </div>
 
+          <!-- ESG SECTION -->
+          <div class="esg-section">
+            <div class="esg-title">CO₂ Footprint</div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">Ta odpowiedź</div>
+                <div class="stat-val esg-val" id="esg-request">—</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Sesja łącznie</div>
+                <div class="stat-val esg-val" id="esg-session">—</div>
+              </div>
+              <div class="stat-card full">
+                <div class="stat-label">Intensywność (sesja)</div>
+                <div class="stat-val" style="font-size:12px" id="esg-intensity">—</div>
+              </div>
+            </div>
+            <div class="esg-note">Szacunek na podstawie literatury naukowej · EF = 0.4 kg CO₂e/kWh</div>
+          </div>
+
           <div style="font-size:11px;color:var(--text-muted);line-height:1.6;margin-bottom:12px">
             <strong style="color:var(--text-primary)">Co to są tokeny?</strong><br>
             1 token ≈ 0,75 słowa. GPT-4o-mini kosztuje ok. $0.15 / 1M tokenów wejściowych.
@@ -852,6 +894,42 @@
     function isReasoningModel(model) {
       // Reasoning models don't support temperature, top_p, presence/frequency_penalty
       return /^o[1-9]/i.test(model);
+    }
+
+    // ===== ESG CALCULATOR =====
+    // Energy estimates: Wh per 1K tokens (inference only, output-weighted)
+    // Sources: IEA 2024, Patterson et al. 2021, Li et al. 2023
+    const ESG_EF = 0.4; // kg CO₂e/kWh = 0.4 g CO₂e/Wh (global average grid mix)
+
+    function getWhPer1K(model) {
+      if (!model) return 0.001;
+      const m = model.toLowerCase();
+      if (m.startsWith('o1') || m.startsWith('o3') || m.startsWith('o4')) return 0.010;
+      if (m.includes('gpt-4o-mini') || m.includes('gpt-3.5'))             return 0.0003;
+      if (m.includes('gpt-4'))                                             return 0.003;
+      return 0.001;
+    }
+
+    let esgSessionTokens = 0;
+    let esgSessionCO2g   = 0;
+
+    function updateESG(totalTokens, model) {
+      const energyWh       = (totalTokens / 1000) * getWhPer1K(model);
+      const co2g           = energyWh * ESG_EF;
+      esgSessionTokens    += totalTokens;
+      esgSessionCO2g      += co2g;
+      const intensity      = (esgSessionCO2g / esgSessionTokens * 1_000_000).toFixed(2) + ' g / 1M tokens';
+      document.getElementById('esg-request').textContent   = co2g.toFixed(4) + ' g';
+      document.getElementById('esg-session').textContent   = esgSessionCO2g.toFixed(3) + ' g';
+      document.getElementById('esg-intensity').textContent = intensity;
+    }
+
+    function resetESG() {
+      esgSessionTokens = 0;
+      esgSessionCO2g   = 0;
+      document.getElementById('esg-request').textContent   = '—';
+      document.getElementById('esg-session').textContent   = '—';
+      document.getElementById('esg-intensity').textContent = '—';
     }
 
     // ===== STATE =====
@@ -1021,6 +1099,7 @@
           document.getElementById('stat-completion').textContent = data.usage.completion_tokens;
           document.getElementById('stat-total').textContent = data.usage.total_tokens;
           document.getElementById('stat-model').textContent = data.model;
+          updateESG(data.usage.total_tokens, data.model);
         }
         document.getElementById('stat-time').textContent = elapsed + 's';
 
@@ -1083,6 +1162,7 @@
       document.getElementById('stat-total').textContent = '—';
       document.getElementById('stat-time').textContent = '—';
       document.getElementById('stat-model').textContent = '—';
+      resetESG();
       updateCode();
     }
 

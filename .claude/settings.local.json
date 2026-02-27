@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:seedance2.app)"
+      "WebFetch(domain:seedance2.app)",
+      "WebFetch(domain:tally.so)"
     ]
   }
 }

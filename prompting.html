@@ -403,10 +403,48 @@
       display: block;
     }
 
-    .md-card .result {
-      font-size: 13px;
-      color: var(--text-muted);
+    .card-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 12px;
     }
+
+    .card-syntax {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-syntax .syntax:last-child { margin-bottom: 0; }
+
+    .card-render {
+      border-left: 1px solid var(--border-color);
+      padding-left: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-primary);
+      min-width: 0;
+    }
+
+    .card-render .r-h1 { font-size: 17px; font-weight: 700; line-height: 1.2; display: block; }
+    .card-render .r-h2 { font-size: 14px; font-weight: 600; line-height: 1.2; display: block; }
+    .card-render .r-h3 { font-size: 12px; font-weight: 600; line-height: 1.2; display: block; color: var(--text-muted); }
+
+    .card-render ul, .card-render ol { margin: 0; padding-left: 16px; }
+    .card-render li { margin-bottom: 2px; font-size: 12px; color: var(--text-muted); }
+
+    .card-render pre { margin: 0; padding: 6px 10px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--text-primary); }
+
+    .card-render table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .card-render th { background: var(--bg-primary); padding: 3px 6px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 10px; }
+    .card-render td { padding: 3px 6px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+    .card-render tr:last-child td { border-bottom: none; }
+
+    .card-render hr { border: none; border-top: 1px solid var(--border-color); margin: 4px 0; width: 100%; }
+    .card-render a { color: var(--text-link); font-size: 12px; }
+    .card-render s { color: var(--text-muted); }
 
     /* ===== PYRAMID ===== */
     .pyramid-wrap {
@@ -477,6 +515,8 @@
       .rules-table th:first-child,
       .rules-table td:first-child { display: none; }
       .md-grid { grid-template-columns: 1fr; }
+      .card-cols { grid-template-columns: 1fr; }
+      .card-render { border-left: none; border-top: 1px solid var(--border-color); padding-left: 0; padding-top: 8px; margin-top: 4px; }
     }
 
     /* ===== PLAYGROUND ===== */
@@ -845,66 +885,134 @@
 
         <div class="md-card">
           <h4>Nagłówki</h4>
-          <code class="syntax"># Nagłówek H1</code>
-          <code class="syntax">## Nagłówek H2</code>
-          <code class="syntax">### Nagłówek H3</code>
-          <span class="result">Organizowanie treści na poziomy</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax"># Nagłówek H1</code>
+              <code class="syntax">## Nagłówek H2</code>
+              <code class="syntax">### Nagłówek H3</code>
+            </div>
+            <div class="card-render">
+              <span class="r-h1">Nagłówek H1</span>
+              <span class="r-h2">Nagłówek H2</span>
+              <span class="r-h3">Nagłówek H3</span>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Wyróżnienia</h4>
-          <code class="syntax">**tekst** lub __tekst__</code>
-          <code class="syntax">*tekst* lub _tekst_</code>
-          <code class="syntax">***tekst***</code>
-          <span class="result"><strong>Pogrubienie</strong> · <em>Kursywa</em> · <strong><em>Oba</em></strong></span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">**tekst** lub __tekst__</code>
+              <code class="syntax">*tekst* lub _tekst_</code>
+              <code class="syntax">***tekst***</code>
+            </div>
+            <div class="card-render">
+              <span><strong>Pogrubienie</strong></span>
+              <span><em>Kursywa</em></span>
+              <span><strong><em>Pogrubienie + kursywa</em></strong></span>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Przekreślenie</h4>
-          <code class="syntax">~~tekst~~</code>
-          <span class="result"><s>Przekreślony tekst</s> — przydatne do zaznaczania zmian</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">~~tekst~~</code>
+            </div>
+            <div class="card-render">
+              <span><s>Przekreślony tekst</s></span>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Linki</h4>
-          <code class="syntax">[tekst linku](URL)</code>
-          <span class="result">Wstawianie hiperłączy do dodatkowych zasobów</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">[tekst linku](URL)</code>
+            </div>
+            <div class="card-render">
+              <a href="#" onclick="return false">tekst linku</a>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Podział treści</h4>
-          <code class="syntax">---</code>
-          <span class="result">Wizualny separator sekcji</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">---</code>
+            </div>
+            <div class="card-render">
+              <hr>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Tabela</h4>
-          <code class="syntax">| Kol 1 | Kol 2 |</code>
-          <code class="syntax">|-------|-------|</code>
-          <code class="syntax">| dane  | dane  |</code>
-          <span class="result">Strukturyzowanie danych w wiersze i kolumny</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">| Kol 1 | Kol 2 |</code>
+              <code class="syntax">|-------|-------|</code>
+              <code class="syntax">| dane  | dane  |</code>
+            </div>
+            <div class="card-render">
+              <table>
+                <tr><th>Kol 1</th><th>Kol 2</th></tr>
+                <tr><td>dane</td><td>dane</td></tr>
+                <tr><td>dane</td><td>dane</td></tr>
+              </table>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Lista punktowana</h4>
-          <code class="syntax">- element</code>
-          <code class="syntax">- element</code>
-          <span class="result">Nieuporządkowane wyliczenia</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">- element A</code>
+              <code class="syntax">- element B</code>
+            </div>
+            <div class="card-render">
+              <ul>
+                <li>element A</li>
+                <li>element B</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Lista numerowana</h4>
-          <code class="syntax">1. pierwszy krok</code>
-          <code class="syntax">2. drugi krok</code>
-          <span class="result">Instrukcje krok po kroku</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">1. pierwszy krok</code>
+              <code class="syntax">2. drugi krok</code>
+            </div>
+            <div class="card-render">
+              <ol>
+                <li>pierwszy krok</li>
+                <li>drugi krok</li>
+              </ol>
+            </div>
+          </div>
         </div>
 
         <div class="md-card">
           <h4>Blok kodu</h4>
-          <code class="syntax">```python</code>
-          <code class="syntax">kod tutaj</code>
-          <code class="syntax">```</code>
-          <span class="result">Formatowanie kodu z podświetlaniem składni</span>
+          <div class="card-cols">
+            <div class="card-syntax">
+              <code class="syntax">```python</code>
+              <code class="syntax">kod tutaj</code>
+              <code class="syntax">```</code>
+            </div>
+            <div class="card-render">
+              <pre><code>kod tutaj</code></pre>
+            </div>
+          </div>
         </div>
 
       </div>

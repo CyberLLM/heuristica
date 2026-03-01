@@ -478,6 +478,108 @@
       .rules-table td:first-child { display: none; }
       .md-grid { grid-template-columns: 1fr; }
     }
+
+    /* ===== PLAYGROUND ===== */
+    .playground-wrap {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      height: 460px;
+      margin-top: 16px;
+    }
+
+    .playground-pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .playground-pane + .playground-pane {
+      border-left: 1px solid var(--border-color);
+    }
+
+    .pane-bar {
+      padding: 7px 14px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--tag-free);
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    #md-input {
+      flex: 1;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: none;
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      resize: none;
+      outline: none;
+      line-height: 1.7;
+      tab-size: 2;
+    }
+
+    .md-preview {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .md-preview h1 { font-size: 22px; font-weight: 700; margin: 0 0 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; color: var(--text-primary); }
+    .md-preview h2 { font-size: 18px; font-weight: 600; margin: 20px 0 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; color: var(--text-primary); }
+    .md-preview h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: var(--text-primary); }
+    .md-preview p { margin: 0 0 12px; color: var(--text-muted); }
+    .md-preview a { color: var(--text-link); }
+    .md-preview strong { color: var(--text-primary); font-weight: 600; }
+    .md-preview em { font-style: italic; }
+    .md-preview del { opacity: 0.5; }
+    .md-preview code { font-family: var(--font-mono); font-size: 12px; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 3px; padding: 2px 5px; color: #79c0ff; }
+    .md-preview pre { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 14px 16px; margin: 12px 0; overflow-x: auto; }
+    .md-preview pre code { background: none; border: none; padding: 0; color: var(--text-primary); }
+    .md-preview ul, .md-preview ol { padding-left: 24px; margin-bottom: 12px; color: var(--text-muted); }
+    .md-preview li { margin-bottom: 4px; }
+    .md-preview blockquote { border-left: 4px solid var(--accent-green); padding: 10px 16px; margin: 12px 0; background: var(--bg-tertiary); border-radius: 0 6px 6px 0; color: var(--text-muted); }
+    .md-preview blockquote p { margin-bottom: 0; }
+    .md-preview hr { border: none; border-top: 1px solid var(--border-color); margin: 20px 0; }
+    .md-preview table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    .md-preview th { background: var(--bg-tertiary); padding: 8px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border-color); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 12px; }
+    .md-preview td { padding: 8px 12px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+    .md-preview tr:last-child td { border-bottom: none; }
+    .md-preview img { max-width: 100%; }
+
+    @media (max-width: 700px) {
+      .playground-wrap { flex-direction: column; height: auto; }
+      #md-input { height: 200px; }
+      .md-preview { min-height: 200px; }
+    }
   </style>
 </head>
 <body>
@@ -517,6 +619,9 @@
         </a>
         <a href="#markdown" class="repo-tab">
           <span>✍️</span> Markdown
+        </a>
+        <a href="#playground" class="repo-tab">
+          <span>📝</span> Playground
         </a>
         <a href="sandbox.html" class="repo-tab">
           <span>⚗️</span> Sandbox
@@ -806,6 +911,61 @@
 
       <hr>
 
+      <!-- PLAYGROUND -->
+      <h2 id="playground">📝 Markdown Playground</h2>
+
+      <p>Napisz Markdown po lewej — podgląd wyrenderowany pojawi się na żywo po prawej.</p>
+
+      <div class="playground-wrap">
+        <div class="playground-pane">
+          <div class="pane-bar">
+            <span>Markdown</span>
+            <span id="md-char-count">—</span>
+          </div>
+          <textarea id="md-input" spellcheck="false"># Prompt — Analiza rynku
+
+## Rola i kontekst
+
+Jesteś **ekspertem marketingowym** z doświadczeniem w branży *B2B SaaS*.
+
+## Zadanie
+
+Przygotuj analizę potencjału rynkowego dla nowego produktu. Myśl krok po kroku.
+
+### Zakres analizy
+
+1. Identyfikacja grupy docelowej
+2. Analiza konkurencji
+3. Propozycja pozycjonowania
+
+## Dane wejściowe
+
+| Parametr | Wartość  |
+|----------|----------|
+| Rynek    | Polska   |
+| Budżet   | 50k PLN  |
+| Horyzont | Q4 2026  |
+
+## Format odpowiedzi
+
+Odpowiedz jako `raport` z sekcjami. Każda sekcja w osobnym nagłówku `##`.
+
+> **Ważne:** Jeśli brakuje danych — zadaj pytania zanim zaczniesz.
+
+---
+
+~~Wersja robocza~~ → Wersja 1.0</textarea>
+        </div>
+        <div class="playground-pane">
+          <div class="pane-bar">
+            <span><span class="live-dot"></span>Podgląd</span>
+          </div>
+          <div class="md-preview" id="md-preview"></div>
+        </div>
+      </div>
+
+      <hr>
+
       <div class="readme-footer">
         <p>Utrzymywane przez <a href="index.html">Heuristica</a> · <a href="ai-tools.html">Zobacz też: Narzędzia AI →</a></p>
         <p style="font-family: var(--font-mono); font-size: 12px; margin-top: 8px;">
@@ -828,5 +988,23 @@
     </div>
   </footer>
 
+
+  <script type="module">
+    import { marked } from 'https://cdn.jsdelivr.net/npm/marked/+esm';
+
+    const input   = document.getElementById('md-input');
+    const preview = document.getElementById('md-preview');
+    const counter = document.getElementById('md-char-count');
+
+    function render() {
+      preview.innerHTML = marked.parse(input.value);
+      const chars = input.value.length;
+      const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
+      counter.textContent = chars + ' zn · ' + words + ' słów';
+    }
+
+    input.addEventListener('input', render);
+    render();
+  </script>
 </body>
 </html>

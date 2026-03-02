@@ -1,6 +1,6 @@
-# Prompting 
+# Prompting - zasady
 
-Zasada	Przykłady
+Zasada	Przykłady 
 Nie musisz być uprzejmy wobec LLM.	Zamiast: „Czy mógłbyś mi powiedzieć, jaka jest stolica Francji?”, użyj: „Jaka jest stolica Francji?”
 Integruj zamierzonych odbiorców w poleceniu.	„Napisz artykuł o globalnym ociepleniu dla ekspertów klimatycznych”.
 Rozłóż skomplikowane zadania na ciąg prostszych poleceń.	Zamiast: „Opisz proces fotosyntezy”, użyj: „1. Co to jest fotosynteza? 2. Jakie są etapy fotosyntezy?”

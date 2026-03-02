@@ -1,4 +1,4 @@
-# Prompting - zasady ogólne i przykłady:
+# Prompting 
 
 Zasada	Przykłady
 Nie musisz być uprzejmy wobec LLM.	Zamiast: „Czy mógłbyś mi powiedzieć, jaka jest stolica Francji?”, użyj: „Jaka jest stolica Francji?”

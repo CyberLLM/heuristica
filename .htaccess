@@ -15,6 +15,9 @@ RewriteRule ^sandbox/?$ /sandbox.html [L,NC]
 # Redirect /embeddings to /embeddings.html
 RewriteRule ^embeddings/?$ /embeddings.html [L,NC]
 
+# Redirect /workshop to /workshop.html
+RewriteRule ^workshop/?$ /workshop.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

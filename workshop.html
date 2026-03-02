@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/workshop">
+  <title>Workshop — Heuristica | Materialy z zajec AI</title>
+  <meta name="description" content="Materialy, linki i prompty ze szkolen AI. Aktualizowane na biezaco podczas zajec.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:   #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary:  #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted:   #8B949E;
+      --text-link:    #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-green:    #3FB950;
+      --font-body:    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --nav-height:   53px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--text-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== NAV ===== */
+    .top-nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .top-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .nav-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-color);
+      padding-left: 16px;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* ===== VIEW MODE LAYOUT ===== */
+    #view-mode {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ===== TOC SIDEBAR ===== */
+    .toc-panel {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+
+    .toc-header {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 16px 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 8px;
+    }
+
+    .toc-nav a {
+      display: block;
+      padding: 5px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toc-nav a:hover {
+      color: var(--text-primary);
+      border-left-color: var(--text-link);
+      text-decoration: none;
+    }
+
+    .toc-nav a.toc-h1 { font-weight: 600; padding-left: 16px; }
+    .toc-nav a.toc-h2 { padding-left: 28px; }
+    .toc-nav a.toc-h3 { padding-left: 40px; font-size: 12px; }
+
+    .toc-empty {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      font-style: italic;
+    }
+
+    /* ===== CONTENT PANEL ===== */
+    .content-main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 36px 56px;
+    }
+
+    .loading-state, .empty-state {
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .error-state {
+      color: #f85149;
+      font-size: 14px;
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    /* ===== MARKDOWN STYLES ===== */
+    .md-content h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+      line-height: 1.3;
+    }
+
+    .md-content h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 28px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+      line-height: 1.3;
+    }
+
+    .md-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      line-height: 1.4;
+    }
+
+    .md-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 16px 0 6px;
+      color: var(--text-muted);
+    }
+
+    .md-content p {
+      margin: 0 0 14px;
+      line-height: 1.75;
+    }
+
+    .md-content ul, .md-content ol {
+      margin: 0 0 14px 22px;
+      line-height: 1.75;
+    }
+
+    .md-content li { margin: 4px 0; }
+
+    .md-content li > ul, .md-content li > ol {
+      margin-bottom: 4px;
+    }
+
+    .md-content a { color: var(--text-link); }
+    .md-content a:hover { text-decoration: underline; }
+
+    .md-content code {
+      font-family: var(--font-mono);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .md-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+      position: relative;
+    }
+
+    .md-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .md-content blockquote {
+      border-left: 3px solid var(--text-link);
+      margin: 0 0 14px;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border-radius: 0 6px 6px 0;
+      color: var(--text-muted);
+    }
+
+    .md-content blockquote p { margin-bottom: 0; }
+
+    .md-content hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 24px 0;
+    }
+
+    .md-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 16px;
+      font-size: 14px;
+    }
+
+    .md-content th {
+      background: var(--bg-secondary);
+      padding: 8px 14px;
+      text-align: left;
+      border: 1px solid var(--border-color);
+      font-weight: 600;
+    }
+
+    .md-content td {
+      padding: 8px 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .md-content tr:hover td { background: var(--bg-secondary); }
+
+    .md-content strong { font-weight: 700; }
+    .md-content em { font-style: italic; }
+
+    /* ===== EDIT MODE ===== */
+    #edit-mode {
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-toolbar {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .tb-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      padding: 4px 8px;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .tb-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .tb-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border-color);
+      margin: 0 6px;
+    }
+
+    .save-status {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+
+    .save-status.status-ok   { color: var(--tag-green); }
+    .save-status.status-err  { color: #f85149; }
+    .save-status.status-saving { color: var(--text-link); }
+
+    .exit-btn {
+      margin-left: auto;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 12px;
+      padding: 4px 12px;
+      font-family: var(--font-body);
+    }
+
+    .exit-btn:hover {
+      background: var(--border-color);
+    }
+
+    .editor-split {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    #md-editor {
+      border: none;
+      border-right: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 28px 32px;
+      resize: none;
+      outline: none;
+      overflow-y: auto;
+    }
+
+    .editor-preview {
+      overflow-y: auto;
+      padding: 28px 36px;
+      background: var(--bg-primary);
+    }
+
+    /* ===== FLOATING EDIT BUTTON ===== */
+    .edit-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .edit-fab:hover {
+      background: var(--text-link);
+      border-color: var(--text-link);
+      color: #fff;
+    }
+
+    /* ===== PASSWORD MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    .modal-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 28px 32px;
+      width: 320px;
+    }
+
+    .modal-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .modal-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: var(--text-primary);
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 8px;
+      font-family: var(--font-body);
+    }
+
+    .modal-input:focus { border-color: var(--text-link); }
+
+    .modal-error {
+      font-size: 12px;
+      color: #f85149;
+      min-height: 16px;
+      margin-bottom: 16px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .modal-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 13px;
+      padding: 6px 16px;
+      font-family: var(--font-body);
+    }
+
+    .modal-btn:hover { background: var(--border-color); }
+
+    .modal-btn.primary {
+      background: var(--text-link);
+      border-color: var(--text-link);
+      color: #fff;
+    }
+
+    .modal-btn.primary:hover { opacity: 0.85; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .toc-panel { display: none; }
+      .content-main { padding: 24px 20px; }
+      .editor-split { grid-template-columns: 1fr; }
+      #md-editor { border-right: none; border-bottom: 1px solid var(--border-color); }
+      .editor-preview { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div style="display:flex;align-items:center;gap:12px">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-mark">H</span>
+          <span>heuristica</span>
+        </a>
+        <span class="nav-title">/ Workshop</span>
+      </div>
+      <div class="nav-links">
+        <a href="ai-tools.html">Narzedzia AI</a>
+        <a href="prompting.html">Prompting</a>
+        <a href="sandbox.html">Sandbox</a>
+        <a href="#" data-tally-open="obAOEx">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- VIEW MODE -->
+  <div id="view-mode" style="display:flex;flex:1;overflow:hidden">
+    <aside class="toc-panel">
+      <div class="toc-header">Spis tresci</div>
+      <nav class="toc-nav" id="toc-nav">
+        <div class="toc-empty">Ladowanie...</div>
+      </nav>
+    </aside>
+    <main class="content-main">
+      <div id="rendered-content" class="md-content">
+        <div class="loading-state">Ladowanie materialow...</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- EDIT MODE (hidden by default) -->
+  <div id="edit-mode" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+    <div class="editor-toolbar">
+      <button class="tb-btn" onclick="insertHeading(1)" title="H1">H1</button>
+      <button class="tb-btn" onclick="insertHeading(2)" title="H2">H2</button>
+      <button class="tb-btn" onclick="insertHeading(3)" title="H3">H3</button>
+      <div class="tb-sep"></div>
+      <button class="tb-btn" onclick="wrapSel('**','**')" title="Pogrubienie"><strong>B</strong></button>
+      <button class="tb-btn" onclick="wrapSel('*','*')" title="Kursywa"><em>I</em></button>
+      <button class="tb-btn" onclick="wrapSel('`','`')" title="Kod inline">` `</button>
+      <button class="tb-btn" onclick="insertCodeBlock()" title="Blok kodu">{ }</button>
+      <div class="tb-sep"></div>
+      <button class="tb-btn" onclick="insertAtLineStart('- ')" title="Lista">&#8226; lista</button>
+      <button class="tb-btn" onclick="insertAtLineStart('> ')" title="Cytat">&ldquo; cytat</button>
+      <button class="tb-btn" onclick="insertSeparator()" title="Linia pozioma">&#8212; hr</button>
+      <button class="tb-btn" onclick="insertLink()" title="Wstaw link">link</button>
+      <div class="tb-sep"></div>
+      <span id="save-status" class="save-status">Gotowy</span>
+      <button class="exit-btn" onclick="exitEdit()">Zakoncz edycje</button>
+    </div>
+    <div class="editor-split">
+      <textarea id="md-editor"
+        spellcheck="true"
+        placeholder="# Tytuł zajęć
+
+## Linki
+
+- [ChatGPT](https://chat.openai.com)
+- [Claude](https://claude.ai)
+
+## Prompty
+
+### Prompt 1 — Analiza tekstu
+
+```
+Jesteś ekspertem od analizy tekstu...
+```
+
+---
+
+## Notatki"></textarea>
+      <div class="editor-preview md-content" id="editor-preview"></div>
+    </div>
+  </div>
+
+  <!-- FLOATING EDIT BUTTON -->
+  <button class="edit-fab" id="edit-fab" onclick="tryEnterEdit()" title="Edytuj">&#9998;</button>
+
+  <!-- PASSWORD MODAL -->
+  <div class="modal-overlay" id="pw-overlay" style="display:none" onclick="if(event.target===this)closePwModal()">
+    <div class="modal-box">
+      <div class="modal-title">Tryb edycji</div>
+      <input type="password" id="pw-input" class="modal-input" placeholder="Haslo..."
+        onkeydown="if(event.key==='Enter')checkPw()">
+      <div id="pw-error" class="modal-error"></div>
+      <div class="modal-actions">
+        <button class="modal-btn" onclick="closePwModal()">Anuluj</button>
+        <button class="modal-btn primary" onclick="checkPw()">Wejdz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (compat v10) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- marked.js -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+  <script>
+    // ============================================================
+    //  KONFIGURACJA — UZUPELNIJ PO ZALOZENIU PROJEKTU FIREBASE
+    // ============================================================
+    const firebaseConfig = {
+      apiKey:            "AIzaSyDO673l7T6-rFfIMxAmQLkvn4gb9dBJKf4",
+      authDomain:        "worhshop-site.firebaseapp.com",
+      projectId:         "worhshop-site",
+      storageBucket:     "worhshop-site.firebasestorage.app",
+      messagingSenderId: "1028020934126",
+      appId:             "1:1028020934126:web:d21ad93466afc255af6aff",
+      measurementId:     "G-ZXBJWLNQNV"
+    };
+
+    // Haslo do trybu edycji — zmien na wlasne
+    const EDIT_PASSWORD = 'warsztat2026';
+
+    // ============================================================
+    //  FIREBASE INIT
+    // ============================================================
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const docRef = db.collection('workshops').doc('main');
+
+    let saveTimer      = null;
+    let isEditMode     = false;
+    let currentContent = '';
+
+    // ============================================================
+    //  MARKED.JS CONFIG
+    // ============================================================
+    marked.setOptions({ breaks: true, gfm: true });
+
+    // ============================================================
+    //  REAL-TIME LISTENER
+    // ============================================================
+    docRef.onSnapshot(snap => {
+      const content = (snap.exists && snap.data().content) ? snap.data().content : '';
+      currentContent = content;
+      if (!isEditMode) renderView(content);
+    }, err => {
+      console.error('Firestore error:', err);
+      if (!isEditMode) {
+        document.getElementById('rendered-content').innerHTML =
+          '<div class="error-state">Blad polaczenia z baza danych.<br>Sprawdz konfiguracje Firebase.</div>';
+      }
+    });
+
+    // ============================================================
+    //  VIEW MODE
+    // ============================================================
+    function renderView(mdText) {
+      const container = document.getElementById('rendered-content');
+
+      if (!mdText || !mdText.trim()) {
+        container.innerHTML = '<div class="empty-state">Prowadzacy przygotowuje materialy...<br>Odswiez strone za chwile.</div>';
+        document.getElementById('toc-nav').innerHTML = '<div class="toc-empty">Brak tresci</div>';
+        return;
+      }
+
+      container.innerHTML = marked.parse(mdText);
+      addHeadingIds(container);
+      buildTOC(container);
+    }
+
+    function addHeadingIds(container) {
+      const seen = {};
+      container.querySelectorAll('h1, h2, h3, h4').forEach(h => {
+        let base = slugify(h.textContent);
+        let id   = base;
+        if (seen[base]) { seen[base]++; id = base + '-' + seen[base]; } else { seen[base] = 1; }
+        h.id = id;
+      });
+    }
+
+    function slugify(text) {
+      return text.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '')
+        .replace(/^-+|-+$/g, '') || 'heading';
+    }
+
+    function buildTOC(container) {
+      const headings = container.querySelectorAll('h1, h2, h3');
+      const tocNav   = document.getElementById('toc-nav');
+      if (headings.length === 0) {
+        tocNav.innerHTML = '<div class="toc-empty">Brak nagłówków</div>';
+        return;
+      }
+      let html = '';
+      headings.forEach(h => {
+        const level = parseInt(h.tagName[1]);
+        html += `<a class="toc-h${level}" href="#${h.id}">${escHtml(h.textContent)}</a>`;
+      });
+      tocNav.innerHTML = html;
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ============================================================
+    //  EDIT MODE — AUTH
+    // ============================================================
+    function tryEnterEdit() {
+      document.getElementById('pw-overlay').style.display = 'flex';
+      document.getElementById('pw-error').textContent = '';
+      document.getElementById('pw-input').value = '';
+      setTimeout(() => document.getElementById('pw-input').focus(), 40);
+    }
+
+    function closePwModal() {
+      document.getElementById('pw-overlay').style.display = 'none';
+    }
+
+    function checkPw() {
+      if (document.getElementById('pw-input').value === EDIT_PASSWORD) {
+        closePwModal();
+        enterEdit();
+      } else {
+        document.getElementById('pw-error').textContent = 'Nieprawidlowe haslo.';
+        document.getElementById('pw-input').select();
+      }
+    }
+
+    // ============================================================
+    //  EDIT MODE — ENTER / EXIT
+    // ============================================================
+    function enterEdit() {
+      isEditMode = true;
+      document.getElementById('view-mode').style.display = 'none';
+      document.getElementById('edit-mode').style.display  = 'flex';
+      document.getElementById('edit-fab').style.display   = 'none';
+
+      const editor = document.getElementById('md-editor');
+      editor.value = currentContent;
+      renderEditorPreview();
+      editor.focus();
+    }
+
+    function exitEdit() {
+      // Zapisz jeszcze raz przed wyjsciem jesli sa niezapisane zmiany
+      if (saveTimer) {
+        clearTimeout(saveTimer);
+        saveContent();
+      }
+      isEditMode = false;
+      document.getElementById('edit-mode').style.display  = 'none';
+      document.getElementById('view-mode').style.display  = 'flex';
+      document.getElementById('edit-fab').style.display   = 'flex';
+      renderView(currentContent);
+    }
+
+    // ============================================================
+    //  EDITOR — INPUT + SAVE
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('md-editor').addEventListener('input', onEditorInput);
+    });
+
+    function onEditorInput() {
+      renderEditorPreview();
+      setSaveStatus('Zapisywanie...', 'status-saving');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveContent, 1500);
+    }
+
+    function renderEditorPreview() {
+      const md      = document.getElementById('md-editor').value;
+      const preview = document.getElementById('editor-preview');
+      preview.innerHTML = marked.parse(md);
+    }
+
+    async function saveContent() {
+      saveTimer = null;
+      const content = document.getElementById('md-editor').value;
+      currentContent = content;
+      try {
+        await docRef.set({
+          content,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        setSaveStatus('Zapisano', 'status-ok');
+        setTimeout(() => setSaveStatus('', ''), 2500);
+      } catch (e) {
+        setSaveStatus('Blad zapisu!', 'status-err');
+        console.error(e);
+      }
+    }
+
+    function setSaveStatus(msg, cls) {
+      const el = document.getElementById('save-status');
+      el.textContent  = msg;
+      el.className    = 'save-status ' + (cls || '');
+    }
+
+    // ============================================================
+    //  TOOLBAR HELPERS
+    // ============================================================
+    function getEditor() { return document.getElementById('md-editor'); }
+
+    function insertHeading(level) {
+      const prefix = '#'.repeat(level) + ' ';
+      const ta     = getEditor();
+      const start  = ta.selectionStart;
+      const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+      const lineText  = ta.value.substring(lineStart);
+
+      // Toggle: jesli juz ma ten heading, usun; inaczej dodaj
+      const existing = lineText.match(/^(#{1,6}) /);
+      if (existing) {
+        ta.setRangeText('', lineStart, lineStart + existing[0].length, 'start');
+        if (existing[1] !== '#'.repeat(level)) {
+          ta.setRangeText(prefix, lineStart, lineStart, 'end');
+        }
+      } else {
+        ta.setRangeText(prefix, lineStart, lineStart, 'end');
+      }
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+
+    function insertAtLineStart(prefix) {
+      const ta        = getEditor();
+      const start     = ta.selectionStart;
+      const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+      ta.setRangeText(prefix, lineStart, lineStart, 'end');
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+
+    function wrapSel(before, after) {
+      const ta       = getEditor();
+      const s        = ta.selectionStart;
+      const e        = ta.selectionEnd;
+      const selected = ta.value.substring(s, e) || 'tekst';
+      ta.setRangeText(before + selected + after, s, e, 'select');
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+
+    function insertCodeBlock() {
+      const ta       = getEditor();
+      const s        = ta.selectionStart;
+      const e        = ta.selectionEnd;
+      const selected = ta.value.substring(s, e) || 'kod';
+      const insertion = '\n```\n' + selected + '\n```\n';
+      ta.setRangeText(insertion, s, e, 'end');
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+
+    function insertSeparator() {
+      const ta    = getEditor();
+      const s     = ta.selectionStart;
+      ta.setRangeText('\n\n---\n\n', s, s, 'end');
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+
+    function insertLink() {
+      const url = prompt('URL:');
+      if (!url) return;
+      const ta       = getEditor();
+      const s        = ta.selectionStart;
+      const e        = ta.selectionEnd;
+      const label    = ta.value.substring(s, e) || 'link';
+      ta.setRangeText('[' + label + '](' + url + ')', s, e, 'end');
+      ta.dispatchEvent(new Event('input'));
+      ta.focus();
+    }
+  </script>
+
+  <!-- Tally forms -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <!-- Chatbase widget -->
+  <script>
+    window.chatbaseConfig = { chatbotId: "OuJ2cri2pwybJE45sE3Sc" };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" defer></script>
+
+</body>
+</html>

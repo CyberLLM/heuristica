@@ -178,6 +178,38 @@
       padding: 36px 56px;
     }
 
+    .content-toolbar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .dl-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: var(--font-body);
+      padding: 5px 12px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .dl-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    @media print {
+      .top-nav, .toc-panel, .content-toolbar, .edit-fab { display: none !important; }
+      .content-main { padding: 0; }
+      body { background: #fff; color: #000; }
+      .md-content a { color: #0066cc; }
+      .md-content pre, .md-content code { background: #f5f5f5; border-color: #ddd; color: #000; }
+      .md-content blockquote { background: #f9f9f9; border-color: #999; color: #333; }
+    }
+
     .loading-state, .empty-state {
       color: var(--text-muted);
       font-size: 14px;
@@ -553,6 +585,10 @@
       </nav>
     </aside>
     <main class="content-main">
+      <div class="content-toolbar" id="content-toolbar" style="display:none">
+        <button class="dl-btn" onclick="downloadMd()">Pobierz .md</button>
+        <button class="dl-btn" onclick="downloadPdf()">Pobierz PDF</button>
+      </div>
       <div id="rendered-content" class="md-content">
         <div class="loading-state">Ladowanie materialow...</div>
       </div>
@@ -685,12 +721,14 @@ Jesteś ekspertem od analizy tekstu...
       if (!mdText || !mdText.trim()) {
         container.innerHTML = '<div class="empty-state">Prowadzacy przygotowuje materialy...<br>Odswiez strone za chwile.</div>';
         document.getElementById('toc-nav').innerHTML = '<div class="toc-empty">Brak tresci</div>';
+        document.getElementById('content-toolbar').style.display = 'none';
         return;
       }
 
       container.innerHTML = marked.parse(mdText);
       addHeadingIds(container);
       buildTOC(container);
+      document.getElementById('content-toolbar').style.display = 'flex';
     }
 
     function addHeadingIds(container) {
@@ -899,6 +937,22 @@ Jesteś ekspertem od analizy tekstu...
       ta.dispatchEvent(new Event('input'));
       ta.focus();
     }
+    // ============================================================
+    //  DOWNLOAD
+    // ============================================================
+    function downloadMd() {
+      const blob = new Blob([currentContent], { type: 'text/markdown' });
+      const a    = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = 'workshop.md';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function downloadPdf() {
+      window.print();
+    }
+
   </script>
 
   <!-- Tally forms -->

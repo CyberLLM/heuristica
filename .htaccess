@@ -3,6 +3,10 @@
 
 RewriteEngine On
 
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # Redirect /ai-tools to /ai-tools.html
 RewriteRule ^ai-tools/?$ /ai-tools.html [L,NC]
 

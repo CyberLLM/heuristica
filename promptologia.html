@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/promptologia">
+  <title>Promptologia — Heuristica | Biblioteka promptów AI</title>
+  <meta name="description" content="Biblioteka gotowych promptów AI dla marketerów, PR-owców i praktyków biznesu.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:   #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary:  #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted:   #8B949E;
+      --text-link:    #58A6FF;
+      --accent-green: #2A7A5B;
+      --tag-green:    #3FB950;
+      --placeholder:  #D29922;
+      --font-body:    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--text-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== AUTH SCREEN ===== */
+    #auth-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .auth-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px 48px;
+      width: 360px;
+      text-align: center;
+    }
+
+    .auth-logo-mark {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      margin: 0 auto 20px;
+      font-family: var(--font-mono);
+    }
+
+    .auth-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+    }
+
+    .auth-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-input {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: 10px 14px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .auth-input:focus { border-color: var(--text-link); }
+    .auth-input.error { border-color: #f85149; animation: shake 0.3s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .auth-btn {
+      background: var(--accent-green);
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px;
+      transition: opacity 0.15s;
+    }
+
+    .auth-btn:hover { opacity: 0.85; }
+
+    .auth-error {
+      color: #f85149;
+      font-size: 12px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+
+    /* ===== MAIN APP ===== */
+    #app {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* ===== NAV ===== */
+    .top-nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      flex-shrink: 0;
+    }
+
+    .top-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+
+    .nav-logo:hover { text-decoration: none; }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-green), #1a5a3d);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .nav-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-color);
+      padding-left: 16px;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* ===== LAYOUT ===== */
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sidebar-search {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 12px;
+      padding: 7px 10px 7px 30px;
+      outline: none;
+      transition: border-color 0.15s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238B949E' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 9px center;
+    }
+
+    .search-input:focus { border-color: var(--text-link); }
+    .search-input::placeholder { color: var(--text-muted); }
+
+    /* Add button (edit mode only) */
+    .sidebar-add {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .add-btn {
+      width: 100%;
+      background: rgba(42, 122, 91, 0.15);
+      border: 1px dashed var(--accent-green);
+      border-radius: 6px;
+      color: var(--tag-green);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      padding: 7px;
+      transition: background 0.15s;
+    }
+
+    .add-btn:hover { background: rgba(42, 122, 91, 0.25); }
+
+    .sidebar-count {
+      padding: 8px 12px 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px 0 16px;
+    }
+
+    /* Category group */
+    .cat-group { margin-bottom: 2px; }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      cursor: pointer;
+      user-select: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+
+    .cat-header:hover { color: var(--text-primary); }
+
+    .cat-arrow {
+      width: 10px;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+      font-size: 10px;
+      display: inline-block;
+    }
+
+    .cat-arrow.open { transform: rotate(90deg); }
+    .cat-name { flex: 1; }
+
+    .cat-count {
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-size: 10px;
+      padding: 1px 6px;
+      font-weight: 500;
+    }
+
+    .cat-items.collapsed { display: none; }
+
+    .prompt-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 8px 5px 26px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: color 0.12s, background 0.12s, border-color 0.12s;
+      line-height: 1.5;
+      gap: 4px;
+    }
+
+    .prompt-item-title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prompt-item:hover {
+      color: var(--text-primary);
+      background: rgba(88, 166, 255, 0.05);
+    }
+
+    .prompt-item.active {
+      color: var(--text-link);
+      border-left-color: var(--text-link);
+      background: rgba(88, 166, 255, 0.08);
+    }
+
+    /* Delete button in edit mode */
+    .item-del {
+      display: none;
+      background: none;
+      border: none;
+      color: #f85149;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0 2px;
+      flex-shrink: 0;
+      opacity: 0.5;
+      transition: opacity 0.12s;
+    }
+
+    .item-del:hover { opacity: 1; }
+    .edit-mode-on .item-del { display: block; }
+
+    .no-results {
+      padding: 20px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ===== CONTENT AREA ===== */
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Empty state */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--text-muted);
+      padding: 48px;
+    }
+
+    .empty-icon { opacity: 0.25; }
+    .empty-text { font-size: 14px; color: var(--text-muted); }
+    .empty-hint { font-size: 12px; color: var(--text-muted); opacity: 0.6; }
+
+    /* Prompt view */
+    .prompt-view {
+      padding: 32px 52px 56px;
+      max-width: 880px;
+      width: 100%;
+    }
+
+    .prompt-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .prompt-breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .prompt-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    .prompt-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      align-items: center;
+      padding-top: 2px;
+    }
+
+    .action-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 12px;
+      padding: 6px 14px;
+      transition: color 0.12s, border-color 0.12s, background 0.12s;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+    .action-btn.primary {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .action-btn.primary:hover { background: #358a6a; border-color: #358a6a; }
+
+    .action-btn.toggled {
+      color: var(--text-link);
+      border-color: var(--text-link);
+      background: rgba(88, 166, 255, 0.08);
+    }
+
+    .action-btn.danger {
+      color: #f85149;
+      border-color: rgba(248, 81, 73, 0.3);
+    }
+
+    .action-btn.danger:hover {
+      background: rgba(248, 81, 73, 0.1);
+      border-color: #f85149;
+      color: #f85149;
+    }
+
+    /* Raw view */
+    .prompt-raw {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      padding: 20px 24px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Markdown rendered */
+    .md-content { font-size: 14.5px; line-height: 1.75; }
+    .md-content h1 { font-size: 19px; font-weight: 600; margin: 0 0 16px; }
+    .md-content h2 { font-size: 16px; font-weight: 600; margin: 28px 0 12px; color: var(--text-primary); }
+    .md-content h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .md-content p { margin: 0 0 14px; }
+    .md-content ul, .md-content ol { padding-left: 22px; margin: 0 0 14px; }
+    .md-content li { margin-bottom: 6px; }
+    .md-content strong { color: var(--text-primary); font-weight: 600; }
+    .md-content em { color: var(--text-muted); }
+    .md-content hr { border: none; border-top: 1px solid var(--border-color); margin: 24px 0; }
+    .md-content code {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      padding: 1px 5px;
+    }
+    .md-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin: 0 0 16px;
+      overflow-x: auto;
+      padding: 16px 20px;
+    }
+    .md-content pre code { background: none; border: none; padding: 0; }
+    .md-content blockquote {
+      background: var(--bg-secondary);
+      border-left: 3px solid var(--accent-green);
+      border-radius: 0 6px 6px 0;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+      padding: 10px 18px;
+    }
+
+    /* Placeholder highlight */
+    .placeholder {
+      background: rgba(210, 153, 34, 0.12);
+      border: 1px solid rgba(210, 153, 34, 0.35);
+      border-radius: 4px;
+      color: #e3b341;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 1px 5px;
+    }
+
+    /* ===== EDIT FORM ===== */
+    .edit-form-wrap {
+      padding: 28px 52px 48px;
+      max-width: 880px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .edit-form-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .edit-form-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      flex: 1;
+    }
+
+    .save-status {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .save-status.ok     { color: var(--tag-green); }
+    .save-status.saving { color: var(--text-link); }
+    .save-status.err    { color: #f85149; }
+
+    .edit-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .edit-input, .edit-select {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .edit-input:focus, .edit-select:focus { border-color: var(--text-link); }
+    .edit-select { cursor: pointer; }
+    .edit-select option { background: var(--bg-secondary); }
+
+    .edit-textarea {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      padding: 14px 16px;
+      outline: none;
+      resize: vertical;
+      min-height: 400px;
+      transition: border-color 0.15s;
+    }
+
+    .edit-textarea:focus { border-color: var(--text-link); }
+    .edit-textarea::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+    .edit-empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+      padding: 48px;
+      font-size: 14px;
+    }
+
+    /* ===== FAB ===== */
+    .edit-fab {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      z-index: 50;
+    }
+
+    .edit-fab:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+      border-color: var(--text-muted);
+    }
+
+    .edit-fab.active {
+      background: rgba(42, 122, 91, 0.2);
+      border-color: var(--accent-green);
+      color: var(--tag-green);
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 28px 32px;
+      width: 320px;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .modal-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+      margin-bottom: 8px;
+      transition: border-color 0.15s;
+    }
+
+    .modal-input:focus { border-color: var(--text-link); }
+
+    .modal-error {
+      font-size: 12px;
+      color: #f85149;
+      min-height: 18px;
+      margin-bottom: 16px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .modal-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 7px 16px;
+      transition: background 0.15s;
+    }
+
+    .modal-btn:hover { background: var(--border-color); }
+
+    .modal-btn.primary {
+      background: var(--text-link);
+      border-color: var(--text-link);
+      color: #fff;
+    }
+
+    .modal-btn.primary:hover { opacity: 0.85; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-color); }
+
+    @media print {
+      #auth-screen, .top-nav, .sidebar, .edit-fab, .modal-overlay,
+      .prompt-actions { display: none !important; }
+      body { background: #fff; color: #000; }
+      .content-area { overflow: visible; }
+      .prompt-view { padding: 0; max-width: 100%; }
+      .prompt-header { border-bottom: 1px solid #ccc; margin-bottom: 20px; }
+      .prompt-title { font-size: 20px; color: #000; }
+      .prompt-breadcrumb { color: #666; }
+      .md-content { font-size: 13px; color: #000; }
+      .md-content h1, .md-content h2, .md-content h3 { color: #000; }
+      .md-content code { background: #f5f5f5; border: 1px solid #ddd; color: #000; }
+      .md-content pre { background: #f5f5f5; border: 1px solid #ddd; }
+      .md-content blockquote { background: #f9f9f9; border-left: 3px solid #aaa; color: #444; }
+      .md-content hr { border-top: 1px solid #ccc; }
+      .placeholder { background: #fff8e1; border: 1px solid #f0c040; color: #7a5a00; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo-mark">H</div>
+    <div class="auth-title">Promptologia</div>
+    <div class="auth-subtitle">Biblioteka promptów AI — dostęp chroniony</div>
+    <form class="auth-form" id="auth-form">
+      <input type="password" class="auth-input" id="auth-input"
+             placeholder="Hasło dostępu" autocomplete="current-password">
+      <button type="submit" class="auth-btn">Wejdź</button>
+    </form>
+    <div class="auth-error" id="auth-error"></div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="logo-mark">H</div>
+        <span>Heuristica</span>
+        <span class="nav-title">Promptologia</span>
+      </a>
+      <div class="nav-links">
+        <button class="action-btn" onclick="downloadAllMd()">Pobierz wszystko .md</button>
+        <button class="action-btn" onclick="downloadAllPdf()">Pobierz wszystko PDF</button>
+        <a href="/ai-tools">Narzędzia AI</a>
+        <a href="/prompting">Prompting</a>
+        <a href="/sandbox">Sandbox</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-search">
+        <input type="text" class="search-input" id="search-input"
+               placeholder="Szukaj promptów...">
+      </div>
+      <div class="sidebar-add" id="sidebar-add" style="display:none">
+        <button class="add-btn" onclick="addNewPrompt()">+ Nowy prompt</button>
+      </div>
+      <div class="sidebar-count" id="sidebar-count"></div>
+      <div class="sidebar-nav" id="sidebar-nav"></div>
+    </aside>
+
+    <!-- ===== CONTENT ===== -->
+    <main class="content-area" id="content-area">
+
+      <!-- VIEW MODE -->
+      <div id="view-content" style="display:flex;flex-direction:column;flex:1">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div class="empty-text">Wybierz prompt z listy po lewej stronie</div>
+          <div class="empty-hint">Lub wyszukaj po słowie kluczowym</div>
+        </div>
+
+        <div class="prompt-view" id="prompt-view" style="display:none">
+          <div class="prompt-header">
+            <div class="prompt-meta">
+              <div class="prompt-breadcrumb" id="prompt-breadcrumb"></div>
+              <div class="prompt-title" id="prompt-title-el"></div>
+            </div>
+            <div class="prompt-actions">
+              <button class="action-btn" id="edit-current-btn"
+                      onclick="editCurrentInForm()" style="display:none">Edytuj</button>
+              <button class="action-btn" onclick="downloadMd()">Pobierz .md</button>
+              <button class="action-btn" onclick="downloadPdf()">Pobierz PDF</button>
+              <button class="action-btn" id="toggle-raw-btn" onclick="toggleRaw()">Surowy tekst</button>
+              <button class="action-btn primary" id="copy-btn" onclick="copyPrompt()">Kopiuj</button>
+            </div>
+          </div>
+          <div id="prompt-content"></div>
+        </div>
+      </div>
+
+      <!-- EDIT MODE -->
+      <div id="edit-content" style="display:none;flex-direction:column;flex:1">
+        <div class="edit-empty-state" id="edit-empty-state">
+          Wybierz prompt do edycji lub dodaj nowy
+        </div>
+
+        <div class="edit-form-wrap" id="edit-form-wrap" style="display:none">
+          <div class="edit-form-header">
+            <div class="edit-form-title" id="edit-form-label">Edycja promptu</div>
+            <span class="save-status" id="save-status"></span>
+            <button class="action-btn danger" onclick="deleteCurrentPrompt()">Usuń</button>
+          </div>
+
+          <div>
+            <div class="edit-label">Tytuł</div>
+            <input type="text" class="edit-input" id="edit-title"
+                   placeholder="Tytuł promptu">
+          </div>
+
+          <div>
+            <div class="edit-label">Kategoria</div>
+            <select class="edit-select" id="edit-category"></select>
+          </div>
+
+          <div>
+            <div class="edit-label">Treść promptu (Markdown)</div>
+            <textarea class="edit-textarea" id="edit-textarea"
+                      placeholder="# Tytuł promptu&#10;&#10;Treść..."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ===== FAB ===== -->
+<button class="edit-fab" id="edit-fab" onclick="toggleEditMode()" title="Tryb edycji">&#9998;</button>
+
+<!-- ===== EDIT PASSWORD MODAL ===== -->
+<div class="modal-overlay" id="edit-pw-overlay" style="display:none"
+     onclick="if(event.target===this)closeEditModal()">
+  <div class="modal-box">
+    <div class="modal-title">Tryb edycji</div>
+    <input type="password" class="modal-input" id="edit-pw-input"
+           placeholder="Hasło edytora..."
+           onkeydown="if(event.key==='Enter')checkEditPw()">
+    <div class="modal-error" id="edit-pw-error"></div>
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="closeEditModal()">Anuluj</button>
+      <button class="modal-btn primary" onclick="checkEditPw()">Wejdź</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<!-- marked.js -->
+<script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+
+const AUTH_KEY   = 'plg_auth';
+const AUTH_PASS  = 'heuristica-plg';
+const EDIT_PASS  = 'plg';
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyDO673l7T6-rFfIMxAmQLkvn4gb9dBJKf4",
+  authDomain:        "worhshop-site.firebaseapp.com",
+  projectId:         "worhshop-site",
+  storageBucket:     "worhshop-site.firebasestorage.app",
+  messagingSenderId: "1028020934126",
+  appId:             "1:1028020934126:web:d21ad93466afc255af6aff",
+};
+
+// ============================================================
+// DEFAULT DATA (used if Firestore is empty)
+// ============================================================
+
+const DEFAULT_PROMPTS = [
+  {
+    id: 'synteza-dokumentow',
+    title: 'Synteza dokumentów',
+    category: 'analiza',
+    prompt: `# Synteza dokumentów – np. obszernych raportów
+
+Przygotuj krótką i zwięzłą syntezę załączonego dokumentu, skupiając się na:
+
+- Najważniejszych informacjach i wnioskach
+- Kluczowych danych liczbowych
+- Istotnych rekomendacjach
+
+Używaj prostych, jasnych zdań. Dla przejrzystości przedstaw najważniejsze elementy w formie listy punktowanej.
+
+Zanim rozpoczniesz syntezę, przygotuj krótką checklistę (3–7 punktów) podzadań na podstawie analizy dokumentu (np. identyfikacja kluczowych sekcji, wyodrębnienie danych liczbowych, sformułowanie rekomendacji).
+
+Po zakończeniu sprawdź, czy lista obejmuje wszystkie wymagane elementy oraz czy język jest jasny i zwięzły.
+
+---
+
+[WSTAW TUTAJ TREŚĆ DOKUMENTU DO SYNTEZY]`,
+  },
+  {
+    id: 'analiza-trendow-branza',
+    title: 'Analiza trendów w branży',
+    category: 'strategia',
+    prompt: `# Analiza trendów w [BRANŻY]
+
+Przygotuj raport prognozujący kluczowe trendy w [BRANŻY] w Polsce i Europie w perspektywie najbliższych 3–5 lat.
+
+Uwzględnij:
+
+- zmiany regulacyjne i polityczne (UE, krajowe)
+- rozwój technologii wspierających transformację sektora
+- zmiany zachowań i oczekiwań klientów indywidualnych oraz biznesowych
+- rolę ESG, zrównoważonego rozwoju i odpowiedzialności społecznej
+- wpływ digitalizacji, danych i automatyzacji
+- szanse i zagrożenia dla dużych firm działających w modelu [TWOJA FIRMA / MODEL BIZNESOWY]
+
+Raport przedstaw w formie punktów z krótkim komentarzem do każdego, zakończonych rekomendacjami komunikacyjnymi dla zespołu PR i komunikacji korporacyjnej.`,
+  },
+  {
+    id: 'analiza-trendow-pr-esg',
+    title: 'Analiza trendów w komunikacji i ESG',
+    category: 'strategia',
+    prompt: `# Analiza trendów w komunikacji korporacyjnej, PR i ESG
+
+Przygotuj raport prognozujący kluczowe trendy w komunikacji korporacyjnej, PR oraz komunikacji ESG w Polsce i Europie w perspektywie najbliższych 3–5 lat.
+
+Uwzględnij:
+
+- zmiany w relacjach z mediami i rolę nowych kanałów komunikacji
+- rosnące znaczenie ESG, transparentności i wiarygodności danych
+- oczekiwania interesariuszy: klientów, regulatorów, społeczności lokalnych i inwestorów
+- wpływ kryzysów (energetycznych, klimatycznych, regulacyjnych) na narracje firm
+- rolę AI i automatyzacji w pracy zespołów PR i komunikacji
+- ryzyka reputacyjne i dezinformację
+
+Raport przedstaw w formie punktów z krótkim komentarzem do każdego, zakończonych rekomendacjami dla zespołu PR i komunikacji korporacyjnej [TWOJA FIRMA].`,
+  },
+  {
+    id: 'odpowiedzi-korespondencja',
+    title: 'Odpowiedzi na korespondencję',
+    category: 'komunikacja',
+    prompt: `# Odpowiedzi na korespondencję
+
+Twoim zadaniem jest wygenerowanie profesjonalnej, spokojnej i zorientowanej na rozwiązanie odpowiedzi na wiadomość skierowaną do [NAZWA FIRMY].
+
+Stosuj ton:
+
+- uprzejmy i empatyczny
+- rzeczowy i precyzyjny
+- adekwatny do roli [NAZWA FIRMY] jako [OPIS PODMIOTU, np. podmiotu infrastrukturalnego i regulowanego]
+
+Uwzględniając realia [SEKTORA / BRANŻY].
+
+**Struktura odpowiedzi:**
+
+- powitanie i potwierdzenie otrzymania zgłoszenia
+- krótkie, rzeczowe odniesienie się do zgłoszonego problemu
+- wyjaśnienie – co jest możliwe na tym etapie, a co wymaga dalszych działań
+- propozycja kolejnych kroków / harmonogram / forma kontaktu
+- zakończenie z zapewnieniem wsparcia i otwartości na dalszy kontakt
+
+---
+
+**Przykładowe typy wiadomości do obsługi:**
+
+*Klient biznesowy:*
+Zgłoszenie technicznego problemu wpływającego na działalność firmy. Prośba o pilne działanie i określenie terminu.
+
+*Instytucja publiczna:*
+Pytanie o harmonogram planowanych prac wpływających na funkcjonowanie obiektów użyteczności publicznej. Potrzeba koordynacji i wyprzedzającego informowania.
+
+*Klient indywidualny:*
+Zastrzeżenia do rozliczenia, faktury lub wysokości opłat. Oczekuje rzeczowego wyjaśnienia i weryfikacji.
+
+*Partner / wykonawca:*
+Napotkanie nieoczekiwanego problemu w trakcie realizacji prac. Prośba o pilny kontakt i ustalenie trybu postępowania.
+
+---
+
+[WSTAW TUTAJ TREŚĆ WIADOMOŚCI, NA KTÓRĄ PRZYGOTOWUJESZ ODPOWIEDŹ]`,
+  },
+  // ── Analiza & Research (cd.) ────────────────────────────
+  {
+    id: 'tlumaczenie-dokumentow',
+    title: 'Tłumaczenie dokumentów',
+    category: 'analiza',
+    prompt: `# Tłumaczenie dokumentów (np. umów, raportów)
+
+Przetłumacz załączony dokument z języka [JĘZYK ŹRÓDŁOWY] na [JĘZYK DOCELOWY].
+
+- Zachowaj formalny styl i oryginalną strukturę dokumentu.
+- Zapewnij precyzyjne użycie terminologii [DZIEDZINA, np. prawnej / technicznej / finansowej], stosując odpowiedniki i sformułowania standardowe dla dokumentów biznesowych w języku docelowym.
+- W przypadku instytucji, aktów prawnych lub przepisów specyficznych dla kraju źródłowego, przetłumacz nazwę i podaj jej oryginał w nawiasie.
+- Korzystaj z typowych wyrażeń i formuł spotykanych w dokumentach tego typu w języku docelowym.
+
+Tłumaczenie powinno dokładnie oddawać znaczenie merytoryczne oraz zachowywać specjalistyczną terminologię.
+
+---
+
+[WSTAW TUTAJ TEKST DOKUMENTU DO PRZETŁUMACZENIA]`,
+  },
+  {
+    id: 'analityk-branzowy',
+    title: 'Analiza rynku branżowego',
+    category: 'analiza',
+    prompt: `# Analiza rynku [BRANŻY]
+
+Jako analityk badający branżę przygotuj szczegółową analizę zgodnie z poniższymi założeniami.
+
+**Branża:** [BRANŻA]
+**Rynek:** [KRAJ / REGION]
+**Okres:** [np. ostatnie 3 lata]
+
+Zwróć: raport z podsumowaniem najważniejszych wniosków.
+
+---
+
+## Analiza dostępnych danych rynkowych
+
+- analizuj dostępne badania rynkowe
+- analizuj dostępne dane statystyczne
+- zbierz dostępne źródła branżowe
+- podawaj źródła danych wraz z linkami
+
+## Identyfikacja kluczowych czynników
+
+- kluczowi gracze rynkowi
+- główne trendy
+- czynniki ryzyka
+- potencjał i możliwości
+
+---
+
+Treść raportu rozpocznij od: "Analiza rynku..."`,
+  },
+
+  // ── Badania & Insights ──────────────────────────────────
+  {
+    id: 'segmentacja-rynku',
+    title: 'Segmentacja rynku',
+    category: 'badania',
+    prompt: `# Segmentacja rynku
+
+W oparciu o poniższe kryteria wygeneruj segmentację rynku dla:
+
+[OPIS PRODUKTU / USŁUGI / MARKI / MIEJSCA, np. aplikacji mobilnej, sieci restauracji, centrum handlowego]
+
+Uwzględnij następujące parametry:
+
+1. **Demograficzne** — wiek, płeć, dochód, wykształcenie, wielkość gospodarstwa domowego.
+2. **Psychograficzne** — styl życia, osobowość, poglądy, postawy, motywacja, poszukiwane korzyści.
+3. **Behawioralne** — transakcje/zakupy, konsumpcja/użycie, korzystanie z mediów i nowych technologii.
+4. **Geograficzne** — lokalizacja, gęstość zaludnienia.
+
+Każdemu segmentowi nadaj charakterystyczną nazwę odzwierciedlającą najważniejsze cechy (maksymalnie 2 słowa, np. "Tradycyjni działkowcy"). Wygeneruj opis każdego segmentu uwzględniając powyższe kryteria.
+
+Na zakończenie podaj podsumowanie w przejrzystej tabeli.`,
+  },
+  {
+    id: 'ocena-atrakcyjnosci-segmentow',
+    title: 'Ocena atrakcyjności segmentów',
+    category: 'badania',
+    prompt: `# Ocena atrakcyjności segmentów rynku
+
+Na podstawie poniższych wag i czynników atrakcyjności segmentów dokonaj oceny atrakcyjności dla każdego z zidentyfikowanych segmentów.
+
+Przyznaj każdemu segmentowi ocenę w skali od 0 do 10 dla każdego czynnika, a następnie oblicz sumę ważoną ocen.
+
+**Czynniki atrakcyjności segmentów:**
+
+1. Wielkość segmentu: [WAGA, np. 30]
+2. Wzrost segmentu: [WAGA, np. 15]
+3. Spodziewana rentowność: [WAGA, np. 25]
+4. [DODAJ KOLEJNE CZYNNIKI I WAGI — suma wag powinna wynosić 100]
+
+Uwzględnij spostrzeżenia dotyczące atrakcyjności segmentów i ewentualne rekomendacje dotyczące działań marketingowych.
+
+---
+
+[WSTAW TUTAJ WYNIKI SEGMENTACJI LUB OPISY SEGMENTÓW]`,
+  },
+  {
+    id: 'fgi-symulacja',
+    title: 'Symulacja badania fokusowego (FGI)',
+    category: 'badania',
+    prompt: `# Symulacja badania fokusowego (FGI)
+
+**Grupa docelowa:**
+[Opis grupy, np. osoby w wieku 30–55 lat, mieszkające w miastach średniej i dużej wielkości, zainteresowane jakością przestrzeni publicznej i zrównoważonym rozwojem]
+
+**Cel badania:**
+[Opis celu, np. Zrozumienie postrzegania projektów [PRODUKT/MARKA/MIEJSCE] i oczekiwań wobec [KATEGORIA]]
+
+---
+
+Zasymuluj dyskusję [6] respondentów w trakcie wywiadu grupowego (focus group interview).
+
+Respondenci są przedstawicielami opisanej grupy docelowej. Utożsamiając się maksymalnie empatycznie z jej przedstawicielami, używaj ich sposobu myślenia, odczuwania i wyrażaj w ich języku opinie, obserwacje, spostrzeżenia, uwagi i sugestie.
+
+Każdej osobie nadaj imię. Nie powtarzaj elementów z opisu zadania. Przejdź od razu do symulowanej dyskusji.
+
+**Pytanie otwierające moderatora:**
+[WSTAW PYTANIE OTWIERAJĄCE, np. "Co sprawia, że dane miejsce / produkt / usługa stają się dla Was czymś, do czego chce się wracać?"]`,
+  },
+  {
+    id: 'consumer-insights',
+    title: 'Generator Consumer Insights',
+    category: 'badania',
+    prompt: `# Generator Consumer Insights
+
+Jako specjalista ds. marketingu stwórz listę tzw. "consumer insights".
+
+**Definicja:** Consumer insights to stwierdzenia wyrażające:
+- ukryte przekonania, uprzedzenia, postawy, stereotypy myślenia
+- głębokie motywacje i nieświadome potrzeby kierujące zachowaniami konsumentów
+- wewnętrzne konflikty potrzeb i silne emocje w codziennych sytuacjach
+- kompleksy, wstyd, głęboko skrywane pragnienia, ukryte fantazje
+- lęki, obawy, frustracje, złość
+
+Cechy consumer insights: często niewyrażane przez konsumentów, niekoniecznie uświadamiane na co dzień, wywołują efekt "Aha!" w komunikacji marketingowej.
+
+---
+
+**Parametry:**
+
+Grupa docelowa:
+[OPIS GRUPY — płeć, wiek, wykształcenie, miejsce zamieszkania, dochody, status, styl życia]
+
+Branża / kontekst:
+[BRANŻA lub KATEGORIA PRODUKTU / USŁUGI]
+
+Kategorie potrzeb:
+[A. KATEGORIA 1, B. KATEGORIA 2, C. KATEGORIA 3, ...]
+
+---
+
+**Zadanie:**
+
+1. Stwórz listę consumer insights dla podanej grupy docelowej i branży.
+2. Użyj języka potocznego, metafor i analogii.
+3. Pogrupuj insights według kategorii potrzeb.
+4. Podaj minimum 3 przykłady dla każdej kategorii.
+
+**Format wyniku:**
+| Kategoria | Consumer insight |`,
+  },
+  {
+    id: 'analiza-semiotyczna',
+    title: 'Analiza semiotyczna (kody kulturowe)',
+    category: 'badania',
+    prompt: `# Analiza semiotyczna — kody kulturowe
+
+Wciel się w rolę doświadczonego semiotyka badającego kulturę.
+
+Na podstawie opisów reklam, tekstów kultury popularnej, popularnych programów telewizyjnych, filmów i seriali, treści książek i komiksów oraz innych wytworów kultury popularnej dokonaj analizy semiotycznej na potrzeby [KOMUNIKACJI MARKETINGOWEJ / STRATEGII MARKI].
+
+**Analizowane pojęcie:** [SŁOWO / CONCEPT, np. "promocja", "luksus", "zdrowie", "bezpieczeństwo"]
+
+---
+
+**Zadanie 1 — Analiza kodów kulturowych**
+
+Opracuj analizę kodów kulturowych. Znajdź min. [20] kodów.
+
+Wynik podaj w formie tabeli:
+| Kody rezydualne | Kody dominujące | Kody emergentne |
+
+**Zadanie 2 — Kwadrat Greimasa**
+
+Skonstruuj kwadrat Greimasa dla analizowanego pojęcia i podaj wymiary dla opozycji i zaprzeczeń (tabela).
+
+---
+
+Przejdź od razu do generowania odpowiedzi bez powtarzania elementów instrukcji.`,
+  },
+
+  // ── Copywriting & Treści ────────────────────────────────
+  {
+    id: 'generator-nazw',
+    title: 'Generator i ewaluator nazw',
+    category: 'copywriting',
+    prompt: `# Generator i ewaluator nazw (produktu / marki / projektu)
+
+Jako doświadczony copywriter wykonaj następujące zadanie sekwencyjnie:
+
+**Krok 1.** Wymyśl 10 unikalnych nazw (nowe słowa na zasadzie: Amazon, Lenovo, Zalando, Yahoo, Samsonite itp.) dla:
+[OPIS PRODUKTU / MARKI / PROJEKTU, np. innowacyjna aplikacja do zarządzania finansami osobistymi]
+
+**Krok 2.** Oceń każdą nazwę w kategoriach:
+- A. Kreatywność / oryginalność [waga 60]
+- B. Zapamiętywalność [waga 20]
+- C. Atrakcyjność brzmieniowa [waga 20]
+
+Wynik podaj w formie tabeli:
+| Nazwa | Kreatywność | Zapamiętywalność | Atrakcyjność brzmieniowa | Ocena łączna |
+
+**Krok 3.** Trzy najwyżej ocenione propozycje z Kroku 2 rozwijaj poprzez wariacje na ich temat i luźne skojarzenia. Każdą z tych propozycji rozwiń w trzy kolejne.
+
+**Krok 4.** Dziewięć propozycji z Kroku 3 oceń tą samą metodą co w Kroku 2 (tabela).
+
+**Krok 5.** Finalnie podaj wyłącznie 3 propozycje, które uzyskały najwyższe wyniki.
+
+Wykonaj całe zadanie krok po kroku.`,
+  },
+  {
+    id: 'generator-nazw-eventow',
+    title: 'Generator nazw eventów i kampanii',
+    category: 'copywriting',
+    prompt: `# Generator nazw eventów i kampanii
+
+Jako doświadczony copywriter stwórz [10] kreatywnych nazw dla:
+
+[OPIS EVENTU / KAMPANII, np. zimowego festiwalu zakupów / konferencji branżowej / kampanii lojalnościowej / akcji CSR]
+
+Nazwy powinny:
+- zawierać grę słów lub skojarzenia związane z [KONTEKSTEM / TEMATEM]
+- być łatwe do zapamiętania i atrakcyjne dla grupy docelowej: [OPIS GRUPY DOCELOWEJ]
+- nadawać się do użycia w mediach społecznościowych i materiałach promocyjnych
+
+Do każdej nazwy dodaj:
+- krótkie uzasadnienie, dlaczego mogłaby się spodobać odbiorcom
+- propozycję hashtagu`,
+  },
+  {
+    id: 'formula-pozycjonujaca',
+    title: 'Formuła pozycjonująca marki',
+    category: 'copywriting',
+    prompt: `# Formuła pozycjonująca marki
+
+Napisz pełną formułę pozycjonującą dla marki:
+[NAZWA MARKI / OPIS PRODUKTU LUB USŁUGI]
+
+---
+
+## Konkurencja / źródło wzrostu
+Kto jest bezpośrednią konkurencją? Skąd pochodzi wzrost — jakie marki lub kategorie "odbiera" klientów?
+
+## Grupa docelowa
+Opis demograficzny i psychograficzny: wiek, styl życia, wartości, potrzeby.
+
+## Consumer Insight
+Głęboka prawda o konsumencie — co czuje, czego naprawdę szuka, jakie ma wewnętrzne napięcie?
+
+## Korzyści racjonalne i emocjonalne
+Konkretne funkcjonalne i emocjonalne powody, dla których konsument wybiera markę.
+
+## Esencja marki
+Jedno hasło / słowo kluczowe — serce marki.
+
+## Konkurencyjny wyróżnik
+Co sprawia, że ta marka jest unikalna na tle konkurencji?
+
+## Reason to believe / dowody
+Co uwiarygodnia obietnicę marki? Certyfikaty, tradycja, dane, opinie?
+
+## Wartości marki
+3–5 kluczowych wartości.
+
+## Osobowość marki / tonalność
+Jak marka "mówi"? Jaka jest jej osobowość i charakter?`,
+  },
+
+  // ── Kreatywne myślenie ──────────────────────────────────
+  {
+    id: 'chain-of-thought',
+    title: 'Chain-of-Thought — łańcuch myśli',
+    category: 'kreatywne',
+    prompt: `# Chain-of-Thought — łańcuch myśli
+
+Rozwiąż podany problem krok po kroku, stosując metodę łańcucha myśli (Chain-of-Thought).
+
+**Problem do rozwiązania:**
+[OPISZ PROBLEM LUB WYZWANIE]
+
+**Dodatkowe czynniki do uwzględnienia:**
+[OPCJONALNIE — np. ograniczenia budżetowe, kontekst rynkowy, ograniczenia techniczne]
+
+---
+
+**Krok 1.** Przygotuj plan myślenia i wnioskowania będący podstawą rozwiązania.
+
+**Krok 2.** Zaproponuj trzy różne rozwiązania problemu, biorąc pod uwagę podane czynniki.
+
+**Krok 3.** Oceń potencjał każdego rozwiązania — zalety i wady, wymagany wysiłek wdrożeniowy, stopień trudności, potencjalne wyzwania i oczekiwane wyniki. Przypisz prawdopodobieństwo sukcesu do każdej opcji.
+
+**Krok 4.** Dla każdego rozwiązania zastosuj pogłębiony proces myślowy — scenariusze, strategie wdrożenia, niezbędne zasoby, sposoby pokonywania przeszkód, potencjalne negatywne konsekwencje.
+
+**Krok 5.** Uszereguj rozwiązania od najbardziej obiecujących do najmniej. Podaj uzasadnienie i końcowe wnioski.`,
+  },
+  {
+    id: 'plan-and-solve',
+    title: 'Plan-and-Solve — rozwiązywanie problemów',
+    category: 'kreatywne',
+    prompt: `# Plan-and-Solve — rozwiązywanie problemów
+
+Rozwiąż podany problem stosując metodę Plan-and-Solve.
+
+**Problem:**
+[OPISZ PROBLEM LUB WYZWANIE]
+
+---
+
+**Krok 1 — Zrozumienie problemu**
+Opisz, w jaki sposób rozumiesz istotę problemu.
+
+**Krok 2 — Opracowanie planu**
+Opracuj plan, który pomoże rozwiązać problem. Podziel go na konkretne etapy.
+
+**Krok 3 — Realizacja planu**
+Zrealizuj plan krok po kroku, pokazując tok rozumowania.
+
+**Krok 4 — Odpowiedź końcowa**
+Podaj finalne rozwiązanie i podsumowanie.`,
+  },
+  {
+    id: 'self-refine',
+    title: 'Self-Refine — iteracyjne doskonalenie',
+    category: 'kreatywne',
+    prompt: `# Self-Refine — iteracyjne doskonalenie odpowiedzi
+
+Rozwiąż podany problem, a następnie samodzielnie oceń i udoskonal swoją odpowiedź.
+
+**Problem / zadanie:**
+[OPISZ PROBLEM LUB ZADANIE]
+
+---
+
+**Krok 1 — Odpowiedź początkowa**
+Wygeneruj pierwszą wersję rozwiązania.
+
+**Krok 2 — Ocena odpowiedzi**
+Zaproponuj adekwatne kryteria oceny wygenerowanej odpowiedzi, aby zidentyfikować błędy i obszary do poprawy. Oceń swoją odpowiedź według tych kryteriów.
+
+**Krok 3 — Poprawa**
+Popraw odpowiedź na podstawie zidentyfikowanych błędów i uwag.
+
+**Krok 4 — Odpowiedź końcowa**
+Podaj ulepszoną, finalną wersję rozwiązania.`,
+  },
+  {
+    id: 'panel-trzech-ekspertow',
+    title: 'Panel trzech ekspertów',
+    category: 'kreatywne',
+    prompt: `# Panel trzech ekspertów
+
+Działaj jako system konsultacyjny składający się z 3 ekspertów w dziedzinie [DZIEDZINA, np. kreatywnego myślenia i problem solvingu / strategii biznesowej / innowacji].
+
+**Problem do rozwiązania:**
+[OPISZ PROBLEM LUB WYZWANIE]
+
+---
+
+Każdy ekspert:
+1. Przyjmuje ten sam problem
+2. Proponuje niezależne rozwiązanie ze swojej perspektywy
+
+Rozwiązania zostaną przeanalizowane i ważone według zdefiniowanych kryteriów (zaproponuj 3 kryteria), tworząc sumę ważoną, która daje najlepsze dostępne rozwiązanie.
+
+Wcielisz się w rolę Moderatora, który na podstawie analizy pierwotnych rozwiązań oceni, które propozycje są włączane do ostatecznej rekomendacji.
+
+Na koniec podaj finalną propozycję.`,
+  },
+  {
+    id: 'tree-of-thoughts',
+    title: 'Tree of Thoughts — drzewo myśli',
+    category: 'kreatywne',
+    prompt: `# Tree of Thoughts — drzewo myśli
+
+Wyobraź sobie, że [3] różnych ekspertów rozwiązuje problem.
+
+**Eksperci:** [np. Strateg, Prawnik, Copywriter — lub zaproponuj własnych adekwatnych do problemu]
+
+**Problem:**
+[OPISZ PROBLEM LUB WYZWANIE]
+
+---
+
+Proces przyjmuje strukturę "drzewa myśli":
+- każdy ekspert podaje na początku jeden krok swojego rozumowania, następnie dzieli się nim z grupą
+- pomysły są stopniowo rozwijane w kolejnych rundach
+- jeśli którykolwiek z ekspertów zorientuje się, że jest w błędzie, opuszcza grupę
+
+Zastosuj te zasady i podaj finalne, zintegrowane rozwiązanie.`,
+  },
+  {
+    id: 'metoda-react',
+    title: 'Metoda ReAct (Reasoning + Acting)',
+    category: 'kreatywne',
+    prompt: `# Metoda ReAct — Reasoning + Acting
+
+Rozwiąż podany problem stosując metodę ReAct — naprzemienne rozumowanie (Myśl) i działanie (Akcja + Obserwacja).
+
+**Problem:**
+[OPISZ PROBLEM DO ZBADANIA LUB ROZWIĄZANIA]
+
+---
+
+Zastosuj następujący schemat iteracyjny:
+
+**Myśl 1:** Co musisz zrozumieć jako pierwszy krok?
+**Akcja 1:** Wyszukaj / Przeanalizuj [TEMAT]
+**Obserwacja 1:** Co wynika z podjętej akcji?
+
+**Myśl 2:** Co wynika z obserwacji? Jaki jest kolejny krok?
+**Akcja 2:** Wyszukaj / Przeanalizuj [KOLEJNY TEMAT]
+**Obserwacja 2:** Co wynika?
+
+...kontynuuj aż do uzyskania wystarczających danych...
+
+**Akcja finalna — Rekomendacja:** Podaj końcowe wnioski i zalecane działania.`,
+  },
+  {
+    id: 'metoda-ahp',
+    title: 'AHP — wielokryterialne podejmowanie decyzji',
+    category: 'kreatywne',
+    prompt: `# AHP — wielokryterialne podejmowanie decyzji
+
+Zastosuj Analytical Hierarchy Process (AHP) Thomasa Saaty'ego do podjęcia decyzji w sprawie:
+[OPIS DECYZJI DO PODJĘCIA, np. wybór dostawcy / wybór strategii marketingowej / wybór lokalizacji / wybór technologii]
+
+**Alternatywy do oceny:**
+[WYMIEŃ OPCJE DO PORÓWNANIA lub poproś AI o zaproponowanie odpowiednich alternatyw]
+
+---
+
+Zastosuj strukturę: **cel → kryteria [z wagami] → alternatywy**
+
+Wyniki podawaj w formie tabelarycznej.
+
+Na zakończenie podaj:
+- ranking alternatyw według sumy ważonej
+- rekomendację wraz z uzasadnieniem`,
+  },
+];
+
+const CATEGORIES = [
+  { id: 'analiza',     name: 'Analiza & Research' },
+  { id: 'strategia',   name: 'Strategia & Trendy' },
+  { id: 'komunikacja', name: 'Komunikacja & PR' },
+  { id: 'copywriting', name: 'Copywriting & Treści' },
+  { id: 'esg',         name: 'ESG & Zrównoważony rozwój' },
+  { id: 'ai',          name: 'AI & Automatyzacja' },
+  { id: 'badania',     name: 'Badania & Insights' },
+  { id: 'kreatywne',   name: 'Kreatywne myślenie' },
+  { id: 'negocjacje',  name: 'Negocjacje & Sprzedaż' },
+];
+
+// ============================================================
+// STATE
+// ============================================================
+
+let PROMPTS         = [];
+let currentId       = null;
+let isRaw           = false;
+let isEditMode      = false;
+let editAuthDone    = false;
+let collapsedCats   = new Set();
+let saveTimer       = null;
+let editingId       = null;   // prompt being edited in form
+
+// ============================================================
+// FIREBASE
+// ============================================================
+
+firebase.initializeApp(firebaseConfig);
+const db     = firebase.firestore();
+const docRef = db.collection('workshops').doc('promptologia');
+
+function loadFromFirestore() {
+  docRef.get().then(snap => {
+    let data = (snap.exists && snap.data().prompts) ? snap.data().prompts : [];
+    // Auto-seed: add any DEFAULT_PROMPTS not yet in Firestore
+    let added = false;
+    for (const dp of DEFAULT_PROMPTS) {
+      if (!data.find(p => p.id === dp.id)) {
+        data.push(JSON.parse(JSON.stringify(dp)));
+        added = true;
+      }
+    }
+    PROMPTS = data;
+    buildSidebar();
+    handleHash();
+    if (added) saveToFirestore();
+  }).catch(() => {
+    PROMPTS = JSON.parse(JSON.stringify(DEFAULT_PROMPTS));
+    buildSidebar();
+    handleHash();
+  });
+}
+
+function saveToFirestore() {
+  setSaveStatus('saving', 'Zapisuję...');
+  docRef.set({ prompts: PROMPTS, updatedAt: new Date().toISOString() })
+    .then(() => setSaveStatus('ok', 'Zapisano'))
+    .catch(() => setSaveStatus('err', 'Błąd zapisu'));
+}
+
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  setSaveStatus('saving', 'Zapisuję...');
+  saveTimer = setTimeout(saveToFirestore, 1200);
+}
+
+function setSaveStatus(cls, text) {
+  const el = document.getElementById('save-status');
+  el.className = 'save-status ' + cls;
+  el.textContent = text;
+  if (cls === 'ok') setTimeout(() => { el.textContent = ''; el.className = 'save-status'; }, 3000);
+}
+
+// ============================================================
+// AUTH (view)
+// ============================================================
+
+function checkAuth() {
+  if (sessionStorage.getItem(AUTH_KEY) === '1') showApp();
+}
+
+document.getElementById('auth-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const input = document.getElementById('auth-input');
+  const error = document.getElementById('auth-error');
+  if (input.value === AUTH_PASS) {
+    sessionStorage.setItem(AUTH_KEY, '1');
+    document.getElementById('auth-screen').style.display = 'none';
+    showApp();
+  } else {
+    input.classList.add('error');
+    error.textContent = 'Nieprawidłowe hasło.';
+    input.value = '';
+    setTimeout(() => { input.classList.remove('error'); error.textContent = ''; }, 2500);
+  }
+});
+
+function showApp() {
+  document.getElementById('app').style.display = 'flex';
+  document.getElementById('auth-screen').style.display = 'none';
+  populateCategorySelect();
+  loadFromFirestore();
+}
+
+// ============================================================
+// EDIT AUTH
+// ============================================================
+
+function toggleEditMode() {
+  if (isEditMode) {
+    exitEditMode();
+  } else {
+    if (editAuthDone) {
+      enterEditMode();
+    } else {
+      document.getElementById('edit-pw-overlay').style.display = 'flex';
+      setTimeout(() => document.getElementById('edit-pw-input').focus(), 50);
+    }
+  }
+}
+
+function checkEditPw() {
+  const input = document.getElementById('edit-pw-input');
+  const error = document.getElementById('edit-pw-error');
+  if (input.value === EDIT_PASS) {
+    editAuthDone = true;
+    closeEditModal();
+    enterEditMode();
+  } else {
+    error.textContent = 'Nieprawidłowe hasło.';
+    input.value = '';
+    setTimeout(() => { error.textContent = ''; }, 2000);
+  }
+}
+
+function closeEditModal() {
+  document.getElementById('edit-pw-overlay').style.display = 'none';
+  document.getElementById('edit-pw-input').value = '';
+  document.getElementById('edit-pw-error').textContent = '';
+}
+
+// ============================================================
+// EDIT MODE ON/OFF
+// ============================================================
+
+function enterEditMode() {
+  isEditMode = true;
+  document.getElementById('sidebar').classList.add('edit-mode-on');
+  document.getElementById('sidebar-add').style.display = 'block';
+  document.getElementById('edit-fab').classList.add('active');
+  document.getElementById('edit-fab').title = 'Zakończ edycję';
+
+  // Switch content panel
+  document.getElementById('view-content').style.display = 'none';
+  document.getElementById('edit-content').style.display = 'flex';
+
+  // Show edit button in view header
+  document.getElementById('edit-current-btn').style.display = 'inline-block';
+
+  // Rebuild sidebar to show delete buttons
+  buildSidebar(document.getElementById('search-input').value);
+
+  // If a prompt was selected, open its edit form
+  if (currentId) openEditForm(currentId);
+}
+
+function exitEditMode() {
+  isEditMode = false;
+  editingId = null;
+  document.getElementById('sidebar').classList.remove('edit-mode-on');
+  document.getElementById('sidebar-add').style.display = 'none';
+  document.getElementById('edit-fab').classList.remove('active');
+  document.getElementById('edit-fab').title = 'Tryb edycji';
+
+  // Switch content panel back
+  document.getElementById('edit-content').style.display = 'none';
+  document.getElementById('view-content').style.display = 'flex';
+  document.getElementById('edit-current-btn').style.display = 'none';
+
+  buildSidebar(document.getElementById('search-input').value);
+
+  // Re-render current prompt if any
+  if (currentId) loadPrompt(currentId);
+}
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+
+function buildSidebar(filter) {
+  filter = (filter || '').toLowerCase().trim();
+  const nav   = document.getElementById('sidebar-nav');
+  const count = document.getElementById('sidebar-count');
+  nav.innerHTML = '';
+
+  let total = 0;
+
+  for (const cat of CATEGORIES) {
+    const items = PROMPTS.filter(p => {
+      if (p.category !== cat.id) return false;
+      if (!filter) return true;
+      return p.title.toLowerCase().includes(filter) ||
+             p.prompt.toLowerCase().includes(filter);
+    });
+    if (items.length === 0) continue;
+    total += items.length;
+
+    const isCollapsed = collapsedCats.has(cat.id) && !filter;
+    const group  = document.createElement('div');
+    group.className = 'cat-group';
+
+    const header = document.createElement('div');
+    header.className = 'cat-header';
+    header.innerHTML =
+      `<span class="cat-arrow ${isCollapsed ? '' : 'open'}">&#9654;</span>` +
+      `<span class="cat-name">${cat.name}</span>` +
+      `<span class="cat-count">${items.length}</span>`;
+    header.addEventListener('click', () => {
+      if (collapsedCats.has(cat.id)) collapsedCats.delete(cat.id);
+      else collapsedCats.add(cat.id);
+      buildSidebar(document.getElementById('search-input').value);
+    });
+
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'cat-items' + (isCollapsed ? ' collapsed' : '');
+
+    for (const p of items) {
+      const isActive = isEditMode ? (p.id === editingId) : (p.id === currentId);
+      const el = document.createElement('div');
+      el.className = 'prompt-item' + (isActive ? ' active' : '');
+      el.innerHTML =
+        `<span class="prompt-item-title">${p.title}</span>` +
+        `<button class="item-del" title="Usuń" data-id="${p.id}">&#10005;</button>`;
+      el.querySelector('.prompt-item-title').addEventListener('click', () => {
+        if (isEditMode) openEditForm(p.id);
+        else loadPrompt(p.id);
+      });
+      el.querySelector('.item-del').addEventListener('click', e => {
+        e.stopPropagation();
+        confirmDelete(p.id);
+      });
+      itemsDiv.appendChild(el);
+    }
+
+    group.appendChild(header);
+    group.appendChild(itemsDiv);
+    nav.appendChild(group);
+  }
+
+  if (nav.children.length === 0) {
+    nav.innerHTML = '<div class="no-results">Brak wyników</div>';
+    count.textContent = '';
+  } else {
+    count.textContent = `${total} promptów`;
+  }
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+  buildSidebar(this.value);
+});
+
+// ============================================================
+// PROMPT VIEW
+// ============================================================
+
+function loadPrompt(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+
+  currentId = id;
+  isRaw = false;
+
+  history.replaceState(null, '', '#' + id);
+
+  document.querySelectorAll('.prompt-item').forEach(el => {
+    const title = el.querySelector('.prompt-item-title');
+    if (title) el.classList.toggle('active', el.dataset && false);
+    // re-check via dataset on title's parent
+  });
+
+  // Expand category if collapsed
+  const cat = CATEGORIES.find(c => c.id === p.category);
+  if (cat && collapsedCats.has(cat.id)) {
+    collapsedCats.delete(cat.id);
+  }
+  buildSidebar(document.getElementById('search-input').value);
+
+  document.getElementById('prompt-breadcrumb').textContent = cat ? cat.name.toUpperCase() : '';
+  document.getElementById('prompt-title-el').textContent = p.title;
+
+  const btn = document.getElementById('toggle-raw-btn');
+  btn.classList.remove('toggled');
+  btn.textContent = 'Surowy tekst';
+
+  renderContent(p.prompt);
+
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('prompt-view').style.display = 'block';
+}
+
+function renderContent(text) {
+  const el = document.getElementById('prompt-content');
+  if (isRaw) {
+    el.innerHTML = `<pre class="prompt-raw">${escHtml(text)}</pre>`;
+  } else {
+    let html = marked.parse(text);
+    html = html.replace(/\[([^\]<>]{1,80})\]/g,
+      '<span class="placeholder">[$1]</span>');
+    el.innerHTML = `<div class="md-content">${html}</div>`;
+  }
+}
+
+function toggleRaw() {
+  isRaw = !isRaw;
+  const btn = document.getElementById('toggle-raw-btn');
+  btn.classList.toggle('toggled', isRaw);
+  btn.textContent = isRaw ? 'Podgląd Markdown' : 'Surowy tekst';
+  const p = PROMPTS.find(x => x.id === currentId);
+  if (p) renderContent(p.prompt);
+}
+
+function copyPrompt() {
+  const p = PROMPTS.find(x => x.id === currentId);
+  if (!p) return;
+  navigator.clipboard.writeText(p.prompt).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Skopiowano!';
+    setTimeout(() => { btn.textContent = 'Kopiuj'; }, 2000);
+  });
+}
+
+function downloadAllMd() {
+  let md = '# Promptologia — biblioteka promptów AI\n\n';
+  for (const cat of CATEGORIES) {
+    const items = PROMPTS.filter(p => p.category === cat.id);
+    if (!items.length) continue;
+    md += `---\n\n## ${cat.name}\n\n`;
+    for (const p of items) {
+      md += `### ${p.title}\n\n${p.prompt}\n\n`;
+    }
+  }
+  const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'promptologia.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function downloadAllPdf() {
+  // Show all-prompts view, print, restore
+  const prev = { cId: currentId, raw: isRaw };
+  showAllPromptsForPrint();
+  setTimeout(() => {
+    window.print();
+    restoreAfterPrint(prev);
+  }, 200);
+}
+
+function showAllPromptsForPrint() {
+  document.getElementById('empty-state').style.display = 'none';
+  const view = document.getElementById('prompt-view');
+  view.style.display = 'block';
+
+  const breadcrumb = document.getElementById('prompt-breadcrumb');
+  const titleEl    = document.getElementById('prompt-title-el');
+  const content    = document.getElementById('prompt-content');
+
+  breadcrumb.textContent = 'WSZYSTKIE PROMPTY';
+  titleEl.textContent    = 'Promptologia — biblioteka promptów AI';
+
+  let html = '';
+  for (const cat of CATEGORIES) {
+    const items = PROMPTS.filter(p => p.category === cat.id);
+    if (!items.length) continue;
+    html += `<hr><h2 style="margin:24px 0 16px;font-size:17px">${cat.name}</h2>`;
+    for (const p of items) {
+      html += `<div style="margin-bottom:32px">`;
+      html += `<h3 style="font-size:15px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-color)">${p.title}</h3>`;
+      let pHtml = marked.parse(p.prompt);
+      pHtml = pHtml.replace(/\[([^\]<>]{1,80})\]/g, '<span class="placeholder">[$1]</span>');
+      html += `<div class="md-content">${pHtml}</div></div>`;
+    }
+  }
+  content.innerHTML = html;
+}
+
+function restoreAfterPrint(prev) {
+  if (prev.cId) {
+    loadPrompt(prev.cId);
+  } else {
+    document.getElementById('prompt-view').style.display = 'none';
+    document.getElementById('empty-state').style.display = 'flex';
+  }
+}
+
+function downloadMd() {
+  const p = PROMPTS.find(x => x.id === currentId);
+  if (!p) return;
+  const blob = new Blob([p.prompt], { type: 'text/markdown;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = p.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '') + '.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function downloadPdf() {
+  window.print();
+}
+
+function editCurrentInForm() {
+  if (currentId) openEditForm(currentId);
+}
+
+// ============================================================
+// EDIT FORM
+// ============================================================
+
+function populateCategorySelect() {
+  const sel = document.getElementById('edit-category');
+  sel.innerHTML = '';
+  for (const cat of CATEGORIES) {
+    const opt = document.createElement('option');
+    opt.value = cat.id;
+    opt.textContent = cat.name;
+    sel.appendChild(opt);
+  }
+}
+
+function openEditForm(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+
+  editingId = id;
+  buildSidebar(document.getElementById('search-input').value);
+
+  document.getElementById('edit-empty-state').style.display = 'none';
+  document.getElementById('edit-form-wrap').style.display = 'flex';
+  document.getElementById('edit-form-label').textContent = 'Edycja promptu';
+
+  document.getElementById('edit-title').value    = p.title;
+  document.getElementById('edit-category').value = p.category;
+  document.getElementById('edit-textarea').value = p.prompt;
+
+  attachEditListeners();
+}
+
+function attachEditListeners() {
+  const titleEl  = document.getElementById('edit-title');
+  const catEl    = document.getElementById('edit-category');
+  const textEl   = document.getElementById('edit-textarea');
+
+  // Remove old listeners by cloning
+  const newTitle = titleEl.cloneNode(true);
+  const newCat   = catEl.cloneNode(true);
+  const newText  = textEl.cloneNode(true);
+
+  titleEl.parentNode.replaceChild(newTitle, titleEl);
+  catEl.parentNode.replaceChild(newCat, catEl);
+  textEl.parentNode.replaceChild(newText, textEl);
+
+  function onChange() {
+    const p = PROMPTS.find(x => x.id === editingId);
+    if (!p) return;
+    p.title    = newTitle.value;
+    p.category = newCat.value;
+    p.prompt   = newText.value;
+    buildSidebar(document.getElementById('search-input').value);
+    scheduleSave();
+  }
+
+  newTitle.addEventListener('input', onChange);
+  newCat.addEventListener('change', onChange);
+  newText.addEventListener('input', onChange);
+}
+
+function addNewPrompt() {
+  const id = 'prompt-' + Date.now();
+  const newPrompt = {
+    id,
+    title: 'Nowy prompt',
+    category: CATEGORIES[0].id,
+    prompt: '# Nowy prompt\n\nTreść promptu...',
+  };
+  PROMPTS.unshift(newPrompt);
+  buildSidebar('');
+  document.getElementById('search-input').value = '';
+  openEditForm(id);
+  scheduleSave();
+
+  // Focus title field
+  setTimeout(() => {
+    const t = document.getElementById('edit-title');
+    t.focus();
+    t.select();
+  }, 50);
+}
+
+function confirmDelete(id) {
+  const p = PROMPTS.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm(`Usunąć prompt "${p.title}"?`)) return;
+  PROMPTS = PROMPTS.filter(x => x.id !== id);
+
+  if (editingId === id) {
+    editingId = null;
+    document.getElementById('edit-form-wrap').style.display = 'none';
+    document.getElementById('edit-empty-state').style.display = 'flex';
+  }
+  if (currentId === id) {
+    currentId = null;
+    document.getElementById('prompt-view').style.display = 'none';
+    document.getElementById('empty-state').style.display = 'flex';
+  }
+
+  buildSidebar(document.getElementById('search-input').value);
+  saveToFirestore();
+}
+
+function deleteCurrentPrompt() {
+  if (editingId) confirmDelete(editingId);
+}
+
+// ============================================================
+// HASH NAV
+// ============================================================
+
+function handleHash() {
+  const id = location.hash.slice(1);
+  if (id) loadPrompt(id);
+}
+
+window.addEventListener('hashchange', handleHash);
+
+// ============================================================
+// UTILS
+// ============================================================
+
+function escHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+
+checkAuth();
+</script>
+
+<!-- Chatbase -->
+<script>
+  window.embeddedChatbotConfig = {
+    chatbotId: "OuJ2cri2pwybJE45sE3Sc",
+    domain: "www.chatbase.co"
+  }
+</script>
+<script src="https://www.chatbase.co/embed.min.js"
+        chatbotId="OuJ2cri2pwybJE45sE3Sc"
+        domain="www.chatbase.co" defer></script>
+
+<!-- Tally -->
+<script async src="https://tally.so/widgets/embed.js"></script>
+
+</body>
+</html>

@@ -22,6 +22,9 @@ RewriteRule ^embeddings/?$ /embeddings.html [L,NC]
 # Redirect /workshop to /workshop.html
 RewriteRule ^workshop/?$ /workshop.html [L,NC]
 
+# Redirect /promptologia to /promptologia.html
+RewriteRule ^promptologia/?$ /promptologia.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

@@ -387,6 +387,17 @@
       background: rgba(88, 166, 255, 0.08);
     }
 
+    /* Drag-and-drop */
+    .prompt-item[draggable="true"] { cursor: grab; }
+    .prompt-item[draggable="true"]:active { cursor: grabbing; }
+    .prompt-item.dragging { opacity: 0.35; pointer-events: none; }
+    .cat-items.drag-over,
+    .cat-header.drag-over {
+      background: rgba(88, 166, 255, 0.12);
+      border-radius: 4px;
+      outline: 1px dashed rgba(88, 166, 255, 0.5);
+    }
+
     /* Delete button in edit mode */
     .item-del {
       display: none;
@@ -2259,6 +2270,7 @@ let editAuthDone    = false;
 let collapsedCats   = new Set();
 let saveTimer       = null;
 let editingId       = null;   // prompt being edited in form
+let draggingId      = null;   // prompt being dragged in sidebar
 
 // ============================================================
 // FIREBASE
@@ -2478,7 +2490,55 @@ function buildSidebar(filter) {
         e.stopPropagation();
         confirmDelete(p.id);
       });
+
+      if (isEditMode) {
+        el.draggable = true;
+        el.addEventListener('dragstart', e => {
+          draggingId = p.id;
+          setTimeout(() => el.classList.add('dragging'), 0);
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        el.addEventListener('dragend', () => {
+          draggingId = null;
+          el.classList.remove('dragging');
+        });
+      }
+
       itemsDiv.appendChild(el);
+    }
+
+    // Drop target: cat-items area
+    if (isEditMode) {
+      const dropOn = (targetCatId) => {
+        if (!draggingId) return;
+        const p = PROMPTS.find(x => x.id === draggingId);
+        if (p && p.category !== targetCatId) {
+          p.category = targetCatId;
+          if (editingId === p.id) {
+            const catEl = document.getElementById('edit-category');
+            if (catEl) catEl.value = targetCatId;
+          }
+          buildSidebar(document.getElementById('search-input').value);
+          scheduleSave();
+        }
+      };
+
+      [itemsDiv, header].forEach(zone => {
+        zone.addEventListener('dragover', e => {
+          if (!draggingId) return;
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          zone.classList.add('drag-over');
+        });
+        zone.addEventListener('dragleave', e => {
+          if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
+        });
+        zone.addEventListener('drop', e => {
+          e.preventDefault();
+          zone.classList.remove('drag-over');
+          dropOn(cat.id);
+        });
+      });
     }
 
     group.appendChild(header);

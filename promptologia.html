@@ -2543,7 +2543,7 @@ function renderContent(text) {
     el.innerHTML = `<pre class="prompt-raw">${escHtml(text)}</pre>`;
   } else {
     let html = marked.parse(text);
-    html = html.replace(/\[([^\]<>]{1,80})\]/g,
+    html = html.replace(/\[([^\]<>]{1,200})\]/g,
       '<span class="placeholder">[$1]</span>');
     el.innerHTML = `<div class="md-content">${html}</div>`;
   }
@@ -2617,7 +2617,7 @@ function showAllPromptsForPrint() {
       html += `<div style="margin-bottom:32px">`;
       html += `<h3 style="font-size:15px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-color)">${p.title}</h3>`;
       let pHtml = marked.parse(p.prompt);
-      pHtml = pHtml.replace(/\[([^\]<>]{1,80})\]/g, '<span class="placeholder">[$1]</span>');
+      pHtml = pHtml.replace(/\[([^\]<>]{1,200})\]/g, '<span class="placeholder">[$1]</span>');
       html += `<div class="md-content">${pHtml}</div></div>`;
     }
   }

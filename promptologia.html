@@ -2686,11 +2686,12 @@ function openEditForm(id) {
 }
 
 function attachEditListeners() {
-  const titleEl  = document.getElementById('edit-title');
-  const catEl    = document.getElementById('edit-category');
-  const textEl   = document.getElementById('edit-textarea');
+  const titleEl = document.getElementById('edit-title');
+  const catEl   = document.getElementById('edit-category');
+  const textEl  = document.getElementById('edit-textarea');
 
-  // Remove old listeners by cloning
+  // Remove old listeners by cloning; preserve select value (cloneNode doesn't copy .value)
+  const savedCat = catEl.value;
   const newTitle = titleEl.cloneNode(true);
   const newCat   = catEl.cloneNode(true);
   const newText  = textEl.cloneNode(true);
@@ -2698,20 +2699,28 @@ function attachEditListeners() {
   titleEl.parentNode.replaceChild(newTitle, titleEl);
   catEl.parentNode.replaceChild(newCat, catEl);
   textEl.parentNode.replaceChild(newText, textEl);
+  newCat.value = savedCat;
 
-  function onChange() {
+  function onFieldChange() {
     const p = PROMPTS.find(x => x.id === editingId);
     if (!p) return;
-    p.title    = newTitle.value;
-    p.category = newCat.value;
-    p.prompt   = newText.value;
+    p.title  = newTitle.value;
+    p.prompt = newText.value;
     buildSidebar(document.getElementById('search-input').value);
     scheduleSave();
   }
 
-  newTitle.addEventListener('input', onChange);
-  newCat.addEventListener('change', onChange);
-  newText.addEventListener('input', onChange);
+  function onCatChange() {
+    const p = PROMPTS.find(x => x.id === editingId);
+    if (!p) return;
+    p.category = newCat.value;
+    buildSidebar(document.getElementById('search-input').value);
+    scheduleSave();
+  }
+
+  newTitle.addEventListener('input', onFieldChange);
+  newText.addEventListener('input', onFieldChange);
+  newCat.addEventListener('change', onCatChange);
 }
 
 function addNewPrompt() {

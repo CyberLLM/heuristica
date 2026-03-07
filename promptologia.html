@@ -229,9 +229,23 @@
       overflow: hidden;
     }
 
+    /* ===== RESIZE HANDLE ===== */
+    .resize-handle {
+      width: 4px;
+      flex-shrink: 0;
+      background: var(--border-color);
+      cursor: col-resize;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .resize-handle:hover,
+    .resize-handle.dragging {
+      background: var(--text-link);
+    }
+
     /* ===== SIDEBAR ===== */
     .sidebar {
-      width: 260px;
       flex-shrink: 0;
       background: var(--bg-secondary);
       border-right: 1px solid var(--border-color);
@@ -833,7 +847,7 @@
 
   <div class="layout">
     <!-- ===== SIDEBAR ===== -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" style="width:260px">
       <div class="sidebar-search">
         <input type="text" class="search-input" id="search-input"
                placeholder="Szukaj promptów...">
@@ -844,6 +858,9 @@
       <div class="sidebar-count" id="sidebar-count"></div>
       <div class="sidebar-nav" id="sidebar-nav"></div>
     </aside>
+
+    <!-- ===== RESIZE HANDLE ===== -->
+    <div class="resize-handle" id="resize-handle"></div>
 
     <!-- ===== CONTENT ===== -->
     <main class="content-area" id="content-area">
@@ -2762,6 +2779,43 @@ window.addEventListener('hashchange', handleHash);
 function escHtml(t) {
   return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+
+// ============================================================
+// RESIZE SIDEBAR
+// ============================================================
+
+(function() {
+  const handle  = document.getElementById('resize-handle');
+  const sidebar = document.getElementById('sidebar');
+  const MIN_W   = 160;
+  const MAX_W   = 520;
+  let dragging  = false;
+  let startX, startW;
+
+  handle.addEventListener('mousedown', e => {
+    dragging = true;
+    startX   = e.clientX;
+    startW   = sidebar.offsetWidth;
+    handle.classList.add('dragging');
+    document.body.style.cursor    = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const w = Math.min(MAX_W, Math.max(MIN_W, startW + e.clientX - startX));
+    sidebar.style.width = w + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    handle.classList.remove('dragging');
+    document.body.style.cursor     = '';
+    document.body.style.userSelect = '';
+  });
+})();
 
 // ============================================================
 // INIT

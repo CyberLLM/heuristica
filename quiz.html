@@ -780,9 +780,14 @@
     document.getElementById('qExplanation').classList.remove('visible');
     document.getElementById('qCloseBtn').classList.remove('visible');
 
+    // Shuffle answers, track where the correct one landed
+    const indices = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+    const shuffledCorrect = indices.indexOf(q.correct);
+    currentQuestion.shuffledCorrect = shuffledCorrect;
+
     const labels = ['A', 'B', 'C', 'D'];
-    document.getElementById('qAnswers').innerHTML = q.a.map((ans, i) => `
-      <button class="q-btn" onclick="handleAnswer(${i})">[${labels[i]}] ${ans}</button>
+    document.getElementById('qAnswers').innerHTML = indices.map((origIdx, i) => `
+      <button class="q-btn" onclick="handleAnswer(${i})">[${labels[i]}] ${q.a[origIdx]}</button>
     `).join('');
 
     const panel = document.getElementById('questionPanel');
@@ -803,7 +808,7 @@
 
     const panel = document.getElementById('questionPanel');
 
-    if (idx === q.correct) {
+    if (idx === currentQuestion.shuffledCorrect) {
       sounds.correct();
       buttons[idx].classList.add('correct');
       panel.classList.add('flash-correct');

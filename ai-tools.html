@@ -864,7 +864,7 @@
       <div class="file-bar">
         <div class="author-avatar"></div>
         <span class="commit-author">marek</span>
-        <span class="commit-message">Dodano 108 narzędzi AI w 11 kategoriach</span>
+        <span class="commit-message" id="commitMessage">Dodano narzędzia AI</span>
         <span class="commit-date" id="lastUpdate">2026-02-26</span>
       </div>
 
@@ -1331,7 +1331,14 @@
 
       // Category Stats
       const categoryStats = document.getElementById('categoryStats');
-      categoryStats.innerHTML = toolsData.categories.map(c => {
+      const totalTools = toolsData.tools.length;
+      categoryStats.innerHTML = `
+        <div class="category-stat-item" onclick="filterByCategory('')" style="cursor: pointer; font-weight: 600;">
+          <span class="category-dot" style="background: var(--accent);"></span>
+          <span>Wszystkie</span>
+          <span class="count">${totalTools}</span>
+        </div>
+      ` + toolsData.categories.map(c => {
         const count = toolsData.tools.filter(t => t.category === c.id).length;
         return `
           <div class="category-stat-item" onclick="filterByCategory('${c.id}')" style="cursor: pointer;">
@@ -1341,6 +1348,8 @@
           </div>
         `;
       }).join('');
+
+      document.getElementById('commitMessage').textContent = `Katalog: ${totalTools} narzędzi AI w ${toolsData.categories.length} kategoriach`;
 
       // Pricing Progress
       const pricingProgress = document.getElementById('pricingProgress');

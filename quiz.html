@@ -844,19 +844,14 @@
     } else {
       sounds.wrong();
       buttons[idx].classList.add('wrong');
-      buttons[q.correct].classList.add('correct');
       panel.classList.add('flash-wrong');
 
-      document.getElementById('qExplanation').classList.add('visible');
-      document.getElementById('qCloseBtn').classList.add('visible');
       document.getElementById('termStatus').textContent = 'Błędna odpowiedź — spróbuj ponownie';
 
       // Allow retry: re-enable after flash
       setTimeout(() => {
         panel.className = 'question-panel visible';
-        // re-show question fresh
         buttons.forEach(b => { b.disabled = false; b.classList.remove('correct', 'wrong'); });
-        document.getElementById('qExplanation').classList.remove('visible');
         document.getElementById('qCloseBtn').classList.remove('visible');
         currentQuestion.answered = false;
       }, 1800);

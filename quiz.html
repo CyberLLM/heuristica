@@ -366,6 +366,67 @@
     .cleared-msg.visible { display: block; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
+    /* ===== END SCREEN OVERLAY ===== */
+    .end-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,8,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+    .end-overlay.visible { display: flex; }
+    .end-box {
+      border: 1px solid var(--amber);
+      background: var(--bg2);
+      padding: 40px 48px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 0 60px rgba(255,184,0,0.15);
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+    .end-title {
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--amber);
+      text-shadow: 0 0 20px rgba(255,184,0,0.7);
+      margin-bottom: 32px;
+    }
+    .end-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .end-stat { display: flex; flex-direction: column; gap: 4px; }
+    .end-stat-label { font-size: 9px; letter-spacing: 2px; color: var(--text-dim); }
+    .end-stat-value { font-size: 28px; font-weight: 700; letter-spacing: 2px; text-shadow: 0 0 10px currentColor; }
+    .end-msg {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+    .end-restart-btn {
+      background: none;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      padding: 10px 28px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .end-restart-btn:hover {
+      background: rgba(255,184,0,0.1);
+      box-shadow: 0 0 16px rgba(255,184,0,0.3);
+    }
+
     /* ===== FOOTER ===== */
     .site-footer {
       border-top: 1px solid var(--border);
@@ -739,6 +800,7 @@
         setTimeout(() => sounds.cleared(), 600);
         document.getElementById('clearedMsg').classList.add('visible');
         document.getElementById('termStatus').textContent = '★ MAP CLEARED ★';
+        setTimeout(() => showEndScreen(), 1800);
       } else {
         document.getElementById('termStatus').textContent = `+${node.difficulty * 100} pkt!`;
       }
@@ -909,6 +971,45 @@
   // INIT
   // ===================================================
 
+  // ===================================================
+  // END SCREEN
+  // ===================================================
+
+  function getRatingMsg(finalScore) {
+    const max = NODES.reduce((sum, n) => sum + n.difficulty * 100, 0);
+    const pct = finalScore / max;
+    if (pct >= 1.0) return 'Perfekcja. Żadnego błędu. Możesz spokojnie prowadzić warsztaty AI.';
+    if (pct >= 0.8) return 'Świetny wynik. Rozumiesz AI Action Framework od podstaw po architekturę systemów.';
+    if (pct >= 0.6) return 'Solidna wiedza. Kilka pojęć warto powtórzyć — wróć do Promptologii.';
+    return 'Dobry start. Przejdź przez materiały na heuristica.pl i zagraj jeszcze raz.';
+  }
+
+  function showEndScreen() {
+    document.getElementById('endScore').textContent = String(score).padStart(6, '0');
+    document.getElementById('endNodes').textContent = `${solved.size}/${NODES.length}`;
+    document.getElementById('endLevel').textContent = getLevel();
+    document.getElementById('endMsg').textContent = getRatingMsg(score);
+    document.getElementById('endOverlay').classList.add('visible');
+  }
+
+  function restartGame() {
+    solved = new Set();
+    activeNodeId = null;
+    score = 0;
+    gamePhase = 'playing';
+    currentQuestion = null;
+    NODES.forEach(n => { nodeQIndex[n.id] = 0; });
+
+    document.getElementById('endOverlay').classList.remove('visible');
+    document.getElementById('clearedMsg').classList.remove('visible');
+    document.getElementById('questionPanel').className = 'question-panel';
+    document.getElementById('termStatus').textContent = 'Wybierz węzeł aby zacząć';
+
+    updateHUD();
+    renderBoard();
+    renderTerminal();
+  }
+
   function init() {
     renderBoard();
     renderTerminal();
@@ -917,6 +1018,29 @@
 
   init();
   </script>
+
+  <!-- END SCREEN OVERLAY -->
+  <div class="end-overlay" id="endOverlay">
+    <div class="end-box">
+      <div class="end-title">★ MAP CLEARED ★</div>
+      <div class="end-stats">
+        <div class="end-stat">
+          <span class="end-stat-label">SCORE</span>
+          <span class="end-stat-value" id="endScore" style="color:var(--green);">000000</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-label">NODES</span>
+          <span class="end-stat-value" id="endNodes" style="color:var(--amber);">10/10</span>
+        </div>
+        <div class="end-stat">
+          <span class="end-stat-label">LEVEL</span>
+          <span class="end-stat-value" id="endLevel" style="color:var(--green);font-size:16px;">MASTER</span>
+        </div>
+      </div>
+      <div class="end-msg" id="endMsg"></div>
+      <button class="end-restart-btn" onclick="restartGame()">[ ZAGRAJ PONOWNIE ]</button>
+    </div>
+  </div>
 
   <!-- Tally contact form -->
   <script async src="https://tally.so/widgets/embed.js"></script>

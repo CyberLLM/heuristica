@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/quiz">
+  <title>AI Knowledge Map Quiz — Heuristica</title>
+  <meta name="description" content="Interaktywna gra edukacyjna o pojęciach AI. Odblokuj węzły, odpowiadaj na pytania, zdobywaj punkty.">
+  <meta name="robots" content="index, follow">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080808;
+      --bg2:       #0f0f0f;
+      --green:     #00ff41;
+      --amber:     #ffb800;
+      --red:       #ff4141;
+      --border:    rgba(0, 255, 65, 0.18);
+      --border2:   rgba(0, 255, 65, 0.35);
+      --text-dim:  rgba(0, 255, 65, 0.45);
+      --text-dark: rgba(0, 255, 65, 0.2);
+      --font: 'Courier New', Courier, monospace;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--green);
+      font-family: var(--font);
+      font-size: 13px;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: var(--font); cursor: pointer; }
+
+    /* ===== SCANLINES OVERLAY ===== */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.10) 2px,
+        rgba(0,0,0,0.10) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ===== TOP NAV (site-wide) ===== */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .top-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 48px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green);
+      text-shadow: 0 0 10px rgba(0,255,65,0.5);
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border2);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--text-dim);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); text-decoration: none; }
+
+    /* ===== GAME HEADER ===== */
+    .game-header {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .game-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 0 14px rgba(0,255,65,0.6);
+      flex: 1;
+    }
+    .hud-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .hud-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+    }
+    .hud-value {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px currentColor;
+    }
+    .hud-score { color: var(--green); }
+    .hud-nodes { color: var(--amber); }
+    .hud-level { color: var(--green); font-size: 12px; }
+    .mute-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 4px 10px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .mute-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* ===== MAIN LAYOUT ===== */
+    .game-layout {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      gap: 20px;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* ===== BOARD AREA ===== */
+    .board-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .board-container {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 16px;
+      position: relative;
+    }
+
+    #boardSvg {
+      width: 100%;
+      display: block;
+      filter: drop-shadow(0 0 16px rgba(0,255,65,0.06));
+    }
+
+    /* SVG node styles */
+    .node-rect {
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .node-rect:hover { filter: brightness(1.3); }
+    .node-text {
+      font-family: var(--font);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    /* ===== QUESTION PANEL ===== */
+    .question-panel {
+      border: 1px solid var(--border2);
+      background: var(--bg2);
+      padding: 20px;
+      display: none;
+    }
+    .question-panel.visible { display: block; }
+    .question-panel.flash-correct { border-color: var(--green); background: rgba(0,255,65,0.05); }
+    .question-panel.flash-wrong   { border-color: var(--red);   background: rgba(255,65,65,0.05); animation: shake 0.4s; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-5px); }
+      80%      { transform: translateX(5px); }
+    }
+
+    .q-node-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .q-text {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      text-shadow: 0 0 8px rgba(0,255,65,0.3);
+    }
+    .q-answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .q-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--green);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.5;
+      transition: all 0.15s;
+    }
+    .q-btn:hover:not(:disabled) {
+      border-color: var(--green);
+      background: rgba(0,255,65,0.07);
+      text-shadow: 0 0 6px rgba(0,255,65,0.5);
+    }
+    .q-btn:disabled { cursor: default; }
+    .q-btn.correct { border-color: var(--green); background: rgba(0,255,65,0.12); }
+    .q-btn.wrong   { border-color: var(--red);   color: var(--red); }
+
+    .q-explanation {
+      margin-top: 14px;
+      padding: 12px;
+      border-left: 2px solid var(--green);
+      color: var(--text-dim);
+      font-size: 12px;
+      line-height: 1.6;
+      display: none;
+    }
+    .q-explanation.visible { display: block; }
+
+    .q-close-btn {
+      margin-top: 14px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 6px 16px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      display: none;
+      transition: all 0.2s;
+    }
+    .q-close-btn.visible { display: inline-block; }
+    .q-close-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* ===== TERMINAL SIDEBAR ===== */
+    .terminal {
+      width: 280px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-self: flex-start;
+      position: sticky;
+      top: 68px;
+    }
+
+    .term-section-title {
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .cursor-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 14px;
+      background: var(--green);
+      animation: blink 1.06s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .term-node-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+    }
+    .term-node-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      cursor: pointer;
+      color: var(--text-dim);
+      transition: color 0.15s;
+    }
+    .term-node-item:hover { color: var(--green); }
+    .term-node-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+
+    .legend { display: flex; flex-direction: column; gap: 6px; font-size: 11px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-dim); }
+    .legend-dot { width: 10px; height: 10px; flex-shrink: 0; }
+
+    .cleared-msg {
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-shadow: 0 0 14px rgba(255,184,0,0.7);
+      animation: pulse 2s ease-in-out infinite;
+      display: none;
+    }
+    .cleared-msg.visible { display: block; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 20px;
+    }
+    .site-footer a { color: var(--text-dim); }
+    .site-footer a:hover { color: var(--green); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .game-layout { flex-direction: column; padding: 12px; }
+      .terminal { width: 100%; position: static; }
+      .q-answers { grid-template-columns: 1fr; }
+      .game-title { font-size: 13px; letter-spacing: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scanlines CRT overlay -->
+  <div class="scanlines"></div>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-mark">H</span>
+        <span>heuristica</span>
+      </a>
+      <div class="nav-links">
+        <a href="ai-tools.html">Narzędzia</a>
+        <a href="kim.html">O mnie</a>
+        <a href="uslugi.html">Warsztaty</a>
+        <a href="#" data-tally-open="obAOEx">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- GAME HEADER / HUD ===== -->
+  <div class="game-header">
+    <div class="game-title">► AI KNOWLEDGE MAP</div>
+    <div class="hud-block">
+      <span class="hud-label">SCORE</span>
+      <span class="hud-value hud-score" id="hudScore">000000</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">NODES</span>
+      <span class="hud-value hud-nodes" id="hudNodes">0/10</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">LEVEL</span>
+      <span class="hud-value hud-level" id="hudLevel">INIT</span>
+    </div>
+    <button class="mute-btn" id="muteBtn" onclick="toggleMute()">[♪ ON]</button>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="game-layout">
+
+    <!-- BOARD + QUESTION PANEL -->
+    <div class="board-area">
+      <div class="board-container">
+        <svg id="boardSvg" viewBox="0 0 700 420"></svg>
+      </div>
+
+      <!-- QUESTION PANEL -->
+      <div class="question-panel" id="questionPanel">
+        <div class="q-node-label" id="qNodeLabel">► NODE</div>
+        <div class="q-text" id="qText"></div>
+        <div class="q-answers" id="qAnswers"></div>
+        <div class="q-explanation" id="qExplanation"></div>
+        <button class="q-close-btn" id="qCloseBtn" onclick="closeQuestion()">[ ZAMKNIJ ]</button>
+      </div>
+    </div>
+
+    <!-- TERMINAL SIDEBAR -->
+    <div class="terminal">
+      <div>
+        <div class="term-section-title">SYSTEM STATUS</div>
+        <div class="cursor-line">
+          <span class="cursor"></span>
+          <span id="termStatus">Wybierz węzeł aby zacząć</span>
+        </div>
+      </div>
+
+      <div class="cleared-msg" id="clearedMsg">★ MAP CLEARED ★</div>
+
+      <div id="termAvailable">
+        <div class="term-section-title">DOSTĘPNE WĘZŁY</div>
+        <div class="term-node-list" id="termNodeList"></div>
+      </div>
+
+      <div>
+        <div class="term-section-title">LEGENDA</div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:rgba(0,255,65,0.15);border:1px solid rgba(0,255,65,0.3);"></div>
+            <span>Zablokowany</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#00ff41;"></div>
+            <span>Odblokowany (diff. 1)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#ffb800;"></div>
+            <span>Odblokowany (diff. 2)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#ff4141;"></div>
+            <span>Odblokowany (diff. 3)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:rgba(0,255,65,0.5);border:2px solid #00ff41;"></div>
+            <span>Rozwiązany ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <a href="ai-tools.html">← Powrót do katalogu narzędzi</a>
+    &nbsp;·&nbsp;
+    <a href="index.html">heuristica.pl</a>
+  </footer>
+
+  <script>
+  // ===================================================
+  // DATA
+  // ===================================================
+
+  const NODES = [
+    { id: 1,  label: "LLM",       x: 1, y: 1, connections: [2, 3], difficulty: 1, description: "Large Language Model — fundament" },
+    { id: 2,  label: "TOKEN",     x: 3, y: 0, connections: [1, 4], difficulty: 1, description: "Tokenizacja i context window" },
+    { id: 3,  label: "PROMPT",    x: 3, y: 2, connections: [1, 5, 6], difficulty: 1, description: "Prompt engineering" },
+    { id: 4,  label: "EMBEDDING", x: 5, y: 0, connections: [2, 7], difficulty: 2, description: "Wektory semantyczne" },
+    { id: 5,  label: "RAG",       x: 5, y: 2, connections: [3, 7], difficulty: 2, description: "Retrieval-Augmented Generation" },
+    { id: 6,  label: "FINE-TUNE", x: 5, y: 4, connections: [3, 8], difficulty: 2, description: "Dostrajanie modelu" },
+    { id: 7,  label: "VECTOR DB", x: 7, y: 1, connections: [4, 5, 9], difficulty: 2, description: "Bazy wektorowe" },
+    { id: 8,  label: "AGENT",     x: 7, y: 3, connections: [6, 9, 10], difficulty: 3, description: "Agenty AI" },
+    { id: 9,  label: "MCP",       x: 9, y: 1, connections: [7, 8, 10], difficulty: 3, description: "Model Context Protocol" },
+    { id: 10, label: "AI SYSTEM", x: 9, y: 3, connections: [8, 9], difficulty: 3, description: "Architektury systemów AI" }
+  ];
+
+  const QUESTIONS = {
+    1: [
+      { q: "Co oznacza skrót LLM?", a: ["Large Language Model", "Low Latency Machine", "Linear Logic Matrix", "Learned Language Method"], correct: 0, explanation: "LLM = Large Language Model. Model trenowany na ogromnych zbiorach tekstu, który uczy się przewidywać następny token." },
+      { q: "ChatGPT, Claude, Gemini — co mają wspólnego?", a: ["Są własnością jednej firmy", "Wszystkie są LLM-ami", "Działają tylko po angielsku", "Wymagają internetu do działania"], correct: 1, explanation: "ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google) — to różne produkty oparte na modelu LLM." },
+      { q: "Jak LLM generuje odpowiedź?", a: ["Wyszukuje w bazie danych", "Kopiuje z internetu w czasie rzeczywistym", "Przewiduje kolejny token na podstawie kontekstu", "Losuje słowa ze słownika"], correct: 2, explanation: "LLM działa probabilistycznie — dla każdego tokenu oblicza, co jest najbardziej prawdopodobną kontynuacją." }
+    ],
+    2: [
+      { q: "Czym jest token w kontekście LLM?", a: ["Zawsze jedno pełne słowo", "Fragment tekstu — słowo, część słowa lub znak", "Jedno zdanie", "Jeden akapit"], correct: 1, explanation: "Token to jednostka przetwarzania — może to być całe słowo, sylaba lub znak interpunkcyjny. Średnio 1 token ≈ 0.75 słowa po angielsku." },
+      { q: "Dlaczego tokeny są ważne z biznesowego punktu widzenia?", a: ["Wpływają na kolor interfejsu", "Decydują o kosztach — płacisz za tokeny", "Nie mają znaczenia dla użytkownika", "Tokeny to tylko termin techniczny"], correct: 1, explanation: "API LLM rozlicza się per token. Im dłuższy prompt i odpowiedź, tym wyższy koszt. Optymalizacja promptów = optymalizacja kosztów." },
+      { q: "Context window (okno kontekstu) to:", a: ["Rozmiar ekranu aplikacji", "Maksymalna liczba tokenów które model może przetworzyć naraz", "Pamięć długoterminowa modelu", "Limit zapytań dziennie"], correct: 1, explanation: "Context window = ile tokenów model 'widzi' jednocześnie. GPT-4o: 128k tokenów ≈ ~100 stron tekstu." }
+    ],
+    3: [
+      { q: "Prompt engineering to:", a: ["Programowanie w nowym języku", "Sztuka formułowania instrukcji dla modelu AI", "Naprawa błędów w kodzie AI", "Tworzenie grafik AI"], correct: 1, explanation: "Prompt engineering = umiejętność pisania instrukcji które prowadzą model do pożądanego rezultatu. To kluczowa kompetencja w pracy z AI." },
+      { q: "Który prompt da lepszy wynik?", a: ["'Napisz coś o naszym produkcie'", "'Napisz 3-zdaniowy opis produktu X dla klientów B2B, podkreślając oszczędność czasu'", "Oba są równie dobre", "Krótszy zawsze lepszy"], correct: 1, explanation: "Precyzja i kontekst działają. Im dokładniej określisz format, odbiorcę, cel, ton — tym lepsza odpowiedź." },
+      { q: "System prompt to:", a: ["Błąd systemowy w AI", "Instrukcja bazowa definiująca zachowanie modelu przed rozmową", "Pierwszy komunikat użytkownika", "Odpowiedź modelu na pierwsze pytanie"], correct: 1, explanation: "System prompt to 'instrukcja obsługi' dla modelu — określa jego rolę, ton, ograniczenia. Firmy używają go do tworzenia asystentów o konkretnym charakterze." }
+    ],
+    4: [
+      { q: "Embedding zamienia tekst w:", a: ["Obraz", "Wektor liczb reprezentujący znaczenie", "Dźwięk", "Inny tekst"], correct: 1, explanation: "Embedding to reprezentacja tekstu jako punkt w przestrzeni matematycznej. Podobne znaczeniowo teksty mają bliskie wektory." },
+      { q: "'Król' - 'Mężczyzna' + 'Kobieta' = ? (słynny przykład z embeddingów)", a: ["'Władca'", "'Królowa'", "'Księżniczka'", "'Dama'"], correct: 1, explanation: "Klasyczny przykład: embeddingi kodują relacje semantyczne jako operacje matematyczne. Przestrzeń wektorowa 'rozumie' analogie." },
+      { q: "Do czego praktycznie używa się embeddingów?", a: ["Tylko do tłumaczenia tekstu", "Wyszukiwania podobnych dokumentów, rekomendacji, wykrywania duplikatów", "Generowania obrazów", "Sprawdzania pisowni"], correct: 1, explanation: "Embeddingi to silnik wyszukiwania semantycznego: znajdź dokumenty 'o podobnym znaczeniu', nie tylko z tym samym słowem kluczowym." }
+    ],
+    5: [
+      { q: "RAG = Retrieval-Augmented...?", a: ["Reasoning", "Recognition", "Generation", "Ranking"], correct: 2, explanation: "RAG = Retrieval-Augmented Generation. Model najpierw pobiera relevantne fragmenty z bazy wiedzy, potem generuje odpowiedź na ich podstawie." },
+      { q: "Główna zaleta RAG vs. czysty LLM?", a: ["RAG jest szybszy", "RAG odpowiada na podstawie aktualnych, własnych danych firmy", "RAG kosztuje mniej", "RAG nie wymaga internetu"], correct: 1, explanation: "LLM ma wiedzę tylko do daty treningu. RAG pozwala modelowi 'czytać' Twoje dokumenty w czasie rzeczywistym — regulaminy, cenniki, FAQ, raporty." },
+      { q: "Kiedy użyć RAG zamiast fine-tuningu?", a: ["Gdy dane zmieniają się często lub jest ich dużo", "Gdy chcesz zmienić styl pisania modelu", "Gdy potrzebujesz modelu offline", "RAG i fine-tuning to to samo"], correct: 0, explanation: "RAG = dynamiczna baza wiedzy (aktualizujesz dokumenty, nie model). Fine-tuning = uczysz model nowego zachowania/stylu." }
+    ],
+    6: [
+      { q: "Fine-tuning polega na:", a: ["Zmianie interfejsu aplikacji", "Dalszym trenowaniu modelu na własnych przykładach", "Kompresji modelu do mniejszego rozmiaru", "Optymalizacji zapytań do API"], correct: 1, explanation: "Fine-tuning = bierzesz gotowy model i trenujesz go dalej na swoich przykładach prompt→odpowiedź. Model uczy się Twojego stylu i specyfiki." },
+      { q: "Do czego NIE nadaje się fine-tuning?", a: ["Nauki specyficznego tonu komunikacji marki", "Dodania aktualnej wiedzy o produktach z tego miesiąca", "Nauki odpowiadania w konkretnym formacie", "Dostosowania do branżowego żargonu"], correct: 1, explanation: "Fine-tuning uczy zachowania, nie wiedzy. Do aktualnych danych użyj RAG — baza wiedzy aktualizuje się bez retrenowania modelu." },
+      { q: "Fine-tuning wymaga:", a: ["Zero przykładów — model sam się uczy", "Setek lub tysięcy par: prompt → idealna odpowiedź", "Tylko systemu prompt", "Tylko zmiany parametrów w API"], correct: 1, explanation: "Jakość fine-tuningu zależy od jakości danych. Im więcej i lepiej przygotowanych par, tym lepszy efekt." }
+    ],
+    7: [
+      { q: "Vector DB (baza wektorowa) służy do:", a: ["Przechowywania obrazów i wideo", "Szybkiego wyszukiwania dokumentów podobnych znaczeniowo", "Trenowania modeli LLM", "Przechowywania haseł użytkowników"], correct: 1, explanation: "Vector DB przechowuje embeddingi i umożliwia błyskawiczne znalezienie 'najbliższych sąsiadów' — dokumentów o podobnym znaczeniu. To serce systemu RAG." },
+      { q: "Czym różni się Vector DB od zwykłej bazy SQL?", a: ["Vector DB jest wolniejsza", "SQL szuka dokładnych dopasowań, Vector DB szuka podobieństwa znaczeniowego", "SQL nie przechowuje tekstu", "Nie ma różnicy"], correct: 1, explanation: "SQL: 'znajdź rekord gdzie name = Kowalski'. Vector DB: 'znajdź dokumenty o podobnym znaczeniu do tego pytania'. Fundamentalnie różne podejścia." },
+      { q: "Przykłady Vector DB to:", a: ["MySQL, PostgreSQL, Oracle", "Pinecone, Weaviate, Qdrant, Chroma", "Excel, Google Sheets, Notion", "MongoDB, Redis, Cassandra"], correct: 1, explanation: "Pinecone, Weaviate, Qdrant, Chroma — to popularne bazy wektorowe. PostgreSQL też obsługuje wektory przez rozszerzenie pgvector." }
+    ],
+    8: [
+      { q: "Agent AI różni się od chatbota tym, że:", a: ["Jest droższy", "Samodzielnie planuje i wykonuje wieloetapowe zadania, używa narzędzi", "Odpowiada szybciej", "Działa tylko głosowo"], correct: 1, explanation: "Chatbot: odpowiada na pytania. Agent: dostaje cel, sam planuje kroki, używa narzędzi (wyszukiwarka, kod, API, pliki), wykonuje zadania autonomicznie." },
+      { q: "Pętla agenta to schemat:", a: ["Zapytaj → Odpowiedz → Koniec", "Cel → Planuj → Działaj → Obserwuj → Planuj ponownie", "Wczytaj dane → Przetwórz → Zapisz", "Prompt → Token → Output"], correct: 1, explanation: "Agenty działają w pętli ReAct (Reason + Act): oceniają sytuację, wybierają narzędzie, patrzą na wynik, planują następny krok — aż do osiągnięcia celu." },
+      { q: "Największe ryzyko przy wdrażaniu agentów AI to:", a: ["Za wolne działanie", "Brak kontroli nad tym co agent robi autonomicznie (błędne decyzje, koszty)", "Zbyt duże zużycie RAM", "Problemy z polskim językiem"], correct: 1, explanation: "Agent działający autonomicznie może podjąć niechciane działania, wysłać maila, usunąć plik, wygenerować ogromny rachunek za API. Human-in-the-loop jest kluczowy." }
+    ],
+    9: [
+      { q: "MCP (Model Context Protocol) to:", a: ["Nowy model językowy od Meta", "Otwarty standard podłączania modeli AI do zewnętrznych narzędzi i danych", "Protokół szyfrowania danych AI", "Format pliku dla promptów"], correct: 1, explanation: "MCP (Anthropic, 2024) to otwarty standard — jak USB dla AI. Definiuje jak modele mogą bezpiecznie korzystać z narzędzi: baz danych, API, plików, aplikacji." },
+      { q: "Dzięki MCP, model AI może:", a: ["Tylko czytać pliki tekstowe", "Korzystać z kalendarza, maila, bazy danych, kodu — przez ustandaryzowany interfejs", "Działać bez internetu", "Trenować się samodzielnie"], correct: 1, explanation: "MCP serwery istnieją dla: Google Drive, Gmail, GitHub, Slack, Notion i setek innych. Model podłączony do MCP staje się agentem z dostępem do Twoich systemów." },
+      { q: "Kto stworzył MCP i kiedy?", a: ["OpenAI, 2023", "Google, 2024", "Anthropic, koniec 2024", "Microsoft, 2022"], correct: 2, explanation: "Anthropic opublikował MCP jako otwarty standard w listopadzie 2024. Szybko zaadoptowały go inne firmy — stał się de facto standardem branżowym." }
+    ],
+    10: [
+      { q: "System AI to w odróżnieniu od samego modelu LLM:", a: ["Tylko większy model", "Kompozycja: model + pamięć + narzędzia + logika + interfejs", "Model z lepszym GPU", "Model z większym context window"], correct: 1, explanation: "Model to silnik. System AI to samochód: silnik + skrzynia biegów + nawigacja + kierownica. Inteligencja staje się właściwością systemu, nie modelu." },
+      { q: "Kluczowa teza AI Action Framework brzmi:", a: ["Modele 7B są wystarczające do wszystkiego", "Inteligencja przestaje być cechą modelu, a staje się właściwością systemu", "Najlepsze AI to najdroższe AI", "Prompt jest ważniejszy niż model"], correct: 1, explanation: "Zamiast szukać 'magicznego modelu' — buduj system który działa niezawodnie. Odpowiednia architektura + mniejszy model często bije słaby system z największym modelem." },
+      { q: "Projektując system AI dla firmy, od czego zacząć?", a: ["Od wyboru najnowszego modelu", "Od zdefiniowania problemu i procesu który chcemy ulepszyć", "Od zakupu GPU", "Od zatrudnienia data scientistów"], correct: 1, explanation: "Najczęstszy błąd: 'mamy AI, znajdźmy problem'. Właściwa droga: 'mamy konkretny problem w procesie — sprawdźmy czy AI go rozwiązuje lepiej niż dotychczasowe narzędzia'." }
+    ]
+  };
+
+  const DIFF_COLORS = { 1: '#00ff41', 2: '#ffb800', 3: '#ff4141' };
+  const LEVELS = [
+    { threshold: 0,   label: 'INIT' },
+    { threshold: 0.3, label: 'BASIC' },
+    { threshold: 0.6, label: 'ADVANCED' },
+    { threshold: 0.9, label: 'MASTER' }
+  ];
+
+  // ===================================================
+  // GAME STATE
+  // ===================================================
+
+  let solved = new Set();
+  let activeNodeId = null;
+  let score = 0;
+  let gamePhase = 'playing'; // 'playing' | 'cleared'
+  let currentQuestion = null; // { nodeId, qIndex, answered }
+  let muted = false;
+
+  // Per-node: track which question index to show next (cycle through 3)
+  const nodeQIndex = {};
+  NODES.forEach(n => { nodeQIndex[n.id] = 0; });
+
+  // ===================================================
+  // AUDIO (Web Audio API)
+  // ===================================================
+
+  let audioCtx = null;
+
+  function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  document.addEventListener('click', () => { try { getCtx().resume(); } catch(e){} }, { once: true });
+
+  function beep(freq, duration, type = 'square', vol = 0.08) {
+    if (muted) return;
+    try {
+      const ctx = getCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(vol, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  const sounds = {
+    click:   () => beep(440, 0.05),
+    correct: () => { beep(523, 0.1); setTimeout(() => beep(659, 0.1), 110); setTimeout(() => beep(784, 0.18), 220); },
+    wrong:   () => { beep(200, 0.06); setTimeout(() => beep(150, 0.14, 'sawtooth'), 70); },
+    unlock:  () => beep(880, 0.08, 'sine'),
+    cleared: () => [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => beep(f, 0.22), i * 130))
+  };
+
+  function toggleMute() {
+    muted = !muted;
+    document.getElementById('muteBtn').textContent = muted ? '[♪ OFF]' : '[♪ ON]';
+  }
+
+  // ===================================================
+  // GAME LOGIC
+  // ===================================================
+
+  function isUnlocked(nodeId) {
+    if (nodeId === 1) return true;
+    const node = NODES.find(n => n.id === nodeId);
+    return node.connections.some(cId => cId < nodeId && solved.has(cId));
+  }
+
+  function getNodeState(nodeId) {
+    if (solved.has(nodeId))   return 'solved';
+    if (activeNodeId === nodeId) return 'active';
+    if (isUnlocked(nodeId))   return 'unlocked';
+    return 'locked';
+  }
+
+  function getLevel() {
+    const pct = solved.size / NODES.length;
+    let level = LEVELS[0].label;
+    for (const l of LEVELS) { if (pct >= l.threshold) level = l.label; }
+    return level;
+  }
+
+  function updateHUD() {
+    document.getElementById('hudScore').textContent = String(score).padStart(6, '0');
+    document.getElementById('hudNodes').textContent = `${solved.size}/${NODES.length}`;
+    document.getElementById('hudLevel').textContent = getLevel();
+  }
+
+  function handleNodeClick(nodeId) {
+    const state = getNodeState(nodeId);
+    if (state === 'locked' || state === 'solved') return;
+    sounds.click();
+
+    activeNodeId = nodeId;
+    showQuestion(nodeId);
+    renderBoard();
+    renderTerminal();
+  }
+
+  function showQuestion(nodeId) {
+    const node = NODES.find(n => n.id === nodeId);
+    const qArr = QUESTIONS[nodeId];
+    const qIdx = nodeQIndex[nodeId] % qArr.length;
+    const q = qArr[qIdx];
+    currentQuestion = { nodeId, qIdx, answered: false };
+
+    document.getElementById('qNodeLabel').textContent = `► ${node.label} — ${node.description}`;
+    document.getElementById('qText').textContent = q.q;
+    document.getElementById('qExplanation').textContent = q.explanation;
+    document.getElementById('qExplanation').classList.remove('visible');
+    document.getElementById('qCloseBtn').classList.remove('visible');
+
+    const labels = ['A', 'B', 'C', 'D'];
+    document.getElementById('qAnswers').innerHTML = q.a.map((ans, i) => `
+      <button class="q-btn" onclick="handleAnswer(${i})">[${labels[i]}] ${ans}</button>
+    `).join('');
+
+    const panel = document.getElementById('questionPanel');
+    panel.className = 'question-panel visible';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('termStatus').textContent = `Węzeł: ${node.label}`;
+  }
+
+  function handleAnswer(idx) {
+    if (!currentQuestion || currentQuestion.answered) return;
+    currentQuestion.answered = true;
+
+    const { nodeId, qIdx } = currentQuestion;
+    const q = QUESTIONS[nodeId][qIdx % QUESTIONS[nodeId].length];
+    const buttons = document.querySelectorAll('.q-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    const panel = document.getElementById('questionPanel');
+
+    if (idx === q.correct) {
+      sounds.correct();
+      buttons[idx].classList.add('correct');
+      panel.classList.add('flash-correct');
+
+      const node = NODES.find(n => n.id === nodeId);
+      score += node.difficulty * 100;
+      solved.add(nodeId);
+      nodeQIndex[nodeId]++;
+      activeNodeId = null;
+
+      document.getElementById('qExplanation').classList.add('visible');
+      document.getElementById('qCloseBtn').classList.add('visible');
+
+      updateHUD();
+      renderBoard();
+
+      // Unlock sound for newly unlocked neighbors
+      const newlyUnlocked = NODES.filter(n =>
+        !solved.has(n.id) && n.id !== nodeId && isUnlocked(n.id)
+      );
+      if (newlyUnlocked.length > 0) setTimeout(() => sounds.unlock(), 400);
+
+      if (solved.size === NODES.length) {
+        gamePhase = 'cleared';
+        setTimeout(() => sounds.cleared(), 600);
+        document.getElementById('clearedMsg').classList.add('visible');
+        document.getElementById('termStatus').textContent = '★ MAP CLEARED ★';
+      } else {
+        document.getElementById('termStatus').textContent = `+${node.difficulty * 100} pkt!`;
+      }
+
+      renderTerminal();
+
+    } else {
+      sounds.wrong();
+      buttons[idx].classList.add('wrong');
+      buttons[q.correct].classList.add('correct');
+      panel.classList.add('flash-wrong');
+
+      document.getElementById('qExplanation').classList.add('visible');
+      document.getElementById('qCloseBtn').classList.add('visible');
+      document.getElementById('termStatus').textContent = 'Błędna odpowiedź — spróbuj ponownie';
+
+      // Allow retry: re-enable after flash
+      setTimeout(() => {
+        panel.className = 'question-panel visible';
+        // re-show question fresh
+        buttons.forEach(b => { b.disabled = false; b.classList.remove('correct', 'wrong'); });
+        document.getElementById('qExplanation').classList.remove('visible');
+        document.getElementById('qCloseBtn').classList.remove('visible');
+        currentQuestion.answered = false;
+      }, 1800);
+    }
+  }
+
+  function closeQuestion() {
+    activeNodeId = null;
+    currentQuestion = null;
+    document.getElementById('questionPanel').className = 'question-panel';
+    document.getElementById('termStatus').textContent = 'Wybierz następny węzeł';
+    renderBoard();
+    renderTerminal();
+  }
+
+  // ===================================================
+  // SVG BOARD RENDERING
+  // ===================================================
+
+  const CELL_W = 70;
+  const CELL_H = 84;
+  const NODE_W = 56;
+  const NODE_H = 28;
+  const PAD_X  = 36;
+  const PAD_Y  = 36;
+
+  function nodeXY(node) {
+    return {
+      x: PAD_X + node.x * CELL_W,
+      y: PAD_Y + node.y * CELL_H
+    };
+  }
+
+  function renderBoard() {
+    const svg = document.getElementById('boardSvg');
+    svg.innerHTML = '';
+
+    // Draw connections first (behind nodes)
+    const drawn = new Set();
+    NODES.forEach(node => {
+      node.connections.forEach(cId => {
+        const key = [Math.min(node.id, cId), Math.max(node.id, cId)].join('-');
+        if (drawn.has(key)) return;
+        drawn.add(key);
+
+        const other = NODES.find(n => n.id === cId);
+        const p1 = nodeXY(node);
+        const p2 = nodeXY(other);
+        const stateA = getNodeState(node.id);
+        const stateB = getNodeState(other.id);
+        const active = stateA !== 'locked' || stateB !== 'locked';
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', p1.x);
+        line.setAttribute('y1', p1.y);
+        line.setAttribute('x2', p2.x);
+        line.setAttribute('y2', p2.y);
+        line.setAttribute('stroke', active ? 'rgba(0,255,65,0.35)' : 'rgba(0,255,65,0.1)');
+        line.setAttribute('stroke-width', '1');
+        if (!active) line.setAttribute('stroke-dasharray', '4 4');
+        svg.appendChild(line);
+      });
+    });
+
+    // Draw nodes
+    NODES.forEach(node => {
+      const { x, y } = nodeXY(node);
+      const state = getNodeState(node.id);
+      const color = DIFF_COLORS[node.difficulty];
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('transform', `translate(${x - NODE_W/2},${y - NODE_H/2})`);
+      if (state !== 'locked') {
+        g.style.cursor = state === 'solved' ? 'default' : 'pointer';
+        if (state !== 'solved') g.addEventListener('click', () => handleNodeClick(node.id));
+      }
+
+      // Background rect
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('width', NODE_W);
+      rect.setAttribute('height', NODE_H);
+      rect.setAttribute('rx', '2');
+
+      if (state === 'locked') {
+        rect.setAttribute('fill', 'rgba(0,255,65,0.04)');
+        rect.setAttribute('stroke', 'rgba(0,255,65,0.15)');
+        rect.setAttribute('stroke-width', '1');
+      } else if (state === 'solved') {
+        rect.setAttribute('fill', color.replace(')', ',0.25)').replace('rgb', 'rgba'));
+        rect.setAttribute('stroke', color);
+        rect.setAttribute('stroke-width', '1.5');
+      } else if (state === 'active') {
+        rect.setAttribute('fill', color.replace(')', ',0.12)').replace('rgb', 'rgba'));
+        rect.setAttribute('stroke', color);
+        rect.setAttribute('stroke-width', '2.5');
+      } else {
+        // unlocked
+        rect.setAttribute('fill', color.replace(')', ',0.08)').replace('rgb', 'rgba'));
+        rect.setAttribute('stroke', color);
+        rect.setAttribute('stroke-width', '1');
+      }
+
+      g.appendChild(rect);
+
+      // Label text
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', NODE_W / 2);
+      text.setAttribute('y', NODE_H / 2);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'central');
+      text.setAttribute('font-family', 'Courier New, monospace');
+      text.setAttribute('font-size', '9');
+      text.setAttribute('font-weight', '700');
+      text.setAttribute('letter-spacing', '1');
+      text.setAttribute('fill', state === 'locked' ? 'rgba(0,255,65,0.2)' : color);
+      text.textContent = state === 'locked' ? '· · ·' : (state === 'solved' ? `✓ ${node.label}` : node.label);
+      g.appendChild(text);
+
+      svg.appendChild(g);
+    });
+  }
+
+  // ===================================================
+  // TERMINAL SIDEBAR
+  // ===================================================
+
+  function renderTerminal() {
+    const list = document.getElementById('termNodeList');
+    const available = NODES.filter(n => isUnlocked(n.id) && !solved.has(n.id));
+
+    if (available.length === 0 && gamePhase !== 'cleared') {
+      list.innerHTML = '<div style="color:var(--text-dim);font-size:11px;">Brak dostępnych węzłów</div>';
+      return;
+    }
+
+    list.innerHTML = available.map(n => `
+      <div class="term-node-item" onclick="handleNodeClick(${n.id})">
+        <div class="dot" style="background:${DIFF_COLORS[n.difficulty]};width:6px;height:6px;"></div>
+        <span>${n.label}</span>
+        <span style="margin-left:auto;color:var(--text-dark);">${'★'.repeat(n.difficulty)}</span>
+      </div>
+    `).join('');
+  }
+
+  // ===================================================
+  // INIT
+  // ===================================================
+
+  function init() {
+    renderBoard();
+    renderTerminal();
+    updateHUD();
+  }
+
+  init();
+  </script>
+
+  <!-- Tally contact form -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <!-- Chatbase widget -->
+  <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="OuJ2cri2pwybJE45sE3Sc";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
+
+</body>
+</html>

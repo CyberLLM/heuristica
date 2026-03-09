@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:seedance2.app)",
       "WebFetch(domain:tally.so)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Skill(claude-api)"
     ]
   }
 }

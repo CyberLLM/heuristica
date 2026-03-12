@@ -744,6 +744,16 @@
       return audioCtx;
     }
 
+    // Próba autostartu przy ładowaniu strony
+    window.addEventListener('load', () => {
+      try {
+        getCtx().resume().then(() => {
+          if (!bgMusicStarted) { bgMusicStarted = true; scheduleBgNote(); }
+        });
+      } catch(e) {}
+    });
+
+    // Fallback: start przy pierwszym kliknięciu (jeśli przeglądarka zablokowała autoplay)
     document.addEventListener('click', () => {
       try { getCtx().resume(); } catch(e) {}
       if (!bgMusicStarted) { bgMusicStarted = true; scheduleBgNote(); }

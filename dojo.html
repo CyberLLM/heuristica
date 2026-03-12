@@ -310,7 +310,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      align-items: start;
+      align-items: stretch;
     }
     .plan-card {
       background: var(--bg2);
@@ -319,6 +319,8 @@
       padding: 32px 28px;
       position: relative;
       transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
     }
     .plan-card:hover { box-shadow: 0 0 30px rgba(168,85,247,0.12); }
     .plan-card.featured {
@@ -368,6 +370,7 @@
     .plan-features {
       list-style: none;
       margin-bottom: 28px;
+      flex: 1;
     }
     .plan-features li {
       padding: 7px 0;
@@ -671,7 +674,7 @@
       <h3>Marek Staniszewski</h3>
       <div class="role">Strateg · Trener AI · Prompt Engineer</div>
       <p>
-        Konsultant ds. strategii, certyfikowany trener biznesu i coach zespołów z ponad 25-letnim doświadczeniem.
+        Konsultant ds. strategii, certyfikowany trener biznesu i coach zespołów.
         Pracował m.in. w Ogilvy, Young &amp; Rubicam, Havas i Canal+. Członek Rady Ekspertów THINKTANK i SUPERBRANDS.
       </p>
       <p>

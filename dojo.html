@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/dojo">
+  <title>Promptologia Dojo — tygodniowy trening AI | Heuristica</title>
+  <meta name="description" content="Promptologia Dojo — subskrypcyjny program treningowy online. Tygodniowe sesje live z narzędzi AI i promptingu. Prowadzi Marek Staniszewski.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg2:       #161b22;
+      --bg3:       #1c2330;
+      --violet:    #a855f7;
+      --violet-dim:#7c3aed;
+      --teal:      #2dd4bf;
+      --green:     #4ade80;
+      --pink:      #f472b6;
+      --text:      #e6edf3;
+      --text-dim:  #7d8590;
+      --border:    #30363d;
+      --border-v:  rgba(168,85,247,0.35);
+      --border-t:  rgba(45,212,191,0.35);
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-ui:   system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── NAV ─── */
+    .nav {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 14px 26px;
+      font-size: 0.85em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border-bottom-color: var(--violet);
+      text-decoration: none;
+    }
+    .nav a.active { border-bottom-color: var(--teal); }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 1100px;
+      margin: 60px auto 0;
+      padding: 0 24px 60px;
+      text-align: center;
+    }
+    .hero-img {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 16px;
+      display: block;
+      margin: 0 auto 40px;
+      box-shadow: 0 0 60px rgba(168,85,247,0.25), 0 0 120px rgba(45,212,191,0.1);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      border: 1px solid var(--border-t);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(2em, 5vw, 3.4em);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 .grad-violet { color: var(--violet); }
+    .hero h1 .grad-teal { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.2em;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet-dim), var(--violet));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(168,85,247,0.4);
+      text-decoration: none;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--border-t);
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-secondary:hover {
+      background: rgba(45,212,191,0.08);
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: var(--teal);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 24px;
+    }
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.5em, 3vw, 2em);
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .section-desc {
+      color: var(--text-dim);
+      max-width: 640px;
+      margin-bottom: 48px;
+    }
+
+    /* ─── BENEFITS GRID ─── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .benefit-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .benefit-card:hover {
+      border-color: var(--border-v);
+      box-shadow: 0 0 20px rgba(168,85,247,0.1);
+    }
+    .benefit-icon {
+      font-size: 2em;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .benefit-card h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--violet);
+    }
+    .benefit-card p {
+      color: var(--text-dim);
+      font-size: 0.9em;
+    }
+
+    /* ─── PROGRAM ─── */
+    .modules {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .module {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 10px 10px 0;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+      transition: border-left-color 0.2s, box-shadow 0.2s;
+    }
+    .module:hover {
+      border-left-color: var(--teal);
+      box-shadow: 0 0 20px rgba(45,212,191,0.08);
+    }
+    .module-num {
+      font-family: var(--font-mono);
+      font-size: 1.6em;
+      font-weight: 700;
+      color: var(--violet);
+      opacity: 0.5;
+      line-height: 1;
+      min-width: 40px;
+    }
+    .module h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .module p {
+      color: var(--text-dim);
+      font-size: 0.9em;
+    }
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.72em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid;
+    }
+    .tag-v { color: var(--violet); border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.08); }
+    .tag-t { color: var(--teal);   border-color: rgba(45,212,191,0.4);  background: rgba(45,212,191,0.08); }
+    .tag-g { color: var(--green);  border-color: rgba(74,222,128,0.4);  background: rgba(74,222,128,0.08); }
+    .tag-p { color: var(--pink);   border-color: rgba(244,114,182,0.4); background: rgba(244,114,182,0.08); }
+
+    .format-note {
+      margin-top: 28px;
+      background: var(--bg3);
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .format-note strong { color: var(--green); }
+
+    /* ─── PRICING ─── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      align-items: start;
+    }
+    .plan-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .plan-card:hover { box-shadow: 0 0 30px rgba(168,85,247,0.12); }
+    .plan-card.featured {
+      border-color: var(--violet);
+      box-shadow: 0 0 30px rgba(168,85,247,0.2);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.7em;
+      background: var(--violet);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 100px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+    .plan-price {
+      font-size: 2.6em;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .plan-price sub {
+      font-size: 0.4em;
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .plan-price-note {
+      font-size: 0.82em;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+    .plan-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .plan-features li {
+      padding: 7px 0;
+      font-size: 0.9em;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-features li::before {
+      content: '▸';
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .plan-features li.dim::before { color: var(--border); }
+    .plan-features li.dim { opacity: 0.5; }
+    .plan-card .btn-primary,
+    .plan-card .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-flex {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .about-photo {
+      width: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--border-v);
+      box-shadow: 0 0 30px rgba(168,85,247,0.2);
+      flex-shrink: 0;
+    }
+    .about-content h3 {
+      font-size: 1.4em;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .about-content .role {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      color: var(--violet);
+      margin-bottom: 16px;
+    }
+    .about-content p {
+      color: var(--text-dim);
+      font-size: 0.95em;
+      margin-bottom: 12px;
+    }
+
+    /* ─── REGISTER ─── */
+    .register-wrap {
+      text-align: center;
+    }
+    .register-wrap .section-desc {
+      margin: 0 auto 36px;
+    }
+    .form-embed {
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .form-embed iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.82em;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--teal); text-decoration: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .hero { margin-top: 30px; padding-bottom: 40px; }
+      section { padding: 48px 18px; }
+      .about-flex { flex-direction: column; align-items: center; text-align: center; }
+      .module { grid-template-columns: 1fr; gap: 4px; }
+      .module-num { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html">Narzędzia</a>
+    <a href="klienci.html">Klienci</a>
+    <a href="inspiracje.html">Inspiracje</a>
+    <a href="#" data-tally-open="obAOEx">Kontakt</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="img/promptologia_dojo.png" alt="Promptologia Dojo — robot sensei w kimono, retro terminal" class="hero-img">
+    <div class="hero-badge">&gt; program subskrypcyjny online_</div>
+    <h1>
+      <span class="grad-violet">PROMPTOLOGIA</span><br>
+      <span class="grad-teal">DOJO</span>
+    </h1>
+    <p class="hero-sub">Tygodniowy trening narzędzi AI i promptingu — sesje live, nagrania, społeczność.</p>
+    <div class="hero-ctas">
+      <a href="#cennik" class="btn-primary">Wejście testowe — 99 zł</a>
+      <a href="#zapis" class="btn-secondary">Zapisz się</a>
+    </div>
+  </div>
+
+  <!-- CO DOSTAJESZ -->
+  <section id="co-dostajesz">
+    <div class="section-label">// co dostajesz</div>
+    <h2 class="section-title">Pełny pakiet treningowy</h2>
+    <p class="section-desc">Każda subskrypcja daje dostęp do kompletnego środowiska nauki — od sesji live po archiwum i wsparcie społeczności.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">📡</span>
+        <h3>Sesje live / tydzień</h3>
+        <p>4 spotkania miesięcznie w formie warsztatowej — temat przewodni, ćwiczenie praktyczne i Q&A na żywo.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🎬</span>
+        <h3>Pełna biblioteka nagrań</h3>
+        <p>Wszystkie sesje nagrywane i dostępne na żądanie. Wróć do materiału kiedy chcesz — archiwum rośnie z każdym tygodniem.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">📓</span>
+        <h3>Notatniki i repozytoria</h3>
+        <p>Gotowe notebooki, szablony promptów, pliki konfiguracyjne. Materiały dostępne przez cały czas trwania subskrypcji.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">💬</span>
+        <h3>Społeczność WhatsApp</h3>
+        <p>Prywatna grupa z uczestnikami i prowadzącym — pytania, linki, ogłoszenia i codzienne mikro-inspiracje AI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section id="program">
+    <div class="section-label">// program ramowy</div>
+    <h2 class="section-title">5 modułów treningowych</h2>
+    <p class="section-desc">Każdy moduł zamknięty <strong style="color:var(--pink)">Kata</strong> — praktycznym challengem zaliczeniowym.</p>
+
+    <div class="modules">
+
+      <div class="module">
+        <div class="module-num">01</div>
+        <div>
+          <h3>Fundamenty</h3>
+          <p>Anatomia promptu, zaawansowane techniki promptingu, pierwsze automatyzacje — od zera do płynnego działania.</p>
+          <div class="module-tags">
+            <span class="tag tag-v">prompt engineering</span>
+            <span class="tag tag-t">chain-of-thought</span>
+            <span class="tag tag-g">few-shot</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-num">02</div>
+        <div>
+          <h3>Zastosowania branżowe &amp; Kreacja</h3>
+          <p>Generowanie obrazów, wideo i audio — narzędzia i workflow. Własne GPT i instrukcje systemowe. Praktyczne przypadki z marketingu, HR i edukacji.</p>
+          <div class="module-tags">
+            <span class="tag tag-p">Midjourney</span>
+            <span class="tag tag-t">Sora / Runway</span>
+            <span class="tag tag-v">Custom GPT</span>
+            <span class="tag tag-g">system prompt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-num">03</div>
+        <div>
+          <h3>RAG i lokalne modele</h3>
+          <p>Własna baza wiedzy, Retrieval-Augmented Generation, Ollama — prywatne LLM lokalnie. Systematyczny prompt engineering.</p>
+          <div class="module-tags">
+            <span class="tag tag-t">RAG</span>
+            <span class="tag tag-v">Ollama</span>
+            <span class="tag tag-g">embeddings</span>
+            <span class="tag tag-p">vector DB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-num">04</div>
+        <div>
+          <h3>Automatyzacja i agenty</h3>
+          <p>n8n od podstaw — pierwsze workflow, praca z API, budowanie autonomicznych agentów AI.</p>
+          <div class="module-tags">
+            <span class="tag tag-v">n8n</span>
+            <span class="tag tag-t">API</span>
+            <span class="tag tag-g">agenty AI</span>
+            <span class="tag tag-p">Make / Zapier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-num">05</div>
+        <div>
+          <h3>Projekty</h3>
+          <p>Case studies z realnych wdrożeń, projekty uczestników, prezentacja efektów — finalne Kata i certyfikat ukończenia.</p>
+          <div class="module-tags">
+            <span class="tag tag-g">case study</span>
+            <span class="tag tag-t">prezentacja</span>
+            <span class="tag tag-p">certyfikat</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="format-note">
+      <strong>Stały format każdej sesji:</strong><br>
+      Aktualności AI (10 min) → Główny temat + ćwiczenie → Q&A<br><br>
+      <strong>Kata:</strong> praktyczny challenge zaliczeniowy na koniec każdego modułu
+    </div>
+  </section>
+
+  <!-- CENNIK -->
+  <section id="cennik">
+    <div class="section-label">// cennik</div>
+    <h2 class="section-title">Wybierz plan</h2>
+    <p class="section-desc">Dostęp do wszystkich materiałów aktywny przez czas trwania subskrypcji. Ceny netto + 23% VAT.</p>
+
+    <div class="pricing-grid">
+
+      <!-- Wejście testowe -->
+      <div class="plan-card">
+        <div class="plan-name">Wejście testowe</div>
+        <div class="plan-price">99<sub>zł brutto</sub></div>
+        <div class="plan-price-note">jednorazowo</div>
+        <ul class="plan-features">
+          <li>Dostęp do 1 sesji live</li>
+          <li>Nagranie sesji (7 dni)</li>
+          <li class="dim">Biblioteka nagrań</li>
+          <li class="dim">Notatniki i repozytoria</li>
+          <li class="dim">Społeczność WhatsApp</li>
+        </ul>
+        <a href="#zapis" class="btn-secondary">Wypróbuj</a>
+      </div>
+
+      <!-- Miesięczny -->
+      <div class="plan-card featured">
+        <div class="plan-badge">Najpopularniejszy</div>
+        <div class="plan-name">Plan miesięczny</div>
+        <div class="plan-price">349<sub>zł netto / mies.</sub></div>
+        <div class="plan-price-note">429,27 zł brutto / miesiąc</div>
+        <ul class="plan-features">
+          <li>4 sesje live miesięcznie</li>
+          <li>Pełna biblioteka nagrań</li>
+          <li>Notatniki i repozytoria</li>
+          <li>Społeczność WhatsApp</li>
+        </ul>
+        <a href="#zapis" class="btn-primary">Zapisz się</a>
+      </div>
+
+      <!-- Kwartalny -->
+      <div class="plan-card">
+        <div class="plan-name">Plan kwartalny</div>
+        <div class="plan-price">897<sub>zł netto / kwartał</sub></div>
+        <div class="plan-price-note">1&nbsp;103,31 zł brutto / 3 miesiące</div>
+        <ul class="plan-features">
+          <li>12 sesji live (3 miesiące)</li>
+          <li>Pełna biblioteka nagrań</li>
+          <li>Notatniki i repozytoria</li>
+          <li>Społeczność WhatsApp</li>
+          <li style="color:var(--green)">Oszczędzasz ~90 zł vs miesięczny</li>
+        </ul>
+        <a href="#zapis" class="btn-secondary">Wybierz kwartalny</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- O PROWADZĄCYM -->
+  <section id="o-prowadzacym">
+    <div class="section-label">// o prowadzącym</div>
+    <h2 class="section-title">Kto prowadzi Dojo?</h2>
+
+    <div class="about-flex">
+      <img src="img/MS_photo_1.png" alt="Marek Staniszewski" class="about-photo">
+      <div class="about-content">
+        <h3>Marek Staniszewski</h3>
+        <div class="role">Strateg · Trener AI · Prompt Engineer</div>
+        <p>
+          Konsultant ds. strategii, certyfikowany trener biznesu i coach zespołów z ponad 25-letnim doświadczeniem.
+          Pracował m.in. w Ogilvy, Young &amp; Rubicam, Havas i Canal+. Członek Rady Ekspertów THINKTANK i SUPERBRANDS.
+        </p>
+        <p>
+          Łączy klasyczną strategię marketingową z praktycznym zastosowaniem narzędzi AI — tworzy kursy, narzędzia i programy szkoleniowe dla marketerów i liderów.
+        </p>
+        <p>
+          <a href="https://heuristica.pl/kim">Więcej o Marku na heuristica.pl</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZAPIS -->
+  <section id="zapis">
+    <div class="register-wrap">
+      <div class="section-label">// zapis</div>
+      <h2 class="section-title">Dołącz do Dojo</h2>
+      <p class="section-desc">
+        Wypełnij formularz — odezwiemy się z potwierdzeniem i instrukcją płatności.
+      </p>
+      <!-- REPLACE src z właściwym linkiem Google Forms: https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true -->
+      <div class="form-embed">
+        <iframe
+          src="https://docs.google.com/forms/d/e/PLACEHOLDER_FORM_ID/viewform?embedded=true"
+          height="720"
+          loading="lazy"
+          title="Formularz zapisu Promptologia Dojo">
+          Ładowanie formularza...
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2025 <a href="https://heuristica.pl">heuristica.pl</a> &nbsp;|&nbsp;
+      <a href="polityka.html">Polityka prywatności</a> &nbsp;|&nbsp;
+      <a href="regulamin.html">Regulamin</a> &nbsp;|&nbsp;
+      <a href="mailto:staniszewski@heuristica.pl">staniszewski@heuristica.pl</a>
+    </p>
+  </footer>
+
+  <!-- Tally contact popup -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <!-- Chatbase widget -->
+  <script>
+    window.embeddedChatbotConfig = { chatbotId: "OuJ2cri2pwybJE45sE3Sc", domain: "www.chatbase.co" };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="OuJ2cri2pwybJE45sE3Sc" domain="www.chatbase.co" defer></script>
+
+</body>
+</html>

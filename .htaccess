@@ -28,6 +28,9 @@ RewriteRule ^promptologia/?$ /promptologia.html [L,NC]
 # Redirect /quiz to /quiz.html
 RewriteRule ^quiz/?$ /quiz.html [L,NC]
 
+# Redirect /dojo to /dojo.html
+RewriteRule ^dojo/?$ /dojo.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

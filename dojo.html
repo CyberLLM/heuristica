@@ -466,6 +466,66 @@
     }
     .mute-btn:hover { border-color: var(--teal); color: var(--teal); }
 
+    /* ─── TERMINY ─── */
+    #terminy {
+      padding: 80px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .schedule-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .schedule-note {
+      color: var(--text-dim);
+      font-size: 0.9em;
+      margin-bottom: 48px;
+      font-family: var(--font-mono);
+    }
+    .cal-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cal-month {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      min-width: 200px;
+    }
+    .cal-month-name {
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .cal-days {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .cal-day {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 1em;
+      font-weight: 600;
+    }
+    .cal-day.session {
+      background: rgba(168,85,247,0.12);
+      border: 1px solid var(--border-v);
+      color: var(--violet);
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -497,6 +557,7 @@
     <a href="https://heuristica.pl/quiz.html">Quiz</a>
     <a href="https://heuristica.pl/sandbox.html">Sandbox</a>
     <a href="https://heuristica.pl/prompting.html">Prompting</a>
+    <a href="#" data-tally-open="obAOEx">Kontakt</a>
     <button class="mute-btn" id="muteBtn" onclick="toggleMute()">[♪ ON]</button>
   </nav>
 
@@ -719,6 +780,43 @@
           title="Formularz zapisu Promptologia Dojo">
           Ładowanie formularza...
         </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMINY -->
+  <section id="terminy">
+    <div class="schedule-wrap">
+      <div class="section-label">// harmonogram</div>
+      <h2 class="section-title">Najbliższe sesje</h2>
+      <p class="schedule-note">Terminy mogą ulec zmianie — subskrybenci są informowani z wyprzedzeniem.</p>
+      <div class="cal-grid">
+        <div class="cal-month">
+          <div class="cal-month-name">Marzec 2026</div>
+          <div class="cal-days">
+            <span class="cal-day session">21</span>
+            <span class="cal-day session">28</span>
+          </div>
+        </div>
+        <div class="cal-month">
+          <div class="cal-month-name">Kwiecień 2026</div>
+          <div class="cal-days">
+            <span class="cal-day session">01</span>
+            <span class="cal-day session">11</span>
+            <span class="cal-day session">18</span>
+            <span class="cal-day session">26</span>
+          </div>
+        </div>
+        <div class="cal-month">
+          <div class="cal-month-name">Maj 2026</div>
+          <div class="cal-days">
+            <span class="cal-day session">02</span>
+            <span class="cal-day session">09</span>
+            <span class="cal-day session">16</span>
+            <span class="cal-day session">23</span>
+            <span class="cal-day session">30</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -31,6 +31,12 @@ RewriteRule ^quiz/?$ /quiz.html [L,NC]
 # Redirect /dojo to /dojo.html
 RewriteRule ^dojo/?$ /dojo.html [L,NC]
 
+# Redirect /payment-success to /payment-success-page.html
+RewriteRule ^payment-success/?$ /payment-success-page.html [L,NC]
+
+# Redirect /platnosci-szkolenie-ai to /platnosci-szkolenie-ai.html
+RewriteRule ^platnosci-szkolenie-ai/?$ /platnosci-szkolenie-ai.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

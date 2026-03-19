@@ -4,7 +4,13 @@
       "WebFetch(domain:seedance2.app)",
       "WebFetch(domain:tally.so)",
       "Bash(unzip:*)",
-      "Skill(claude-api)"
+      "Skill(claude-api)",
+      "Bash(node -e \"require\\(''''puppeteer''''\\)\")",
+      "Bash(node -e \"require\\(''''playwright''''\\)\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --print-to-pdf=\"C:/Users/stani/Downloads/eon_ets_report.pdf\" --print-to-pdf-no-header --no-pdf-header-footer \"C:/Users/stani/Downloads/eon_ets_report.html\")",
+      "Bash(git status:*)"
     ]
   }
 }

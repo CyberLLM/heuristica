@@ -10,7 +10,11 @@
       "Read(//c/Program Files/Google/Chrome/Application/**)",
       "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
       "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --no-sandbox --print-to-pdf=\"C:/Users/stani/Downloads/eon_ets_report.pdf\" --print-to-pdf-no-header --no-pdf-header-footer \"C:/Users/stani/Downloads/eon_ets_report.html\")",
-      "Bash(git status:*)"
+      "Bash(git status:*)",
+      "Bash(node -e \"require\\(''''pptxgenjs''''\\)\")",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)"
     ]
   }
 }

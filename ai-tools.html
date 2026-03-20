@@ -78,6 +78,94 @@
       min-height: 100vh;
     }
 
+    /* ===== AUTH SCREEN ===== */
+    #auth-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .auth-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px 48px;
+      width: 360px;
+      text-align: center;
+    }
+    .auth-logo-mark {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #2A7A5B, #1a5a3d);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      margin: 0 auto 20px;
+      font-family: var(--font-mono);
+    }
+    .auth-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+    }
+    .auth-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .auth-input {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      padding: 10px 14px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .auth-input:focus { border-color: var(--text-link); }
+    .auth-input.error { border-color: #f85149; animation: shake 0.3s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+    .auth-btn {
+      background: #2A7A5B;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px;
+      transition: opacity 0.15s;
+    }
+    .auth-btn:hover { opacity: 0.85; }
+    .auth-error {
+      color: #f85149;
+      font-size: 12px;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+    #app { display: none; }
+
     a {
       color: var(--text-link);
       text-decoration: none;
@@ -800,6 +888,21 @@
   </style>
 </head>
 <body>
+
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo-mark">H</div>
+    <div class="auth-title">Narzędzia AI</div>
+    <div class="auth-subtitle">Katalog narzędzi — dostęp chroniony</div>
+    <form class="auth-form" id="auth-form">
+      <input type="password" class="auth-input" id="auth-input" placeholder="Hasło dostępu" autofocus>
+      <button type="submit" class="auth-btn">Wejdź</button>
+    </form>
+    <div class="auth-error" id="auth-error"></div>
+  </div>
+</div>
+
+<div id="app">
   <!-- TOP NAVIGATION -->
   <nav class="top-nav">
     <div class="top-nav-inner">
@@ -1444,5 +1547,32 @@
       }
     }
   </script>
+</div><!-- /#app -->
+
+<script>
+  const AUTH_KEY  = 'ai_tools_auth';
+  const AUTH_PASS = 'heuristica-plg';
+
+  if (sessionStorage.getItem(AUTH_KEY) === '1') showApp();
+
+  document.getElementById('auth-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const input = document.getElementById('auth-input');
+    const error = document.getElementById('auth-error');
+    if (input.value === AUTH_PASS) {
+      sessionStorage.setItem(AUTH_KEY, '1');
+      showApp();
+    } else {
+      input.classList.add('error');
+      error.textContent = 'Nieprawidłowe hasło';
+      setTimeout(() => { input.classList.remove('error'); error.textContent = ''; }, 2500);
+    }
+  });
+
+  function showApp() {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+</script>
 </body>
 </html>

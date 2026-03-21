@@ -331,6 +331,66 @@
       padding-top: 64px;
     }
 
+    /* ─── HARMONOGRAM ─── */
+    .schedule-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .schedule-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .schedule-note {
+      color: var(--text-dim);
+      font-size: 0.9em;
+      margin-bottom: 48px;
+      font-family: var(--font-mono);
+    }
+    .cal-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cal-month {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      min-width: 200px;
+    }
+    .cal-month-name {
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .cal-days {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .cal-day {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 1em;
+      font-weight: 600;
+      background: rgba(168,85,247,0.12);
+      border: 1px solid var(--border-v);
+      color: var(--violet);
+    }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -453,6 +513,43 @@
   </article>
 
 </main>
+
+<!-- HARMONOGRAM -->
+<div class="schedule-section">
+  <div class="schedule-wrap">
+    <div class="section-label">// harmonogram</div>
+    <h2 class="section-title">Najbliższe sesje</h2>
+    <p class="schedule-note">Terminy mogą ulec zmianie — subskrybenci są informowani z wyprzedzeniem.</p>
+    <div class="cal-grid">
+      <div class="cal-month">
+        <div class="cal-month-name">Marzec 2026</div>
+        <div class="cal-days">
+          <span class="cal-day">21</span>
+          <span class="cal-day">28</span>
+        </div>
+      </div>
+      <div class="cal-month">
+        <div class="cal-month-name">Kwiecień 2026</div>
+        <div class="cal-days">
+          <span class="cal-day">01</span>
+          <span class="cal-day">11</span>
+          <span class="cal-day">18</span>
+          <span class="cal-day">26</span>
+        </div>
+      </div>
+      <div class="cal-month">
+        <div class="cal-month-name">Maj 2026</div>
+        <div class="cal-days">
+          <span class="cal-day">02</span>
+          <span class="cal-day">09</span>
+          <span class="cal-day">16</span>
+          <span class="cal-day">23</span>
+          <span class="cal-day">30</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   &copy; 2026 Heuristica &mdash; <a href="#" data-tally-open="obAOEx">Kontakt</a>

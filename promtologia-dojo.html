@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Promtologia Dojo — Materiały | Heuristica</title>
+  <meta name="description" content="Materiały dla uczestników Promtologii Dojo — nagrania sesji i materiały do pobrania.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg2:       #161b22;
+      --bg3:       #1c2330;
+      --violet:    #a855f7;
+      --violet-dim:#7c3aed;
+      --teal:      #2dd4bf;
+      --green:     #4ade80;
+      --pink:      #f472b6;
+      --text:      #e6edf3;
+      --text-dim:  #7d8590;
+      --border:    #30363d;
+      --border-v:  rgba(168,85,247,0.35);
+      --border-t:  rgba(45,212,191,0.35);
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-ui:   system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── PASSWORD OVERLAY ─── */
+    #auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #auth-overlay.hidden { display: none; }
+    .auth-box {
+      background: var(--bg2);
+      border: 1px solid var(--border-v);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    .auth-box h2 {
+      font-family: var(--font-mono);
+      font-size: 1.3em;
+      color: var(--violet);
+      margin-bottom: 8px;
+    }
+    .auth-box p {
+      color: var(--text-dim);
+      font-size: 0.9em;
+      margin-bottom: 28px;
+    }
+    .auth-input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1em;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      outline: none;
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+    .auth-input:focus { border-color: var(--violet); }
+    .auth-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--violet-dim), var(--violet));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .auth-btn:hover { opacity: 0.9; }
+    .auth-error {
+      color: var(--pink);
+      font-size: 0.85em;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 14px 26px;
+      font-size: 0.85em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border-bottom-color: var(--violet);
+      text-decoration: none;
+    }
+    .nav a.active { border-bottom-color: var(--teal); }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      border: 1px solid var(--border-t);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+    }
+    .page-header h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(1.8em, 4vw, 2.8em);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .page-header h1 .v { color: var(--violet); }
+    .page-header p {
+      color: var(--text-dim);
+      font-size: 1.05em;
+      max-width: 600px;
+    }
+
+    /* ─── SESSIONS CONTAINER ─── */
+    .sessions {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    /* ─── SINGLE SESSION ─── */
+    .session {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .session-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .session-num {
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--violet);
+      border: 1px solid var(--border-v);
+      border-radius: 6px;
+      padding: 3px 10px;
+      letter-spacing: 0.08em;
+    }
+    .session-num.latest {
+      background: rgba(168,85,247,0.12);
+      color: var(--violet);
+    }
+    .session-date {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      color: var(--text-dim);
+    }
+    .session-title {
+      font-size: clamp(1.2em, 2.5vw, 1.6em);
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .session-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ─── VIDEO / IMAGE COLUMN ─── */
+    .session-media {
+      position: relative;
+      width: 100%;
+    }
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .session-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: block;
+      box-shadow: 0 0 40px rgba(168,85,247,0.15);
+    }
+
+    /* ─── NOTES / DOWNLOADS COLUMN ─── */
+    .session-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .info-block h3 {
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .info-block p, .info-block li {
+      color: var(--text-dim);
+      font-size: 0.95em;
+      line-height: 1.7;
+    }
+    .info-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .info-block ul li::before {
+      content: '›';
+      color: var(--violet);
+      margin-right: 8px;
+    }
+    .download-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .download-link:hover {
+      border-color: var(--border-t);
+      background: rgba(45,212,191,0.05);
+      text-decoration: none;
+      color: var(--text);
+    }
+    .download-icon {
+      font-size: 1.4em;
+      flex-shrink: 0;
+    }
+    .download-label {
+      display: flex;
+      flex-direction: column;
+    }
+    .download-label span:first-child {
+      font-weight: 600;
+      font-size: 0.95em;
+    }
+    .download-label span:last-child {
+      font-size: 0.8em;
+      color: var(--text-dim);
+    }
+
+    .session + .session {
+      border-top: 1px solid var(--border);
+      padding-top: 64px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-dim);
+      font-size: 0.85em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 720px) {
+      .session-body {
+        grid-template-columns: 1fr;
+      }
+      .page-header { padding: 40px 16px 32px; }
+      .sessions { padding: 32px 16px 60px; gap: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD OVERLAY -->
+<div id="auth-overlay">
+  <div class="auth-box">
+    <h2>Promtologia Dojo</h2>
+    <p>Strona przeznaczona dla uczestników.<br>Podaj hasło dostępu.</p>
+    <input type="password" id="auth-input" class="auth-input" placeholder="hasło" autocomplete="current-password">
+    <button class="auth-btn" onclick="checkAuth()">Wejdź</button>
+    <div class="auth-error" id="auth-error"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/">HEURISTICA</a>
+  <a href="/kim">Kim jestem</a>
+  <a href="/dojo">Dojo</a>
+  <a href="/sandbox">Sandbox</a>
+  <a href="/prompting">Prompting</a>
+  <a href="#" data-tally-open="obAOEx">Kontakt</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="badge">MATERIAŁY DLA UCZESTNIKÓW</div>
+  <h1>Promtologia <span class="v">Dojo</span></h1>
+  <p>Nagrania sesji i materiały do pobrania. Najnowsze spotkanie zawsze na górze.</p>
+</header>
+
+<!-- SESSIONS -->
+<main class="sessions">
+
+  <!-- ══ SESJA 2 (najnowsza) ══ -->
+  <article class="session">
+    <div class="session-meta">
+      <span class="session-num latest">Sesja 2</span>
+      <span class="session-date">21 marca 2026</span>
+    </div>
+    <h2 class="session-title">Sesja 2 — Promtologia Dojo</h2>
+    <div class="session-body">
+      <div class="session-media">
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/pmwPsPQkUmo"
+            title="Promtologia Dojo — sesja 2"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="session-info">
+        <div class="info-block">
+          <h3>Materiały do pobrania</h3>
+          <a class="download-link" href="https://drive.google.com/drive/folders/1Aa3hTRVqoHHEbgNwTQk7H62h7S7cxe6t?usp=drive_link" target="_blank" rel="noopener">
+            <span class="download-icon">📁</span>
+            <span class="download-label">
+              <span>Folder Google Drive</span>
+              <span>Slajdy, notatki i zasoby sesji</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ══ SESJA 1 ══ -->
+  <article class="session">
+    <div class="session-meta">
+      <span class="session-num">Sesja 1</span>
+      <span class="session-date">14 marca 2026</span>
+    </div>
+    <h2 class="session-title">Sesja 1 — Promtologia Dojo</h2>
+    <div class="session-body">
+      <div class="session-media">
+        <img src="img/promptologia_dojo.png" alt="Promtologia Dojo — sesja 1" class="session-img">
+      </div>
+      <div class="session-info">
+        <div class="info-block">
+          <h3>Notatki ze spotkania</h3>
+          <p>Inauguracyjna sesja Dojo — zapoznanie z programem, fundamenty promptingu, pierwsze ćwiczenia.</p>
+          <!-- TODO: wklej opis z Notion -->
+        </div>
+        <div class="info-block">
+          <h3>Materiały do pobrania</h3>
+          <a class="download-link" href="https://drive.google.com/drive/folders/1Aa3hTRVqoHHEbgNwTQk7H62h7S7cxe6t?usp=drive_link" target="_blank" rel="noopener">
+            <span class="download-icon">📁</span>
+            <span class="download-label">
+              <span>Folder Google Drive</span>
+              <span>Slajdy, notatki i zasoby sesji</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  &copy; 2026 Heuristica &mdash; <a href="#" data-tally-open="obAOEx">Kontakt</a>
+</footer>
+
+<script>
+  const AUTH_KEY = 'dojo_mat_auth';
+  const PASSWORD = 'dojoprompt';
+
+  function checkAuth() {
+    const val = document.getElementById('auth-input').value;
+    if (val === PASSWORD) {
+      sessionStorage.setItem(AUTH_KEY, '1');
+      document.getElementById('auth-overlay').classList.add('hidden');
+    } else {
+      document.getElementById('auth-error').textContent = 'Nieprawidłowe hasło.';
+      document.getElementById('auth-input').value = '';
+      document.getElementById('auth-input').focus();
+    }
+  }
+
+  document.getElementById('auth-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAuth();
+  });
+
+  if (sessionStorage.getItem(AUTH_KEY) === '1') {
+    document.getElementById('auth-overlay').classList.add('hidden');
+  }
+</script>
+
+<script async src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>

@@ -801,27 +801,27 @@
         <div class="cal-month">
           <div class="cal-month-name">Marzec 2026</div>
           <div class="cal-days">
-            <span class="cal-day session">21</span>
-            <span class="cal-day session">28</span>
+            <span class="cal-day session" data-date="2026-03-21">21</span>
+            <span class="cal-day session" data-date="2026-03-28">28</span>
           </div>
         </div>
         <div class="cal-month">
           <div class="cal-month-name">Kwiecień 2026</div>
           <div class="cal-days">
-            <span class="cal-day session">01</span>
-            <span class="cal-day session">11</span>
-            <span class="cal-day session">18</span>
-            <span class="cal-day session">26</span>
+            <span class="cal-day session" data-date="2026-04-01">01</span>
+            <span class="cal-day session" data-date="2026-04-11">11</span>
+            <span class="cal-day session" data-date="2026-04-18">18</span>
+            <span class="cal-day session" data-date="2026-04-26">26</span>
           </div>
         </div>
         <div class="cal-month">
           <div class="cal-month-name">Maj 2026</div>
           <div class="cal-days">
-            <span class="cal-day session">02</span>
-            <span class="cal-day session">09</span>
-            <span class="cal-day session">16</span>
-            <span class="cal-day session">23</span>
-            <span class="cal-day session">30</span>
+            <span class="cal-day session" data-date="2026-05-02">02</span>
+            <span class="cal-day session" data-date="2026-05-09">09</span>
+            <span class="cal-day session" data-date="2026-05-16">16</span>
+            <span class="cal-day session" data-date="2026-05-23">23</span>
+            <span class="cal-day session" data-date="2026-05-30">30</span>
           </div>
         </div>
       </div>
@@ -893,6 +893,16 @@
       muted = !muted;
       document.getElementById('muteBtn').textContent = muted ? '[♪ OFF]' : '[♪ ON]';
     }
+  </script>
+
+  <script>
+    (function() {
+      const today = new Date(); today.setHours(0,0,0,0);
+      document.querySelectorAll('.cal-day[data-date]').forEach(function(el) {
+        const d = new Date(el.dataset.date);
+        if (d < today) { el.classList.remove('session'); el.classList.add('past'); }
+      });
+    })();
   </script>
 
   <!-- Tally contact popup -->

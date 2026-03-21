@@ -900,7 +900,7 @@
       const today = new Date(); today.setHours(0,0,0,0);
       document.querySelectorAll('.cal-day[data-date]').forEach(function(el) {
         const d = new Date(el.dataset.date);
-        if (d < today) { el.classList.remove('session'); el.classList.add('past'); }
+        if (d <= today) { el.classList.remove('session'); el.classList.add('past'); }
       });
     })();
   </script>

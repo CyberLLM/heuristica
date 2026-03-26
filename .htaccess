@@ -40,6 +40,9 @@ RewriteRule ^payment-success/?$ /payment-success-page.html [L,NC]
 # Redirect /platnosci-szkolenie-ai to /platnosci-szkolenie-ai.html
 RewriteRule ^platnosci-szkolenie-ai/?$ /platnosci-szkolenie-ai.html [L,NC]
 
+# Redirect /postbiotic to /postbiotic.html
+RewriteRule ^postbiotic/?$ /postbiotic.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

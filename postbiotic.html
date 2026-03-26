@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Barrier & Stress Support | Next‑Generation Postbiotic Matrix</title>
+  <!-- Google Fonts + simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefef7;
+      color: #1a2a2f;
+      line-height: 1.4;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #2b7a62;
+      padding-left: 1rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 5rem 0;
+      border-bottom: 1px solid #e6ede8;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    /* buttons */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2b7a62;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #2b7a62;
+      color: #2b7a62;
+    }
+
+    .btn-outline:hover {
+      background: #2b7a62;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #1f5e4b;
+      transform: translateY(-2px);
+    }
+
+    /* hero */
+    .hero {
+      padding: 4rem 0 3rem 0;
+      background: linear-gradient(135deg, #f8faf6 0%, #f0f5f0 100%);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      flex: 1.2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #e1f0ea;
+      color: #1f5e4b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.8rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #3a5e54;
+      margin-top: 0.5rem;
+      max-width: 90%;
+    }
+
+    .hero-visual {
+      flex: 0.9;
+      background: #eaf3ef;
+      border-radius: 48px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.03);
+    }
+
+    .matrix-icon {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: white;
+      display: inline-block;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      color: #2b7a62;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    /* grid cards */
+    .grid-2, .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+      border: 1px solid #eef3ef;
+    }
+
+    .card-highlight {
+      border-top: 4px solid #2b7a62;
+    }
+
+    .marker-badge {
+      background: #eef6f2;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1f5e4b;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* table compare */
+    .compare-table {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .compare-card {
+      flex: 1;
+      background: white;
+      border-radius: 32px;
+      padding: 1.8rem;
+      border: 1px solid #e2e9e4;
+    }
+    .compare-card.premium {
+      background: #fefdf7;
+      border-color: #cbdcd2;
+    }
+    .price-tag {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    /* list */
+    .check-list {
+      list-style: none;
+      padding: 0;
+    }
+    .check-list li {
+      padding-left: 1.8rem;
+      position: relative;
+      margin-bottom: 0.7rem;
+    }
+    .check-list li::before {
+      content: "✓";
+      color: #2b7a62;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .dont-list {
+      list-style: none;
+      padding: 0;
+    }
+    .dont-list li {
+      padding-left: 1.8rem;
+      position: relative;
+      margin-bottom: 0.6rem;
+      color: #5e6e66;
+    }
+    .dont-list li::before {
+      content: "✕";
+      color: #bc9a6c;
+      position: absolute;
+      left: 0;
+    }
+
+    hr {
+      margin: 2rem 0;
+      border: none;
+      height: 1px;
+      background: #e2eae5;
+    }
+
+    footer {
+      background: #1a2a2f;
+      color: #cbdcd2;
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 800px) {
+      h1 { font-size: 2.4rem; }
+      .container { padding: 0 20px; }
+      .section { padding: 3rem 0; }
+      .hero-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WARSZTATY BANNER -->
+<div style="background: #1f5e4b; color: white; text-align: center; padding: 0.8rem 1rem; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.01em;">
+  Materiał przygotowany na warsztaty z Uniwersytetem Przyrodniczym w Lublinie &nbsp;·&nbsp; <a href="https://www.heuristica.pl" style="color: #a8d8c4; text-decoration: underline;">heuristica.pl</a>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-badge">Next‑Generation Postbiotic · Dual‑Standardised Matrix</span>
+      <h1>Barrier & Stress Support.<br>Neuroimmune Resilience.</h1>
+      <p class="hero-sub">Dual‑standardised <em>Lactiplantibacillus plantarum</em> postbiotic, magnez i witamina B6 – wsparcie bariery jelitowej oraz prawidłowego funkcjonowania układu nerwowego.</p>
+      <div class="btn-group">
+        <a href="#" class="btn">Sprawdź formułę Core</a>
+        <a href="#" class="btn btn-outline">Zobacz wariant Premium</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="matrix-icon">Postbiotic Matrix™</div>
+      <div style="font-weight:500; margin-top: 0.5rem;">≥1×10¹¹ inactivated cells equiv.<br>ILA + EPS standaryzacja</div>
+      <div style="font-size:0.8rem; margin-top: 0.8rem;">⬩ fermentacja ukierunkowana ⬩ frakcja metabolitów</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE SNAPSHOT -->
+<div class="container">
+  <div class="section">
+    <h2>Nauka w pigułce</h2>
+    <p style="font-size:1.2rem; margin-bottom: 2rem; max-width: 85%;">Nie kolejny probiotyk. Nie „postbiotyczny blend”.<br>Definiujemy jakość procesem i markerami.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="marker-badge">Dual‑standardised postbiotic</div>
+        <h3>ILA + EPS jako markery procesu</h3>
+        <p>Inaktywowane komórki <em>L. plantarum</em> z zachowaną frakcją metabolitów. <strong>ILA</strong> (kwas indolilo-3-mlekowy) – szlak tryptofanowy. <strong>EPS</strong> (egzopolisacharydy) – wsparcie bariery jelitowej i immunomodulacja.</p>
+      </div>
+      <div class="card">
+        <div class="marker-badge">Standaryzowana moc</div>
+        <h3>≥1×10¹¹ cell equivalents / porcja</h3>
+        <p>Każda dzienna porcja dostarcza standaryzowaną ilość inaktywowanych komórek i metabolitów – mierzalną, powtarzalną, kontrolowaną w QC.</p>
+      </div>
+      <div class="card">
+        <div class="marker-badge">Legalny szkielet UE</div>
+        <h3>Magnez + Witamina B6</h3>
+        <p><strong>Magnez</strong> – przyczynia się do prawidłowego funkcjonowania układu nerwowego oraz funkcji psychologicznych.<br>
+        <strong>Witamina B6</strong> – wspiera układ nerwowy i regulację hormonalną.<br>Zatwierdzone oświadczenia zdrowotne UE.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE SECTION -->
+<div class="container">
+  <div class="section">
+    <h2>Architektura produktu</h2>
+    <p style="margin-bottom: 1.5rem;">Zaprojektowany od procesu, nie od listy składników.</p>
+    <div class="grid-3">
+      <div class="card card-highlight">
+        <div class="feature-icon">🧬</div>
+        <h3>Postbiotic Matrix</h3>
+        <p>Inaktywowane komórki <em>L. plantarum</em> + frakcja metabolitów pozakomórkowych. Standaryzacja na ILA / EPS.</p>
+        <p style="margin-top: 0.5rem; font-weight:500;">⬩ Nowatorstwo biologiczne</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon">⚡</div>
+        <h3>Magnez</h3>
+        <p>Dawka zgodna z claimami UE – wsparcie układu nerwowego, redukcja zmęczenia, funkcje psychologiczne.</p>
+        <p style="margin-top: 0.5rem; font-weight:500;">⬩ Legalny szkielet komunikacyjny</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon">🌀</div>
+        <h3>Witamina B6</h3>
+        <p>W dawce z zatwierdzonymi claimami – prawidłowe funkcjonowanie układu nerwowego oraz regulacja hormonalna.</p>
+        <p style="margin-top: 0.5rem; font-weight:500;">⬩ Legalny szkielet komunikacyjny</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT MAKES IT DIFFERENT -->
+<div class="container">
+  <div class="section">
+    <h2>Czym różni się ten produkt?</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>🔬 Nowatorstwo w mechanizmie</h3>
+        <ul class="check-list">
+          <li>Fermentacja ukierunkowana na ILA / EPS – sterowana pod kątem markerów funkcjonalnych</li>
+          <li>Zachowanie frakcji metabolitów po inaktywacji – produkt niesie biomasę + metabolity bakteryjne</li>
+          <li>Podwójna standaryzacja jakościowa – mierzalność i powtarzalność, nie tylko deklaracja</li>
+          <li>Krótka, czysta formuła – bez adaptogenów, przypadkowych prebiotyków, zbędnych stacków</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>✅ Mówimy to, co możemy udowodnić</h3>
+        <p><strong>Obietnica produktu:</strong><br>
+        ✔ wspiera prawidłowe funkcjonowanie układu nerwowego i funkcji psychologicznych (magnez, B6)<br>
+        ✔ oparty na dual‑standardised <em>L. plantarum</em> postbiotic matrix<br>
+        ✔ projektowany pod wsparcie bariery jelitowej i równowagi neuroimmunologicznej</p>
+        <p style="margin-top: 1rem;"><strong>Nie mówimy:</strong></p>
+        <ul class="dont-list">
+          <li>„redukuje stan zapalny”</li>
+          <li>„leczy oś jelito–mózg”</li>
+          <li>„obniża TNF-alfa”</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANTS CORE + PREMIUM -->
+<div class="container">
+  <div class="section">
+    <h2>Dwa warianty – świadomy wybór</h2>
+    <div class="compare-table">
+      <div class="compare-card">
+        <span class="marker-badge">Core · Daily Barrier & Stress Support</span>
+        <h3>Postbiotic Barrier + Magnez/B6</h3>
+        <ul class="check-list" style="margin: 1rem 0;">
+          <li>Postbiotic matrix <em>L. plantarum</em> (≥1×10¹¹ inactivated cells equiv., ILA + EPS)</li>
+          <li>Magnez (claim UE: układ nerwowy + funkcje psychologiczne)</li>
+          <li>Witamina B6 (claim UE: układ nerwowy + regulacja hormonalna)</li>
+          <li>Forma: stick-pack lub kapsułki premium</li>
+        </ul>
+        <div class="price-tag">Start smart</div>
+        <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Sprawdź Core</a>
+      </div>
+      <div class="compare-card premium">
+        <span class="marker-badge">Premium · Neuro‑Barrier</span>
+        <h3>Core + DHA 250 mg</h3>
+        <ul class="check-list" style="margin: 1rem 0;">
+          <li>Wszystko z wariantu Core</li>
+          <li><strong>DHA 250 mg / dzień</strong> – claim: „DHA przyczynia się do utrzymania prawidłowego funkcjonowania mózgu”</li>
+          <li>Opcjonalnie: wyższa gęstość postbiotyku, wzmocniona kontrola ILA/EPS</li>
+          <li>Idealny dla świadomych użytkowników szukających mostu do komunikacji „brain support”</li>
+        </ul>
+        <div class="price-tag">Premium neuro‑barrier</div>
+        <a href="#" class="btn btn-outline" style="margin-top: 1rem;">Zobacz Premium</a>
+      </div>
+    </div>
+    <p style="font-size:0.9rem; margin-top: 0.5rem; background: #eff4f1; padding: 0.8rem; border-radius: 20px;">⭐ DHA daje realny most do komunikacji „brain support” – lepiej zakotwiczone regulacyjnie niż sama narracja o osi jelito–mózg.</p>
+  </div>
+</div>
+
+<!-- WHAT WE DON'T ADD + USP -->
+<div class="container">
+  <div class="section">
+    <div class="grid-2">
+      <div class="card">
+        <h3>🚫 Świadomie nie dodajemy na start</h3>
+        <ul class="dont-list">
+          <li>Ashwagandha</li>
+          <li>Melatonina</li>
+          <li>Wieloskładnikowy „adaptogen stack”</li>
+          <li>Przypadkowe prebiotyki</li>
+          <li>GABA jako claimowy hero składnik</li>
+        </ul>
+        <p style="margin-top: 1rem;">Dlaczego? Rozwadniają koncepcję, komplikują interpretację, utrudniają badania kliniczne i osłabiają USP. Lepiej: <strong>krótszy, czystszy, procesowo inteligentny</strong> produkt.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Gdzie naprawdę jest nowatorstwo</h3>
+        <ul class="check-list">
+          <li>Fermentacja ukierunkowana na ILA / EPS</li>
+          <li>Zachowanie frakcji metabolitów po inaktywacji</li>
+          <li>Połączenie inaktywowanych komórek + metabolitów</li>
+          <li>Podwójna standaryzacja jakościowa (ILA, EPS, cell equivalents)</li>
+        </ul>
+        <p>To odróżnia produkt od zwykłego „heat‑killed biomass” lub „paraprobiotic powder” bez realnej definicji.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DLA KOGO? -->
+<div class="container">
+  <div class="section">
+    <h2>Dla kogo?</h2>
+    <div class="grid-3">
+      <div class="card">🧪 Dla osób poszukujących <strong>naukowo definiowanego postbiotyku</strong> – nie probiotyku z przypadku.</div>
+      <div class="card">📊 Dla świadomych użytkowników – którzy oczekują przejrzystości procesu, a nie tylko marketingowych haseł.</div>
+      <div class="card">🧘 Dla potrzebujących wsparcia w stresie i codziennej regeneracji – dzięki połączeniu z magnezem i B6.</div>
+      <div class="card">🌿 Dla tych, którzy wolą krótkie, czyste formuły – bez przeładowania składnikami.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL STRENGTH + CTA -->
+<div class="container">
+  <div class="section" style="text-align: center; background: #f9fdf9; border-radius: 48px; margin-bottom: 2rem; padding: 3rem 2rem;">
+    <h2 style="border-left: none;">Krótszy. Czystszy. Procesowo inteligentny.</h2>
+    <p style="font-size: 1.2rem; max-width: 700px; margin: 1rem auto;">Nie przeładowujemy formuły. Nie składamy obietnic bez pokrycia. Łączymy nowatorstwo biologiczne z regulacyjną rzeczywistością.</p>
+    <div class="btn-group" style="justify-content: center;">
+      <a href="#" class="btn">Zamów Core</a>
+      <a href="#" class="btn btn-outline">Zamów Premium</a>
+    </div>
+    <p style="margin-top: 1.5rem; font-size: 0.85rem;">Dla profesjonalistów / dystrybutorów: <a href="#" style="color:#2b7a62;">kontakt biznesowy →</a></p>
+  </div>
+</div>
+
+<!-- FOOTER with regulatory note -->
+<footer>
+  <div class="container">
+    <p>Postbiotic Matrix™ · Dual‑standardised L. plantarum · ILA + EPS markers</p>
+    <p style="margin-top: 0.5rem;">Claimy dotyczące magnezu, witaminy B6 oraz DHA są zgodne z Rozporządzeniem UE 432/2012 i zatwierdzonymi oświadczeniami zdrowotnymi. Produkt nie jest przeznaczony do diagnozowania, leczenia ani zapobiegania chorobom.</p>
+    <p style="margin-top: 1rem;">&copy; 2026 Barrier & Stress Support — next‑generation postbiotic science</p>
+  </div>
+</footer>
+
+</body>
+</html>

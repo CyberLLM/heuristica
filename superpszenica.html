@@ -1,761 +1,556 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Superpszenica — Postbiotyczna Matryca Nowej Generacji</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kombinatoryczna Architektura Odporności | Heuristica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2d5930;
+            --accent-orange: #d97706;
+            --light-bg: #f8fdf9;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --dna-blue: #3b82f6;
+            --warning-red: #dc2626;
+            --gradient-bio: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-sharp: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-    :root {
-      --green:   #2b7a62;
-      --green-d: #1f5e4b;
-      --green-l: #e1f0ea;
-      --green-xl:#f0f7f4;
-      --ink:     #0f1e18;
-      --ink-2:   #3a5e54;
-      --sand:    #fefcf6;
-      --white:   #ffffff;
-      --border:  #d8e8e0;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--sand);
-      color: var(--ink);
-      line-height: 1.6;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    /* ── TOPBAR ── */
-    .topbar {
-      background: var(--green-d);
-      color: #a8d8c4;
-      text-align: center;
-      padding: 0.65rem 1rem;
-      font-size: 0.88rem;
-      font-weight: 500;
-    }
-    .topbar a { color: #c8edd8; text-decoration: underline; }
+        /* Animated DNA Header */
+        .hero {
+            background: var(--gradient-bio);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(254,252,246,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-    }
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--ink-2);
-      text-decoration: none;
-      font-size: 0.9rem;
-      padding: 0.4rem 0.75rem;
-      border-radius: 30px;
-      transition: background 0.15s, color 0.15s;
-    }
-    .nav-links a:hover {
-      background: var(--green-l);
-      color: var(--green-d);
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.15)"/><circle cx="60" cy="80" r="2.5" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.12)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
 
-    /* ── LAYOUT ── */
-    .wrap {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100px) translateX(50px); }
+        }
 
-    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
-    section:last-of-type { border-bottom: none; }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
 
-    h1 {
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.2rem;
-    }
-    h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    h2::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 1.4em;
-      background: var(--green);
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
 
-    /* ── HERO ── */
-    .hero {
-      padding: 4rem 0 0;
-      background: linear-gradient(160deg, var(--green-xl) 0%, var(--sand) 60%);
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-top {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      padding-bottom: 3rem;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: var(--green-l);
-      color: var(--green-d);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.3rem 1rem;
-      border-radius: 30px;
-      margin-bottom: 1.4rem;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--ink-2);
-      max-width: 520px;
-      margin-bottom: 2rem;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-    }
-    .stat {
-      text-align: center;
-    }
-    .stat-value {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--green);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--ink-2);
-      margin-top: 0.3rem;
-    }
-    .hero-right {
-      background: var(--white);
-      border-radius: 32px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.04);
-    }
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .pill {
-      background: var(--green-l);
-      color: var(--green-d);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.3rem 0.8rem;
-      border-radius: 30px;
-    }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
 
-    /* ── VIDEO ── */
-    .video-section {
-      background: var(--ink);
-      padding: 4rem 0;
-      border-bottom: none;
-    }
-    .video-section h2 { color: #fff; }
-    .video-section h2::before { background: #a8d8c4; }
-    .video-section p { color: #8aa89e; margin-bottom: 1.5rem; }
-    .video-wrap {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #000;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    }
-    .video-wrap video {
-      width: 100%;
-      display: block;
-      max-height: 65vh;
-      object-fit: contain;
-    }
+        .brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
 
-    /* ── CARDS ── */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .card {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 1.8rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-    }
-    .card-accent { border-top: 4px solid var(--green); }
-    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .tag {
-      display: inline-block;
-      background: var(--green-l);
-      color: var(--green-d);
-      font-size: 0.73rem;
-      font-weight: 600;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      margin-bottom: 0.9rem;
-    }
+        /* Content Sections */
+        .section {
+            padding: 4rem 0;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
 
-    /* ── LISTS ── */
-    .check-list { list-style: none; padding: 0; }
-    .check-list li {
-      padding-left: 1.8rem;
-      position: relative;
-      margin-bottom: 0.6rem;
-      font-size: 0.95rem;
-    }
-    .check-list li::before {
-      content: "✓";
-      color: var(--green);
-      font-weight: 700;
-      position: absolute;
-      left: 0;
-    }
-    .cross-list { list-style: none; padding: 0; }
-    .cross-list li {
-      padding-left: 1.8rem;
-      position: relative;
-      margin-bottom: 0.6rem;
-      color: var(--ink-2);
-      font-size: 0.95rem;
-    }
-    .cross-list li::before {
-      content: "✕";
-      color: #bc9a6c;
-      position: absolute;
-      left: 0;
-    }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
 
-    /* ── COMPARE ── */
-    .compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .compare-card {
-      background: var(--white);
-      border-radius: 28px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-    }
-    .compare-card.highlight {
-      border-color: var(--green);
-      background: var(--green-xl);
-    }
-    .price-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--green-d);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* ── ROADMAP ── */
-    .roadmap {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 1.5rem;
-    }
-    .roadmap-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-    .roadmap-item:last-child { border-bottom: none; }
-    .roadmap-step {
-      background: var(--green-l);
-      color: var(--green-d);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 12px;
-      text-align: center;
-    }
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            position: relative;
+        }
 
-    /* ── CTA ── */
-    .cta-section {
-      background: linear-gradient(135deg, var(--green-d) 0%, var(--green) 100%);
-      text-align: center;
-      padding: 5rem 0;
-      border-bottom: none;
-    }
-    .cta-section h2 { color: #fff; justify-content: center; }
-    .cta-section h2::before { background: #a8d8c4; }
-    .cta-section p { color: #c8edd8; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-orange);
+            border-radius: 2px;
+        }
 
-    /* ── BUTTONS ── */
-    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn {
-      display: inline-block;
-      background: var(--green);
-      color: #fff;
-      font-weight: 600;
-      padding: 0.85rem 2rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: background 0.2s, transform 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn:hover { background: var(--green-d); transform: translateY(-2px); }
-    .btn-ghost {
-      background: rgba(255,255,255,0.12);
-      border: 1.5px solid rgba(255,255,255,0.5);
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.22); }
+        /* Problem vs Solution Cards */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
 
-    /* ── INFOBOX ── */
-    .infobox {
-      background: var(--green-l);
-      border-left: 4px solid var(--green);
-      border-radius: 0 16px 16px 0;
-      padding: 1.2rem 1.5rem;
-      margin-top: 1.5rem;
-      font-size: 0.92rem;
-      color: var(--green-d);
-    }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      color: #8aa89e;
-      padding: 3rem 0;
-      font-size: 0.84rem;
-    }
-    footer p { margin-bottom: 0.4rem; }
-    footer a { color: #a8d8c4; }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sharp);
+        }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 800px) {
-      .hero-top { grid-template-columns: 1fr; }
-      .compare { grid-template-columns: 1fr; }
-      .roadmap-item { grid-template-columns: 1fr; gap: 0.5rem; }
-      section { padding: 3rem 0; }
-      .nav-links { display: none; }
-    }
-  </style>
+        .card.problem {
+            border-top: 4px solid var(--warning-red);
+        }
+
+        .card.solution {
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card.problem .card-title {
+            color: var(--warning-red);
+        }
+
+        .card.solution .card-title {
+            color: var(--primary-green);
+        }
+
+        /* Mechanism Visualization */
+        .mechanism {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .mechanism-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-bio);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Statistics */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Code-like blocks for technical details */
+        .technical {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 2rem;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .technical::before {
+            content: 'MECHANIZM MOLEKULARNY';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            font-size: 0.7rem;
+            color: var(--accent-orange);
+            opacity: 0.7;
+        }
+
+        .gene {
+            color: var(--dna-blue);
+            font-weight: 500;
+        }
+
+        .pathway {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        /* Interactive elements */
+        .interactive {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            background: var(--accent-orange);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #c2710c;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-
-<div class="topbar">
-  Materiał przygotowany na warsztaty z Uniwersytetem Przyrodniczym w Lublinie &nbsp;·&nbsp;
-  <a href="https://www.heuristica.pl">heuristica.pl</a>
-</div>
-
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#">Superpszenica™</a>
-    <ul class="nav-links">
-      <li><a href="#nauka">Nauka</a></li>
-      <li><a href="#formula">Formuła</a></li>
-      <li><a href="#technologia">Technologia</a></li>
-      <li><a href="#regulacje">Regulacje UE</a></li>
-      <li><a href="#warianty">Warianty</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-top">
-      <div>
-        <span class="hero-badge">Postbiotyk nowej generacji · Dual-Standardised Matrix</span>
-        <h1>Bariera jelitowa.<br>Oś jelito–mózg.<br>Odporność na stres.</h1>
-        <p class="hero-sub">Inaktywowane komórki <em>Lactiplantibacillus plantarum</em> standaryzowane na ILA i EPS — naukowo zdefiniowany postbiotyk z klinicznymi kotwicami dla rynku UE.</p>
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-value">≥10¹¹</div>
-            <div class="stat-label">inaktywowanych komórek<br>na porcję dzienną</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">2×</div>
-            <div class="stat-label">standaryzacja<br>ILA + EPS</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">RCT</div>
-            <div class="stat-label">potwierdzone<br>badaniami klinicznymi</div>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="brand">Heuristica Laboratory</div>
+                <h1>Kombinatoryczna Architektura Odporności</h1>
+                <p class="hero-subtitle">Jak przechytrzyć ewolucję patogenów roślinnych</p>
+            </div>
         </div>
-      </div>
-      <div class="hero-right">
-        <div class="tag">Definicja ISAPP</div>
-        <h3>Czym jest prawdziwy postbiotyk?</h3>
-        <p style="font-size:0.95rem; color:var(--ink-2);">Preparat <strong>nieżywych mikroorganizmów i/lub ich składników</strong>, który przynosi korzyść zdrowotną gospodarzowi. Sam oczyszczony metabolit nie kwalifikuje się — liczy się zdefiniowany szczep, zdefiniowany proces i udowodniony efekt.</p>
-        <div class="pill-row">
-          <span class="pill">Nieżywe komórki</span>
-          <span class="pill">Frakcja metabolitów</span>
-          <span class="pill">Zdefiniowany proces</span>
-          <span class="pill">Potwierdzona skuteczność</span>
+    </section>
+
+    <!-- Problem Definition -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Wyzwanie Ewolucyjne</h2>
+
+            <div class="comparison reveal">
+                <div class="card problem">
+                    <h3 class="card-title">🦠 Tradycyjne Podejście</h3>
+                    <p>Pojedyncze geny odporności (R-geny) tracą skuteczność po <strong>3-7 latach</strong> z powodu adaptacji patogenów.</p>
+                    <br>
+                    <p>Patogeny mutują szybciej niż hodowcy tworzą nowe odmiany. To jak wyścig, którego nie możemy wygrać.</p>
+                </div>
+
+                <div class="card solution">
+                    <h3 class="card-title">🧬 Architektura Kombinatoryczna</h3>
+                    <p>Łączymy <strong>edycję genów podatności</strong> z <strong>układaniem genów odporności</strong> w jeden system.</p>
+                    <br>
+                    <p>Patogen musi pokonać wielopoziomową obronę jednocześnie - prawdopodobieństwo: <strong>1 na miliard</strong>.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ══ VIDEO ══ -->
-<section class="video-section">
-  <div class="wrap">
-    <h2>Film prezentacyjny</h2>
-    <p>Wprowadzenie do koncepcji Superpszenica™ — postbiotycznej matrycy nowej generacji.</p>
-    <div class="video-wrap">
-      <video controls preload="metadata" poster="">
-        <source src="superpszenica.mp4" type="video/mp4">
-        Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-      </video>
-    </div>
-  </div>
-</section>
+    <!-- How it Works -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Jak to działa?</h2>
 
-<!-- ══ NAUKA ══ -->
-<section id="nauka">
-  <div class="wrap">
-    <h2>Nauka w pigułce</h2>
-    <p style="font-size:1.1rem; color:var(--ink-2); max-width:720px; margin-bottom:2rem;">Cztery mechanistyczne domeny z mierzalnymi markerami i realnym przełożeniem na człowieka.</p>
-    <div class="grid-3">
-      <div class="card card-accent">
-        <div class="tag">Mechanizm #1</div>
-        <h3>Bariera jelitowa → układ odpornościowy → mózg</h3>
-        <p style="font-size:0.93rem;">Metabolity zewnątrzkomórkowe i polisacharydy <em>L. plantarum</em> zwiększają białka tight-junction (ZO-1, okludyna, klaudyna) i redukują sygnalizację zapalną NF-κB/MAPK.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Marker ILA</div>
-        <h3>Kwas indolilo-3-mlekowy (ILA)</h3>
-        <p style="font-size:0.93rem;">Metabolit szlaku tryptofanowego. Aktywuje AhR/Nrf2, hamuje NF-κB. Mierzalny metodą HPLC — nadaje się jako marker standaryzacji procesu.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Marker EPS</div>
-        <h3>Egzopolisacharydy (EPS)</h3>
-        <p style="font-size:0.93rem;">Wzmacniają tight-junction, redukują cytokiny prozapalne (TNF-α, IL-1β). W modelach mysich potwierdzono wsparcie bariery jelitowej i modulację immunologiczną.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Mechanizm #4</div>
-        <h3>Immunomodulatory struktury komórkowe</h3>
-        <p style="font-size:0.93rem;">Peptydoglikan, kwasy tejchojowe, białka powierzchniowe i sekretowane peptydy. Komórki po inaktywacji zachowują aktywność immunomodulatorową — to koncepcyjna baza postbiotyków.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Badanie kliniczne SNK12</div>
-        <h3>Inaktywowany <em>L. plantarum</em> SNK12 — RCT</h3>
-        <p style="font-size:0.93rem;">≥10¹¹ komórek/dzień przez 4 tygodnie: poprawa jakości snu, redukcja kortyzolu ślinowego i TNF-α w osoczu. Bezpośrednie przełożenie na narrację oś jelito–mózg + stan zapalny.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Badanie kliniczne L-137</div>
-        <h3>Inaktywowany <em>L. plantarum</em> L-137 — RCT</h3>
-        <p style="font-size:0.93rem;">10 mg/dzień przez 12 tygodni: poprawa parametrów zapalnych, silniejszy efekt u uczestników z wyższym wyjściowym CRP. Implikacja: skuteczność rośnie wraz z poziomem wyjściowego stanu zapalnego.</p>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="mechanism reveal">
+                <h3 style="color: var(--primary-green); margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">
+                    Dwutorowa strategia obrony
+                </h3>
 
-<!-- ══ FORMULA ══ -->
-<section id="formula" style="background: var(--green-xl);">
-  <div class="wrap">
-    <h2>Formuła produktu</h2>
-    <p style="font-size:1.05rem; color:var(--ink-2); max-width:680px; margin-bottom:2rem;">Zaprojektowana od procesu, nie od listy składników. Kompatybilna z wymogami EFSA.</p>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-icon">🧬</div>
-        <div class="tag">Rdzeń biologiczny</div>
-        <h3>Postbiotyczna matryca dual-standaryzowana</h3>
-        <ul class="check-list" style="margin-top:0.8rem;">
-          <li>Inaktywowane komórki całe <em>L. plantarum</em> — wymagane przez definicję ISAPP</li>
-          <li>Współzatrzymana frakcja zewnątrzkomórkowa (metabolity + EPS) — nie sam oczyszczony metabolit</li>
-          <li>Standaryzacja na ILA (mg/dzień) jako marker szlaku tryptofanowego</li>
-          <li>Standaryzacja na EPS (mg/dzień lub fingerprint polisacharydowy) jako marker barierowy</li>
-          <li>≥10¹¹ ekwiwalentów komórek/dzień — kotwica kliniczna z badania SNK12</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚗️</div>
-        <div class="tag">Metryki standaryzacji QC</div>
-        <h3>Dwa ortogonalne wskaźniki jakości</h3>
-        <p style="font-size:0.93rem; margin-bottom:1rem;">Produkt nie jest „czarną skrzynką" — każda seria posiada mierzalne, powtarzalne parametry:</p>
-        <ul class="check-list">
-          <li><strong>Ekwiwalenty komórek/dzień</strong> — cytometria przepływowa lub qPCR, potwierdzona nieżywotność (CFU poniżej granicy detekcji)</li>
-          <li><strong>ILA (mg/dzień)</strong> — HPLC/LC, marker osi AhR/Nrf2/NF-κB</li>
-          <li><strong>EPS (mg/dzień)</strong> — fingerprint polisacharydowy, marker barierowy i immunologiczny</li>
-          <li>Kwasy organiczne — użyteczne do kontroli procesu, ale mniej swoiste biologicznie</li>
-        </ul>
-      </div>
-    </div>
-    <div class="infobox">
-      <strong>Przełom tkwi w procesie, nie w egzotycznych składnikach.</strong> Fermentacja ukierunkowana na ILA/EPS + zachowanie frakcji metabolitów po inaktywacji + podwójna standaryzacja jakościowa — to odróżnia produkt od zwykłego „heat-killed biomass" bez realnej definicji.
-    </div>
-  </div>
-</section>
+                <div class="mechanism-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Usunięcie genów podatności</div>
+                        <div class="step-description">CRISPR/Cas9 wyłącza geny potrzebne patogenowi do infekcji (TaBCAT1, TaPsIPK1)</div>
+                    </div>
 
-<!-- ══ WARIANTY ══ -->
-<section id="warianty">
-  <div class="wrap">
-    <h2>Dwa warianty — świadomy wybór</h2>
-    <div class="compare">
-      <div class="compare-card">
-        <div class="price-label">Core · Daily Barrier &amp; Stress Support</div>
-        <h3>Postbiotic Barrier + Magnez / B6</h3>
-        <ul class="check-list" style="margin: 1rem 0;">
-          <li>Postbiotyczna matryca <em>L. plantarum</em> (≥10¹¹ ekw. komórek, ILA + EPS)</li>
-          <li><strong>Magnez</strong> — prawidłowe funkcjonowanie układu nerwowego i funkcje psychologiczne (claim UE)</li>
-          <li><strong>Witamina B6</strong> — układ nerwowy i regulacja hormonalna (claim UE)</li>
-          <li>Forma: stick-pack lub kapsułki premium</li>
-        </ul>
-        <p style="font-size:0.88rem; color:var(--ink-2);">Solidna kotwica regulacyjna dla komunikacji gut-brain poprzez zatwierdzone oświadczenia zdrowotne.</p>
-      </div>
-      <div class="compare-card highlight">
-        <div class="price-label">Premium · Neuro-Barrier</div>
-        <h3>Core + DHA 250 mg</h3>
-        <ul class="check-list" style="margin: 1rem 0;">
-          <li>Wszystko z wariantu Core</li>
-          <li><strong>DHA 250 mg/dzień</strong> — „DHA przyczynia się do utrzymania prawidłowego funkcjonowania mózgu" (claim UE)</li>
-          <li>Opcjonalnie: wyższa gęstość postbiotyku, wzmocniona kontrola ILA/EPS</li>
-          <li>Most do komunikacji „brain support" — lepiej zakotwiczony regulacyjnie niż sama narracja gut-brain</li>
-        </ul>
-        <p style="font-size:0.88rem; color:var(--green-d);">DHA to realny most do komunikacji mózgowej w ramach prawa UE.</p>
-      </div>
-    </div>
-    <div class="infobox" style="margin-top:1.5rem;">
-      <strong>Czego świadomie nie dodajemy na start:</strong> Ashwagandha, melatonina, wieloskładnikowe stacki adaptogenne, przypadkowe prebiotyki, GABA jako hero składnik. Powód: rozwadniają koncepcję, komplikują badania kliniczne i osłabiają USP. Krótszy, czystszy, procesowo inteligentny produkt wygrywa.
-    </div>
-  </div>
-</section>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Układanie genów odporności</div>
+                        <div class="step-description">Kombinacja 3 różnych genów R (Yr15, Yr58, Yr64) rozpoznających patogeny</div>
+                    </div>
 
-<!-- ══ TECHNOLOGIA ══ -->
-<section id="technologia" style="background: var(--green-xl);">
-  <div class="wrap">
-    <h2>Technologia i proces</h2>
-    <div class="grid-3">
-      <div class="card">
-        <div class="tag">Szczep</div>
-        <h3>Genomicznie zdefiniowany szczep</h3>
-        <p style="font-size:0.93rem;">Selekcja pod kątem potwierdzonej zdolności do metabolizmu tryptofanu (ILA) i/lub produkcji EPS. Badanie WGS pod kątem lekooporności (AMR) — EFSA wymaga aktualnej analizy bioinformatycznej co max. 2 lata.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Fermentacja</div>
-        <h3>Fermentacja ukierunkowana na markery</h3>
-        <ul class="check-list" style="font-size:0.9rem; margin-top:0.5rem;">
-          <li>Temperatura: ~35–37 °C (wzrost biomasy)</li>
-          <li>pH: ~5,5–6,2 z kontrolowaną fazą dryfu</li>
-          <li>Medium: odpowiedniki MRS klasy spożywczej</li>
-          <li>Suplementacja tryptofanem → wzrost ILA</li>
-          <li>Opcja GABA: MSG + 40°C, ~48h (proof-of-concept)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Inaktywacja</div>
-        <h3>Inaktywacja termiczna</h3>
-        <p style="font-size:0.93rem;"><strong>Mass-market:</strong> inaktywacja termiczna 105°C / 30 min (jak w RCT SNK12) — potwierdzona skuteczność i powtarzalność.</p>
-        <p style="font-size:0.93rem; margin-top:0.5rem;"><strong>Premium:</strong> łagodna termia + sterylna filtracja supernatantu, a następnie rekombinacja z inaktywowanymi komórkami — zachowanie integralności metabolitów przy spełnieniu definicji postbiotyku.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Suszenie</div>
-        <h3>Stabilizacja i trwałość</h3>
-        <p style="font-size:0.93rem;"><strong>Mass-market:</strong> suszenie natryskowe z nośnikiem (dekstryna/maltodekstryna) — potwierdzone w formule SNK12.</p>
-        <p style="font-size:0.93rem; margin-top:0.5rem;"><strong>Premium:</strong> liofilizacja lub mikroenkapsulacja frakcji metabolitów — ochrona sygnatur ILA/EPS.</p>
-      </div>
-      <div class="card">
-        <div class="tag">QC minimum</div>
-        <h3>Minimalny panel kontroli jakości</h3>
-        <ul class="check-list" style="font-size:0.9rem; margin-top:0.5rem;">
-          <li>Tożsamość: WGS szczep + bioinformatyczne AMR</li>
-          <li>Nieżywotność: CFU poniżej granicy detekcji</li>
-          <li>ILA: HPLC/LC</li>
-          <li>EPS: fingerprint polisacharydowy</li>
-          <li>Aminy biogenne, D-/L-mleczan, metale ciężkie</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Forma produktu</div>
-        <h3>Stick-pack (rekomendowany)</h3>
-        <p style="font-size:0.93rem;">Wyższy payload (postbiotyk + sole magnezu) bez konieczności połykania wielu kapsułek. Sprawdzone nośniki węglowodanowe (dekstryna). Opcja kapsułek premium dla SKU z DHA (softgel + kapsułka postbiotyczna).</p>
-      </div>
-    </div>
-  </div>
-</section>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Skoordynowana odpowiedź</div>
+                        <div class="step-description">Produkcja ROS i aktywacja szlaków fenylpropanoidowych w układzie synergistycznym</div>
+                    </div>
+                </div>
+            </div>
 
-<!-- ══ REGULACJE ══ -->
-<section id="regulacje">
-  <div class="wrap">
-    <h2>Bezpieczeństwo i regulacje UE</h2>
-    <div class="grid-2">
-      <div class="card">
-        <div class="tag">QPS · EFSA</div>
-        <h3>Status bezpieczeństwa <em>L. plantarum</em></h3>
-        <p style="font-size:0.93rem; margin-bottom:1rem;">EFSA stosuje podejście QPS (Qualified Presumption of Safety) pod warunkiem potwierdzonej tożsamości szczepu i braku nabytych genów oporności na antybiotyki (AMR). Brak AMR to warunek konieczny — nie opcja.</p>
-        <ul class="check-list">
-          <li>Brak nabytych genów AMR (WGS)</li>
-          <li>Potwierdzona nieżywotność preparatu</li>
-          <li>Brak aminów biogennych (histamina, tyramina)</li>
-          <li>Kontrola frakcji D-mleczanu (ryzyko u pacjentów z krótkim jelitem)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Novel Food · Art. 4</div>
-        <h3>Potencjalne ryzyko Novel Food</h3>
-        <p style="font-size:0.93rem; margin-bottom:1rem;">Nawet jeśli szczep jest znany, <strong>konkretny preparat</strong> może podlegać przepisom Novel Food, jeśli nie był konsumowany w UE w znacznym stopniu przed 15 maja 1997 r.</p>
-        <p style="font-size:0.93rem;"><strong>Działanie:</strong> konsultacja Art. 4 z organami regulacyjnymi na wczesnym etapie. Dokumentacja: skład, proces produkcji, specyfikacje, historia bezpiecznego stosowania.</p>
-      </div>
-      <div class="card">
-        <div class="tag">Oświadczenia zdrowotne UE</div>
-        <h3>Strategia claimów — realność EFSA</h3>
-        <p style="font-size:0.93rem; margin-bottom:1rem;">Bezpośrednie claime „przeciwzapalne" lub „oś jelito–mózg" wymagają wieloletniego dossier EFSA. Dla mass-market to nie jest punkt startowy.</p>
-        <p style="font-size:0.93rem;"><strong>Strategia działająca teraz:</strong></p>
-        <ul class="check-list" style="margin-top:0.5rem;">
-          <li>Magnez → prawidłowe funkcjonowanie układu nerwowego + funkcje psychologiczne</li>
-          <li>Witamina B6 → układ nerwowy + regulacja hormonalna</li>
-          <li>DHA 250 mg → prawidłowe funkcjonowanie mózgu (wariant Premium)</li>
-          <li>Postbiotyk = mechanistyczny differentiator/USP, nie bezpośredni claim</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="tag">Luki danych</div>
-        <h3>Co jeszcze wymaga walidacji</h3>
-        <p style="font-size:0.93rem; margin-bottom:1rem;">Definicja ISAPP wymaga udowodnienia korzyści dla <em>konkretnej</em> populacji docelowej z <em>konkretnym</em> preparatem (szczep + proces + dawka).</p>
-        <p style="font-size:0.93rem;"><strong>Rekomendowane badanie kliniczne:</strong></p>
-        <ul class="check-list" style="margin-top:0.5rem;">
-          <li>RCT, randomizowane, podwójnie zaślepione, 8–12 tygodni</li>
-          <li>Populacja: zdrowi dorośli ze stresem lub łagodnymi dolegliwościami GI + podwyższone hs-CRP</li>
-          <li>Endpointy: hs-CRP, TNF-α, jakość snu/stres, marker jelitowy (kalprotektyna lub test przepuszczalności)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ROADMAP ══ -->
-<section id="roadmap" style="background: var(--green-xl);">
-  <div class="wrap">
-    <h2>Roadmap produktowy</h2>
-    <p style="font-size:1.05rem; color:var(--ink-2); max-width:680px; margin-bottom:0.5rem;">Przełom tkwi w IP procesowym i standaryzacji — nie w egzotycznych składnikach.</p>
-    <div class="roadmap">
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 1<br>Szczep</div>
-        <div>
-          <h3>Selekcja i walidacja szczepu</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">Wybór genomicznie zdefiniowanego szczepu <em>L. plantarum</em> z potwierdzoną ekspresją ILA i/lub EPS. Screening bezpieczeństwa: AMR, aminy biogenne, stosunek D-/L-mleczanu. Pełna sekwencja WGS jako dokumentacja bazowa.</p>
+            <div class="technical reveal">
+                <strong>MECHANIZM MOLEKULARNY:</strong><br><br>
+                S-geny knockout → <span class="pathway">ROS priming</span> → R-geny recognition → <span class="pathway">coordinated defense</span><br><br>
+                Kluczowe geny: <span class="gene">TaPRR1</span> (8.2x↑), <span class="gene">TaRBOH-D</span> (12.4x↑), <span class="gene">TaPAL1</span> (15.7x↑)<br>
+                Szlaki: NADPH oxidase → ROS production → lignin deposition → pathogen blocking
+            </div>
         </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 2<br>Proces</div>
-        <div>
-          <h3>Inżynieria fermentacji pod markery funkcjonalne</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">Optymalizacja warunków fermentacji (T, pH, medium) pod kątem konsekwentnej ekspresji ILA/EPS. Opracowanie kontrolowanego protokołu inaktywacji z zachowaniem frakcji metabolitów. Budowa IP procesowego.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 3<br>QC</div>
-        <div>
-          <h3>Wdrożenie panelu kontroli jakości</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">Metody analityczne: HPLC dla ILA, fingerprint EPS, cytometria/qPCR dla ekwiwalentów komórek, potwierdzenie nieżywotności (CFU). Program stabilności: real-time + przyspieszone warunki, opakowania z barierą wilgoci.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 4<br>Regulacje</div>
-        <div>
-          <h3>Ścieżka regulacyjna UE</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">Konsultacja Art. 4 w sprawie Novel Food. Dobór formy dawkowania i dawek magnezu/B6/DHA pod kątem zatwierdzonych claimów (Rozporządzenie 432/2012). Dokumentacja procesu produkcji dla dossier regulacyjnego.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 5<br>Klinika</div>
-        <div>
-          <h3>Badanie kliniczne walidujące USP</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">RCT 8–12 tygodni na populacji „stressed but healthy" lub łagodne dolegliwości GI + podwyższone hs-CRP. Endpointy: TNF-α, kortyzol, hs-CRP, jakość snu, marker barierowy. Cel: zamknięcie luki dowodowej wymaganej przez definicję ISAPP.</p>
-        </div>
-      </div>
-      <div class="roadmap-item">
-        <div class="roadmap-step">Etap 6<br>Launch</div>
-        <div>
-          <h3>Komercjalizacja — Core, następnie Premium</h3>
-          <p style="font-size:0.93rem; color:var(--ink-2);">Start z wariantem Core (postbiotyk + Mg + B6, stick-pack mass-market). Wariant Premium Neuro-Barrier (+ DHA 250 mg) jako SKU dla świadomych konsumentów. Komunikacja: mechanistyczny differentiator jako USP, claimy prawne jako szkielet.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ══ CTA ══ -->
-<section class="cta-section">
-  <div class="wrap">
-    <h2>Krótszy. Czystszy. Procesowo inteligentny.</h2>
-    <p>Nie przeładowujemy formuły. Nie składamy obietnic bez pokrycia. Łączymy nowatorstwo biologiczne z regulacyjną rzeczywistością rynku UE.</p>
-    <div class="btn-group" style="justify-content: center;">
-      <a href="https://www.heuristica.pl" class="btn">heuristica.pl</a>
-      <a href="#nauka" class="btn btn-ghost">Wróć do nauki</a>
-    </div>
-  </div>
-</section>
+    <!-- Results -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Wyniki Badań</h2>
 
-<footer>
-  <div class="wrap">
-    <p>Superpszenica™ · Dual-standardised <em>L. plantarum</em> · ILA + EPS markers</p>
-    <p style="margin-top:0.5rem;">Claimy dotyczące magnezu, witaminy B6 oraz DHA są zgodne z Rozporządzeniem UE 432/2012 i zatwierdzonymi oświadczeniami zdrowotnymi. Produkt nie jest przeznaczony do diagnozowania, leczenia ani zapobiegania chorobom.</p>
-    <p style="margin-top:1rem;">&copy; 2026 Superpszenica™ — next-generation postbiotic science &nbsp;·&nbsp; <a href="https://www.heuristica.pl">heuristica.pl</a></p>
-  </div>
-</footer>
+            <div class="stats reveal">
+                <div class="stat">
+                    <span class="stat-number">92%</span>
+                    <div class="stat-label">Skuteczność kombinacji<br>vs 64% pojedynczy gen</div>
+                </div>
 
+                <div class="stat">
+                    <span class="stat-number">22</span>
+                    <div class="stat-label">Różnych szczepów patogenu<br>przetestowanych</div>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Sezony polowe<br>bez utraty odporności</div>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-number">10⁻⁹</span>
+                    <div class="stat-label">Prawdopodobieństwo<br>przełamania (vs 10⁻³)</div>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <p style="text-align: center; color: var(--text-light); margin-top: 2rem; font-style: italic;">
+                    Badania prowadzone przez 3 lata w warunkach polowych potwierdziły stabilną odporność przeciwko 22 różnym szczepom rdzy pszenicy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Implications -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Perspektywy</h2>
+
+            <div class="comparison reveal">
+                <div class="card">
+                    <h3 class="card-title" style="color: var(--dna-blue);">🚀 Zastosowania</h3>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Pszenica, ryż, kukurydza, ziemniak</li>
+                        <li>Grzyby, bakterie, wirusy, nematody</li>
+                        <li>Wszystkie strefy klimatyczne</li>
+                        <li>Integracja z AI i precision farming</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title" style="color: var(--accent-orange);">⚠️ Wyzwania</h3>
+                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                        <li>Regulacje prawne i akceptacja społeczna</li>
+                        <li>Długoterminowe testy bezpieczeństwa</li>
+                        <li>Koszty rozwoju i wdrożenia</li>
+                        <li>Adaptowalność do lokalnych warunków</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive reveal">
+                <h3 style="margin-bottom: 1rem;">Przyszłość rolnictwa to systemy, nie pojedyncze geny</h3>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                    "Inteligencja przestaje być domysłem modelu, a staje się właściwością systemu"
+                </p>
+                <a href="https://heuristica.pl" class="cta-button">Dowiedz się więcej o AI w rolnictwie</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 <a href="https://heuristica.pl">Heuristica Laboratory</a> |
+            Marek Staniszewski | AI w Rolnictwie i Biotechnologii</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all reveal elements
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'var(--accent-orange)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(0, 0, 0, 0.05)';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -483,6 +483,45 @@
       color: var(--text-primary);
     }
 
+    /* ===== NAV ===== */
+    .nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav a, .mute-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 2px solid transparent;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .nav a:hover, .nav a.active, .mute-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.04);
+      text-decoration: none;
+    }
+
+    .mute-btn {
+      padding: 14px 16px;
+    }
+
     @page {
       size: A4;
       margin: 0;
@@ -512,6 +551,16 @@
   </style>
 </head>
 <body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="index.html">HEURISTICA</a>
+  <a href="kim.html">Kim jestem</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="sandbox.html">Sandbox</a>
+  <a href="prompting.html">Prompting</a>
+  <a href="#" data-tally-open="obAOEx">Kontakt</a>
+</nav>
 
 <!-- ===== LOGIN SCREEN ===== -->
 <div id="login-screen">

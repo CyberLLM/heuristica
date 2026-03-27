@@ -46,6 +46,9 @@ RewriteRule ^postbiotic/?$ /postbiotic.html [L,NC]
 # Redirect /superpszenica to /superpszenica.html
 RewriteRule ^superpszenica/?$ /superpszenica.html [L,NC]
 
+# Redirect /certyfikat to /certyfikat.html
+RewriteRule ^certyfikat/?$ /certyfikat.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

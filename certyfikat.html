@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certyfikat — Heuristica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --bg-tertiary: #21262D;
+      --border-color: #30363D;
+      --text-primary: #E6EDF3;
+      --text-muted: #8B949E;
+      --accent-blue: #58A6FF;
+      --accent-cyan: #39C5CF;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* ===== LOGIN SCREEN ===== */
+    #login-screen {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #login-screen .logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    #login-screen h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    #login-screen p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #0D1117;
+    }
+
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-download {
+      background: var(--accent-cyan);
+      color: #0D1117;
+      font-size: 16px;
+      padding: 14px;
+      margin-top: 20px;
+    }
+
+    .btn-download:hover { opacity: 0.88; }
+
+    .error-msg {
+      color: #F85149;
+      font-size: 13px;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      display: none;
+    }
+
+    /* ===== MAIN APP ===== */
+    #app-screen {
+      display: none;
+      width: 100%;
+      max-width: 760px;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .app-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .app-header .logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+    }
+
+    .app-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .name-panel {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    .name-panel h3 {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+      font-weight: 400;
+    }
+
+    .name-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .name-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    .name-row .btn {
+      width: auto;
+      padding: 10px 24px;
+      margin-top: 0;
+      white-space: nowrap;
+    }
+
+    .consent-box {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .consent-label {
+      display: flex;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .consent-label input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .consent-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .consent-text a {
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .consent-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== CERTIFICATE PREVIEW ===== */
+    #cert-container {
+      width: 100%;
+    }
+
+    #cert-preview {
+      width: 794px; /* A4 w 96dpi */
+      min-height: 1123px;
+      background: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      transform-origin: top left;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px;
+      gap: 0;
+      font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* Responsive scale */
+    .cert-wrapper {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .cert-logo {
+      width: 80px;
+      margin-bottom: 32px;
+    }
+
+    .cert-brand {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 48px;
+      font-weight: 700;
+    }
+
+    .cert-title {
+      font-size: 56px;
+      font-weight: 900;
+      color: #00ADEF;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .cert-subtitle {
+      font-size: 22px;
+      font-weight: 600;
+      color: #00ADEF;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .cert-dla {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .cert-name {
+      font-size: 34px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .cert-divider {
+      width: 100%;
+      height: 1px;
+      background: #e0e0e0;
+      margin-bottom: 24px;
+    }
+
+    .cert-ktory {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .cert-course {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2a2a2a;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .cert-divider2 {
+      width: 100%;
+      height: 1px;
+      background: #e0e0e0;
+      margin-bottom: 28px;
+    }
+
+    .cert-zakres {
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .cert-zakres strong {
+      color: #333;
+    }
+
+    .cert-bullet {
+      color: #00ADEF;
+    }
+
+    .cert-godziny {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cert-godziny-num {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      border-bottom: 1px solid #aaa;
+      min-width: 60px;
+      text-align: center;
+      padding: 0 8px;
+    }
+
+    .cert-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .cert-data-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cert-data-label {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .cert-data-val {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      border-bottom: 1px solid #aaa;
+      min-width: 160px;
+      padding-bottom: 4px;
+    }
+
+    .cert-sig-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .cert-sig-label {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .cert-sig-img {
+      height: 50px;
+      width: 120px;
+      object-fit: contain;
+      object-position: left bottom;
+    }
+
+    .cert-sig-line {
+      border-bottom: 1px solid #aaa;
+      width: 220px;
+      margin-bottom: 4px;
+    }
+
+    .cert-sig-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .cert-sig-role {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .cert-tagline {
+      font-size: 13px;
+      font-weight: 700;
+      color: #00ADEF;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .cert-footer-text {
+      font-size: 10px;
+      color: #aaa;
+      text-align: center;
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 16px;
+    }
+
+    .cert-url {
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* ===== DOWNLOAD HINT ===== */
+    .download-hint {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      width: 100%;
+      font-family: var(--font-mono);
+    }
+
+    .download-hint strong {
+      color: var(--text-primary);
+    }
+
+    @media print {
+      body, html {
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #login-screen, #app-screen .app-header,
+      .name-panel, .btn-download, .download-hint { display: none !important; }
+      #app-screen { display: block !important; }
+      #cert-preview {
+        width: 100% !important;
+        min-height: auto !important;
+        box-shadow: none !important;
+        transform: none !important;
+        padding: 40px 60px !important;
+      }
+      .cert-wrapper { overflow: visible !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="login-screen">
+  <div class="logo">HEURISTICA</div>
+  <h1>Pobierz certyfikat</h1>
+  <p>Szkolenie · 26 marca 2026 · Lublin</p>
+
+  <div class="form-group">
+    <label>Hasło dostępu</label>
+    <input type="password" id="password-input" placeholder="wpisz hasło" autocomplete="off">
+  </div>
+
+  <button class="btn btn-primary" onclick="checkPassword()">Wejdź</button>
+  <div class="error-msg" id="error-msg">Nieprawidłowe hasło. Spróbuj ponownie.</div>
+</div>
+
+<!-- ===== APP SCREEN ===== -->
+<div id="app-screen">
+  <div class="app-header">
+    <div class="logo">HEURISTICA</div>
+    <h2>Certyfikat ukończenia szkolenia</h2>
+    <div></div>
+  </div>
+
+  <div class="name-panel">
+    <h3>Wpisz swoje imię i nazwisko, a następnie pobierz certyfikat jako PDF</h3>
+
+    <div class="consent-box">
+      <label class="consent-label">
+        <input type="checkbox" id="consent-checkbox">
+        <span class="consent-text">
+          Niniejszym oświadczam, że w dniu 26.03.2026 uczestniczyłem/am w szkoleniu „Systemy agentowe AI w zastosowaniach badawczych i dydaktycznych" organizowanym przez BG UP Lublin oraz że generuję certyfikat wyłącznie na podstawie prawdziwych danych i na własne potrzeby. Zobowiązuję się nie udostępniać dostępu (linku ani hasła) osobom trzecim oraz przyjmuję do wiadomości, że naruszenie powyższego może skutkować unieważnieniem certyfikatu. Akceptuję <a href="https://heuristica.pl/polityka" target="_blank">politykę prywatności</a>.
+        </span>
+      </label>
+    </div>
+
+    <div class="name-row">
+      <div class="form-group">
+        <label>Imię i nazwisko uczestnika</label>
+        <input type="text" id="name-input" placeholder="np. Anna Kowalska" oninput="updateName()">
+      </div>
+    </div>
+  </div>
+
+  <div class="cert-wrapper">
+    <div id="cert-preview">
+
+      <img src="img/logo.png" alt="Heuristica" class="cert-logo">
+
+      <div class="cert-brand">HEURISTICA</div>
+
+      <div class="cert-title">CERTYFIKAT</div>
+      <div class="cert-subtitle">ukończenia szkolenia</div>
+
+      <div class="cert-dla">dla:</div>
+      <div class="cert-name" id="cert-name-display">Sz. P. Imię Nazwisko</div>
+
+      <div class="cert-divider"></div>
+
+      <div class="cert-ktory">Któr(y)a ukończył(a) warsztaty szkoleniowe:</div>
+
+      <div class="cert-course">Systemy agentowe AI w zastosowaniach badawczych<br>i dydaktycznych</div>
+
+      <div class="cert-divider2"></div>
+
+      <div class="cert-zakres">
+        <strong>Zakres:</strong> &nbsp;<span class="cert-bullet">◆</span>&nbsp; Modele LLM &nbsp;<span class="cert-bullet">◆</span>&nbsp; AI jako wsparcie w research &nbsp;<span class="cert-bullet">◆</span>&nbsp; Generowanie i analiza treści<br>
+        <span class="cert-bullet">◆</span>&nbsp; Modele specjalizowane w bazach naukowych &nbsp;<span class="cert-bullet">◆</span>&nbsp; Praca z API &nbsp;<span class="cert-bullet">◆</span>&nbsp; Google Colab &nbsp;<span class="cert-bullet">◆</span>&nbsp; Systemy agentowe
+      </div>
+
+      <div class="cert-godziny">
+        W wymiarze &nbsp;<span class="cert-godziny-num">5</span>&nbsp; godzin
+      </div>
+
+      <div class="cert-bottom">
+        <div class="cert-data-box">
+          <div class="cert-data-label">Data i miejsce:</div>
+          <div class="cert-data-val">26 marca 2026<br>Lublin</div>
+        </div>
+        <div class="cert-sig-box">
+          <div class="cert-sig-label">Trener prowadzący:</div>
+          <img src="img/podpis.png" alt="Podpis" class="cert-sig-img">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">Marek Staniszewski</div>
+          <div class="cert-sig-role">Założyciel Heuristica</div>
+        </div>
+      </div>
+
+      <div class="cert-tagline">Wspieramy w znaczącej przemianie</div>
+
+      <div class="cert-footer-text">
+        Heuristica jest firmą wpisaną do Rejestru Instytucji Szkoleniowych (podstawa: Art. 20 ust. 4 z 20.04.14
+        o promocji zatrudnienia i instytucjach rynku pracy (Dz.U z 2018 r. poz. 1265 i 1149).
+        Firma jest również wpisana do Bazy Usług Rozwojowych PARP.
+      </div>
+
+      <div class="cert-url">www.heuristica.pl</div>
+
+    </div><!-- /cert-preview -->
+  </div><!-- /cert-wrapper -->
+
+  <button class="btn btn-download" onclick="downloadPDF()">Pobierz certyfikat jako PDF</button>
+
+  <div class="download-hint">
+    <strong>Jak pobrać:</strong> kliknij przycisk powyżej → w oknie drukowania wybierz <strong>„Zapisz jako PDF"</strong> → kliknij Zapisz.
+    W ustawieniach drukowania ustaw <strong>Brak marginesów</strong> i odznacz <strong>Nagłówki i stopki</strong>.
+  </div>
+
+</div><!-- /app-screen -->
+
+<script>
+  const PASSWORD = 'AI-0326';
+
+  // Skalowanie podglądu do szerokości ekranu
+  function scaleCert() {
+    const wrapper = document.querySelector('.cert-wrapper');
+    const preview = document.getElementById('cert-preview');
+    if (!wrapper || !preview) return;
+    const available = wrapper.clientWidth;
+    const natural = 794;
+    const scale = Math.min(1, available / natural);
+    preview.style.transform = `scale(${scale})`;
+    preview.style.marginBottom = `${(preview.offsetHeight * scale) - preview.offsetHeight}px`;
+    wrapper.style.height = `${preview.offsetHeight * scale}px`;
+  }
+
+  window.addEventListener('resize', scaleCert);
+
+  function checkPassword() {
+    const val = document.getElementById('password-input').value;
+    if (val === PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      const app = document.getElementById('app-screen');
+      app.style.display = 'flex';
+      setTimeout(scaleCert, 50);
+      document.getElementById('name-input').focus();
+    } else {
+      document.getElementById('error-msg').style.display = 'block';
+      document.getElementById('password-input').value = '';
+      document.getElementById('password-input').focus();
+    }
+  }
+
+  document.getElementById('password-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function updateName() {
+    const val = document.getElementById('name-input').value.trim();
+    const display = document.getElementById('cert-name-display');
+    display.textContent = val ? 'Sz. P. ' + val : 'Sz. P. Imię Nazwisko';
+  }
+
+  function downloadPDF() {
+    const name = document.getElementById('name-input').value.trim();
+    const consent = document.getElementById('consent-checkbox').checked;
+
+    if (!name) {
+      alert('Wpisz najpierw swoje imię i nazwisko.');
+      document.getElementById('name-input').focus();
+      return;
+    }
+
+    if (!consent) {
+      alert('Zaakceptuj oświadczenie, aby pobrać certyfikat.');
+      document.getElementById('consent-checkbox').focus();
+      return;
+    }
+
+    window.print();
+  }
+
+  // Zamknij błąd gdy user zaczyna pisać
+  document.getElementById('password-input').addEventListener('input', function() {
+    document.getElementById('error-msg').style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

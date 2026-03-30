@@ -42,23 +42,19 @@
       padding: 0;
     }
 
-    body > #login-screen,
-    body > #app-screen {
+    /* ===== LOGIN SCREEN ===== */
+    #login-screen {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-    }
-
-    /* ===== LOGIN SCREEN ===== */
-    #login-screen {
       width: 100%;
       max-width: 420px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 40px;
+      margin: auto;
       text-align: center;
     }
 
@@ -156,11 +152,14 @@
 
     /* ===== MAIN APP ===== */
     #app-screen {
+      flex: 1;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
       width: 100%;
       max-width: 760px;
       flex-direction: column;
-      align-items: center;
       gap: 0;
     }
 

@@ -12,12 +12,15 @@
     :root {
       --bg-primary: #ffffff;
       --bg-secondary: #f8f9fa;
+      --bg-tertiary: #f2f4f7;
       --text-primary: #1a1a1a;
       --text-muted: #666;
       --border-color: #e0e0e0;
       --accent-blue: #0066cc;
+      --accent-soft: rgba(0, 102, 204, 0.08);
       --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.04);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +37,6 @@
       flex-direction: column;
     }
 
-    /* ===== NAV ===== */
     .nav {
       background: #ffffff;
       border-bottom: 1px solid var(--border-color);
@@ -77,37 +79,42 @@
       padding: 14px 24px;
     }
 
-    /* ===== MAIN CONTENT ===== */
     main {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 40px 24px;
+      padding: 40px 24px 64px;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 1160px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 48px;
-      text-align: center;
+      box-shadow: var(--shadow-soft);
     }
 
-    .container h1 {
-      font-size: 28px;
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
       font-weight: 600;
       margin-bottom: 12px;
       color: var(--text-primary);
     }
 
-    .container p {
+    .hero p {
       font-size: 15px;
       color: var(--text-muted);
-      margin-bottom: 32px;
       line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto;
     }
 
     .logo-icon {
@@ -117,31 +124,292 @@
       opacity: 0.7;
     }
 
-    /* ===== TALLY FORM ===== */
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.9fr);
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 36px;
+    }
+
+    .configurator,
+    .summary-card,
+    .tally-wrap {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+    }
+
+    .configurator {
+      padding: 28px;
+    }
+
+    .summary-card {
+      padding: 24px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .section-head {
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.field-full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .field select {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--text-primary);
+      padding: 14px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill-group input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pill-group label {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      background: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .pill-group input:checked + label {
+      border-color: var(--accent-blue);
+      background: var(--accent-soft);
+      color: var(--accent-blue);
+    }
+
+    .summary-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 16px;
+    }
+
+    .summary-price {
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .summary-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .summary-block {
+      padding: 14px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .summary-block:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .summary-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .summary-list li {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .summary-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+    }
+
+    .jump-btn {
+      margin-top: 22px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.2s ease;
+    }
+
+    .jump-btn:hover {
+      opacity: 0.94;
+      transform: translateY(-1px);
+    }
+
+    .microcopy {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .tally-wrap {
+      padding: 28px;
+    }
+
+    .tally-wrap h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .tally-wrap p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
     iframe[data-tally-src] {
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
+      background: #ffffff;
+    }
+
+    @media (max-width: 980px) {
+      .container {
+        padding: 32px 20px;
+      }
+
+      .calculator-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        position: static;
+      }
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 32px 24px;
+      main {
+        padding: 24px 16px 40px;
       }
 
-      .container h1 {
-        font-size: 22px;
+      .container {
+        padding: 24px 16px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .configurator,
+      .summary-card,
+      .tally-wrap {
+        padding: 20px;
       }
 
       .nav a {
         padding: 12px 16px;
         font-size: 13px;
       }
+
+      .summary-price {
+        font-size: 28px;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
 <nav class="nav">
   <a href="index.html" class="logo">HEURISTICA</a>
   <a href="kim.html">Kim jestem</a>
@@ -152,23 +420,300 @@
   <a href="#" data-tally-open="obAOEx">Kontakt</a>
 </nav>
 
-<!-- ===== MAIN CONTENT ===== -->
 <main>
   <div class="container">
-    <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="32" r="30" stroke="#0066cc" stroke-width="2"/>
-      <path d="M28 32h8M32 28v8" stroke="#0066cc" stroke-width="2" stroke-linecap="round"/>
-    </svg>
+    <section class="hero">
+      <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#0066cc" stroke-width="2"/>
+        <path d="M28 32h8M32 28v8" stroke="#0066cc" stroke-width="2" stroke-linecap="round"/>
+      </svg>
 
-    <h1>Zapisy na szkolenia</h1>
-    <p>Wypełnij formularz poniżej, aby zarejestrować się na nasze szkolenia i warsztaty.</p>
+      <h1>Zapisy na szkolenia</h1>
+      <p>Wypełnij krótki kalkulator, aby zobaczyć rekomendowany format szkolenia i orientacyjny zakres inwestycji. Po sprawdzeniu szczegółów przejdź do formularza zapisu.</p>
+    </section>
 
-    <!-- Tally Form -->
-    <iframe data-tally-src="https://tally.so/embed/EkL9OX" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Zapisy na szkolenia"></iframe>
+    <section class="calculator-layout" aria-label="Kalkulator szkolenia">
+      <div class="configurator">
+        <div class="section-head">
+          <h2>Skonfiguruj szkolenie</h2>
+          <p>To szybki estymator. Pokazuje rekomendowany format i orientacyjny zakres inwestycji, a nie sztywną ofertę.</p>
+        </div>
+
+        <form id="trainingCalculator">
+          <div class="field-grid">
+            <div class="field field-full">
+              <label for="goal">Cel</label>
+              <select id="goal" name="goal">
+                <option value="wdrożenie AI">Wdrożenie AI</option>
+                <option value="zwiększenie produktywności">Zwiększenie produktywności</option>
+                <option value="szkolenie liderów">Szkolenie liderów</option>
+                <option value="warsztat dla zespołu">Warsztat dla zespołu</option>
+              </select>
+            </div>
+
+            <div class="field field-full">
+              <label>Typ usługi</label>
+              <div class="pill-group">
+                <input type="radio" id="service-webinar" name="service" value="webinar" checked>
+                <label for="service-webinar">Webinar</label>
+
+                <input type="radio" id="service-workshop-online" name="service" value="workshop-online">
+                <label for="service-workshop-online">Warsztat online</label>
+
+                <input type="radio" id="service-workshop-onsite" name="service" value="workshop-onsite">
+                <label for="service-workshop-onsite">Warsztat stacjonarny</label>
+
+                <input type="radio" id="service-program" name="service" value="program">
+                <label for="service-program">Program rozwojowy</label>
+
+                <input type="radio" id="service-consulting" name="service" value="consulting">
+                <label for="service-consulting">Konsultacje / doradztwo</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Liczba uczestników</label>
+              <div class="pill-group">
+                <input type="radio" id="participants-1-10" name="participants" value="1-10">
+                <label for="participants-1-10">1–10</label>
+
+                <input type="radio" id="participants-11-25" name="participants" value="11-25" checked>
+                <label for="participants-11-25">11–25</label>
+
+                <input type="radio" id="participants-26-50" name="participants" value="26-50">
+                <label for="participants-26-50">26–50</label>
+
+                <input type="radio" id="participants-51plus" name="participants" value="51+">
+                <label for="participants-51plus">51+</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Poziom zaawansowania</label>
+              <div class="pill-group">
+                <input type="radio" id="level-beginner" name="level" value="beginner">
+                <label for="level-beginner">Beginner</label>
+
+                <input type="radio" id="level-mixed" name="level" value="mixed" checked>
+                <label for="level-mixed">Mixed</label>
+
+                <input type="radio" id="level-advanced" name="level" value="advanced">
+                <label for="level-advanced">Advanced</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Forma realizacji</label>
+              <div class="pill-group">
+                <input type="radio" id="delivery-online" name="delivery" value="online" checked>
+                <label for="delivery-online">Online</label>
+
+                <input type="radio" id="delivery-onsite" name="delivery" value="onsite">
+                <label for="delivery-onsite">Stacjonarnie</label>
+
+                <input type="radio" id="delivery-hybrid" name="delivery" value="hybrid">
+                <label for="delivery-hybrid">Hybrydowo</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Czas trwania</label>
+              <div class="pill-group">
+                <input type="radio" id="duration-1h" name="duration" value="1h" checked>
+                <label for="duration-1h">1h</label>
+
+                <input type="radio" id="duration-2h" name="duration" value="2h">
+                <label for="duration-2h">2h</label>
+
+                <input type="radio" id="duration-4h" name="duration" value="4h">
+                <label for="duration-4h">4h</label>
+
+                <input type="radio" id="duration-1d" name="duration" value="1d">
+                <label for="duration-1d">1 dzień</label>
+
+                <input type="radio" id="duration-2d" name="duration" value="2d">
+                <label for="duration-2d">2 dni</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <aside class="summary-card" aria-live="polite">
+        <div class="summary-eyebrow">Estimator</div>
+        <div class="summary-price" id="budgetRange">3 000 – 4 000 PLN</div>
+        <p class="summary-note" id="budgetNote">Orientacyjny zakres inwestycji netto. Finalna oferta zależy od briefu, personalizacji i logistyki.</p>
+
+        <div class="summary-block">
+          <div class="summary-label">Rekomendacja</div>
+          <div class="summary-value" id="recommendationText">Krótki webinar wprowadzający online</div>
+        </div>
+
+        <div class="summary-block">
+          <div class="summary-label">Konfiguracja</div>
+          <ul class="summary-list" id="configSummary">
+            <li>Cel: wdrożenie AI</li>
+            <li>Uczestnicy: 11–25</li>
+            <li>Poziom: mixed</li>
+            <li>Forma: online</li>
+          </ul>
+        </div>
+
+        <div class="summary-block">
+          <div class="summary-label">Uwagi</div>
+          <div class="summary-value" id="extraNote">Koszty dojazdu i logistyki wyceniane są oddzielnie. Dla większych grup i formatów hybrydowych możliwa wycena indywidualna.</div>
+        </div>
+
+        <button class="jump-btn" type="button" id="scrollToTally">Przejdź do formularza</button>
+        <div class="microcopy">Kalkulator jest nad Tally. Sam formularz Tally pozostaje bez ingerencji.</div>
+      </aside>
+    </section>
+
+    <section class="tally-wrap" id="tallySection">
+      <h2>Formularz zapisu</h2>
+      <p>Po sprawdzeniu zakresu szkolenia wypełnij formularz poniżej. Formularz Tally pozostaje w tej samej postaci co wcześniej.</p>
+      <iframe data-tally-src="https://tally.so/embed/EkL9OX" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Zapisy na szkolenia"></iframe>
+    </section>
   </div>
 </main>
 
 <script src="https://tally.so/widgets/embed.js"></script>
+<script>
+  (function () {
+    const form = document.getElementById('trainingCalculator');
+    const budgetRange = document.getElementById('budgetRange');
+    const budgetNote = document.getElementById('budgetNote');
+    const recommendationText = document.getElementById('recommendationText');
+    const configSummary = document.getElementById('configSummary');
+    const extraNote = document.getElementById('extraNote');
+    const scrollBtn = document.getElementById('scrollToTally');
+    const tallySection = document.getElementById('tallySection');
+
+    const basePrices = {
+      webinar: 3000,
+      'workshop-online': 15000,
+      'workshop-onsite': 15000,
+      program: 25000,
+      consulting: 18000
+    };
+
+    const durationMultipliers = {
+      '1h': 0.2,
+      '2h': 0.32,
+      '4h': 0.48,
+      '1d': 1.0,
+      '2d': 1.8
+    };
+
+    const participantsMultipliers = {
+      '1-10': 0.9,
+      '11-25': 1.0,
+      '26-50': 1.4,
+      '51+': 1.8
+    };
+
+    const deliveryMultipliers = {
+      online: 0.9,
+      onsite: 1.0,
+      hybrid: 1.2
+    };
+
+    const levelMultipliers = {
+      beginner: 0.9,
+      mixed: 1.0,
+      advanced: 1.2
+    };
+
+    const formatCurrency = (value) => {
+      return new Intl.NumberFormat('pl-PL', {
+        style: 'currency',
+        currency: 'PLN',
+        maximumFractionDigits: 0
+      }).format(value).replace(',00', '');
+    };
+
+    const roundToThousand = (value) => Math.round(value / 1000) * 1000;
+
+    const getSelectedValue = (name) => {
+      const checked = form.querySelector(`input[name="${name}"]:checked`);
+      return checked ? checked.value : '';
+    };
+
+    const getRecommendation = ({ service, duration, delivery, participants, goal }) => {
+      if (service === 'program') return 'Program rozwojowy z etapami wdrożenia i follow-upem';
+      if (service === 'consulting') return 'Doradztwo strategiczne lub konsultacje eksperckie';
+      if (service === 'webinar') return delivery === 'online'
+        ? 'Krótki webinar wprowadzający online'
+        : 'Krótka forma inspiracyjna z elementem Q&A';
+      if (duration === '2d') return '2-dniowy warsztat dopasowany z pracą na case’ach';
+      if (duration === '1d') return goal === 'szkolenie liderów'
+        ? '1-dniowy warsztat dla liderów z modułem decyzyjnym'
+        : '1-dniowy warsztat dopasowany do zespołu';
+      if (duration === '4h') return 'Półdniowy warsztat roboczy z ćwiczeniami';
+      return 'Kompaktowa sesja szkoleniowa z jasnym zakresem';
+    };
+
+    const calculate = () => {
+      const goal = document.getElementById('goal').value;
+      const service = getSelectedValue('service');
+      const participants = getSelectedValue('participants');
+      const level = getSelectedValue('level');
+      const delivery = getSelectedValue('delivery');
+      const duration = getSelectedValue('duration');
+
+      const forceIndividual = participants === '51+' || (delivery === 'hybrid' && level === 'advanced');
+
+      const base = basePrices[service] || 3000;
+      const total = base
+        * (durationMultipliers[duration] || 1)
+        * (participantsMultipliers[participants] || 1)
+        * (deliveryMultipliers[delivery] || 1)
+        * (levelMultipliers[level] || 1);
+
+      if (forceIndividual) {
+        budgetRange.textContent = 'Wycena indywidualna';
+        budgetNote.textContent = 'Ta konfiguracja wymaga krótkiego briefu. Dotyczy to zwykle dużych grup, wysokiej złożoności lub formatu hybrydowego.';
+      } else {
+        const min = roundToThousand(total * 0.85);
+        const max = roundToThousand(total * 1.15);
+        budgetRange.textContent = `${formatCurrency(min)} – ${formatCurrency(max)}`;
+        budgetNote.textContent = 'Orientacyjny zakres inwestycji netto. Finalna oferta zależy od briefu, personalizacji i logistyki.';
+      }
+
+      recommendationText.textContent = getRecommendation({ service, duration, delivery, participants, goal });
+
+      const deliveryLabel = {
+        online: 'online',
+        onsite: 'stacjonarnie',
+        hybrid: 'hybrydowo'
+      };
+
+      const levelLabel = {
+        beginner: 'beginner',
+        mixed: 'mixed',
+        advanced: 'advanced'
+      };
+
+      configSummary.innerHTML = `
+        <li>Cel: ${goal}</li>
+        <li>Uczestnicy: ${participants}</li>
+        <li>Poziom: ${levelLabel[level]}</li>
+        <li>Forma: ${deliveryLabel[delivery]}</li>
+      `;
+
+      extraNote.textContent = forceIndividual
+        ? 'Koszty dojazdu i logistyki wyceniane są oddzielnie. Przy tej konfiguracji rekomendowany jest krótki kontakt przed ofertą.'
+        : 'Koszty dojazdu i logistyki wyceniane są oddzielnie. Kalkulator ma pomóc oszacować skalę projektu, nie zastępuje briefu.';
+    };
+
+    form.addEventListener('change', calculate);
+    scrollBtn.addEventListener('click', function () {
+      tallySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    calculate();
+  })();
+</script>
 
 </body>
 </html>

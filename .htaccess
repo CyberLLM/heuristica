@@ -49,6 +49,9 @@ RewriteRule ^superpszenica/?$ /superpszenica.html [L,NC]
 # Redirect /certyfikat to /certyfikat.html
 RewriteRule ^certyfikat/?$ /certyfikat.html [L,NC]
 
+# Redirect /certyfikat-trener to /certyfikat-trener.html
+RewriteRule ^certyfikat-trener/?$ /certyfikat-trener.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

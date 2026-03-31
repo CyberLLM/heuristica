@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QDHLBXLXT4');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Certyfikat — Heuristica</title>
@@ -39,22 +31,19 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
     /* ===== LOGIN SCREEN ===== */
     #login-screen {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
       width: 100%;
       max-width: 420px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      margin: auto;
+      padding: 40px;
       text-align: center;
     }
 
@@ -152,14 +141,11 @@
 
     /* ===== MAIN APP ===== */
     #app-screen {
-      flex: 1;
       display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
       width: 100%;
       max-width: 760px;
       flex-direction: column;
+      align-items: center;
       gap: 0;
     }
 
@@ -606,7 +592,7 @@
       <label class="consent-label">
         <input type="checkbox" id="consent-checkbox">
         <span class="consent-text">
-          Niniejszym oświadczam, że w dniu 26.03.2026 uczestniczyłem/am w szkoleniu „Systemy agentowe AI w zastosowaniach badawczych i dydaktycznych" organizowanym przez BG UP Lublin oraz że generuję certyfikat wyłącznie na podstawie prawdziwych danych i na własne potrzeby. Zobowiązuję się nie udostępniać dostępu (linku ani hasła) osobom trzecim oraz przyjmuję do wiadomości, że naruszenie powyższego może skutkować unieważnieniem certyfikatu. <strong>Twoje dane osobowe nie są nigdzie zapisywane — są używane wyłącznie do wygenerowania certyfikatu PDF.</strong>
+          Niniejszym oświadczam, że w dniu 26.03.2026 uczestniczyłem/am w szkoleniu „Systemy agentowe AI w zastosowaniach badawczych i dydaktycznych" organizowanym przez BG UP Lublin oraz że generuję certyfikat wyłącznie na podstawie prawdziwych danych i na własne potrzeby. Zobowiązuję się nie udostępniać dostępu (linku ani hasła) osobom trzecim oraz przyjmuję do wiadomości, że naruszenie powyższego może skutkować unieważnieniem certyfikatu. Akceptuję <a href="https://heuristica.pl/polityka" target="_blank">politykę prywatności</a>.
         </span>
       </label>
     </div>

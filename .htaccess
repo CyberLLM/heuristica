@@ -52,6 +52,9 @@ RewriteRule ^certyfikat/?$ /certyfikat.html [L,NC]
 # Redirect /certyfikat-trener to /certyfikat-trener.html
 RewriteRule ^certyfikat-trener/?$ /certyfikat-trener.html [L,NC]
 
+# Redirect /szkolenia-form to /szkolenia-form.html
+RewriteRule ^szkolenia-form/?$ /szkolenia-form.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

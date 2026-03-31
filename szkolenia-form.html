@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zapisy na szkolenia — Heuristica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --text-primary: #1a1a1a;
+      --text-muted: #666;
+      --border-color: #e0e0e0;
+      --accent-blue: #0066cc;
+      --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 2px solid transparent;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--text-primary);
+      background: rgba(0,0,0,0.04);
+      text-decoration: none;
+    }
+
+    .nav a.logo {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 14px 24px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .container p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .logo-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      opacity: 0.7;
+    }
+
+    /* ===== TALLY FORM ===== */
+    iframe[data-tally-src] {
+      border: none;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 32px 24px;
+      }
+
+      .container h1 {
+        font-size: 22px;
+      }
+
+      .nav a {
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="index.html" class="logo">HEURISTICA</a>
+  <a href="kim.html">Kim jestem</a>
+  <a href="quiz.html">Quiz</a>
+  <a href="sandbox.html">Sandbox</a>
+  <a href="prompting.html">Prompting</a>
+  <a href="#" data-tally-open="obAOEx">Kontakt</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main>
+  <div class="container">
+    <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" stroke="#0066cc" stroke-width="2"/>
+      <path d="M28 32h8M32 28v8" stroke="#0066cc" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    <h1>Zapisy na szkolenia</h1>
+    <p>Wypełnij formularz poniżej, aby zarejestrować się na nasze szkolenia i warsztaty.</p>
+
+    <!-- Tally Form -->
+    <iframe data-tally-src="https://tally.so/embed/EkL9OX" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Zapisy na szkolenia"></iframe>
+  </div>
+</main>
+
+<script src="https://tally.so/widgets/embed.js"></script>
+
+</body>
+</html>

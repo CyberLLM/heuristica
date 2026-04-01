@@ -85,6 +85,22 @@
     }
     .nav a.active { border-bottom-color: var(--teal); }
 
+    /* ─── MUTE BTN ─── */
+    .mute-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 4px 10px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+      align-self: center;
+      margin-left: 8px;
+    }
+    .mute-btn:hover { border-color: var(--teal); color: var(--teal); }
+
     /* ─── HERO ─── */
     .hero {
       max-width: 900px;
@@ -316,6 +332,7 @@
     <a href="sandbox.html">Sandbox</a>
     <a href="prompting.html">Prompting</a>
     <a href="#" data-tally-open="obAOEx">Kontakt</a>
+    <button class="mute-btn" id="muteBtn" onclick="toggleMute()">[♪ ON]</button>
   </nav>
 
   <!-- HERO -->
@@ -541,6 +558,11 @@
     </div>
   </section>
 
+  <!-- ALIGATOR -->
+  <section style="text-align: center; padding-top: 20px;">
+    <img src="img/aligator.png" alt="See you later, alligator" style="max-width: 280px; border-radius: 12px; box-shadow: 0 0 40px rgba(168,85,247,0.2);">
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <p>
@@ -550,6 +572,61 @@
       <a href="#" data-tally-open="obAOEx">Kontakt</a>
     </p>
   </footer>
+
+  <!-- BG MUSIC -->
+  <script>
+    let audioCtx = null;
+    let muted = false;
+    let bgMusicStarted = false;
+
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    window.addEventListener('load', () => {
+      try {
+        getCtx().resume().then(() => {
+          if (!bgMusicStarted) { bgMusicStarted = true; scheduleBgNote(); }
+        });
+      } catch(e) {}
+    });
+
+    document.addEventListener('click', () => {
+      try { getCtx().resume(); } catch(e) {}
+      if (!bgMusicStarted) { bgMusicStarted = true; scheduleBgNote(); }
+    }, { once: true });
+
+    const PENTA = [262, 294, 330, 392, 440, 523, 587, 659, 784, 880];
+    const DURATIONS = [0.12, 0.18, 0.24, 0.36];
+
+    function scheduleBgNote() {
+      if (muted) { setTimeout(scheduleBgNote, 300); return; }
+      try {
+        const ctx = getCtx();
+        const freq = PENTA[Math.floor(Math.random() * PENTA.length)];
+        const dur  = DURATIONS[Math.floor(Math.random() * DURATIONS.length)];
+        const f = Math.random() < 0.25 ? freq * 2 : freq;
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'square';
+        osc.frequency.value = f;
+        gain.gain.setValueAtTime(0.025, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+        osc.start();
+        osc.stop(ctx.currentTime + dur);
+        const gap = 80 + Math.random() * 240;
+        setTimeout(scheduleBgNote, (dur * 1000) + gap);
+      } catch(e) {}
+    }
+
+    function toggleMute() {
+      muted = !muted;
+      document.getElementById('muteBtn').textContent = muted ? '[♪ OFF]' : '[♪ ON]';
+    }
+  </script>
 
   <!-- Tally contact popup -->
   <script async src="https://tally.so/widgets/embed.js"></script>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QDHLBXLXT4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/hyperagent">
+  <title>Twój Agent działa! — HyperAgent Report | Heuristica</title>
+  <meta name="description" content="Raport operacyjny HyperAgent — pierwsze zadanie wykonane 1 kwietnia 2026. Analiza sygnałów środowiskowych, hipotezy intencji i testowe działanie.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg2:       #161b22;
+      --bg3:       #1c2330;
+      --violet:    #a855f7;
+      --violet-dim:#7c3aed;
+      --teal:      #2dd4bf;
+      --green:     #4ade80;
+      --pink:      #f472b6;
+      --text:      #e6edf3;
+      --text-dim:  #7d8590;
+      --border:    #30363d;
+      --border-v:  rgba(168,85,247,0.35);
+      --border-t:  rgba(45,212,191,0.35);
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-ui:   system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-ui);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── NAV ─── */
+    .nav {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 14px 26px;
+      font-size: 0.85em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: color 0.2s, background 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border-bottom-color: var(--violet);
+      text-decoration: none;
+    }
+    .nav a.active { border-bottom-color: var(--teal); }
+
+    /* ─── HERO ─── */
+    .hero {
+      max-width: 900px;
+      margin: 60px auto 0;
+      padding: 0 24px 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      border: 1px solid var(--border-t);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-size: clamp(2em, 5vw, 3.2em);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 .grad-violet { color: var(--violet); }
+    .hero h1 .grad-teal { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.15em;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 36px;
+    }
+    .status-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--green);
+    }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.4em, 3vw, 1.8em);
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    /* ─── REPORT CARDS ─── */
+    .report-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .report-card h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--violet);
+      margin-bottom: 12px;
+    }
+    .report-card p {
+      color: var(--text-dim);
+      font-size: 0.95em;
+      margin-bottom: 12px;
+    }
+    .report-card p:last-child { margin-bottom: 0; }
+    .report-card ul {
+      list-style: none;
+      margin: 12px 0;
+    }
+    .report-card li {
+      padding: 6px 0 6px 20px;
+      color: var(--text-dim);
+      font-size: 0.95em;
+      position: relative;
+    }
+    .report-card li::before {
+      content: '•';
+      color: var(--teal);
+      position: absolute;
+      left: 0;
+    }
+
+    /* ─── INSIGHT BOX ─── */
+    .insight-box {
+      background: var(--bg3);
+      border: 1px solid var(--border-v);
+      border-left: 3px solid var(--violet);
+      border-radius: 0 10px 10px 0;
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .insight-box h4 {
+      font-family: var(--font-mono);
+      font-size: 0.8em;
+      color: var(--violet);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .insight-box p {
+      color: var(--text);
+      font-size: 1em;
+      line-height: 1.7;
+    }
+
+    /* ─── FACTS GRID ─── */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .fact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .fact-card h5 {
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .fact-card p {
+      color: var(--text-dim);
+      font-size: 0.9em;
+    }
+
+    /* ─── CONCLUSION ─── */
+    .conclusion-box {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid var(--border-v);
+      border-radius: 12px;
+      padding: 32px 36px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .conclusion-box h3 {
+      font-size: 1.3em;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .conclusion-box p {
+      color: var(--text-dim);
+      font-size: 1em;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .mode-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75em;
+      background: rgba(244, 114, 182, 0.15);
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      border-radius: 6px;
+      padding: 6px 14px;
+      color: var(--pink);
+      margin-top: 20px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.82em;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--teal); text-decoration: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .hero { margin-top: 30px; padding-bottom: 40px; }
+      section { padding: 40px 18px; }
+      .report-card { padding: 20px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="dojo.html">Dojo</a>
+    <a href="sandbox.html">Sandbox</a>
+    <a href="prompting.html">Prompting</a>
+    <a href="#" data-tally-open="obAOEx">Kontakt</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">&gt; raport operacyjny_</div>
+    <h1>
+      <span class="grad-violet">TWÓJ AGENT</span><br>
+      <span class="grad-teal">DZIAŁA!</span>
+    </h1>
+    <p class="hero-sub">
+      Dziś, 1 kwietnia, Twój HyperAgent wykonał swoje pierwsze zadanie operacyjne.
+    </p>
+    <div class="status-box">
+      <span class="status-dot"></span>
+      Uruchomienie przebiegło poprawnie
+    </div>
+  </div>
+
+  <!-- INICJALIZACJA -->
+  <section>
+    <div class="section-label">// status zadania</div>
+    <h2 class="section-title">Pierwsza pętla zakończona sukcesem</h2>
+
+    <div class="report-card">
+      <h3>Inicjalizacja systemu</h3>
+      <p>Uruchomienie przebiegło poprawnie:</p>
+      <ul>
+        <li>inicjalizacja kontekstu</li>
+        <li>synchronizacja pamięci</li>
+        <li>pierwsza pętla planner → executor → verifier zakończona sukcesem</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CO ZROBIŁ -->
+  <section>
+    <div class="section-label">// wykonane operacje</div>
+    <h2 class="section-title">Co zrobił?</h2>
+
+    <div class="report-card">
+      <p>Agent przeprowadził następujące działania:</p>
+      <ul>
+        <li>przeanalizował właśnie bieżące sygnały środowiskowe (kalendarz, zachowania użytkownika, mikro-decyzje)</li>
+        <li>wygenerował hipotezy intencji (predictive intent layer)</li>
+        <li>przeprowadził testowe działanie w trybie niskiego ryzyka (low-impact execution)</li>
+        <li>zweryfikował wynik i zapisał ślad w pamięci semantycznej</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KLUZOWY INSIGHT -->
+  <section>
+    <div class="section-label">// analiza</div>
+    <h2 class="section-title">Kluczowy insight</h2>
+
+    <div class="insight-box">
+      <h4>Wniosek operacyjny</h4>
+      <p>
+        Na podstawie analizy danych agent doszedł do następującego wniosku:<br><br>
+        W dniu 1 kwietnia obserwuje się globalny wzorzec komunikacyjny polegający na celowym wprowadzaniu odbiorców w błąd w formie humorystycznej.
+      </p>
+    </div>
+
+    <div class="report-card" style="margin-top: 24px;">
+      <h3>Geneza zjawiska</h3>
+      <p>Zjawisko to ma udokumentowaną historię:</p>
+      <ul>
+        <li>odniesienia do zmiany kalendarza juliańskiego na gregoriański (XVI w.)</li>
+        <li>osoby obchodzące „stary Nowy Rok" w kwietniu były obiektem żartów</li>
+        <li>tradycja rozprzestrzeniła się kulturowo jako April Fools' Day</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAKTY -->
+  <section>
+    <div class="section-label">// kontekst historyczny</div>
+    <h2 class="section-title">Fakty + mniej oczywiste konteksty</h2>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <h5>Kalendarzowa rewolucja</h5>
+        <p>Reforma kalendarza przez Papieża Grzegorza XIII (1582) rzeczywiście przesunęła Nowy Rok na 1 stycznia.</p>
+      </div>
+      <div class="fact-card">
+        <h5>Regionalne tradycje</h5>
+        <p>W niektórych regionach Francji i Niderlandów długo utrzymywał się zwyczaj świętowania pod koniec marca / 1 kwietnia.</p>
+      </div>
+      <div class="fact-card">
+        <h5>„Poisson d'avril"</h5>
+        <p>Osoby „spóźnione" z adaptacją bywały obiektem żartów — tzw. poisson d'avril (fr. „kwietniowa ryba").</p>
+      </div>
+      <div class="fact-card">
+        <h5>Ostrzeżenie</h5>
+        <p>Historycy (np. Joseph Boskin, Boston University) wskazują, że brak twardych dowodów, że to jedyne źródło April Fools.</p>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top: 24px;">
+      <h4>Wniosek</h4>
+      <p>
+        April Fools to raczej konwergencja kilku tradycji „odwrócenia porządku" niż jedno wydarzenie.
+      </p>
+    </div>
+  </section>
+
+  <!-- MECHANIKA SPOŁECZNA -->
+  <section>
+    <div class="section-label">// obserwacja</div>
+    <h2 class="section-title">Mechanika społeczna: „dozwolona dezinformacja"</h2>
+
+    <div class="report-card">
+      <p>1 kwietnia działa jak tymczasowe zawieszenie norm epistemicznych:</p>
+      <ul>
+        <li><strong>standard:</strong> komunikacja = prawda / wiarygodność</li>
+        <li><strong>1 kwietnia:</strong> komunikacja = intencjonalne wprowadzenie w błąd + sygnał humoru</li>
+      </ul>
+      <p>To przypomina znany w antropologii mechanizm:</p>
+      <ul>
+        <li>„ritualized inversion" (Victor Turner)</li>
+        <li>chwilowe odwrócenie reguł społecznych, które&hellip; wzmacnia je w długim okresie</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>Wniosek</h4>
+      <p>
+        Innymi słowy: społeczeństwo ćwiczy odporność na fałsz, bez realnych kosztów.
+      </p>
+    </div>
+  </section>
+
+  <!-- VIRALOWE FEJKY -->
+  <section>
+    <div class="section-label">//Historia mediów</div>
+    <h2 class="section-title">Wczesne „viralowe fejki" (przed erą internetu)</h2>
+
+    <div class="report-card">
+      <p>Zanim pojawiły się social media, istniały spektakularne mistyfikacje:</p>
+      <ul>
+        <li><strong>BBC, 1957</strong> — reportaż o „zbiorach spaghetti w Szwajcarii"<br><em>→ tysiące widzów dzwoniło, pytając jak „uprawiać makaron"</em></li>
+        <li><strong>Sidd Finch, 1985</strong> (Sports Illustrated)<br><em>→ fikcyjny baseballista rzucający 168 mph</em></li>
+        <li><strong>The Guardian, 1977</strong> — dodatek o fikcyjnym państwie San Serriffe<br><em>→ czytelnicy zamawiali wycieczki</em></li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>Obserwacja</h4>
+      <p>
+        To były proto-modele dzisiejszych fake newsów, ale z jasnym kontekstem gry.
+      </p>
+    </div>
+  </section>
+
+  <!-- CIEKAWOSTKI -->
+  <section>
+    <div class="section-label">// kultura</div>
+    <h2 class="section-title">Ciekawostki kulturowe (mało znane)</h2>
+
+    <div class="facts-grid">
+      <div class="fact-card">
+        <h5>Francja</h5>
+        <p>Dzieci przyklejają papierową rybę na plecy (symbol „łatwej zdobyczy").</p>
+      </div>
+      <div class="fact-card">
+        <h5>Iran</h5>
+        <p>Sizdah Bedar (13. dzień Nowego Roku perskiego, często ~1–2 kwietnia) — również tradycja żartów.</p>
+      </div>
+      <div class="fact-card">
+        <h5>Szkocja</h5>
+        <p>Kiedyś obchodzono przez 2 dni — drugi to „Tailie Day" (żarty związane z&hellip; tyłem ciała).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WSPÓŁCZESNY WYMIAR -->
+  <section>
+    <div class="section-label">// test systemów</div>
+    <h2 class="section-title">Współczesny wymiar: test systemów informacji</h2>
+
+    <div class="report-card">
+      <p>Dziś 1 kwietnia to coś więcej niż żarty:</p>
+      <ul>
+        <li><strong>firmy technologiczne</strong> (np. Google) używały tego dnia do testowania:
+          <ul>
+            <li>reakcji użytkowników</li>
+            <li>granic wiarygodności</li>
+            <li>UX komunikacji</li>
+          </ul>
+        </li>
+        <li><strong>media</strong> → sprawdzają:
+          <ul>
+            <li>jak szybko rozprzestrzenia się informacja</li>
+            <li>gdzie użytkownicy tracą czujność</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>Wniosek</h4>
+      <p>
+        To de facto eksperymenty na systemach poznawczych w skali globalnej.
+      </p>
+    </div>
+  </section>
+
+  <!-- PODSUMOWANIE -->
+  <section>
+    <div class="section-label">// wynik operacji</div>
+    <h2 class="section-title">Wniosek operacyjny agenta</h2>
+
+    <div class="conclusion-box">
+      <h3>Dziękujemy za udział w eksperymencie</h3>
+      <p>
+        Dzisiejsze działanie mogło zawierać komponent tzw. wkrętki.<br>
+        Agent oznaczył zdarzenie jako:
+      </p>
+      <div class="mode-tag">[SIMULATION: TRUST_BOUNDARY_TEST / MODE: PLAYFUL]</div>
+      <p style="margin-top: 24px; color: var(--green);">
+        System działa prawidłowo ;)
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2026 <a href="https://heuristica.pl">heuristica.pl</a> &nbsp;|&nbsp;
+      <a href="polityka.html">Polityka prywatności</a> &nbsp;|&nbsp;
+      <a href="regulamin.html">Regulamin</a> &nbsp;|&nbsp;
+      <a href="#" data-tally-open="obAOEx">Kontakt</a>
+    </p>
+  </footer>
+
+  <!-- Tally contact popup -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+</body>
+</html>

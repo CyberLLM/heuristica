@@ -34,6 +34,9 @@ RewriteRule ^dojo/?$ /dojo.html [L,NC]
 # Redirect /promptologia-dojo to /promptologia-dojo.html
 RewriteRule ^promptologia-dojo/?$ /promptologia-dojo.html [L,NC]
 
+# Redirect /hyperagent to /hyperagent.html
+RewriteRule ^hyperagent/?$ /hyperagent.html [L,NC]
+
 # Redirect /payment-success to /payment-success-page.html
 RewriteRule ^payment-success/?$ /payment-success-page.html [L,NC]
 

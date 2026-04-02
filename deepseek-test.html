@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pre-work: Storytelling w marketingu | Materiały dla uczestników</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefcf5;
+            color: #1e1a15;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* header / hero */
+        .hero {
+            background: linear-gradient(135deg, #f9e7c2 0%, #f5dba8 100%);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.1);
+            border: 1px solid #eedbae;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #2c3e2f;
+            color: #fef5e6;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #1f2b1c;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #3a2e24;
+            max-width: 85%;
+            border-left: 4px solid #c17b4b;
+            padding-left: 1rem;
+            margin: 1rem 0 1.2rem 0;
+        }
+
+        .meta-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .meta-card {
+            background: rgba(255,255,245,0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* sekcje */
+        .section {
+            background: white;
+            border-radius: 1.75rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03);
+            border: 1px solid #f0e5d6;
+            transition: box-shadow 0.2s;
+        }
+
+        .section:hover {
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 5px solid #e6a157;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.2rem 0 0.75rem 0;
+            color: #2c4b2b;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #fffbf5;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .timeline-table th {
+            background-color: #e9dbc9;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-table td {
+            border-bottom: 1px solid #f0e2d2;
+            padding: 1rem;
+            vertical-align: top;
+            background-color: #ffffff;
+        }
+
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .hour-col {
+            font-weight: 700;
+            background-color: #fef7ef;
+            width: 100px;
+            color: #a65626;
+        }
+
+        .badge-module {
+            background-color: #e9f0e6;
+            color: #2c5e2a;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 0.4rem;
+        }
+
+        .equip-list, .quotes-list, .source-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .equip-list li, .quotes-list li, .source-list li {
+            margin-bottom: 0.65rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .equip-list li::before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .quotes-list li::before {
+            content: "💬";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .source-list li::before {
+            content: "📘";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight {
+            background: #fef1e0;
+            padding: 1rem 1.5rem;
+            border-radius: 1.5rem;
+            border-left: 5px solid #e6a157;
+            font-weight: 500;
+            margin: 1rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #e5d5c0;
+            font-size: 0.85rem;
+            color: #7b6b58;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .hero-sub {
+                max-width: 100%;
+            }
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+            .timeline-table th, .timeline-table td {
+                font-size: 0.85rem;
+                padding: 0.75rem;
+            }
+            .section {
+                padding: 1.2rem;
+            }
+        }
+
+        .prep-note {
+            background-color: #eef3ea;
+            border-radius: 1rem;
+            padding: 0.75rem 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .button-top {
+            display: inline-block;
+            background: #1e1a15;
+            color: white;
+            border-radius: 40px;
+            padding: 0.4rem 1.2rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="hero-badge">📖 MATERIAŁ PRE-WORK | POBIERZ I PRZYGOTUJ SIĘ</div>
+        <h1>Nie opowiadaj – angażuj.<br>Storytelling, który sprzedaje, buduje markę i porywa zespół</h1>
+        <div class="hero-sub">Warsztat stacjonarny dla zespołu marketingu – synteza programu, cele i praktyczne przygotowanie.</div>
+        <div class="meta-grid">
+            <span class="meta-card">🎯 12–15 uczestników</span>
+            <span class="meta-card">⏱️ 6h warsztatu + przerwy</span>
+            <span class="meta-card">📍 Hotel Narvil Conference & Spa (okolice Warszawy)</span>
+            <span class="meta-card">📅 20.05.2026</span>
+        </div>
+    </div>
+
+    <!-- 1. Cel i efekty -->
+    <div class="section">
+        <h2>✨ Po co ten warsztat? (efekty dla Ciebie)</h2>
+        <div class="grid-2col">
+            <div>
+                <h3>📈 Wiedza, którą wyniesiesz</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li>Praktyczne modele storytellingu (3-aktowy, Przed–Po–Most, StoryBrand)</li>
+                    <li>Jak tworzyć spójną narrację marki w social mediach i prezentacjach</li>
+                    <li>Metody wykorzystania AI (ChatGPT, Claude) do generowania angażujących historii</li>
+                </ul>
+            </div>
+            <div>
+                <h3>🛠️ Umiejętności, które przećwiczysz</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li>Przekształcanie suchych danych / raportów w historie z napięciem</li>
+                    <li>Budowanie otwarć do prezentacji wewnętrznych, które przykuwają uwagę</li>
+                    <li>Redagowanie promptów AI i iterowanie narracji do różnych kanałów</li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight">
+            🧠 Główna zmiana postawy: od poprawnej, lecz neutralnej komunikacji → do <strong>świadomego, emocjonalnego i spójnego opowiadania historii</strong> marki oraz zespołu.
+        </div>
+        <div class="prep-note">
+            ✅ <strong>Zadanie przed szkoleniem (max 5 min):</strong> Przynieś ze sobą jeden przykład „suchej" komunikacji – może to być post, slajd, wewnętrzny e-mail lub fragment raportu. Przerobimy go na warsztacie na angażującą historię!
+        </div>
+    </div>
+
+    <!-- 2. SZCZEGÓŁOWY PROGRAM (tabela) -->
+    <div class="section">
+        <h2>📋 Program warsztatu – dzień pełen praktyki</h2>
+        <table class="timeline-table">
+            <thead>
+                <tr><th>Godzina</th><th>Moduł / aktywności (treść + ćwiczenia praktyczne)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="hour-col">09:00 – 09:15</td><td><span class="badge-module">ENERGIZER + OTWARCIE</span><br><strong>„Dwa zdania, jedna historia"</strong> – uczestnicy w parach opowiadają sukces zawodowy w dwóch zdaniach, partner wskazuje wersję bardziej angażującą. Prowadzący zbiera realne wyzwania na flipcharcie „Nasze codzienne historie".</td></tr>
+                <tr><td class="hour-col">09:15 – 09:30</td><td><span class="badge-module">MINIWYKŁAD</span><br>Dlaczego storytelling zmienia komunikację? Przykłady rynkowe (Dove, Żabka, Allegro). Pytania do sali: „Co ostatnio Cię wzruszyło w social mediach?"</td></tr>
+                <tr><td class="hour-col">09:30 – 10:45</td><td><span class="badge-module">MODUŁ 1 – MODELE OD RĘKI</span><br>Modele: 3-aktowy oraz „Przed – Po – Most". <strong>Ćwiczenie grupowe (3 osoby):</strong> każda grupa dostaje realny post z dotychczasowej komunikacji firmy – przekształca go na flipcharcie według modelu „Przed – Po – Most". Prowadzący chodzi z feedbackiem „tu daj napięcie, tu emocję".</td></tr>
+                <tr><td class="hour-col">10:45 – 11:00</td><td>☕ <strong>Przerwa kawowa #1</strong> (15 min)</td></tr>
+                <tr><td class="hour-col">11:00 – 12:15</td><td><span class="badge-module">MODUŁ 2 – NARRACJA MARKI</span><br>Głos marki vs fabuła. <strong>Warsztat „Nasza marka jako bohater"</strong> – grupy wypełniają kartę: cel marki, przeszkoda, transformacja klienta. Krótkie prezentacje na forum, nagroda „Opowiadacz Roku". <strong>Energizer „Storytellingowe bingo"</strong> – uczestnicy odhaczają u innych emocjonalne zwroty.</td></tr>
+                <tr><td class="hour-col">12:15 – 12:45</td><td><span class="badge-module">MODUŁ 3 – AI W STORYTELLINGU</span><br>Demo na żywo: prowadzący wrzuca suche fakty o produkcie do ChatGPT/Claude, generuje 3 historie (LinkedIn, newsletter, prezentacja). <strong>Ćwiczenie indywidualne (5 min):</strong> każdy pisze własny prompt AI do swojego ostatniego zadania. Wymiana w parach i ocena „która historia brzmi najbardziej ludzko".</td></tr>
+                <tr><td class="hour-col">12:45 – 13:15</td><td>🍽️ <strong>Lunch (30 min)</strong> – przy posiłku luźne rozmowy o historiach marki.</td></tr>
+                <tr><td class="hour-col">13:15 – 14:30</td><td><span class="badge-module">MODUŁ 4 – REALNE CASY FIRMOWE</span><br>Każdy uczestnik dostaje kartę z realnym materiałem firmy (suchy raport / post). <strong>Zadanie indywidualne (10 min):</strong> przekształca go w historię według wybranego modelu. Następnie <strong>triady feedbackowe</strong> – każdy opowiada swoją historię, pozostali dają feedback wg schematu „1x mocna strona, 1x co dodać". Prowadzący wybiera 3 najlepsze historie do analizy na flipcharcie.</td></tr>
+                <tr><td class="hour-col">14:30 – 14:45</td><td>☕ <strong>Przerwa kawowa #2 + konkurs</strong> – kto opowie najśmieszniejszą historię o porażce swojej historii – nagroda drobna.</td></tr>
+                <tr><td class="hour-col">14:45 – 15:30</td><td><span class="badge-module">MODUŁ 5 – PREZENTACJE WEWNĘTRZNE</span><br>Schemat „Otwarcie – punkt zwrotny – wezwanie do działania". <strong>Ćwiczenie w parach:</strong> każde przygotowuje 2-minutowe otwarcie swojego ostatniego wewnętrznego wystąpienia, zmieniając liczby w historię („Wyobraźcie sobie, że…"). Prowadzący nagrywa feedback na karteczkach plus/delta.</td></tr>
+                <tr><td class="hour-col">15:30 – 15:45</td><td><span class="badge-module">ZAKOŃCZENIE I SCHEMATY</span><br>Każdy otrzymuje kartę pracy <strong>„Mój codzienny schemat storytellingu"</strong> (wizualny model do wypełnienia). Zbiór kluczowych wniosków + materiały cyfrowe i link do biblioteczki.</td></tr>
+            </tbody>
+        </table>
+        <div class="prep-note" style="margin-top: 1rem;">
+            🧠 <strong>Pamiętaj:</strong> warsztat oparty na modelu Kolba (doświadczenie → refleksja → teoria → praktyka) oraz ADDIE. Minimum teorii, maksimum symulacji i case studies.
+        </div>
+    </div>
+
+    <!-- 3. charakter miejsca + wykorzystanie przestrzeni -->
+    <div class="section">
+        <h2>🏨 Jak wykorzystamy przestrzeń Hotelu Narvil?</h2>
+        <p>Hotel Narvil Conference & Spa zapewnia świetne warunki do pracy warsztatowej. Zaplanowaliśmy:</p>
+        <ul style="margin: 0.75rem 0 0 1.5rem;">
+            <li><strong>Sale w układzie wyspowym</strong> – 4 okrągłe stoły dla grup 3-4 osobowych, co sprzyja ćwiczeniom w triadach i feedbackowi.</li>
+            <li><strong>Flipcharty na każdej wyspie</strong> – uczestnicy natychmiast zapisują wersje swoich historii i rozwieszają na ścianach (galeria opowieści).</li>
+            <li><strong>Strefa demo AI</strong> – rzutnik i głośnik, aby pokazać narzędzia na żywo, a później uczestnicy pracują na własnych laptopach (przynieś swój!).</li>
+            <li><strong>Przestrzeń na energizery</strong> – szybkie przearanżowanie krzeseł do kręgu na „Storytellingowe bingo" i konkursy.</li>
+        </ul>
+        <p>Dzięki temu nawet w formule wyjazdowej łączymy komfort, swobodę i wysoką interaktywność.</p>
+    </div>
+
+    <!-- 4. sprzęt / rekwizyty -->
+    <div class="section">
+        <h2>🎒 Sprzęt i rekwizyty (zapewnia trener)</h2>
+        <ul class="equip-list">
+            <li>Flipchart + 4 kolory markerów + papierowe flipcharty na każdej wyspie</li>
+            <li>Projektor + głośnik do demo AI i przykładów wideo (kampanie Allegro/Żabka)</li>
+            <li>Karty pracy drukowane: „Przed – Po – Most", „Marka jako bohater", „Mój codzienny schemat storytellingu"</li>
+            <li>Żetony / naklejki „Opowiadacz Roku" oraz drobne upominki do konkursów</li>
+            <li>Karteczki samoprzylepne w 3 kolorach (do feedbacku plus/delta)</li>
+            <li>Stoper do ćwiczeń czasowych i wizualny timer na ekranie</li>
+            <li>Przykładowe realne posty i slajdy z firmy klienta (anonimowe, dostarczone przed szkoleniem)</li>
+        </ul>
+    </div>
+
+    <!-- 5. źródła i lektury -->
+    <div class="section">
+        <h2>📚 Polecane źródła (dla każdego modułu)</h2>
+        <div class="grid-2col">
+            <div>
+                <h3>📘 Moduły 1–2 (modele i narracja)</h3>
+                <ul class="source-list">
+                    <li>„Storytelling. Materiały do szkoleń" – A. Śliwińska (PDF)</li>
+                    <li>„The Storytelling Edge" – J. Lazauskas, S. Snow</li>
+                    <li>„Building a StoryBrand" – D. Miller</li>
+                </ul>
+            </div>
+            <div>
+                <h3>🤖 Moduł 3 (AI w storytellingu)</h3>
+                <ul class="source-list">
+                    <li>„The AI Prompt Cookbook" – M. K. P.</li>
+                    <li>Artykuł „Jak pisać prompty do historii" (ContentBrew)</li>
+                </ul>
+                <h3 style="margin-top: 1rem;">📊 Moduły 4–5 (case'y + prezentacje)</h3>
+                <ul class="source-list">
+                    <li>„Slide:ology" – N. Duarte</li>
+                    <li>„Opowiadanie danych" – C. Nussbaumer Knaflic</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. inspirujące cytaty -->
+    <div class="section">
+        <h2>💡 Cytaty, które zabierzesz ze sobą</h2>
+        <ul class="quotes-list">
+            <li><strong>„Fakty są neutralne, ale historie nadają im znaczenie."</strong> – Anonim</li>
+            <li><strong>„Nie pamiętamy list, pamiętamy emocje i punkty zwrotne."</strong> – P. Guber</li>
+            <li><strong>„AI napisze Ci fabułę. Tylko Ty nadasz jej duszę."</strong> – Cytat szkoleniowy</li>
+            <li><strong>„Marketing bez historii to tylko koszt. Marketing z historią to inwestycja w relację."</strong> – własne</li>
+        </ul>
+    </div>
+
+    <!-- 7. przygotowanie uczestnika + kontakt -->
+    <div class="section">
+        <h2>📌 Twoje zadanie przed warsztatem</h2>
+        <div class="grid-2col">
+            <div>
+                <p>✔️ Przynieś laptopa (będziemy testować AI – ChatGPT lub Claude, bezpłatne konto mile widziane).<br>
+                ✔️ Znajdź jeden „suchy" komunikat, który chcesz przekształcić (post, e-mail, fragment prezentacji).<br>
+                ✔️ Zastanów się: „Jaka historia marki ostatnio do mnie trafiła i dlaczego?"</p>
+            </div>
+            <div>
+                <p>📧 W razie pytań: <strong>Anastazja Haerowska</strong> (Senior People & Vibes Manager) <br>
+                📞 +48 000 000 000<br>
+                <span style="font-size:0.8rem;">Korporacja Synergia & Kawusia</span></p>
+            </div>
+        </div>
+        <div class="highlight" style="margin-top: 0.5rem;">
+            🔥 Pamiętaj – to warsztat dla Ciebie. Im więcej przyniesiesz własnych przykładów, tym większą wartość wyniesiesz do codziennej pracy.
+        </div>
+    </div>
+
+    <div class="footer">
+        © Materiał pre-work dla uczestników szkolenia „Nie opowiadaj – angażuj" | Opracowano na podstawie briefu Korporacja Synergia & Kawusia | Hotel Narvil Conference & Spa | 20.05.2026
+    </div>
+</div>
+</body>
+</html>

@@ -751,7 +751,14 @@
           return false;
         };
       });
-      
+
+      // Jeśli URL zawiera hash, pokaż tę sekcję
+      if (window.location.hash) {
+        const hashId = window.location.hash.substring(1);
+        console.log('🔗 Znaleziono hash w URL:', hashId);
+        showInspiration(hashId);
+      }
+
       console.log('✅ Inicjalizacja zakończona');
     });
   </script>

@@ -17,9 +17,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="canonical" href="https://heuristica.pl/narzedzia">
-  <title>Narzędzia | HEURISTICA</title>
+  <title>Karty trenerskie | HEURISTICA</title>
   <meta name="description" content="Autorskie narzędzia warsztatowe: Karty Inwencji, Karty Opowieści, Karty Transformacji, Vita Inspira, Ko-Kartki, Fakapki, PersonaliTY. Dla trenerów i coachów.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=premium-2026-5">
   <style>
     .tools-list {
       max-width: 600px;
@@ -33,33 +33,33 @@
       font-size: 1.22em;
       font-family: 'Montserrat', Arial, sans-serif;
       letter-spacing: 0.5px;
-      border-top: 1px solid #aaa;
-      border-bottom: 1px solid #aaa;
+      border-top: 1px solid #2d3d4a;
+      border-bottom: 1px solid #2d3d4a;
       padding: 8px 0;
       transition: background 0.2s;
     }
     .tools-list li a {
       display: block;
       text-decoration: none;
-      color: #222;
+      color: #d4a574;
       font-weight: 600;
       padding: 8px 0;
       transition: background 0.2s, color 0.2s;
     }
     .tools-list li a:hover, .tools-list li.active a {
-      background: #242829;
-      color: #fff;
+      background: #2d5a4e;
+      color: #e8e6e1;
     }
     .tool-desc {
       max-width: 800px;
-      margin: 32px auto;
-      background: #f6f9fb;
-      border-radius: 8px;
-      box-shadow: 0 1px 7px #eee;
-      padding: 32px 28px;
+      margin: 48px auto;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
       font-size: 1.08em;
       line-height: 1.6;
       display: none;
+      color: #e8e6e1;
     }
     .tool-desc.active {
       display: block;
@@ -67,7 +67,18 @@
     .tool-desc h2 {
       font-size: 1.4em;
       margin-bottom: 16px;
-      color: #22394d;
+      color: #d4a574;
+      margin-top: 0;
+    }
+    .tool-desc b {
+      color: #d4a574;
+      font-weight: 600;
+    }
+    .tool-desc p {
+      color: #e8e6e1;
+    }
+    .tool-desc li {
+      color: #e8e6e1;
     }
     .tool-content {
       display: flex;
@@ -81,8 +92,9 @@
     }
     .tool-image img {
       width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      border: 1px solid #2d3d4a;
     }
     .tool-text {
       flex: 1;
@@ -98,14 +110,14 @@
     }
     .order-form {
       max-width: 800px;
-      margin: 40px auto;
-      background: #e8f1f6;
-      border-radius: 8px;
-      padding: 32px 28px;
-      border: 2px solid #c6d7e0;
+      margin: 48px auto;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      border: none;
     }
     .order-form h3 {
-      color: #22394d;
+      color: #d4a574;
       margin-bottom: 16px;
       font-size: 1.3em;
       text-align: center;
@@ -122,18 +134,24 @@
     .form-group textarea {
       width: 100%;
       padding: 8px 12px;
-      border: 2px solid #d0d0d0;
+      border: 1px solid #2d3d4a;
       border-radius: 4px;
       font-size: 0.95em;
       box-sizing: border-box;
+      background: #1a1f2e;
+      color: #e8e6e1;
     }
     .form-group input:focus,
     .form-group textarea:focus {
-      border-color: #22394d;
+      border-color: #d4a574;
       outline: none;
     }
     .form-group input.required {
-      border-color: #e74c3c;
+      border-color: #d4a574;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #a09a94;
     }
     .form-group textarea {
       resize: vertical;
@@ -147,7 +165,7 @@
     }
     .submit-btn {
       background: #d4a574;
-      color: white;
+      color: #0f1419;
       padding: 12px 32px;
       border: none;
       border-radius: 4px;
@@ -163,10 +181,16 @@
       background: #c19660;
     }
     .form-note {
-      color: #666;
+      color: #a09a94;
       font-size: 0.9em;
       margin-top: 16px;
       line-height: 1.4;
+    }
+    .form-note a {
+      color: #d4a574;
+    }
+    .checkbox-row label {
+      color: #e8e6e1;
     }
     @media (max-width: 750px) {
       .tool-content {
@@ -196,7 +220,8 @@
     <a href="#" data-tally-open="obAOEx">Kontakt</a>
   </div>
 
-  <h1>Narzędzia warsztatowe</h1>
+  <div class="container">
+    <h1>Karty trenerskie</h1>
   <ul class="tools-list">
     <li><a href="inspiracje.html#narzedzia-ai">NARZĘDZIA AI</a></li>
     <li><a href="#karty-inwencji" onclick="showTool('karty-inwencji', 'Karty Inwencji')">KARTY INWENCJI</a></li>
@@ -492,6 +517,7 @@ Znajdziesz tu więc adaptację stworzonej przez twórcę „burzy mózgów” Al
       return false;
     }
   </script>
+  </div>
 
   <div class="footer">
     <div class="footer-social">

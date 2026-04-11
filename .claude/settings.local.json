@@ -17,7 +17,8 @@
       "Bash(node:*)",
       "WebFetch(domain:n8n.heuristica.pl)",
       "mcp__claude_ai_Ahrefs__doc",
-      "mcp__claude_ai_Ahrefs__batch-analysis"
+      "mcp__claude_ai_Ahrefs__batch-analysis",
+      "Bash(grep:*)"
     ]
   }
 }

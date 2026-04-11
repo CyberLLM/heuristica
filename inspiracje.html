@@ -20,7 +20,7 @@
   <title>Inspiracje | HEURISTICA</title>
   <meta name="description" content="Książki, webinary i artykuły o AI w marketingu. Autorskie narzędzia AI: StoryLens, AdTestChamber, QualiInsightLab. Darmowe materiały edukacyjne.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=premium-2026-7">
   <style>
     .inspiration-list {
       max-width: 600px;
@@ -28,39 +28,48 @@
       padding: 0;
       list-style: none;
     }
+    .inspiration-desc p {
+      color: #e8e6e1;
+    }
+    .inspiration-desc a {
+      color: #d4a574;
+    }
+    .inspiration-desc strong {
+      color: #d4a574;
+    }
     .inspiration-list li {
       margin: 0 0 12px 0;
       text-align: center;
       font-size: 1.22em;
       font-family: 'Montserrat', Arial, sans-serif;
       letter-spacing: 0.5px;
-      border-top: 1px solid #aaa;
-      border-bottom: 1px solid #aaa;
+      border-top: 1px solid #2d3d4a;
+      border-bottom: 1px solid #2d3d4a;
       padding: 8px 0;
       transition: background 0.2s;
     }
     .inspiration-list li a {
       display: block;
       text-decoration: none;
-      color: #222;
+      color: #d4a574;
       font-weight: 600;
       padding: 8px 0;
       transition: background 0.2s, color 0.2s;
     }
     .inspiration-list li a:hover, .inspiration-list li.active a {
-      background: #242829;
-      color: #fff;
+      background: #2d5a4e;
+      color: #e8e6e1;
     }
     .inspiration-desc {
       max-width: 900px;
-      margin: 32px auto;
-      background: #f6f9fb;
-      border-radius: 8px;
-      box-shadow: 0 1px 7px #eee;
-      padding: 32px 28px;
+      margin: 48px auto;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
       font-size: 1.08em;
       line-height: 1.6;
       display: none;
+      color: #e8e6e1;
     }
     .inspiration-desc.active {
       display: block;
@@ -68,8 +77,9 @@
     .inspiration-desc h2 {
       font-size: 1.4em;
       margin-bottom: 16px;
-      color: #22394d;
+      color: #d4a574;
       text-align: center;
+      margin-top: 0;
     }
     .books-grid {
       display: grid;
@@ -79,32 +89,33 @@
     }
     .book-item {
       text-align: center;
-      background: #fff;
+      background: transparent;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 0;
+      box-shadow: none;
     }
     .book-cover {
       width: 120px;
       height: 180px;
       margin: 0 auto 15px;
-      border-radius: 5px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      border: 1px solid #2d3d4a;
     }
     .book-title {
       font-weight: 600;
       font-size: 1.1em;
-      color: #22394d;
+      color: #d4a574;
       margin-bottom: 8px;
     }
     .book-details {
       font-size: 0.9em;
-      color: #666;
+      color: #a09a94;
       margin-bottom: 15px;
     }
     .book-btn {
-      background: #38547c;
-      color: white;
+      background: #d4a574;
+      color: #0f1419;
       padding: 8px 16px;
       border: none;
       border-radius: 4px;
@@ -112,29 +123,36 @@
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
+      font-weight: 600;
     }
     .book-btn:hover {
-      background: #2a3f5c;
+      background: #c19660;
     }
     .intro-text {
-      background: #e8f1f6;
+      background: transparent;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 0;
       margin-bottom: 30px;
       font-style: italic;
       text-align: center;
+      color: #e8e6e1;
+      border-top: 1px solid #2d3d4a;
+      border-bottom: 1px solid #2d3d4a;
+    }
+    .intro-text strong {
+      color: #d4a574;
     }
     
     /* Nowe style dla webinarów */
     .webinar-item {
       margin-bottom: 40px;
-      background: #fff;
+      background: transparent;
       padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 0;
+      box-shadow: none;
     }
     .webinar-title {
-      color: #22394d;
+      color: #d4a574;
       margin-bottom: 15px;
       font-size: 1.1em;
       font-weight: 600;
@@ -158,38 +176,38 @@
     /* Nowe style dla artykułów */
     .article-item {
       margin-bottom: 30px;
-      background: #fff;
+      background: transparent;
       padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-left: 4px solid #38547c;
+      border-radius: 0;
+      box-shadow: none;
+      border-left: 4px solid #d4a574;
     }
     .article-title {
-      color: #22394d;
+      color: #d4a574;
       margin-bottom: 10px;
       font-size: 1.1em;
       font-weight: 600;
       line-height: 1.3;
     }
     .article-source {
-      color: #666;
+      color: #a09a94;
       font-size: 0.9em;
       margin-bottom: 15px;
       font-style: italic;
     }
     .article-link {
       display: inline-block;
-      background: #38547c;
-      color: white;
+      background: #d4a574;
+      color: #0f1419;
       padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 4px;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       transition: background 0.3s;
     }
     .article-link:hover {
-      background: #2a3f5c;
-      color: white;
+      background: #c19660;
+      color: #0f1419;
     }
     
     @media (max-width: 750px) {
@@ -221,7 +239,8 @@
     <a href="#" data-tally-open="obAOEx">Kontakt</a>
   </div>
 
-  <h1 style="text-align:center; margin:38px 0 12px;">Inspiracje:</h1>
+  <div class="container">
+    <h1 style="text-align:center; margin-top:0; margin-bottom:32px;">Inspiracje</h1>
 
   <ul class="inspiration-list">
     <li class="active"><a href="#moje-ksiazki">MOJE KSIĄŻKI</a></li>
@@ -766,9 +785,11 @@
       console.log('✅ Inicjalizacja zakończona');
     });
   </script>
-<p style="text-align: center;">
-<a href="mailto:staniszewski@heuristica.pl">Kontakt: staniszewski🐒heuristica.pl</a>
+<p style="text-align: center; color: #e8e6e1;">
+<a href="mailto:staniszewski@heuristica.pl" style="color: #d4a574;">Kontakt: staniszewski🐒heuristica.pl</a>
 </p>
+  </div>
+
   <div class="footer">
     <div class="footer-social">
       <a href="https://www.youtube.com/@marekstaniszewski7424" target="_blank">YouTube</a> |

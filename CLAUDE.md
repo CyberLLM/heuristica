@@ -83,3 +83,51 @@ cloudflared.exe tunnel --url http://localhost:8001
 1. Edytuj pliki lokalnie w `C:\Users\stani\OneDrive\Dokumenty\GitHub\`
 2. Backend (`biblioteka_app.py`) → wgraj przez `scp` na Hetzner
 3. Frontend (`biblioteka-test/index.html`) → commit + push przez GitHub Desktop
+
+---
+
+## Ollama Executor Pattern (Konwencja delegacji)
+
+**Gdy pracujesz nad kodem dla Heuristica — deleguj proste zadania do Ollamy by oszczędzać tokeny Anthropic.**
+
+### Kiedy delegować do `ollama run glm-5.1:cloud`
+
+✅ **Deleguj:**
+- Implementacja kodu z jasną specyfikacją
+- Pisanie testów, dokumentacji, komentarzy
+- Refactoring z jednoznacznymi regułami
+- Bash/Python scripty dla automation
+- Generowanie danych testowych
+
+❌ **Nie deleguj (zostań przy Anthropic):**
+- Decyzje architektoniczne
+- Debugging subtelnych błędów
+- Kod będący na produkcji bez review
+- **Jeśli Ollama już próbował 2 razy i się nie udało → eskaluj, nie iteruj**
+
+### Procedura (Plan → Delegate → Verify)
+
+1. **JA PLANUJĘ:** Definiuję zadanie, wymagania, kontekst
+2. **DELEGUJĘ:** `ollama run glm-5.1:cloud "PROMPT_Z_KONTEKSTEM"` (max 2 próby)
+3. **WERYFIKUJĘ:** Czytam, testuję, integruję lub eskaluj do Anthropic
+
+### Doświadczenia z testów
+
+- **glm-5.1:cloud:** Fast (<5s), production-quality, szczegółowe komentarze
+- **qwen3:30b:** Wolny (60s+), zadowalający, minimalne wyjaśnienia
+- **Bash/scripting:** glm-5.1 generuje robustne skrypty z error handling i counters na first attempt
+
+### Szablon promptu dla Ollamy
+
+```
+KONTEKST:
+[Opis problemu, repo, cel]
+
+SPECYFIKACJA:
+[Dokładne wymagania, format, edge cases]
+
+ZADANIE:
+Wygeneruj [output type] spełniający powyższe wymagania.
+```
+
+**Uwaga:** Ollama nie pamięta poprzednich turns — każdy prompt musi być self-contained.

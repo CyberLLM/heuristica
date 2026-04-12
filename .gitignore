@@ -3,3 +3,8 @@ eon.html
 eon_ets_report.pdf
 cybersec_energetyka_2022_2026.pptx
 img/eon-workshop.png
+
+# Pliki konfiguracji Claude (zawierają wrażliwe dane)
+CLAUDE.md
+.claude/
+biblioteka-test/CLAUDE.md

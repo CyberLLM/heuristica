@@ -108,7 +108,7 @@ cloudflared.exe tunnel --url http://localhost:8001
 ### Procedura (Plan → Delegate → Verify)
 
 1. **JA PLANUJĘ:** Definiuję zadanie, wymagania, kontekst
-2. **DELEGUJĘ:** `ollama run glm-5.1:cloud "PROMPT_Z_KONTEKSTEM"` (max 2 próby)
+2. **DELEGUJĘ:** `ollama run glm-5.1:cloud "PROMPT_Z_KONTEKSTEM"` (max 2 próby). Promptuj modele Ollama po angielsku.
 3. **WERYFIKUJĘ:** Czytam, testuję, integruję lub eskaluj do Anthropic
 
 ### Doświadczenia z testów

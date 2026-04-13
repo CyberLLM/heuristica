@@ -1050,7 +1050,7 @@ async function submitForm() {
 
   try {
     // Wyślij do n8n webhook
-    const webhookUrl = 'WSTAW_URL_WEBHOOKA_N8N_TUTAJ';
+    const webhookUrl = 'https://n8n.heuristica.pl/webhook/mio-rejestracja';
 
     await fetch(webhookUrl, {
       method: 'POST',

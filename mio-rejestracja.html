@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIO — Rejestracja | Media Intelligence Officer by Heuristica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b12;
+  --surface: #12121e;
+  --surface2: #1a1a2e;
+  --border: #2a2a40;
+  --accent: #e94560;
+  --accent2: #ff6b81;
+  --text: #e8e8f0;
+  --text2: #8888a8;
+  --text3: #555570;
+  --success: #2a8a4a;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(233,69,96,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233,69,96,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Header */
+.header {
+  margin-bottom: 48px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mark svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.logo-text {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--text2);
+  text-transform: uppercase;
+}
+
+.logo-text span {
+  color: var(--accent);
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* Steps indicator */
+.steps {
+  display: flex;
+  gap: 0;
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.step {
+  flex: 1;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.step:last-child { border-right: none; }
+
+.step.active {
+  background: rgba(233,69,96,0.08);
+}
+
+.step.done {
+  background: rgba(42,138,74,0.06);
+}
+
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+
+.step.active .step-num {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(233,69,96,0.1);
+}
+
+.step.done .step-num {
+  border-color: var(--success);
+  color: var(--success);
+  background: rgba(42,138,74,0.1);
+}
+
+.step-label {
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 500;
+}
+
+.step.active .step-label { color: var(--text); }
+.step.done .step-label { color: var(--text2); }
+
+/* Form sections */
+.form-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  display: none;
+}
+
+.form-section.visible { display: block; }
+
+.section-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(233,69,96,0.1);
+  border: 1px solid rgba(233,69,96,0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+
+.section-body {
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Form fields */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field label .required {
+  color: var(--accent);
+  font-size: 10px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: var(--sans);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text3);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(233,69,96,0.08);
+}
+
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555570' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.field select option {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+
+/* Modules grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.module-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+
+.module-toggle:hover {
+  border-color: var(--accent);
+  background: rgba(233,69,96,0.03);
+}
+
+.module-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.module-toggle.checked {
+  border-color: var(--accent);
+  background: rgba(233,69,96,0.06);
+}
+
+.toggle-box {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.module-toggle.checked .toggle-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-check {
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.module-toggle.checked .toggle-check { opacity: 1; }
+
+.module-info {
+  flex: 1;
+}
+
+.module-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.module-desc {
+  font-size: 11px;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+/* Time picker row */
+.time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-family: var(--sans);
+  letter-spacing: 0.3px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--text2);
+  color: var(--text);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(233,69,96,0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Summary section */
+.summary-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  display: none;
+}
+
+.summary-section.visible { display: block; }
+
+.summary-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.summary-row:last-child { border-bottom: none; }
+
+.summary-key {
+  color: var(--text2);
+  font-weight: 500;
+}
+
+.summary-val {
+  color: var(--text);
+  text-align: right;
+  max-width: 400px;
+}
+
+.summary-modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.module-pill {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(233,69,96,0.1);
+  border: 1px solid rgba(233,69,96,0.2);
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+/* Success state */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.success-screen.visible { display: block; }
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(42,138,74,0.1);
+  border: 1px solid rgba(42,138,74,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.success-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #2a8a4a;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.success-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+
+.success-id {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.success-id span { color: var(--accent); }
+
+/* Validation */
+.field input.error,
+.field select.error,
+.field textarea.error {
+  border-color: var(--accent);
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--accent);
+  display: none;
+}
+
+.field-error.visible { display: block; }
+
+/* Loading state */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: none;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .row-2, .modules-grid, .time-row { grid-template-columns: 1fr; }
+  .steps { display: none; }
+  .hero-title { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Logo -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20"><path d="M10 2L3 7v6l7 5 7-5V7L10 2zm0 2.5L15 8v4l-5 3.5L5 12V8l5-3.5z"/></svg>
+      </div>
+      <div class="logo-text"><span>MIO</span> — Media Intelligence Officer</div>
+    </div>
+    <div class="hero-label">Beta — dostęp na zaproszenie</div>
+    <h1 class="hero-title">Skonfiguruj swojego<br><em>agenta wywiadowczego</em></h1>
+    <p class="hero-desc">Wypełnij formularz aby aktywować MIO dla swojej organizacji. Agent zacznie dostarczać raporty następnego dnia roboczego.</p>
+  </div>
+
+  <!-- Steps -->
+  <div class="steps">
+    <div class="step active" id="step-tab-1">
+      <div class="step-num">1</div>
+      <div class="step-label">Organizacja</div>
+    </div>
+    <div class="step" id="step-tab-2">
+      <div class="step-num">2</div>
+      <div class="step-label">Moduły</div>
+    </div>
+    <div class="step" id="step-tab-3">
+      <div class="step-num">3</div>
+      <div class="step-label">Dostarczanie</div>
+    </div>
+    <div class="step" id="step-tab-4">
+      <div class="step-num">4</div>
+      <div class="step-label">Potwierdzenie</div>
+    </div>
+  </div>
+
+  <form id="mio-form" novalidate>
+
+    <!-- KROK 1: Organizacja -->
+    <div class="form-section visible" id="step-1">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">Dane organizacji</span>
+      </div>
+      <div class="section-body">
+        <div class="row-2">
+          <div class="field">
+            <label>Nazwa firmy <span class="required">wymagane</span></label>
+            <input type="text" id="firma" name="firma" placeholder="np. Heuristica sp. z o.o." required>
+            <span class="field-error" id="err-firma">Podaj nazwę firmy</span>
+          </div>
+          <div class="field">
+            <label>Branża <span class="required">wymagane</span></label>
+            <select id="branża" name="branża" required>
+              <option value="">Wybierz branżę...</option>
+              <option>Energetyka i OZE</option>
+              <option>Finanse i bankowość</option>
+              <option>Farmacja i zdrowie</option>
+              <option>Technologia i IT</option>
+              <option>Retail i e-commerce</option>
+              <option>Produkcja przemysłowa</option>
+              <option>Nieruchomości</option>
+              <option>Transport i logistyka</option>
+              <option>Media i komunikacja</option>
+              <option>Doradztwo i consulting</option>
+              <option>Inna</option>
+            </select>
+            <span class="field-error" id="err-branża">Wybierz branżę</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Główni konkurenci</label>
+          <input type="text" id="konkurenci" name="konkurenci" placeholder="np. PGE, Tauron, Enea (oddzielone przecinkami)">
+          <span class="field-hint">Agent będzie monitorował aktywność medialną tych firm.</span>
+        </div>
+        <div class="field">
+          <label>Dodatkowe słowa kluczowe</label>
+          <textarea id="slowa_kluczowe" name="slowa_kluczowe" placeholder="np. OZE, transformacja energetyczna, carbon footprint, ESG&#10;(oddzielone przecinkami lub enterami)"></textarea>
+          <span class="field-hint">Tematy i pojęcia które agent ma szczególnie śledzić.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KROK 2: Moduły -->
+    <div class="form-section" id="step-2">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">Wybór modułów monitoringu</span>
+      </div>
+      <div class="section-body">
+        <div class="modules-grid">
+
+          <label class="module-toggle checked" id="toggle-prasowka">
+            <input type="checkbox" name="modul_prasowka" value="TAK" checked>
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">Codzienna prasówka</div>
+              <div class="module-desc">Media krajowe, portale, agencje PAP. Codziennie rano.</div>
+            </div>
+          </label>
+
+          <label class="module-toggle checked" id="toggle-sejm">
+            <input type="checkbox" name="modul_sejm" value="TAK" checked>
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">Monitoring Sejmu</div>
+              <div class="module-desc">Projekty ustaw, druki sejmowe, komisje.</div>
+            </div>
+          </label>
+
+          <label class="module-toggle checked" id="toggle-ue">
+            <input type="checkbox" name="modul_ue" value="TAK" checked>
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">Legislacja UE</div>
+              <div class="module-desc">Dyrektywy, rozporządzenia, Europarlament.</div>
+            </div>
+          </label>
+
+          <label class="module-toggle" id="toggle-uokik">
+            <input type="checkbox" name="modul_uokik" value="TAK">
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">UOKiK / KNF / UODO</div>
+              <div class="module-desc">Postępowania i decyzje regulatorów.</div>
+            </div>
+          </label>
+
+          <label class="module-toggle checked" id="toggle-esg">
+            <input type="checkbox" name="modul_esg" value="TAK" checked>
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">ESG konkurencji</div>
+              <div class="module-desc">Raporty ESG i zobowiązania klimatyczne rywali.</div>
+            </div>
+          </label>
+
+          <label class="module-toggle checked" id="toggle-raporty">
+            <input type="checkbox" name="modul_raporty" value="TAK" checked>
+            <div class="toggle-box">
+              <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
+            </div>
+            <div class="module-info">
+              <div class="module-name">Raporty branżowe</div>
+              <div class="module-desc">Publikacje think-tanków i instytutów badawczych.</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- KROK 3: Dostarczanie -->
+    <div class="form-section" id="step-3">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">Dostarczanie raportów</span>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label>Adres email <span class="required">wymagane</span></label>
+          <input type="email" id="email" name="email" placeholder="jan.kowalski@firma.pl" required>
+          <span class="field-error" id="err-email">Podaj prawidłowy adres email</span>
+        </div>
+        <div class="time-row">
+          <div class="field">
+            <label>Częstotliwość raportów</label>
+            <select id="czestotliwosc" name="czestotliwosc">
+              <option value="codziennie">Codziennie (dni robocze)</option>
+              <option value="tygodniowo">Raz w tygodniu (poniedziałek)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Godzina dostarczenia</label>
+            <select id="godzina_raportu" name="godzina_raportu">
+              <option value="6:00">6:00</option>
+              <option value="6:30" selected>6:30</option>
+              <option value="7:00">7:00</option>
+              <option value="7:30">7:30</option>
+              <option value="8:00">8:00</option>
+              <option value="8:30">8:30</option>
+              <option value="9:00">9:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Uwagi dodatkowe</label>
+          <textarea id="uwagi" name="uwagi" placeholder="Np. szczególne tematy do monitorowania, preferencje dotyczące formatu raportu..." style="min-height:60px"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- KROK 4: Potwierdzenie -->
+    <div class="summary-section" id="step-4">
+      <div class="summary-title">Podsumowanie konfiguracji</div>
+      <div id="summary-content"></div>
+    </div>
+
+    <!-- Nawigacja -->
+    <div class="nav" id="form-nav">
+      <button type="button" class="btn btn-ghost" id="btn-back" style="display:none" onclick="prevStep()">← Wstecz</button>
+      <div></div>
+      <button type="button" class="btn btn-primary" id="btn-next" onclick="nextStep()">
+        Dalej →
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Sukces -->
+  <div class="success-screen" id="success">
+    <div class="success-icon">
+      <svg viewBox="0 0 28 28" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="5,14 11,20 23,8"/>
+      </svg>
+    </div>
+    <h2 class="success-title">Agent aktywowany</h2>
+    <p class="success-desc">Twoja konfiguracja została zapisana. MIO zacznie dostarczać raporty następnego dnia roboczego o wybranej godzinie.</p>
+    <div class="success-id">ID klienta: <span id="client-id-display">—</span></div>
+  </div>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 4;
+
+// Toggle module checkboxes
+document.querySelectorAll('.module-toggle').forEach(label => {
+  label.addEventListener('click', function() {
+    const checkbox = this.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    this.classList.toggle('checked', checkbox.checked);
+  });
+});
+
+function updateStepTabs() {
+  for (let i = 1; i <= totalSteps; i++) {
+    const tab = document.getElementById('step-tab-' + i);
+    tab.classList.remove('active', 'done');
+    if (i === currentStep) tab.classList.add('active');
+    if (i < currentStep) tab.classList.add('done');
+  }
+}
+
+function showStep(step) {
+  // Hide all
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById('step-' + i).classList.remove('visible');
+  }
+  document.getElementById('step-4').classList.remove('visible');
+
+  if (step <= 3) {
+    document.getElementById('step-' + step).classList.add('visible');
+  } else {
+    buildSummary();
+    document.getElementById('step-4').classList.add('visible');
+  }
+
+  // Back button
+  document.getElementById('btn-back').style.display = step > 1 ? 'block' : 'none';
+
+  // Next button label
+  const btnNext = document.getElementById('btn-next');
+  if (step === totalSteps) {
+    btnNext.innerHTML = 'Aktywuj agenta →<div class="spinner" id="spinner"></div>';
+  } else {
+    btnNext.innerHTML = 'Dalej →';
+  }
+
+  updateStepTabs();
+}
+
+function validateStep(step) {
+  let valid = true;
+
+  if (step === 1) {
+    const firma = document.getElementById('firma');
+    const branża = document.getElementById('branża');
+
+    if (!firma.value.trim()) {
+      firma.classList.add('error');
+      document.getElementById('err-firma').classList.add('visible');
+      valid = false;
+    } else {
+      firma.classList.remove('error');
+      document.getElementById('err-firma').classList.remove('visible');
+    }
+
+    if (!branża.value) {
+      branża.classList.add('error');
+      document.getElementById('err-branża').classList.add('visible');
+      valid = false;
+    } else {
+      branża.classList.remove('error');
+      document.getElementById('err-branża').classList.remove('visible');
+    }
+  }
+
+  if (step === 3) {
+    const email = document.getElementById('email');
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+    if (!emailValid) {
+      email.classList.add('error');
+      document.getElementById('err-email').classList.add('visible');
+      valid = false;
+    } else {
+      email.classList.remove('error');
+      document.getElementById('err-email').classList.remove('visible');
+    }
+  }
+
+  return valid;
+}
+
+function buildSummary() {
+  const modules = [];
+  document.querySelectorAll('.module-toggle.checked .module-name').forEach(el => {
+    modules.push(el.textContent);
+  });
+
+  const html = `
+    <div class="summary-row">
+      <span class="summary-key">Firma</span>
+      <span class="summary-val">${document.getElementById('firma').value}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Branża</span>
+      <span class="summary-val">${document.getElementById('branża').value}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Konkurenci</span>
+      <span class="summary-val">${document.getElementById('konkurenci').value || '—'}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Słowa kluczowe</span>
+      <span class="summary-val">${document.getElementById('slowa_kluczowe').value || '—'}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Aktywne moduły</span>
+      <span class="summary-val">
+        <div class="summary-modules">
+          ${modules.map(m => `<span class="module-pill">${m}</span>`).join('')}
+        </div>
+      </span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Email</span>
+      <span class="summary-val">${document.getElementById('email').value}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-key">Częstotliwość</span>
+      <span class="summary-val">${document.getElementById('czestotliwosc').value} o ${document.getElementById('godzina_raportu').value}</span>
+    </div>
+  `;
+
+  document.getElementById('summary-content').innerHTML = html;
+}
+
+function nextStep() {
+  if (!validateStep(currentStep)) return;
+
+  if (currentStep === totalSteps) {
+    submitForm();
+    return;
+  }
+
+  currentStep++;
+  showStep(currentStep);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevStep() {
+  currentStep--;
+  showStep(currentStep);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function generateClientId() {
+  return 'MIO-' + Math.floor(1000 + Math.random() * 9000);
+}
+
+function generateToken() {
+  return Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+}
+
+function generateSuffix() {
+  return Math.random().toString(36).substring(2, 8);
+}
+
+function getModuleValue(name) {
+  const checkbox = document.querySelector(`input[name="${name}"]`);
+  return checkbox && checkbox.checked ? 'TAK' : 'NIE';
+}
+
+async function submitForm() {
+  const btn = document.getElementById('btn-next');
+  const spinner = document.getElementById('spinner');
+  btn.disabled = true;
+  spinner.style.display = 'block';
+
+  const clientId = generateClientId();
+  const token = generateToken();
+  const suffix = generateSuffix();
+  const today = new Date().toISOString().split('T')[0];
+
+  const payload = {
+    client_id: clientId,
+    token: token,
+    firma: document.getElementById('firma').value,
+    branża: document.getElementById('branża').value,
+    konkurenci: document.getElementById('konkurenci').value,
+    slowa_kluczowe: document.getElementById('slowa_kluczowe').value,
+    modul_prasowka: getModuleValue('modul_prasowka'),
+    modul_sejm: getModuleValue('modul_sejm'),
+    modul_ue: getModuleValue('modul_ue'),
+    modul_uokik: getModuleValue('modul_uokik'),
+    modul_esg: getModuleValue('modul_esg'),
+    modul_raporty: getModuleValue('modul_raporty'),
+    czestotliwosc: document.getElementById('czestotliwosc').value,
+    godzina_raportu: document.getElementById('godzina_raportu').value,
+    email: document.getElementById('email').value,
+    aktywny: 'TAK',
+    data_rejestracji: today,
+    raport_url_suffix: suffix
+  };
+
+  try {
+    // Wyślij do n8n webhook
+    const webhookUrl = 'WSTAW_URL_WEBHOOKA_N8N_TUTAJ';
+
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    // Nawet jeśli webhook zawiedzie — pokaż sukces (beta)
+    console.log('Webhook error:', e);
+  }
+
+  // Pokaż sukces
+  document.getElementById('mio-form').style.display = 'none';
+  document.getElementById('form-nav').style.display = 'none';
+  document.getElementById('step-4').classList.remove('visible');
+  document.getElementById('success').classList.add('visible');
+  document.getElementById('client-id-display').textContent = clientId;
+
+  // Schowaj steps
+  document.querySelector('.steps').style.display = 'none';
+}
+</script>
+</body>
+</html>

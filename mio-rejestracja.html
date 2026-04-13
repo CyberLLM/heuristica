@@ -854,7 +854,8 @@ const totalSteps = 4;
 
 // Toggle module checkboxes
 document.querySelectorAll('.module-toggle').forEach(label => {
-  label.addEventListener('click', function() {
+  label.addEventListener('click', function(e) {
+    e.preventDefault();
     const checkbox = this.querySelector('input[type="checkbox"]');
     checkbox.checked = !checkbox.checked;
     this.classList.toggle('checked', checkbox.checked);

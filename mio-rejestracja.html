@@ -713,7 +713,7 @@ body::before {
       <div class="section-body">
         <div class="modules-grid">
 
-          <label class="module-toggle checked" id="toggle-prasowka">
+          <div class="module-toggle checked" id="toggle-prasowka">
             <input type="checkbox" name="modul_prasowka" value="TAK" checked>
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -722,9 +722,9 @@ body::before {
               <div class="module-name">Codzienna prasówka</div>
               <div class="module-desc">Media krajowe, portale, agencje PAP. Codziennie rano.</div>
             </div>
-          </label>
+          </div>
 
-          <label class="module-toggle checked" id="toggle-sejm">
+          <div class="module-toggle checked" id="toggle-sejm">
             <input type="checkbox" name="modul_sejm" value="TAK" checked>
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -733,9 +733,9 @@ body::before {
               <div class="module-name">Monitoring Sejmu</div>
               <div class="module-desc">Projekty ustaw, druki sejmowe, komisje.</div>
             </div>
-          </label>
+          </div>
 
-          <label class="module-toggle checked" id="toggle-ue">
+          <div class="module-toggle checked" id="toggle-ue">
             <input type="checkbox" name="modul_ue" value="TAK" checked>
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -744,9 +744,9 @@ body::before {
               <div class="module-name">Legislacja UE</div>
               <div class="module-desc">Dyrektywy, rozporządzenia, Europarlament.</div>
             </div>
-          </label>
+          </div>
 
-          <label class="module-toggle" id="toggle-uokik">
+          <div class="module-toggle" id="toggle-uokik">
             <input type="checkbox" name="modul_uokik" value="TAK">
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -755,9 +755,9 @@ body::before {
               <div class="module-name">UOKiK / KNF / UODO</div>
               <div class="module-desc">Postępowania i decyzje regulatorów.</div>
             </div>
-          </label>
+          </div>
 
-          <label class="module-toggle checked" id="toggle-esg">
+          <div class="module-toggle checked" id="toggle-esg">
             <input type="checkbox" name="modul_esg" value="TAK" checked>
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -766,9 +766,9 @@ body::before {
               <div class="module-name">ESG konkurencji</div>
               <div class="module-desc">Raporty ESG i zobowiązania klimatyczne rywali.</div>
             </div>
-          </label>
+          </div>
 
-          <label class="module-toggle checked" id="toggle-raporty">
+          <div class="module-toggle checked" id="toggle-raporty">
             <input type="checkbox" name="modul_raporty" value="TAK" checked>
             <div class="toggle-box">
               <svg class="toggle-check" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5"><polyline points="1,5 4,8 9,2"/></svg>
@@ -777,7 +777,7 @@ body::before {
               <div class="module-name">Raporty branżowe</div>
               <div class="module-desc">Publikacje think-tanków i instytutów badawczych.</div>
             </div>
-          </label>
+          </div>
 
         </div>
       </div>
@@ -853,9 +853,8 @@ let currentStep = 1;
 const totalSteps = 4;
 
 // Toggle module checkboxes
-document.querySelectorAll('.module-toggle').forEach(label => {
-  label.addEventListener('click', function(e) {
-    e.preventDefault();
+document.querySelectorAll('.module-toggle').forEach(el => {
+  el.addEventListener('click', function() {
     const checkbox = this.querySelector('input[type="checkbox"]');
     checkbox.checked = !checkbox.checked;
     this.classList.toggle('checked', checkbox.checked);

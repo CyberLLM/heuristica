@@ -613,6 +613,17 @@ body::before {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Disclaimer */
+.disclaimer {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 48px;
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
 @media (max-width: 600px) {
   .row-2, .modules-grid, .time-row { grid-template-columns: 1fr; }
   .steps { display: none; }
@@ -844,6 +855,10 @@ body::before {
     <h2 class="success-title">Agent aktywowany</h2>
     <p class="success-desc">Twoja konfiguracja została zapisana. MIO zacznie dostarczać raporty następnego dnia roboczego o godzinie 6:30.</p>
     <div class="success-id">ID klienta: <span id="client-id-display">—</span></div>
+  </div>
+
+  <div class="disclaimer">
+    Narzędzie wspierane przez sztuczną inteligencję. Wyniki mogą zawierać błędy — zawsze weryfikuj przed działaniem. Status: beta.
   </div>
 
 </div>

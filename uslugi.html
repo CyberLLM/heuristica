@@ -83,8 +83,18 @@
     }
     .process-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .process-step {
       text-align: center;
@@ -190,6 +200,49 @@
       font-weight: 600;
     }
 
+    .services-tabs {
+      max-width: 600px;
+      margin: 0 auto 60px;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 0;
+      border-top: 1px solid #2d3d4a;
+      border-bottom: 1px solid #2d3d4a;
+    }
+    .services-tabs li {
+      flex: 1;
+      margin: 0;
+      text-align: center;
+      border-right: 1px solid #2d3d4a;
+      transition: background 0.2s;
+    }
+    .services-tabs li:last-child {
+      border-right: none;
+    }
+    .services-tabs li a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #d4a574;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .services-tabs li a:hover,
+    .services-tabs li.active a {
+      background: #2d5a4e;
+      color: #e8e6e1;
+    }
+
+    .services-content {
+      display: none;
+    }
+    .services-content.active {
+      display: block;
+    }
+
     @media (max-width: 768px) {
       .hero-section h1 {
         font-size: 1.8em;
@@ -202,6 +255,16 @@
       }
       .process-grid {
         grid-template-columns: 1fr 1fr;
+      }
+      .services-tabs {
+        flex-direction: column;
+      }
+      .services-tabs li {
+        border-right: none;
+        border-bottom: 1px solid #2d3d4a;
+      }
+      .services-tabs li:last-child {
+        border-bottom: none;
       }
     }
   </style>
@@ -219,6 +282,12 @@
   </div>
 
   <div class="container">
+    <ul class="services-tabs">
+      <li class="active"><a onclick="switchService('kompletna')">KOMPLETNA OBECNOŚĆ ONLINE</a></li>
+      <li><a onclick="switchService('warsztaty')">WARSZTATY</a></li>
+    </ul>
+
+    <div class="services-content active" id="kompletna">
     <div class="hero-section">
       <h1>Kompletna obecność online</h1>
       <p>Budujemy strony, osadzamy chatboty AI i automatyzacje — wszystko co potrzebne, żeby firma była widoczna w sieci 24/7.</p>
@@ -229,6 +298,10 @@
       <div class="service-card">
         <h3>Domena i hosting</h3>
         <p>Rejestrujemy domenę, konfigurujemy serwer, SSL i wszystko co potrzebne do obecności w sieci. Szybko, bezpiecznie, bez balaganu.</p>
+      </div>
+      <div class="service-card">
+        <h3>Dedykowany serwer</h3>
+        <p>Twoja strona działa na dedykowanym serwerze VPS — nie na współdzielonym hostingu. Szybciej, bezpieczniej, bez sąsiadów którzy spowalniają Twój ruch.</p>
       </div>
       <div class="service-card">
         <h3>Strona internetowa</h3>
@@ -259,17 +332,27 @@
         <div class="process-step">
           <div class="step-num">2</div>
           <h4>Build</h4>
-          <p>Budujemy stronę, integrujemy chatbot, konfigurujemy analitykę.</p>
+          <p>Budujemy stronę, integrujemy chatbot, konfigurujemy analitykę i kampanie.</p>
         </div>
         <div class="process-step">
           <div class="step-num">3</div>
+          <h4>Akceptacja</h4>
+          <p>Pokazujemy gotową stronę przed wdrożeniem. Wprowadzamy poprawki. Nic nie idzie na żywo bez Twojej zgody.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
           <h4>Deploy</h4>
           <p>Wdrażamy, testujemy, wychodzimy na żywo.</p>
         </div>
         <div class="process-step">
-          <div class="step-num">4</div>
+          <div class="step-num">5</div>
           <h4>Support</h4>
           <p>Jesteśmy dostępni — pytania, zmiany, optymalizacje.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">6</div>
+          <h4>Grow</h4>
+          <p>Analizujemy dane z Analytics i Ads. Raportujemy co działa — i co zrobić, żeby przychodziło więcej klientów.</p>
         </div>
       </div>
     </div>
@@ -278,8 +361,10 @@
       <p>Powiedz czym się zajmujesz — pokażemy jak mogłoby to wyglądać u Ciebie.</p>
       <a href="#" class="btn-cta" data-tally-open="obAOEx">Umów rozmowę</a>
     </div>
+    </div>
 
-    <div class="workshops-section">
+    <div class="services-content" id="warsztaty">
+    <div class="workshops-section" style="margin-top: 0; border-top: none; padding-top: 0;">
       <h2>Warsztaty i szkolenia</h2>
       <p>Oprócz budowy obecności online, prowadzimy warsztaty dla zespołów chcących pogłębiać wiedzę z AI, kreatywności i strategii.</p>
 
@@ -354,6 +439,8 @@
         <p>Chcesz wiedzieć więcej? <a href="#" data-tally-open="obAOEx">Skontaktuj się z nami.</a></p>
       </div>
     </div>
+    </div>
+    </div>
   </div>
 
   <div class="footer">
@@ -363,6 +450,20 @@
     </div>
     (C) 2026 Heuristica. Marek Staniszewski | <a href="polityka.html">Polityka prywatności</a>
   </div>
+  <script>
+    function switchService(serviceId) {
+      const allContents = document.querySelectorAll('.services-content');
+      allContents.forEach(content => content.classList.remove('active'));
+
+      const allTabs = document.querySelectorAll('.services-tabs li');
+      allTabs.forEach(tab => tab.classList.remove('active'));
+
+      document.getElementById(serviceId).classList.add('active');
+      event.target.parentElement.classList.add('active');
+
+      return false;
+    }
+  </script>
   <script async src="https://tally.so/widgets/embed.js"></script>
   <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="OuJ2cri2pwybJE45sE3Sc";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();

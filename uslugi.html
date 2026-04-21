@@ -18,86 +18,190 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="canonical" href="https://heuristica.pl/uslugi">
-  <meta name="description" content="Warsztaty i szkolenia: AI w marketingu, storytelling, inwentyka, consumer insight, strategia marki. Szkolenia stacjonarne i online dla firm.">
+  <meta name="description" content="Budujemy kompletną obecność online dla firm: strona internetowa, chatbot AI, analityka, automatyzacje. Domena, hosting, SEO, reklama — wszystko w jednym pakiecie.">
   <link rel="stylesheet" href="style.css?v=premium-2026-4">
   <style>
-    .workshop-list {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 0;
-      list-style: none;
-    }
-    .workshop-list li {
-      margin: 0 0 12px 0;
+    .hero-section {
       text-align: center;
-      font-size: 1.22em;
-      font-family: 'Montserrat', Arial, sans-serif;
-      letter-spacing: 0.5px;
-      border-top: 1px solid #2d3d4a;
-      border-bottom: 1px solid #2d3d4a;
-      padding: 8px 0;
-      transition: background 0.2s;
-      position: relative;
+      max-width: 800px;
+      margin: 60px auto 80px;
+      padding: 0 20px;
     }
-    .workshop-list li:before {
-      content: "";
-    }
-    .workshop-list li a {
-      display: block;
-      text-decoration: none;
-      color: #d4a574;
-      font-weight: 600;
-      padding: 8px 0;
-      transition: background 0.2s, color 0.2s;
-    }
-    .workshop-list li a:hover, .workshop-list li.active a {
-      background: #2d5a4e;
+    .hero-section h1 {
+      font-size: 2.2em;
+      margin-bottom: 16px;
       color: #e8e6e1;
     }
-    .workshop-desc {
-      max-width: 700px;
-      margin: 48px auto;
-      padding: 0;
-      font-size: 1.08em;
-      line-height: 1.6;
-      color: #e8e6e1;
+    .hero-section p {
+      font-size: 1.1em;
+      line-height: 1.7;
+      color: #b8b4ad;
+      margin-bottom: 10px;
     }
-    .workshop-desc h2 {
-      font-size: 1.4em;
-      margin-bottom: 6px;
-      color: #d4a574;
-      margin-top: 40px;
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
     }
-    .workshop-desc h2:first-child {
-      margin-top: 0;
-    }
-    .workshop-desc b {
-      color: #d4a574;
-      font-weight: 600;
-    }
-    .workshop-desc li {
-      color: #e8e6e1;
-    }
-    .workshop-desc p {
-      color: #e8e6e1;
-    }
-    .workshop-desc img {
-      border-radius: 4px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    .service-card {
+      background: #161B22;
       border: 1px solid #2d3d4a;
+      padding: 32px 24px;
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .workshop-desc ul {
-      margin-top: 10px;
+    .service-card:hover {
+      border-color: #d4a574;
+      box-shadow: 0 8px 24px rgba(212, 165, 116, 0.1);
     }
-    @media (max-width: 750px) {
-      .workshop-desc img {
-        width: 100px !important;
-        margin-bottom: 15px;
+    .service-card h3 {
+      font-size: 1.2em;
+      margin-bottom: 12px;
+      color: #d4a574;
+    }
+    .service-card p {
+      font-size: 0.95em;
+      line-height: 1.6;
+      color: #b8b4ad;
+      margin: 0;
+    }
+
+    .process-section {
+      max-width: 1000px;
+      margin: 80px auto 60px;
+      padding: 0 20px;
+    }
+    .process-section h2 {
+      text-align: center;
+      font-size: 1.6em;
+      margin-bottom: 40px;
+      color: #e8e6e1;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .process-step {
+      text-align: center;
+    }
+    .process-step .step-num {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      background: #d4a574;
+      color: #0D1117;
+      border-radius: 50%;
+      line-height: 48px;
+      font-weight: 700;
+      font-size: 1.3em;
+      margin-bottom: 12px;
+    }
+    .process-step h4 {
+      font-size: 1.05em;
+      margin-bottom: 8px;
+      color: #e8e6e1;
+    }
+    .process-step p {
+      font-size: 0.9em;
+      color: #b8b4ad;
+      margin: 0;
+    }
+
+    .cta-section {
+      text-align: center;
+      max-width: 600px;
+      margin: 80px auto 100px;
+      padding: 0 20px;
+    }
+    .cta-section p {
+      font-size: 1.05em;
+      color: #b8b4ad;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #d4a574;
+      color: #0D1117;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1.05em;
+      transition: background 0.2s, transform 0.1s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cta:hover {
+      background: #e8d4b0;
+      transform: translateY(-2px);
+    }
+
+    .workshops-section {
+      max-width: 900px;
+      margin: 100px auto 0;
+      padding: 60px 20px 0;
+      border-top: 1px solid #2d3d4a;
+    }
+    .workshops-section h2 {
+      font-size: 1.6em;
+      margin-bottom: 12px;
+      color: #e8e6e1;
+    }
+    .workshops-section > p {
+      color: #b8b4ad;
+      margin-bottom: 36px;
+      font-size: 0.95em;
+    }
+    .workshop-item {
+      margin-bottom: 48px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid #2d3d4a;
+    }
+    .workshop-item:last-child {
+      border-bottom: none;
+    }
+    .workshop-item h3 {
+      font-size: 1.3em;
+      margin-bottom: 12px;
+      color: #d4a574;
+    }
+    .workshop-item > p {
+      color: #b8b4ad;
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+    }
+    .workshop-item ul {
+      color: #b8b4ad;
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .workshop-item li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .workshop-item b {
+      color: #d4a574;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 1.8em;
       }
-      .workshop-desc > div:first-child {
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center;
+      .hero-section p {
+        font-size: 1em;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -115,129 +219,141 @@
   </div>
 
   <div class="container">
-    <h1 style="text-align:center; margin:38px 0 12px;">Warsztaty i szkolenia:</h1>
+    <div class="hero-section">
+      <h1>Kompletna obecność online</h1>
+      <p>Budujemy strony, osadzamy chatboty AI i automatyzacje — wszystko co potrzebne, żeby firma była widoczna w sieci 24/7.</p>
+      <p>Jeden pakiet. Jedna wycena. Zero zbędnych zależności.</p>
+    </div>
 
-  <ul class="workshop-list">
-    <li><a href="#ai">SZTUCZNA INTELIGENCJA – WARSZTATY</a></li>
-    <li><a href="#">STORYTELLING – WARSZTATY</a></li>
-    <li><a href="#inwentyka">INWENTYKA – WARSZTATY</a></li>
-    <li><a href="#">CONSUMER INSIGHT I ARCHETYPY – WARSZTATY</a></li>
-    <li><a href="#">SKUTECZNY MARKETING – WARSZTATY</a></li>
-    <li><a href="#">STRATEGY DESIGN</a></li>
-  </ul>
-
-  <div class="workshop-desc" id="ai">
-    <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap;">
-      <img src="img/colour_bot_big.jpg" alt="AI Bot" style="width: 140px; border-radius: 10px; box-shadow: 0 2px 12px #c3c3c3;">
-      <div style="flex: 1; min-width: 300px;">
-        <h2 style="margin-top: 0;">SZTUCZNA INTELIGENCJA W MARKETINGU STRATEGICZNYM</h2>
-        <p><b>[Warsztaty w formule stacjonarnej lub on-line]</b></p>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Domena i hosting</h3>
+        <p>Rejestrujemy domenę, konfigurujemy serwer, SSL i wszystko co potrzebne do obecności w sieci. Szybko, bezpiecznie, bez balaganu.</p>
+      </div>
+      <div class="service-card">
+        <h3>Strona internetowa</h3>
+        <p>Szybka, responsywna, dostosowana do mobile. SEO gotowe od pierwszego dnia. Klienci znajdują Cię w Google.</p>
+      </div>
+      <div class="service-card">
+        <h3>Analityka i reklama</h3>
+        <p>Google Analytics, Google Search Console i kampanie Google Ads. Analizujemy skąd przychodzą klienci i jak zwiększyć ich liczbę.</p>
+      </div>
+      <div class="service-card">
+        <h3>Chatbot AI</h3>
+        <p>Zna Twoje usługi, odpowiada na pytania i zbiera kontakty — nawet gdy biuro jest zamknięte. 24/7 na stronie.</p>
+      </div>
+      <div class="service-card">
+        <h3>Automatyzacje</h3>
+        <p>Formularze, rezerwacje, powiadomienia — procesy, które wcześniej wymagały ręcznej obsługi. Oszczędzamy czas zespołu.</p>
       </div>
     </div>
 
-    <b>Wprowadzenie do AI.</b>
-    <ul>
-      <li>Przegląd historii AI, kluczowe koncepcje i terminologia.</li>
-      <li>Na czym polega uczenie maszynowe i uczenie głębokie.</li>
-      <li>Czym są i jak działają sieci neuronowe.</li>
-    </ul>
+    <div class="process-section">
+      <h2>Jak pracujemy</h2>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>Discovery</h4>
+          <p>Poznajemy Twoją firmę, branżę i klientów. Tworzymy plan.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>Build</h4>
+          <p>Budujemy stronę, integrujemy chatbot, konfigurujemy analitykę.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>Deploy</h4>
+          <p>Wdrażamy, testujemy, wychodzimy na żywo.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">4</div>
+          <h4>Support</h4>
+          <p>Jesteśmy dostępni — pytania, zmiany, optymalizacje.</p>
+        </div>
+      </div>
+    </div>
 
-    <b>AI generatywna.</b>
-    <ul>
-      <li>Jak działają modele językowe – LLM (Large language models), takie jak ChatGPT, Gemini, Claude, DeepSeek itd.</li>
-      <li>Jak działa transformer - co to jest tokenizacja, embedding i mechanizm uwagi.</li>
-      <li>Podstawowe parametry LLM (temperatura itp.)</li>
-      <li>Czy GEO zastąpi SEO? Jak mierzyć kondycję marki w LLM.</li>
-    </ul>
+    <div class="cta-section">
+      <p>Powiedz czym się zajmujesz — pokażemy jak mogłoby to wyglądać u Ciebie.</p>
+      <a href="#" class="btn-cta" data-tally-open="obAOEx">Umów rozmowę</a>
+    </div>
 
-    <b>Prompt engineering, czyli inżynieria zachęt → Reasoning & Task Design</b>
-    <ul>
-      <li>Konstrukcja i struktura skutecznych promptów</li>
-      <li>Prompt jako interfejs do zadania</li>
-      <li>Role, cele, kryteria jakości</li>
-      <li>Strategie promptingu (m.in. Few-shot Prompting, Chain of Thought, Tree of Thoughts itp.)</li>
-      <li>Praktyczne ćwiczenia w budowaniu i stosowaniu promptów.</li>
-    </ul>
+    <div class="workshops-section">
+      <h2>Warsztaty i szkolenia</h2>
+      <p>Oprócz budowy obecności online, prowadzimy warsztaty dla zespołów chcących pogłębiać wiedzę z AI, kreatywności i strategii.</p>
 
-    <b>Narzędzia AI i Agenty w Marketingu</b>
-    <ul>
-      <li>Automatyzacja workflow (np. platformy nocode w rodzaju n8n, Make).</li>
-      <li>Agenci AI i systemy agentowe – czym różnią się od chatbotów</li>
-      <li>Generowanie obrazów, filmów i dźwięków</li>
-      <li>Tworzenie prezentacji.</li>
-      <li>Chatboty – tworzenie i zarządzanie bazą wiedzy (RAG w praktyce, chunking, embedding, retrieval)</li>
-      <li>W jaki sposób ustawić i przetrenować własny GPT</li>
-    </ul>
+      <div class="workshop-item" id="ai">
+        <h3>Sztuczna inteligencja w marketingu strategicznym</h3>
+        <p><b>Warsztaty stacjonarne lub online</b></p>
 
-    <b>Bezpieczeństwo i ograniczenia, ryzyka i governance</b>
-    <ul>
-      <li>Hallucynacje, prompt hacking i prompt injection, kiedy NIE używać AI.</li>
-    </ul>
-
-    <b>Podsumowanie i Dyskusja</b>
-    <ul>
-      <li>Omówienie kluczowych wniosków z warsztatów</li>
-    </ul>
-  </div>
-
-  <div class="workshop-desc" id="inwentyka">
-    <h2>INWENTYKA - CZYLI JAK WYMYŚLAĆ SPRAWNIEJ</h2>
-    <p><b>[warsztaty także w formule on-line]</b></p>
-
-    <p>Warsztaty w formie zamkniętej przeznaczone są dla firm chcących stymulować kreatywne myślenie swoich pracowników oraz podnosić ich umiejętności w zakresie generowania nowych pomysłów niezbędnych dla:</p>
-    <ul>
-      <li>twórczego rozwiązywania problemów biznesowych,</li>
-      <li>opracowywania koncepcji nowych produktów, sposobów dystrybucji, merchandisingu, sposobów obsługi klienta itp.</li>
-      <li>tworzenia nowych idei marketingowych,</li>
-      <li>generowania pomysłów reklamowych, czy idei komunikacyjnych.</li>
-    </ul>
-
-    <p><b>GŁÓWNYM CELEM</b> warsztatów jest otwarcie uczestników na nowe, niestandardowe sposoby podejścia do rozwiązywania problemów oraz dostarczenie im zestawu prostych, intuicyjnych a zarazem skutecznych narzędzi twórczego myślenia. Narzędzia zostały dobrane w ten sposób aby zaraz po zajęciach mogły być stosowane w codziennej pracy i zostały opracowane w formie dwudziestu czterech KART INSPIRACJI DLA INWENCJI.</p>
-
-    <p><b>KONCEPCJA</b> warsztatów oraz zestaw zadań realizowanych w ich trakcie zostały opracowane w sposób pozwalający poznać i przećwiczyć różnorodne metody kreatywnego myślenia oraz tworzenia nieoczywistych i innowacyjnych rozwiązań.</p>
-    
-    <p>Dodatkowo warsztaty mają walor integracyjny – pozwalają usprawnić komunikację w zespole (szczególnie w przypadku zespołów multidyscyplinarnych) oraz obserwować inne niż zazwyczaj role i sposoby współpracy uczestników. Dzięki temu promowana jest równiej właściwa kultura i wartości konieczne dla usprawniania procesu twórczego myślenia w organizacji.</p>
-
-    <p><b>AGENDA WARSZTATÓW OBEJMUJE:</b></p>
-    <ul>
-      <li>Podstawowe informacje z zakresu psychologii twórczości.</li>
-      <li>Blokady, opór i przeszkody dla twórczego myślenia – jak je zidentyfikować i pokonywać.</li>
-      <li>Prezentacja przykładów myślenia dywergentnego.</li>
-      <li>Rola wglądu (insight) w procesie twórczym oraz sposoby generowania „insightów".</li>
-      <li>Zastosowanie w praktyce wybranych technik, heurystyk i metod twórczych oraz wynalazczych – m. in.:
+        <p><b>Wprowadzenie do AI:</b></p>
         <ul>
-          <li>SCAMPER,</li>
-          <li>technika SUPRPOZYCJI i metody oparte na bisocjacji,</li>
-          <li>techniki oparte na analogiach (w tym CIRCEPT) i metaforach,</li>
-          <li>analiza funkcjonalna i analiza morfologiczna,</li>
-          <li>techniki wykorzystujące wyobraźnię i fantazję.</li>
+          <li>Przegląd historii AI, kluczowe koncepcje i terminologia</li>
+          <li>Uczenie maszynowe i uczenie głębokie</li>
+          <li>Sieci neuronowe i jak działają</li>
         </ul>
-      </li>
-      <li>Elementy procesu design thinking:
+
+        <p><b>AI generatywna:</b></p>
         <ul>
-          <li>strukturyzacja celów, funkcji i zasobów,</li>
-          <li>tworzenie person użytkowników docelowych rozwiązań,</li>
-          <li>prototypowanie.</li>
+          <li>Modele językowe (LLM) – ChatGPT, Gemini, Claude, DeepSeek</li>
+          <li>Transformery, tokenizacja, embedding, mechanizm uwagi</li>
+          <li>Parametry LLM (temperatura, top_p itp.)</li>
+          <li>GEO vs SEO – mierzenie kondycji marki w LLM</li>
         </ul>
-      </li>
-    </ul>
 
-    <p>Warsztaty w formie podstawowej trwają cały dzień (9.00-17.00). W formie rozszerzonej odbywają się w ciągu dwóch dni. Ta druga formuła pozwala na wykorzystanie większej ilości metod i ćwiczeń, rozszerzenie moduł nt. insightu oraz wprowadzenie elementów perswazyjnego prezentowania stworzonych idei poprzez storytelling.</p>
+        <p><b>Prompt engineering i Reasoning:</b></p>
+        <ul>
+          <li>Konstrukcja skutecznych promptów</li>
+          <li>Prompt jako interfejs do zadania</li>
+          <li>Role, cele, kryteria jakości</li>
+          <li>Strategie: Few-shot, Chain of Thought, Tree of Thoughts</li>
+          <li>Praktyczne ćwiczenia</li>
+        </ul>
 
-    <p>Minimalna ilość osób: 6.<br>
-    Zalecane by w warsztatach uczestniczyli przedstawiciele różnych działów.<br>
-    Zajęcia mogą się odbywać w miejscu wskazanych przez Zlecającego (zapewnienie sali szkoleniowej, projektora oraz flipchartu) lub w rekomendowanym przez nas miejscu.</p>
+        <p><b>Narzędzia AI i Agenty w Marketingu:</b></p>
+        <ul>
+          <li>Automatyzacja workflow (n8n, Make)</li>
+          <li>Agenci AI vs chatboty</li>
+          <li>Generowanie obrazów, filmów, dźwięków</li>
+          <li>Chatboty i RAG (retrieval augmented generation)</li>
+          <li>Custom GPT</li>
+        </ul>
 
-    <p>Prowadzący: Marek Staniszewski</p>
+        <p><b>Bezpieczeństwo i ograniczenia:</b></p>
+        <ul>
+          <li>Hallucynacje, prompt injection, governance</li>
+        </ul>
+      </div>
 
-    <p><b>CENA</b> warsztatów – ustalana jest indywidualnie w zależności od liczby uczestników oraz ewentualnych wymagań dodatkowych Zlecającego.</p>
+      <div class="workshop-item" id="inwentyka">
+        <h3>Inwentyka – czyli jak wymyślać sprawniej</h3>
+        <p><b>Warsztaty zamknięte dla zespołów – także w formule online</b></p>
 
-    <p>W sprawie rezerwacji terminu warsztatów i finalnej wyceny wyślij maila.</p>
+        <p>Warsztaty dla firm chcących stymulować kreatywne myślenie pracowników. Dostarczamy zestaw prostych, intuicyjnych narzędzi twórczych do codziennego użytku.</p>
 
-    <p><b>NARZĘDZIA</b><br>
-    Zestaw prostych i praktycznych technik do zastosowania w pracy zaraz po warsztatach.<br>
-    Wiedza podana w przyjazny sposób, w tym historie odkryć i kontekstu powstania przełomowych idei w świecie nauki, techniki i biznesu.</p>
-  </div>
+        <p><b>Główny cel:</b> Otwarcie na nowe sposoby rozwiązywania problemów. Opracowaliśmy 24 karty inspiracji dla inwencji, które można stosować zaraz po zajęciach.</p>
+
+        <p><b>Agenda:</b></p>
+        <ul>
+          <li>Psychologia twórczości</li>
+          <li>Blokady i przeszkody dla twórczego myślenia</li>
+          <li>Myślenie dywergentne i insight</li>
+          <li>Techniki twórcze: SCAMPER, bisocjacja, analogie, analiza morfologiczna</li>
+          <li>Design thinking: strukturyzacja celów, persona, prototypowanie</li>
+        </ul>
+
+        <p><b>Format:</b> Forma podstawowa cały dzień (9:00–17:00). Forma rozszerzona – 2 dni z dodatkową sekcją storytelling.</p>
+
+        <p><b>Wymogi:</b> Min. 6 osób, zalecane mieszane zespoły. Sala, projektor, flipchart.</p>
+
+        <p><b>Prowadzący:</b> Marek Staniszewski</p>
+
+        <p><b>Wycena:</b> Ustalana indywidualnie w zależności od liczby uczestników i wymagań.</p>
+
+        <p>Chcesz wiedzieć więcej? <a href="#" data-tally-open="obAOEx">Skontaktuj się z nami.</a></p>
+      </div>
+    </div>
   </div>
 
   <div class="footer">

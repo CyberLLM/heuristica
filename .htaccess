@@ -61,6 +61,9 @@ RewriteRule ^szkolenia-form/?$ /szkolenia-form.html [L,NC]
 # Redirect /deepseek-test to /deepseek-test.html
 RewriteRule ^deepseek-test/?$ /deepseek-test.html [L,NC]
 
+# Redirect /dziekujemy to /dziekujemy.html
+RewriteRule ^dziekujemy/?$ /dziekujemy.html [L,NC]
+
 # Redirect main pages
 RewriteRule ^kim/?$ /kim.html [L,NC]
 RewriteRule ^uslugi/?$ /uslugi.html [L,NC]

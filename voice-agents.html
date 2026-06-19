@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QDHLBXLXT4');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/voice-agents">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <title>Voice Agents — Historia mowy AI | HEURISTICA</title>
+  <meta name="description" content="Historia rozpoznawania i syntezy mowy AI — od Vodera w 1939 po GPT-4o i Gemini Live. 70 lat technologii głosowych w jednym miejscu.">
+  <link rel="stylesheet" href="style.css?v=premium-2026">
+  <style>
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding: 8px 0 8px 0;
+      margin: 40px 0 48px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 88px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #2d5a4e 0%, #d4a574 50%, #2d5a4e 100%);
+      opacity: 0.5;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 0;
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .tl-year {
+      flex: 0 0 88px;
+      text-align: right;
+      padding-right: 24px;
+      padding-top: 2px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82em;
+      font-weight: 700;
+      color: #d4a574;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .tl-dot {
+      flex: 0 0 0;
+      position: relative;
+    }
+
+    .tl-dot::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d4a574;
+      border: 2px solid #0D1117;
+      box-shadow: 0 0 0 2px #d4a574;
+    }
+
+    .tl-content {
+      flex: 1;
+      padding-left: 28px;
+    }
+
+    .tl-content h3 {
+      font-size: 1.05em;
+      font-weight: 700;
+      color: #e8e6e1;
+      margin: 0 0 6px 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .tl-content p {
+      color: #a8b5c0;
+      font-size: 0.93em;
+      line-height: 1.65;
+      margin: 0 0 10px 0;
+    }
+
+    .tl-refs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tl-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: #161B22;
+      border: 1px solid #2d3d4a;
+      border-radius: 20px;
+      font-size: 0.8em;
+      color: #7aabb8;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .tl-ref:hover {
+      border-color: #d4a574;
+      color: #d4a574;
+    }
+
+    /* ── LISTEN BUTTON ── */
+    .listen-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0 40px 0;
+      flex-wrap: wrap;
+    }
+
+    #listenBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      background: transparent;
+      color: #d4a574;
+      border: 1.5px solid #d4a574;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #listenBtn:hover { background: rgba(212,165,116,0.1); }
+    #listenBtn.speaking { border-color: #2d5a4e; color: #4caf82; }
+    #listenBtn.speaking:hover { background: rgba(45,90,78,0.1); }
+
+    #speechStatus {
+      font-size: 0.82em;
+      color: #5a7a8a;
+    }
+
+    /* ── EPOCH BADGE ── */
+    .epoch {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.72em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .epoch-analog  { background: #1a2a1e; color: #4caf82; }
+    .epoch-hmm     { background: #1a2230; color: #5b8fce; }
+    .epoch-deep    { background: #271a30; color: #9c6fce; }
+    .epoch-llm     { background: #2a1a10; color: #d4a574; }
+
+    /* ── SUMMARY BOX ── */
+    .summary-box {
+      border-left: 3px solid #d4a574;
+      padding: 20px 24px;
+      background: #161B22;
+      border-radius: 0 4px 4px 0;
+      margin: 40px 0;
+    }
+
+    .summary-box p {
+      margin: 0 0 8px 0;
+      color: #e8e6e1;
+      line-height: 1.7;
+      font-size: 1.02em;
+    }
+
+    .summary-box p:last-child { margin-bottom: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .timeline::before { left: 60px; }
+      .tl-year { flex: 0 0 60px; font-size: 0.75em; }
+      .tl-content { padding-left: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html" class="logo">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html">Narzędzia</a>
+    <a href="inspiracje.html">Inspiracje</a>
+    <a href="voice-agents.html" style="color:#d4a574;">Voice Agents</a>
+    <a href="sandbox.html">AI Sandbox</a>
+    <a href="#" data-tally-open="obAOEx">Kontakt</a>
+  </div>
+
+  <div class="container">
+    <h1>Voice Agents — 70 lat historii mowy AI</h1>
+    <p style="font-size:1.05em;line-height:1.8;margin-bottom:8px;">
+      Od mechanicznego syntezatora dźwięku do modeli, które rozmawiają jak ludzie — historia technologii głosowych to jedna z najdłuższych i najbardziej fascynujących opowieści w AI.
+    </p>
+
+    <div class="listen-bar">
+      <button id="listenBtn">&#9654; Słuchaj treści</button>
+      <span id="speechStatus"></span>
+    </div>
+
+    <div class="timeline" id="timeline-content">
+
+      <div class="tl-item">
+        <div class="tl-year">1939</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Voder (Bell Labs) <span class="epoch epoch-analog">Analogowy</span></h3>
+          <p>Pierwsza elektroniczna synteza mowy. Operator sterował głosem za pomocą klawiatury i pedałów nożnych — maszyna nie rozmawiała samodzielnie, ale po raz pierwszy głos ludzki wyszedł z urządzenia elektronicznego. Pokaz na New York World's Fair wywołał sensację.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://en.wikipedia.org/wiki/Voder" target="_blank" rel="noopener">&#128214; Wikipedia — Voder</a>
+            <a class="tl-ref" href="https://www.youtube.com/results?search_query=Voder+Bell+Labs+1939" target="_blank" rel="noopener">&#127909; Demonstracja: Voder na YouTube</a>
+            <a class="tl-ref" href="https://www.bellsystem.com/" target="_blank" rel="noopener">&#128247; Zdjęcia i diagramy Vodera</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">1952</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Audrey (Bell Labs) <span class="epoch epoch-analog">Analogowy</span></h3>
+          <p>Pierwszy system rozpoznawania mowy. Urządzenie wielkości szafy rozpoznawało cyfry 0–9 wypowiadane przez jeden, konkretny głos. Dokładność: 97% dla cyfr w ciszy. Dla innych głosów — bezużyteczne.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://computerhistory.org/blog/audrey/" target="_blank" rel="noopener">&#128247; Computer History Museum — Audrey</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">1962</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>IBM Shoebox <span class="epoch epoch-analog">Analogowy</span></h3>
+          <p>Rozpoznawanie 16 słów i prostych poleceń matematycznych. Pokaz na Seattle World's Fair. Urządzenie wielkości pudełka na buty — stąd nazwa. Pierwszy krok ku interfejsowi głosowemu dla komputerów.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://www.ibm.com/ibm/history/exhibits/specialprod1/specialprod1_7.html" target="_blank" rel="noopener">&#128247; IBM Archive — Shoebox History</a>
+            <a class="tl-ref" href="https://www.youtube.com/results?search_query=IBM+Shoebox+1962" target="_blank" rel="noopener">&#127909; Demo: IBM Shoebox Video</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">1971–1976</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Program DARPA Speech Understanding <span class="epoch epoch-analog">Analogowy</span></h3>
+          <p>Pierwsze systemy rozpoznające ponad 1000 słów. Finansowany przez agencję obronną USA, program wyłonił projekty Harpy i Hearsay. Przełom: maszyna rozumiała pełne zdania, nie tylko cyfry czy pojedyncze słowa.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://en.wikipedia.org/wiki/Speech_recognition" target="_blank" rel="noopener">&#128214; Timeline: Speech Recognition (Wikipedia)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">lata 80.</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Hidden Markov Models (HMM) <span class="epoch epoch-hmm">Statystyczny</span></h3>
+          <p>Statystyczna rewolucja w rozpoznawaniu mowy. HMM modeluje sekwencje fonemów jako łańcuchy stanów probabilistycznych — zamiast dopasowywać wzorce, maszyna liczy prawdopodobieństwa. Standard przez ponad 20 lat, obecny w każdym systemie do 2010 roku.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://en.wikipedia.org/wiki/Hidden_Markov_model" target="_blank" rel="noopener">&#128214; HMM: Wikipedia</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">1997</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Dragon NaturallySpeaking <span class="epoch epoch-hmm">Statystyczny</span></h3>
+          <p>Pierwsze praktyczne dyktowanie ciągłe dla użytkowników biznesowych. Cena: 695 USD. Wymagało 45-minutowego treningu głosu. Po raz pierwszy sekretarki mogły bać się o pracę — diktat słowny przechodziło bezpośrednio do Worda.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://www.youtube.com/results?search_query=Dragon+NaturallySpeaking+history+1997" target="_blank" rel="noopener">&#127909; Historia: Speech Recognition Video</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2009–2012</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Deep Learning wypiera HMM <span class="epoch epoch-deep">Deep Learning</span></h3>
+          <p>Sieci głębokie (DNN) zaczęły bić HMM na własnym podwórku. Google, Microsoft i IBM równolegle opublikowały wyniki pokazujące 20–30% redukcję błędów. To był moment, gdy maszyny zaczęły słyszeć prawie tak dobrze jak ludzie w kontrolowanych warunkach.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://www.assemblyai.com/blog/a-brief-history-of-automatic-speech-recognition/" target="_blank" rel="noopener">&#128214; Deep Speech Era: AssemblyAI</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2016</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>WaveNet (DeepMind) <span class="epoch epoch-deep">Deep Learning</span></h3>
+          <p>Pierwsza synteza mowy brzmiąca naturalnie dla większości słuchaczy. WaveNet generuje audio próbka po próbce przy użyciu sieci konwolucyjnej z rozszerzonym polem receptywnym. Koniec z robotycznym „tekstem-na-mowę" — głosy AI stały się prawie ludzkie.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://deepmind.google/discover/blog/wavenet-a-generative-model-for-raw-audio/" target="_blank" rel="noopener">&#128203; DeepMind WaveNet — blog</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2018</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Neural TTS w chmurze <span class="epoch epoch-deep">Deep Learning</span></h3>
+          <p>Google Cloud TTS, Amazon Polly i Microsoft Azure Neural Voice udostępniają neuronową syntezę mowy przez API. Każdy developer może teraz dodać naturalnie brzmiący głos do swojej aplikacji za kilka dolarów miesięcznie.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://cloud.google.com/text-to-speech" target="_blank" rel="noopener">&#128203; Google Cloud TTS</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Whisper (OpenAI) <span class="epoch epoch-llm">Era LLM</span></h3>
+          <p>Uniwersalny model STT trenowany na 680 tys. godzin audio z internetu. Obsługuje 99 języków, działa offline, jest open source. Whisper zdemokratyzował transkrypcję — prosta Python-owa komenda i masz dokładniejszy zapis niż usługi enterprise sprzed 5 lat.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://openai.com/research/whisper" target="_blank" rel="noopener">&#128203; OpenAI Whisper — karta modelu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2023–2024</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>ElevenLabs &amp; OpenAI TTS — głos nieodróżnialny od ludzkiego <span class="epoch epoch-llm">Era LLM</span></h3>
+          <p>ElevenLabs klonuje głos z 30-sekundowej próbki. OpenAI TTS oferuje 6 głosów przez API. Dla większości słuchaczy te głosy są nieodróżnialne od nagrań ludzkich — co rodzi pytania etyczne o deepfakes audio i dezinformację.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://elevenlabs.io/voice-library" target="_blank" rel="noopener">&#127909; ElevenLabs Voice Library — demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>GPT-4o — jeden model dla tekstu, obrazu i mowy <span class="epoch epoch-llm">Era LLM</span></h3>
+          <p>Multimodalny model end-to-end: słyszy, widzi, rozumie i mówi — bez pośrednich warstw transkrypcji. Latencja odpowiedzi głosowej: ~300ms, porównywalna z naturalną rozmową. Emocje w głosie są rozpoznawane i odzwierciedlane.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://openai.com/index/gpt-4o-system-card/" target="_blank" rel="noopener">&#128203; GPT-4o — System Card</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2025–2026</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Natywne Voice-to-Voice AI <span class="epoch epoch-llm">Era LLM</span></h3>
+          <p>GPT Realtime API i Gemini Live eliminują architekturę STT → LLM → TTS. Jeden model obsługuje cały strumień audio w czasie rzeczywistym. Voice Agenci mogą prowadzić pełne rozmowy, negocjować, rezerwować wizyty, odpowiadać na pytania klientów — bez skryptów i bez człowieka w pętli.</p>
+          <div class="tl-refs">
+            <a class="tl-ref" href="https://platform.openai.com/docs/guides/realtime" target="_blank" rel="noopener">&#128203; OpenAI Realtime API</a>
+            <a class="tl-ref" href="https://ai.google.dev/gemini-api/docs/live" target="_blank" rel="noopener">&#128203; Gemini Live API</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+
+    <div class="summary-box">
+      <p>Przez 70 lat rozwijaliśmy osobno <strong>słuchanie</strong> i <strong>mówienie</strong> maszyn.</p>
+      <p>Dopiero modele multimodalne połączyły rozpoznawanie mowy, rozumienie i generowanie głosu w jeden system AI — otwierając erę Voice Agentów, którzy prowadzą rozmowy jak ludzie.</p>
+    </div>
+
+    <h2 id="kontakt">Kontakt</h2>
+    <p>Masz pytania o wdrożenie voice agentów? <a href="#" data-tally-open="obAOEx">Napisz do mnie</a> lub <a href="mailto:staniszewski@heuristica.pl">staniszewski&#x1F412;heuristica.pl</a></p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-social">
+      <a href="https://www.youtube.com/@marekstaniszewski7424" target="_blank">YouTube</a> |
+      <a href="https://www.linkedin.com/in/staniszewskimarek/" target="_blank">LinkedIn</a>
+    </div>
+    (C) 2026 Heuristica. Marek Staniszewski | <a href="polityka.html">Polityka prywatności</a>
+  </div>
+
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <script>
+  (function () {
+    const btn = document.getElementById('listenBtn');
+    const status = document.getElementById('speechStatus');
+    let isSpeaking = false;
+    let isPaused = false;
+
+    function getPolishVoice() {
+      const voices = speechSynthesis.getVoices();
+      return voices.find(v => v.lang === 'pl-PL') ||
+             voices.find(v => v.lang && v.lang.startsWith('pl')) ||
+             voices[0];
+    }
+
+    function extractTimelineText() {
+      const items = document.querySelectorAll('.tl-item');
+      let text = 'Historia rozpoznawania i syntezy mowy — kamienie milowe. ';
+      items.forEach(item => {
+        const year = item.querySelector('.tl-year')?.textContent.trim() || '';
+        const title = item.querySelector('h3')?.childNodes[0]?.textContent.trim() || '';
+        const desc = item.querySelector('p')?.textContent.trim() || '';
+        text += `${year}: ${title}. ${desc} `;
+      });
+      text += 'Przez 70 lat rozwijaliśmy osobno słuchanie i mówienie maszyn. Dopiero modele multimodalne połączyły rozpoznawanie mowy, rozumienie i generowanie głosu w jeden system AI.';
+      return text;
+    }
+
+    function updateBtn(state) {
+      if (state === 'idle') {
+        btn.textContent = '▶ Słuchaj treści';
+        btn.classList.remove('speaking');
+        status.textContent = '';
+      } else if (state === 'speaking') {
+        btn.textContent = '⏸ Pauza';
+        btn.classList.add('speaking');
+        status.textContent = 'Odtwarzanie...';
+      } else if (state === 'paused') {
+        btn.textContent = '▶ Wznów';
+        btn.classList.remove('speaking');
+        status.textContent = 'Wstrzymano';
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) {
+        status.textContent = 'Twoja przeglądarka nie obsługuje Web Speech API.';
+        return;
+      }
+
+      if (isSpeaking) {
+        if (isPaused) {
+          speechSynthesis.resume();
+          isPaused = false;
+          updateBtn('speaking');
+        } else {
+          speechSynthesis.pause();
+          isPaused = true;
+          updateBtn('paused');
+        }
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(extractTimelineText());
+      utterance.lang = 'pl-PL';
+      utterance.rate = 0.95;
+      utterance.pitch = 1;
+
+      function assignVoice() {
+        const voice = getPolishVoice();
+        if (voice) utterance.voice = voice;
+      }
+
+      if (speechSynthesis.getVoices().length) {
+        assignVoice();
+      } else {
+        speechSynthesis.addEventListener('voiceschanged', assignVoice, { once: true });
+      }
+
+      utterance.onstart = () => {
+        isSpeaking = true;
+        isPaused = false;
+        updateBtn('speaking');
+      };
+
+      utterance.onend = () => {
+        isSpeaking = false;
+        isPaused = false;
+        updateBtn('idle');
+      };
+
+      utterance.onerror = (e) => {
+        isSpeaking = false;
+        isPaused = false;
+        updateBtn('idle');
+        if (e.error !== 'interrupted') {
+          status.textContent = 'Błąd odtwarzania: ' + e.error;
+        }
+      };
+
+      speechSynthesis.speak(utterance);
+    });
+
+    window.addEventListener('beforeunload', () => {
+      speechSynthesis.cancel();
+    });
+  })();
+  </script>
+
+  <script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="OuJ2cri2pwybJE45sE3Sc";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
+</body>
+</html>

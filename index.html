@@ -119,9 +119,10 @@
     <h1>Wdrażamy AI w marketingu aby realnie zwiększyć efektywność Twojego zespołu</h1>
     <p style="font-size: 1.05em; line-height: 1.8; margin-bottom: 28px;">Od strategii po konkretne narzędzia — pomagamy firmom uporządkować marketing i wykorzystać AI tam, gdzie daje mierzalny efekt.</p>
 
-    <div style="display: flex; gap: 16px; margin: 32px 0 48px 0; flex-wrap: wrap;">
+    <div style="display: flex; gap: 16px; margin: 32px 0 48px 0; flex-wrap: wrap; align-items: center;">
       <a href="#" data-tally-open="obAOEx" style="display: inline-block; padding: 12px 28px; background: #2d5a4e; color: #e8e6e1; text-decoration: none; border-radius: 4px; font-weight: 600; transition: opacity 0.2s;">👉 Umów rozmowę</a>
       <a href="#jak-pracujemy" style="display: inline-block; padding: 12px 28px; background: #d4a574; color: #0f1419; text-decoration: none; border-radius: 4px; font-weight: 600; transition: opacity 0.2s;">👉 Zobacz, jak pracujemy</a>
+      <button id="listenBtn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: #d4a574; border: 1.5px solid #d4a574; border-radius: 4px; font-weight: 600; font-size: 0.95em; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(212,165,116,0.1)'" onmouseout="this.style.background='transparent'">▶ Słuchaj strony</button>
     </div>
 
     <h2>Co zyskujesz?</h2>
@@ -246,6 +247,60 @@
     (C) 2026 Heuristica. Marek Staniszewski | <a href="polityka.html">Polityka prywatności</a>
   </div>
   <script async src="https://tally.so/widgets/embed.js"></script>
+  <script>
+  (function() {
+    const btn = document.getElementById('listenBtn');
+    let isSpeaking = false;
+    let isPaused = false;
+
+    function getPolishVoice() {
+      const voices = speechSynthesis.getVoices();
+      return voices.find(v => v.lang === 'pl-PL' || v.lang === 'pl') ||
+             voices.find(v => v.lang && v.lang.startsWith('pl')) ||
+             voices[0];
+    }
+
+    function extractPageText() {
+      const container = document.querySelector('.container');
+      if (!container) return '';
+      let text = '';
+      container.querySelectorAll('h1, h2, p, li').forEach(el => {
+        if (el.textContent.trim()) text += el.textContent.trim() + '. ';
+      });
+      return text;
+    }
+
+    btn.addEventListener('click', () => {
+      if (isSpeaking) {
+        if (isPaused) {
+          speechSynthesis.resume();
+          isPaused = false;
+          btn.textContent = '⏸ Pauza';
+        } else {
+          speechSynthesis.pause();
+          isPaused = true;
+          btn.textContent = '▶ Wznów';
+        }
+      } else {
+        isSpeaking = true;
+        const utterance = new SpeechSynthesisUtterance(extractPageText());
+        utterance.lang = 'pl-PL';
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        speechSynthesis.getVoices().length
+          ? (utterance.voice = getPolishVoice())
+          : speechSynthesis.onvoiceschanged = () => { utterance.voice = getPolishVoice(); };
+        utterance.onend = () => {
+          isSpeaking = false;
+          isPaused = false;
+          btn.textContent = '▶ Słuchaj strony';
+        };
+        speechSynthesis.speak(utterance);
+        btn.textContent = '⏸ Pauza';
+      }
+    });
+  })();
+  </script>
   <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="OuJ2cri2pwybJE45sE3Sc";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>

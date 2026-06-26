@@ -81,8 +81,9 @@
       padding: 0 2rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      height: 52px;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -91,11 +92,20 @@
     .lp-nav-logo {
       font-family: 'Inter', sans-serif;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--text-primary);
       text-decoration: none;
+      padding: 16px 24px 16px 0;
+      margin-right: 8px;
+      border-right: 0.5px solid var(--border);
+    }
+
+    .lp-nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .lp-nav-link {
@@ -103,13 +113,16 @@
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
+      padding: 16px 18px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
     }
 
-    .lp-nav-link:hover { color: var(--text-primary); }
+    .lp-nav-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
     /* PAGE WRAPPER */
     .page {
@@ -633,10 +646,16 @@
 
   <!-- NAV -->
   <nav class="lp-nav">
-    <a href="/" class="lp-nav-logo">Heuristica</a>
-    <a href="mailto:staniszewski@heuristica.pl" class="lp-nav-link">
-      <i class="ti ti-mail" aria-hidden="true"></i> Napisz do mnie
-    </a>
+    <a href="/" class="lp-nav-logo">HEURISTICA</a>
+    <div class="lp-nav-links">
+      <a href="/kim" class="lp-nav-link">Kim jestem</a>
+      <a href="/uslugi" class="lp-nav-link">Usługi</a>
+      <a href="/narzedzia" class="lp-nav-link">Narzędzia</a>
+      <a href="/klienci" class="lp-nav-link">Klienci</a>
+      <a href="/inspiracje" class="lp-nav-link">Inspiracje</a>
+      <a href="/sandbox" class="lp-nav-link">AI Sandbox</a>
+      <a href="#" data-tally-open="obAOEx" class="lp-nav-link">Kontakt</a>
+    </div>
   </nav>
 
   <div class="page">

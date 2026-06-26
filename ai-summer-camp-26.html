@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QDHLBXLXT4');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://heuristica.pl/ai-summer-camp-26">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fraunces:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+  <title>AI Strategy Summer Camp — Warsztat online 30-31.07.2026 | HEURISTICA</title>
+  <meta name="description" content="Dwudniowy warsztat online dla menedżerów i konsultantów. Naucz się myśleć razem z AI. 30-31 lipca 2026, 9:00-15:00. 1 490 zł brutto/osoba.">
+  <link rel="stylesheet" href="style.css?v=premium-2026">
+  <style>
+    /* ── CAMP PAGE STYLES ── */
+
+    .camp {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 0 80px 0;
+    }
+
+    /* HERO */
+    .camp-hero {
+      padding: 52px 48px 44px;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(212,165,116,0.08);
+      border: 1px solid rgba(212,165,116,0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent-gold);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .camp-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.18;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    .camp-hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent-gold);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 1.25rem 0 2rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 2.25rem;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 5px 14px;
+    }
+
+    .meta-pill svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--accent-gold);
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-gold);
+      color: #0f1419;
+      border: none;
+      border-radius: 6px;
+      padding: 13px 26px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-primary:hover { opacity: 0.85; }
+
+    .cta-price {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .cta-price strong {
+      color: var(--text-primary);
+      font-size: 1.35rem;
+      font-weight: 600;
+      font-family: 'Fraunces', serif;
+    }
+
+    /* SECTIONS */
+    .camp-section {
+      padding: 3rem 48px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      opacity: 0.7;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+    }
+
+    .section-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+
+    /* TENSION GRID */
+    .tension-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .tension-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .tension-cell {
+      background: var(--bg-secondary);
+      padding: 1.35rem 1.5rem;
+    }
+
+    .tension-cell.highlight {
+      background: #1a2a1e;
+    }
+
+    .tension-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .tension-label.bad { color: #c0604a; }
+    .tension-label.good { color: #4caf82; }
+
+    .tension-cell p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* PERSONA GRID */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+
+    .persona-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.1rem 1rem;
+    }
+
+    .persona-icon {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .persona-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .persona-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* PROGRAM */
+    .day-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .day-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(212,165,116,0.1);
+      border-radius: 4px;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .day-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .day-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .module-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2.25rem;
+    }
+
+    .module-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px 16px;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(45,61,74,0.5);
+      align-items: start;
+    }
+
+    .module-item:last-child { border-bottom: none; }
+
+    .module-num {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-top: 2px;
+      white-space: nowrap;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .module-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .module-bullets {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .module-bullets li {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 9px;
+    }
+
+    /* WHAT YOU GET */
+    .what-you-get {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+
+    .get-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .get-card-icon {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .get-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .get-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TOOLS */
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 1rem;
+    }
+
+    .tool-tag {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-weight: 400;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tool-tag:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    /* PRICING */
+    .price-card {
+      background: #141a23;
+      border: 1px solid rgba(212,165,116,0.3);
+      border-radius: 14px;
+      padding: 2rem;
+      max-width: 440px;
+    }
+
+    .price-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0.5rem 0 1.25rem;
+    }
+
+    .price-amount {
+      font-family: 'Fraunces', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .price-suffix {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .price-includes {
+      list-style: none;
+      margin: 0 0 1.5rem 0;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    .price-includes li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 5px 0;
+    }
+
+    .check-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      stroke: #4caf82;
+      fill: none;
+    }
+
+    .price-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--accent-gold);
+      color: #0f1419;
+      border: none;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .price-cta:hover { opacity: 0.85; }
+
+    /* FOOTER CTA */
+    .footer-cta {
+      padding: 4rem 48px;
+      text-align: center;
+    }
+
+    .spots-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      color: #c49a4a;
+      background: rgba(196,154,74,0.1);
+      border: 1px solid rgba(196,154,74,0.25);
+      border-radius: 20px;
+      padding: 4px 14px;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-cta-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-cta-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+    }
+
+    .footer-email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 1.5rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .footer-email-link:hover {
+      border-bottom-color: var(--accent-gold);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .camp-hero,
+      .camp-section {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .footer-cta { padding: 3rem 24px; }
+      .tension-grid { grid-template-columns: 1fr; }
+      .camp-hero h1 { font-size: 1.75rem; }
+      .day-header { flex-wrap: wrap; }
+      .day-sub { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html" class="logo">HEURISTICA</a>
+    <a href="kim.html">Kim jestem</a>
+    <a href="uslugi.html">Usługi</a>
+    <a href="narzedzia.html">Narzędzia</a>
+    <a href="inspiracje.html">Inspiracje</a>
+    <a href="dojo.html">Dojo</a>
+    <a href="sandbox.html">AI Sandbox</a>
+    <a href="#" data-tally-open="obAOEx">Kontakt</a>
+  </div>
+
+  <div class="container">
+    <div class="camp">
+
+      <!-- HERO -->
+      <section class="camp-hero">
+        <div class="hero-eyebrow">30-31 lipca 2026 · warsztat online</div>
+        <h1>Wszyscy mają te same narzędzia AI.<br><em>Co dziś daje przewagę?</em></h1>
+        <p class="hero-sub">Dwudniowy warsztat dla menedżerów i konsultantów, którzy chcą nauczyć się myśleć razem z AI, a nie delegować myślenie do AI.</p>
+        <div class="hero-meta">
+          <span class="meta-pill">
+            <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            2 × 6 godzin (9:00–15:00)
+          </span>
+          <span class="meta-pill">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Online, na żywo
+          </span>
+          <span class="meta-pill">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Mała grupa, praca na konkretnych przykładach
+          </span>
+        </div>
+        <div class="cta-row">
+          <a href="mailto:staniszewski@heuristica.pl" class="cta-primary">
+            Chcę wziąć udział
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <span class="cta-price"><strong>1 490 zł</strong> brutto / osoba</span>
+        </div>
+      </section>
+
+      <!-- PROBLEM -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Problem</p>
+        <p class="tension-title">AI wyrównało dostęp do informacji.<br>Przewaga przeniosła się gdzie indziej.</p>
+        <div class="tension-grid">
+          <div class="tension-cell">
+            <div class="tension-label bad">Co już nie daje przewagi</div>
+            <p>Dostęp do narzędzi AI. Szybkość generowania treści. Obszerne raporty zbudowane na tym samym zestawie promptów.</p>
+          </div>
+          <div class="tension-cell highlight">
+            <div class="tension-label good">Czego AI nie zastąpi</div>
+            <p>Zadawania właściwych pytań. Oceny jakości informacji. Budowania insightów. Podejmowania decyzji w warunkach niepewności.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DLA KOGO -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Dla kogo</p>
+        <h2 class="section-title">Warsztat dla osób, które pracują z informacją i decyzją</h2>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <span class="persona-icon">📊</span>
+            <div class="persona-title">Menedżerowie</div>
+            <div class="persona-desc">Podejmujący decyzje strategiczne</div>
+          </div>
+          <div class="persona-card">
+            <span class="persona-icon">💼</span>
+            <div class="persona-title">Konsultanci</div>
+            <div class="persona-desc">Budujący analizy, rekomendacje i strategie dla klientów</div>
+          </div>
+          <div class="persona-card">
+            <span class="persona-icon">📈</span>
+            <div class="persona-title">Marketerzy i analitycy</div>
+            <div class="persona-desc">Pracujący z danymi rynkowymi, insightami i planowaniem</div>
+          </div>
+          <div class="persona-card">
+            <span class="persona-icon">🔀</span>
+            <div class="persona-title">Liderzy projektów</div>
+            <div class="persona-desc">Koordynujący złożone procesy i wielostronną komunikację</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROGRAM -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Program</p>
+        <h2 class="section-title">Dwa dni. Dwa kluczowe przejścia.</h2>
+        <p class="section-desc">Każdy moduł łączy koncepcję z praktyką.</p>
+
+        <div class="day-header">
+          <span class="day-label">Dzień 1 · 30.07</span>
+          <span class="day-title">Od informacji do wiedzy</span>
+          <span class="day-sub">9:00–15:00</span>
+        </div>
+        <div class="module-list">
+          <div class="module-item">
+            <span class="module-num">M1</span>
+            <div>
+              <div class="module-title">Jak zmienia się praca umysłowa</div>
+              <ul class="module-bullets">
+                <li>Co AI automatyzuje</li>
+                <li>Czego AI nie potrafi</li>
+                <li>Gdzie zostaje przewaga człowieka</li>
+              </ul>
+            </div>
+          </div>
+          <div class="module-item">
+            <span class="module-num">M2</span>
+            <div>
+              <div class="module-title">Jak zdobywać wiedzę szybciej i sprawniej</div>
+              <ul class="module-bullets">
+                <li>Deep Research</li>
+                <li>Źródła pierwotne i wtórne</li>
+                <li>Triangulacja i weryfikacja</li>
+                <li>Analiza dokumentów i raportów</li>
+              </ul>
+            </div>
+          </div>
+          <div class="module-item">
+            <span class="module-num">M3</span>
+            <div>
+              <div class="module-title">Od danych do insightów</div>
+              <ul class="module-bullets">
+                <li>Analiza konkurencji i klientów</li>
+                <li>Segmentacja</li>
+                <li>Wzorce i trendy</li>
+                <li>Słabe sygnały</li>
+                <li>Consumer insight</li>
+              </ul>
+            </div>
+          </div>
+          <div class="module-item">
+            <span class="module-num">M4</span>
+            <div>
+              <div class="module-title">Krytyczne myślenie w erze AI</div>
+              <ul class="module-bullets">
+                <li>Halucynacje i bias</li>
+                <li>Rozpoznawanie założeń</li>
+                <li>Ocena jakości odpowiedzi</li>
+                <li>Checklisty weryfikacyjne</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="day-header">
+          <span class="day-label">Dzień 2 · 31.07</span>
+          <span class="day-title">Od wiedzy do decyzji</span>
+          <span class="day-sub">9:00–15:00</span>
+        </div>
+        <div class="module-list">
+          <div class="module-item">
+            <span class="module-num">M5</span>
+            <div>
+              <div class="module-title">Jak budować rekomendacje strategiczne</div>
+              <ul class="module-bullets">
+                <li>Synteza</li>
+                <li>Propozycja wartości</li>
+                <li>Pozycjonowanie</li>
+                <li>Generowanie opcji i scenariuszy</li>
+              </ul>
+            </div>
+          </div>
+          <div class="module-item">
+            <span class="module-num">M6</span>
+            <div>
+              <div class="module-title">AI jako partner decyzyjny</div>
+              <ul class="module-bullets">
+                <li>Decyzje w niepewności</li>
+                <li>Testowanie założeń</li>
+                <li>Adwokat diabła</li>
+                <li>Projektowanie procesu decyzyjnego</li>
+              </ul>
+            </div>
+          </div>
+          <div class="module-item">
+            <span class="module-num">M7</span>
+            <div>
+              <div class="module-title">Twój własny system pracy</div>
+              <ul class="module-bullets">
+                <li>Workflow i biblioteka promptów</li>
+                <li>Bazy wiedzy</li>
+                <li>Agent Researcher</li>
+                <li>Agent Strateg</li>
+                <li>Agent Krytyk</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CO WYNIESIESZ -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Co wyniesiesz</p>
+        <h2 class="section-title">Gotowe do użycia. Nazajutrz w pracy.</h2>
+        <div class="what-you-get">
+          <div class="get-card">
+            <span class="get-card-icon">📋</span>
+            <div class="get-card-title">Szablony i prompty</div>
+            <div class="get-card-desc">Gotowe procedury do researchu, analizy i budowania rekomendacji</div>
+          </div>
+          <div class="get-card">
+            <span class="get-card-icon">⚙️</span>
+            <div class="get-card-title">Własny workflow</div>
+            <div class="get-card-desc">Zaprojektowany pod Twój sposób pracy i rolę zawodową</div>
+          </div>
+          <div class="get-card">
+            <span class="get-card-icon">🤖</span>
+            <div class="get-card-title">System agentów AI</div>
+            <div class="get-card-desc">Researcher, Strateg, Krytyk — trzy role AI w jednym procesie myślowym</div>
+          </div>
+          <div class="get-card">
+            <span class="get-card-icon">✅</span>
+            <div class="get-card-title">Narzędzia weryfikacji</div>
+            <div class="get-card-desc">Checklisty do oceny jakości odpowiedzi AI i rozpoznawania halucynacji</div>
+          </div>
+          <div class="get-card">
+            <span class="get-card-icon">▶️</span>
+            <div class="get-card-title">Demo na żywo</div>
+            <div class="get-card-desc">Zobaczysz każde narzędzie w akcji na realnych przykładach biznesowych</div>
+          </div>
+          <div class="get-card">
+            <span class="get-card-icon">🎬</span>
+            <div class="get-card-title">Nagranie</div>
+            <div class="get-card-desc">Dostęp do nagrania warsztatów po zakończeniu</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NARZĘDZIA -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Narzędzia</p>
+        <h2 class="section-title" style="font-size:1.3rem;">Poznasz wiele narzędzi takich jak:</h2>
+        <div class="tools-grid">
+          <span class="tool-tag">ChatGPT / Custom GPT</span>
+          <span class="tool-tag">Claude</span>
+          <span class="tool-tag">Claude Code</span>
+          <span class="tool-tag">NotebookLM</span>
+          <span class="tool-tag">Perplexity</span>
+          <span class="tool-tag">Manus</span>
+          <span class="tool-tag">Genspark</span>
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">Obsidian</span>
+          <span class="tool-tag">Deep Research</span>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="camp-section">
+        <p class="section-eyebrow">Inwestycja</p>
+        <div class="price-card">
+          <div class="price-card-label">Dwudniowy pakiet</div>
+          <div class="price-main">
+            <span class="price-amount">1 490 zł</span>
+            <span class="price-suffix">brutto / osoba</span>
+          </div>
+          <ul class="price-includes">
+            <li>
+              <svg class="check-icon" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              2 × 6 godzin live (30–31 lipca 2026)
+            </li>
+            <li>
+              <svg class="check-icon" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Dostęp do nagrania
+            </li>
+            <li>
+              <svg class="check-icon" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Gotowe szablony i biblioteka promptów
+            </li>
+            <li>
+              <svg class="check-icon" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Materiały do pobrania po każdym module
+            </li>
+            <li>
+              <svg class="check-icon" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Mała grupa — praca na Twoich przykładach
+            </li>
+          </ul>
+          <a href="mailto:staniszewski@heuristica.pl" class="price-cta">Zapisz się — napisz do mnie</a>
+        </div>
+      </section>
+
+      <!-- FOOTER CTA -->
+      <section class="footer-cta">
+        <div class="spots-badge">⏱ Start za niecałe 5 tygodni · liczba miejsc ograniczona</div>
+        <h2 class="footer-cta-title">Gotowy na reset myślenia o AI?</h2>
+        <p class="footer-cta-sub">Napisz bezpośrednio i otrzymasz szczegółowe informacje,<br>jak przygotować się do warsztatów.</p>
+        <a href="mailto:staniszewski@heuristica.pl" class="footer-email-link">
+          staniszewski@heuristica.pl
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </section>
+
+    </div><!-- /.camp -->
+  </div><!-- /.container -->
+
+  <!-- Chatbase -->
+  <script>
+    window.embeddedChatbotConfig = { chatbotId: "OuJ2cri2pwybJE45sE3Sc", domain: "www.chatbase.co" };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="OuJ2cri2pwybJE45sE3Sc" domain="www.chatbase.co" defer></script>
+
+  <!-- Tally -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>

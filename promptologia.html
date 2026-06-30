@@ -1057,6 +1057,52 @@ Uwzględnij:
 Raport przedstaw w formie punktów z krótkim komentarzem do każdego, zakończonych rekomendacjami dla zespołu PR i komunikacji korporacyjnej [TWOJA FIRMA].`,
   },
   {
+    id: 'debata-pieciu-strategow',
+    title: 'Debata pięciu strategów',
+    category: 'strategia',
+    prompt: `Jesteś systemem symulującym debatę pięciu niezależnych strategów wokół jednego problemu biznesowego. Twoim zadaniem NIE jest dać jedną rekomendację. Twoim zadaniem jest ujawnić strukturę niezgody między pięcioma odrębnymi logikami strategicznymi i pokazać, jak zmienia się ich pewność po wzajemnej krytyce.
+
+PROBLEM DO ANALIZY:
+
+[tutaj wklej opis problemu biznesowego]
+
+EKSPERCI:
+1. PORTER - pozycjonowanie konkurencyjne, pięć sił, przewaga kosztowa lub zróżnicowania
+2. CHRISTENSEN - dezorientacja (disruption), niewykorzystani lub przeobsłużeni klienci, jobs-to-be-done
+3. BLUE OCEAN (Kim/Mauborgne) - innowacja wartości, eliminacja konkurencji przez stworzenie nowej przestrzeni rynkowej
+4. EFFECTUATION (Sarasvathy) - logika dostępnych środków, akceptowalnej straty, partnerstw, działania w warunkach radykalnej niepewności
+5. BYRON SHARP - empiryczny marketing, mental/physical availability, prawa wzrostu marek, sceptycyzm wobec segmentacji i lojalności
+
+WYKONAJ NASTĘPUJĄCE KROKI W JEDNYM PRZEBIEGU, ZACHOWUJĄC WSZYSTKIE ETAPY W ODPOWIEDZI:
+
+KROK 1 - DIAGNOZA (każdy ekspert osobno)
+Dla każdego z pięciu ekspertów napisz 4-6 zdań diagnozy problemu WYŁĄCZNIE przez pryzmat jego logiki. Nie mieszaj perspektyw. Każdy ekspert ma inny słownik, inne pytania kluczowe, inną definicję "dobrej strategii". Zakończ jednym konkretnym kierunkiem działania rekomendowanym przez tego eksperta i oceną pewności (X/10).
+
+KROK 2 - CROSS-EXAMINATION
+Każdy ekspert krytykuje dwóch innych (wedle matrycy: Porter krytykuje Blue Ocean i Sharp; Christensen krytykuje Porter i Effectuation; Blue Ocean krytykuje Christensen i Sharp; Effectuation krytykuje Porter i Blue Ocean; Sharp krytykuje Christensen i Effectuation). Krytyka ma wskazywać konkretnie: co dany model pomija, jakie ukryte założenie jest błędne lub niesprawdzone, gdzie rekomendacja tamtego eksperta prowadzi do ryzyka. Bądź precyzyjny, nie bądź dyplomatyczny. Unikaj uprzejmościowych zastrzeżeń.
+
+KROK 3 - AKTUALIZACJA STANOWISK
+Każdy ekspert, widząc WSZYSTKIE krytyki skierowane pod jego adresem (nie tylko od dwóch wskazanych powyżej, ale potraktuj, że zna całą debatę), wykonuje trzy rzeczy: aktualizuje swoją pewność (nowe X/10 z uzasadnieniem zmiany), wskazuje najsilniejszy argument przeciwny, z którym się zgadza, i mówi wprost, co mimo wszystko pozostaje niezmienne w jego stanowisku i dlaczego.
+
+KROK 4 - SYNTHESIS
+Zmapuj strukturę całej debaty:
+- gdzie jest największa zgodność między ekspertami (i dlaczego to ważne)
+- gdzie jest największy, nierozwiązany konflikt
+- który kierunek jest najbardziej innowacyjny
+- który kierunek jest najbardziej wykonalny od zaraz, przy obecnych zasobach
+- jakie kluczowe niewiadome/dane brakujące uniemożliwiają rozstrzygnięcie sporu
+- rekomendacja syntetyczna: nie uśredniona, tylko wskazująca, w jakiej kolejności i pod jakimi warunkami warto testować poszczególne kierunki
+
+KROK 5 - META-ANALIZA
+Przeanalizuj samą debatę jako system, nie jej treść merytoryczną:
+- jakie ukryte założenie podzielali wszyscy pięcioro ekspertów, nie kwestionując go
+- jakiej perspektywy zabrakło przy stole (np. finansowej, regulacyjnej, organizacyjnej)
+- czy któryś ekspert dominował narracyjnie mimo słabszych argumentów, i dlaczego
+- czy konstrukcja matrycy krytyki (kto kogo krytykuje) mogła wpłynąć na wynik debaty
+
+FORMAT WYJŚCIA: użyj nagłówków dla każdego kroku i każdego eksperta. Nie streszczaj, nie skracaj na siłę, ale unikaj powtórzeń między krokami. Pisz po polsku, bez znaku myślnika.`,
+  },
+  {
     id: 'odpowiedzi-korespondencja',
     title: 'Odpowiedzi na korespondencję',
     category: 'komunikacja',

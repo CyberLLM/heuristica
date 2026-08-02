@@ -545,6 +545,25 @@
 
     .modal-btn.primary:hover { opacity: 0.85; }
 
+    /* ===== GATE (haslo wejscia) ===== */
+    .gate-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+    }
+
+    .gate-overlay.hidden { display: none; }
+
+    .gate-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .toc-panel { display: none; }
@@ -556,6 +575,20 @@
   </style>
 </head>
 <body>
+
+  <!-- GATE — HASLO WEJSCIA (widoczne od razu, przed zaladowaniem tresci) -->
+  <div class="gate-overlay" id="gate-overlay">
+    <div class="modal-box">
+      <div class="modal-title">Materialy warsztatowe</div>
+      <div class="gate-sub">Strona chroniona haslem.</div>
+      <input type="password" id="gate-input" class="modal-input" placeholder="Haslo dostepu..."
+        onkeydown="if(event.key==='Enter')checkGate()">
+      <div id="gate-error" class="modal-error"></div>
+      <div class="modal-actions">
+        <button class="modal-btn primary" onclick="checkGate()">Wejdz</button>
+      </div>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav class="top-nav">
@@ -682,6 +715,10 @@ Jesteś ekspertem od analizy tekstu...
     // Haslo do trybu edycji — zmien na wlasne
     const EDIT_PASSWORD = 'warsztat2026';
 
+    // Haslo wejscia na strone (dla uczestnikow)
+    const ACCESS_PASSWORD = 'eme-08';
+    const ACCESS_KEY      = 'workshop_access';
+
     // ============================================================
     //  FIREBASE INIT
     // ============================================================
@@ -692,6 +729,7 @@ Jesteś ekspertem od analizy tekstu...
     let saveTimer      = null;
     let isEditMode     = false;
     let currentContent = '';
+    let syncStarted    = false;
 
     // ============================================================
     //  MARKED.JS CONFIG
@@ -699,19 +737,48 @@ Jesteś ekspertem od analizy tekstu...
     marked.setOptions({ breaks: true, gfm: true });
 
     // ============================================================
-    //  REAL-TIME LISTENER
+    //  GATE — HASLO WEJSCIA
     // ============================================================
-    docRef.onSnapshot(snap => {
-      const content = (snap.exists && snap.data().content) ? snap.data().content : '';
-      currentContent = content;
-      if (!isEditMode) renderView(content);
-    }, err => {
-      console.error('Firestore error:', err);
-      if (!isEditMode) {
-        document.getElementById('rendered-content').innerHTML =
-          '<div class="error-state">Blad polaczenia z baza danych.<br>Sprawdz konfiguracje Firebase.</div>';
+    function unlockGate() {
+      document.getElementById('gate-overlay').classList.add('hidden');
+      startContentSync();
+    }
+
+    function checkGate() {
+      if (document.getElementById('gate-input').value === ACCESS_PASSWORD) {
+        sessionStorage.setItem(ACCESS_KEY, '1');
+        unlockGate();
+      } else {
+        document.getElementById('gate-error').textContent = 'Nieprawidlowe haslo.';
+        document.getElementById('gate-input').select();
       }
-    });
+    }
+
+    if (sessionStorage.getItem(ACCESS_KEY) === '1') {
+      unlockGate();
+    } else {
+      document.getElementById('gate-input').focus();
+    }
+
+    // ============================================================
+    //  REAL-TIME LISTENER (startuje dopiero po przejsciu bramki)
+    // ============================================================
+    function startContentSync() {
+      if (syncStarted) return;
+      syncStarted = true;
+
+      docRef.onSnapshot(snap => {
+        const content = (snap.exists && snap.data().content) ? snap.data().content : '';
+        currentContent = content;
+        if (!isEditMode) renderView(content);
+      }, err => {
+        console.error('Firestore error:', err);
+        if (!isEditMode) {
+          document.getElementById('rendered-content').innerHTML =
+            '<div class="error-state">Blad polaczenia z baza danych.<br>Sprawdz konfiguracje Firebase.</div>';
+        }
+      });
+    }
 
     // ============================================================
     //  VIEW MODE

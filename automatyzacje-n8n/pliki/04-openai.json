@@ -1,0 +1,89 @@
+{
+  "name": "04-openai",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -64
+      ],
+      "id": "5bd89e9b-d07f-4fbe-ad19-03634664bf6d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Odpowiadasz wyłącznie na podstawie sprawdzonych informacji. Przed odpowiedzią sprawdź fakty w Wikipedii. Jeśli nie masz pewności, napisz NIE WIEM."
+            },
+            {
+              "content": "W którym roku powstała agencja reklamowa Ogilvy i kto ją założył? Podaj też jedno zdanie o tym czym zasłynęła najbardziej."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        -112,
+        -64
+      ],
+      "id": "b9acb656-d82a-4aa6-943d-374e2fc2f384",
+      "name": "Message a model"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        32,
+        144
+      ],
+      "id": "380c5bbb-3b75-4111-9bca-779393d3a151",
+      "name": "Wikipedia"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

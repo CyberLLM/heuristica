@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uruchamiamy n8n — Automatyzacje bez kodowania</title>
+<meta name="description" content="Rozdział 1. Zanim zrozumiesz, jak działa n8n, proponuję po prostu zobaczyć, jak to wszystko wygląda w praktyce. To być może kolejność odwrotna do tej,…">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/1.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Uruchamiamy n8n — Automatyzacje bez kodowania">
+<meta property="og:description" content="Rozdział 1. Zanim zrozumiesz, jak działa n8n, proponuję po prostu zobaczyć, jak to wszystko wygląda w praktyce. To być może kolejność odwrotna do tej,…">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/1.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Uruchamiamy n8n — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Rozdział 1. Zanim zrozumiesz, jak działa n8n, proponuję po prostu zobaczyć, jak to wszystko wygląda w praktyce. To być może kolejność odwrotna do tej,…">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Rozdział 1</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Rozdział 1</p>
+    <h1>Rozdział 1. Uruchamiamy n8n</h1>
+<p>Zanim zrozumiesz, jak działa n8n, proponuję po prostu zobaczyć, jak to wszystko wygląda w praktyce. To być może kolejność odwrotna do tej, której uczono nas w szkole, gdzie zwykle najpierw jest teoria, a dopiero później zadanie. <strong>Nic nie uczy jednak szybciej niż działający system na własnym ekranie - i nic nie zniechęca skuteczniej niż teoria, której nie ma jeszcze do czego przyłożyć.</strong></p>
+<p>W tym rozdziale nie będę ci więc jeszcze wyjaśniał, czym jest węzeł ani dlaczego łączy się go w taki, a nie inny sposób. Zrobimy na razie tylko jedną rzecz: założysz konto, klikniesz parę razy myszką i zobaczysz na swoim ekranie gotowy, działający zautomatyzowany system, który sam pobierze dane i coś z nimi zrobi.</p>
+<p>Poćwiczymy więc od razu import gotowego przepływu, jedno kliknięcie i sprawdzimy wynik. Zaczynamy więc od konta.</p>
+<h2 id="zakladasz-konto">Zakładasz konto</h2>
+<p>n8n działa w dwóch wariantach: jako usługa w chmurze (n8n Cloud), na której nic nie instalujesz, albo jako coś, co stawiasz na własnym serwerze - w tym również lokalnie, na własnym komputerze. Tutaj omawiany będzie wyłącznie ten pierwszy sposób.</p>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Otwórz przeglądarkę i wejdź na stronę <a href="https://n8n.io" rel="noopener">n8n.io</a>. W prawym górnym rogu kliknij przycisk „Get started" (rozpocznij).</p></div></div>
+<figure class="rysunek"><a href="../img/rys-1-1-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-1-800.avif 800w, ../img/rys-1-1-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-1-800.webp 800w, ../img/rys-1-1-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-1-1400.jpg" srcset="../img/rys-1-1-800.jpg 800w, ../img/rys-1-1-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Punkt startowy - strona główna n8n.io" width="1400" height="778" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.1.</span> Punkt startowy - strona główna <a href="https://n8n.io" rel="noopener">n8n.io</a></figcaption></figure>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>formularz rejestracji z polami na e-mail, hasło i nazwę.</p>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>Na formularzu podaj swój adres e-mail, ustaw hasło i wpisz imię i nazwisko jako nazwę wyświetlaną na koncie. Kliknij przycisk pod formularzem, żeby przejść dalej.</p></div></div>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Na tym etapie n8n nie prosi o numer karty płatniczej. Plan startowy (Starter) i plan Pro uruchamiają darmowy okres próbny bez karty. Karta będzie potrzebna dopiero przy koncie na modelu językowym.</p></aside>
+<div class="krok"><div class="krok-nr">3</div><div class="krok-tresc"><p>n8n poprosi cię o nazwę przestrzeni roboczej - fragmentu adresu, pod którym będzie działał twój n8n, na przykład „twoja-nazwa.app.n8n.cloud". Wpisz cokolwiek zapamiętywalnego i przejdź dalej.</p></div></div>
+<div class="krok"><div class="krok-nr">4</div><div class="krok-tresc"><p>Potwierdź regulamin i zakończ rejestrację. Na ekranie zobaczysz: komunikat, że na twój adres e-mail wysłano wiadomość z potwierdzeniem.</p></div></div>
+<div class="krok"><div class="krok-nr">5</div><div class="krok-tresc"><p>Otwórz swoją skrzynkę pocztową. Znajdziesz w niej mail z linkiem potwierdzającym adres e-mail. Kliknij ten link.</p></div></div>
+<p>Sprawdź, czy działa: po kliknięciu linku przeglądarka przenosi cię z powrotem do n8n, na ekran twojej przestrzeni roboczej. W lewym górnym rogu zobaczysz nazwę, którą wybrałeś w kroku 3. Zobaczysz też duży przycisk „Create Workflow" (utwórz przepływ).</p>
+<h2 id="pierwszy-widok-twojego-przeplywu">Pierwszy widok Twojego przepływu</h2>
+<p>Kliknij „Create Workflow". n8n otworzy nowy, pusty obszar roboczy przepływu - dalej będziemy nazywać go po prostu obszarem roboczym. Zobaczysz tło w drobną kratkę i jeden duży przycisk na środku: „Add first step" (dodaj pierwszy krok).</p>
+<figure class="rysunek"><a href="../img/rys-1-2-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-2-800.avif 800w, ../img/rys-1-2-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-2-800.webp 800w, ../img/rys-1-2-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-2-1400.jpg" srcset="../img/rys-1-2-800.jpg 800w, ../img/rys-1-2-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Pusty obszar roboczy przed dodaniem czegokolwiek" width="1400" height="713" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.2.</span> Pusty obszar roboczy przed dodaniem czegokolwiek</figcaption></figure>
+<p>Nie klikaj jednak tego przycisku. Zamiast budować coś od zera, zaimportujemy na początek gotowy przepływ - zobaczysz cały działający system w kilka sekund, a od zera zaczniemy dopiero w rozdziale 3.</p>
+<h2 id="importujesz-gotowy-przeplyw">Importujesz gotowy przepływ</h2>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Pobierz plik <code>01-pierwszy-przeplyw.json</code> ze strony <a href="https://heuristica.pl/automatyzacje-n8n/" rel="noopener">heuristica.pl/automatyzacje-n8n</a>, z sekcji „Pobierz przepływy". Znajdziesz tam wszystkie przepływy z tego poradnika. Zapisz go w miejscu, które łatwo znajdziesz, na przykład na swoim pulpicie.</p></div></div>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>W obszarze roboczym kliknij trzy kropki (⋯) w prawym górnym rogu ekranu. Z rozwiniętego menu wybierz „Import from File" (importuj z pliku).</p></div></div>
+<figure class="rysunek"><a href="../img/rys-1-3-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-3-800.avif 800w, ../img/rys-1-3-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-3-800.webp 800w, ../img/rys-1-3-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-3-1400.jpg" srcset="../img/rys-1-3-800.jpg 800w, ../img/rys-1-3-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Menu importu przepływu" width="1400" height="728" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.3.</span> Menu importu przepływu</figcaption></figure>
+<div class="krok"><div class="krok-nr">3</div><div class="krok-tresc"><p>W oknie systemowym, które się otworzy, znajdź i zaznacz pobrany plik <code>01-pierwszy-przeplyw.json</code>, a potem potwierdź wybór.</p></div></div>
+<div class="krok"><div class="krok-nr">4</div><div class="krok-tresc"><p>Na ekranie natychmiast pojawi się gotowy przepływ: pięć prostokątów połączonych liniami ze strzałkami, w jednym poziomym rzędzie. To są węzły i połączenia między nimi - czym dokładnie są, dowiesz się w rozdziale 2. Teraz przyjrzymy im się bliżej.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-1-4-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-4-800.avif 800w, ../img/rys-1-4-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-4-800.webp 800w, ../img/rys-1-4-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-4-1400.jpg" srcset="../img/rys-1-4-800.jpg 800w, ../img/rys-1-4-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Zaimportowany przepływ, gotowy do uruchomienia" width="1400" height="736" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.4.</span> Zaimportowany przepływ, gotowy do uruchomienia</figcaption></figure>
+<div class="krok"><div class="krok-nr">5</div><div class="krok-tresc"><p>Sprawdź, czy przepływ działa, klikając „Execute workflow" (uruchom przepływ) - pomarańczowy przycisk w prawym dolnym rogu ekranu. Poczekaj kilka sekund.</p></div></div>
+<p>Na ekranie każdy węzeł, przez który przeszły dane, obrysowuje się na zielono, a pod nim pojawia się mała liczba - to liczba elementów, które przez niego przeszły. Jeśli wszystkie węzły w przepływie zmienią kolor na zielony, to znaczy, że system zadziałał - wykonał się prawidłowo od początku do końca.</p>
+<figure class="rysunek"><a href="../img/rys-1-5-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-5-800.avif 800w, ../img/rys-1-5-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-5-800.webp 800w, ../img/rys-1-5-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-5-1400.jpg" srcset="../img/rys-1-5-800.jpg 800w, ../img/rys-1-5-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Przepływ po uruchomieniu - zielone obwódki oznaczają sukces" width="1400" height="739" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.5.</span> Przepływ po uruchomieniu - zielone obwódki oznaczają sukces</figcaption></figure>
+<p>Zielona obwódka mówi, że system zadziałał. Nie mówi jeszcze, co dla ciebie zrobił - to sprawdzimy w ostatnim kroku.</p>
+<div class="krok"><div class="krok-nr">6</div><div class="krok-tresc"><p>Kliknij teraz dwukrotnie ostatni węzeł, „Zostaw tylko to, co ważne". W panelu, który się otworzy z prawej strony, przełącz widok na Table. Zobaczysz listę pięciu artykułów pobranych z serwisu technologicznego, każdy z tytułem, datą publikacji i treścią - prawdziwe dane, które przepływ przed chwilą dla ciebie zebrał, posortował od najnowszego i oczyścił z tego, co niepotrzebne.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-1-6-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-1-6-800.avif 800w, ../img/rys-1-6-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-1-6-800.webp 800w, ../img/rys-1-6-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-1-6-1400.jpg" srcset="../img/rys-1-6-800.jpg 800w, ../img/rys-1-6-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Prawdziwy wynik - pięć najnowszych artykułów zebranych przez przepływ" width="1400" height="703" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 1.6.</span> Prawdziwy wynik - pięć najnowszych artykułów zebranych przez przepływ</figcaption></figure>
+<p>I to wszystko. Właśnie udało ci się uruchomić twój pierwszy system w n8n - i widzisz, co konkretnie dla ciebie zrobił.</p>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Nazwa „n8n" to skrót zapisany jak tablica rejestracyjna: litera „n", osiem liter pominiętych, litera „n" - czyli „nodemation", automatyzacja przez węzły. Ten sam trik zapisu znajdziesz w słowach i18n (internationalization) czy k8s (Kubernetes). Jest to żargon pragmatycznych programistów, u którego korzeni leży zwykła oszczędność miejsca w terminalu.</p></aside>
+<h2 id="wariacje-na-temat">Wariacje na temat</h2>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Otwórz zaimportowany przepływ jeszcze raz i kliknij pojedynczo każdy węzeł. Zobacz, czy potrafisz zgadnąć, co robi, zanim przeczytasz o tym w rozdziale 2.</p></div></div>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>Zmień nazwę przepływu (kliknij jego tytuł w lewym górnym rogu ekranu i wpisz nową nazwę) i sprawdź, czy „Execute workflow" nadal działa po zmianie.</p></div></div>
+<p>Nie wiesz jeszcze, czym są „węzły" ani dlaczego strzałki łączą je akurat w tej kolejności - i to jest na tym etapie OK. Dowodem na to, że coś w n8n działa, jest na razie zielona obwódka na ekranie. W kolejnych częściach tego poradnika zrobimy inne ćwiczenia, które pozwolą ci lepiej zrozumieć, co naprawdę się pod tym wszystkim kryje.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="wstep.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Przedmowa i wstęp</span></a>
+  <a class="nr-nast" href="2.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Co widzisz na ekranie</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

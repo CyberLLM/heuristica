@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Przedmowa i wstęp — Automatyzacje bez kodowania</title>
+<meta name="description" content="Jak powstał ten poradnik i czego możesz się po nim spodziewać. Nie napiszesz ani jednej linijki kodu - wszystko robi się myszą.">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/wstep.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Przedmowa i wstęp — Automatyzacje bez kodowania">
+<meta property="og:description" content="Jak powstał ten poradnik i czego możesz się po nim spodziewać. Nie napiszesz ani jednej linijki kodu - wszystko robi się myszą.">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/wstep.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Przedmowa i wstęp — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Jak powstał ten poradnik i czego możesz się po nim spodziewać. Nie napiszesz ani jednej linijki kodu - wszystko robi się myszą.">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Otwarcie</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Otwarcie</p>
+    <h1>Przedmowa</h1>
+<p>Większości narzędzi AI uczyłem się od… AI.</p>
+<p>Istnieją rzecz jasna zyliardy tutoriali, artykułów, filmów na YouTube czy webinarów płatnych i bezpłatnych, gdzie wszystko jest dokładnie omówione.</p>
+<p>Poznając jednak takie rozwiązania jak Make.com, Apify, Pinecone czy inne narzędzia - choćby Google Colab, Jupyter, notatniki Wolfram Language itp., których chciałem użyć w różnych projektach - pytam najczęściej Claude'a lub ChatGPT i robię kolejne eksperymenty, dopytując model o szczegóły.</p>
+<p>LLM jako tutor ma wiele wad. Odpowiedzi są często niepotrzebnie zbyt obszerne (nawet po promptowym napominaniu), czasem zaś zbyt zaawansowane albo banalne - czyli nieadekwatne do poziomu wiedzy. Model pomimo tego, że wie już wiele na mój temat nie zawsze trafnie odczytuje aktualne intencje i potrzeby informacyjne.</p>
+<p>Dużą zaletą takiej nauki jest jednak fakt, że model przez cały czas niezmordowanie i cierpliwie coś tłumaczy - jest nieustannie dostępny i pozostaje niewzruszony przy zadawaniu nawet najgłupszych pytań…</p>
+<p>Podobnie uczyłem się też obsługi platformy n8n. Obecnie używam jej do wielu projektów jako wsparcia np. w chatbotach osadzanych na stronach www czy modułów CRM.</p>
+<p>Lekcje, jakie wyciągnąłem z tych wszystkich przygód uczenia się czegoś z AI, sprowadzają się do tego, że skuteczne poznawanie nowych tematów z chatbotem jako tutorem wymaga pewnej narzuconej struktury i dyscypliny tego, jak się uczyć. Gdybym miał je podsumować w kilku punktach, brzmiałyby następująco:</p>
+<ul><li>Chaotyczne pytania i skakanie z tematu na temat powiększają jedynie chaos i do niczego nie prowadzą.</li><li>Zaczynając przygodę z jakimś nowym narzędziem warto wyznaczyć sobie jakiś konkretny cel: co ja właściwie chcę z tym osiągnąć, do czego zamierzam tego używać i co chcę wiedzieć?</li><li>Sesję uczenia się warto też dzielić na wyraźne partie - np. bloki tematyczne. Warto też ustalić jakąś granularność - kolejne partie powinny być ze sobą powiązane i powinny przynosić jakościowo nowe rzeczy.</li><li>Ważna jest tu również praca własna - ćwiczenia, samodzielne eksperymenty, powtórki, utrwalanie wiedzy.</li></ul>
+<p>Niniejszy tutorial jest więc projektem eksperymentalnym. Próbą sprawdzenia na ile modele językowe mogą być przydatne w tworzeniu spójnych treści i materiałów edukacyjnych. Kierowany jest głównie do osób, które nie używały jeszcze n8n, nie znają się na kodowaniu i nie chcą wnikać zbyt głęboko w kwestie techniczne. Chciałyby się jednak szybko nauczyć korzystać z tej platformy i tworzyć własne automatyzacje do celów marketingowych.</p>
+<h2 id="jak-powstawal-ten-poradnik">Jak powstawał ten poradnik</h2>
+<p>Punktem wyjścia były konkretne przepływy (workflows), z których na co dzień korzystam. Zaadaptowałem je do tego materiału w ten sposób, aby mogły ilustrować ogólne zasady pracy na n8n. Przykłady starałem się dobierać tak, by czytelnik mógł kolejno poznawać tzw. „węzły" powtarzające się w wielu zadaniach.</p>
+<p>Następnie, korzystając z Claude (różne modele), stworzyłem strukturę całości. Utworzony został katalog, w którym Claude Code pisał kolejne rozdziały w oparciu o zadane przepływy.</p>
+<p>Każdy rozdział redagowałem, usuwając to, co uznałem za zbyteczne, i uzupełniając własnymi notatkami.</p>
+<p>Wszystkie opisywane przez Claude operacje testowałem ręcznie na n8n, sprawdzając wykonania, i nanosiłem poprawki do generowanych opisów. Każdy ważniejszy krok dokumentowany był również zrzutem ekranu obrazującym omawiane zagadnienie.</p>
+<h2 id="na-ile-byl-to-eksperyment-udany">Na ile był to eksperyment udany?</h2>
+<p>Ten osąd pozostawiam już Czytelnikom, którzy także lubią eksperymentować i zechcą spróbować uczyć się n8n w ten właśnie sposób. Zapraszam również do zgłaszania poprawek, uwag, sugestii zmian czy kierunków rozbudowy tego ebooka. Projekt ma charakter otwarty i dzięki takim uwagom mogą powstawać kolejne, ulepszone wersje służące kolejnym Czytelnikom.</p>
+<p>Tyle ode mnie. Resztę słów poniżej napisało już AI…</p>
+<p class="podpis">Marek Staniszewski</p>
+<p class="podpis">Sierpień 2026</p>
+<h2 id="wstep-zawrzyjmy-pewien-kontrakt">Wstęp: Zawrzyjmy pewien kontrakt…</h2>
+<p>Zacznijmy od dwóch pojęć, które w ostatnich dwóch latach zrobiły zawrotną karierę: „automatyzacja" i „agent". Oba stały się wytrychami używanymi praktycznie do wszystkiego - od prostego formularza kontaktowego po coś, co ktoś nazwał „inteligencją", żeby sprzedać drożej. Kiedy słowo pasuje do wszystkiego, przestaje cokolwiek znaczyć.</p>
+<p>W tej książce słowo „agent" znaczy dokładnie tyle: kilka kroków połączonych strzałkami, które robią za ciebie to, co i tak robiłbyś ręcznie - tylko że robią to codziennie, na przykład o siódmej rano, bez twojego udziału i bez marudzenia. Żadnej rewolucji, żadnej maszyny myślącej za ciebie.</p>
+<p>To, co tu robimy, nie jest zresztą nowe. Marketerzy programowali swoje narzędzia, odkąd istnieje arkusz kalkulacyjny: makro liczące marże, reguła w skrzynce mailowej przekierowująca leady do właściwej osoby. n8n jest kolejnym wcieleniem tego samego pomysłu. Różnica jest jedna: tym razem jeden z kroków potrafi przeczytać tekst i ocenić, czy jest istotny. <strong>Automatyzacja, o której będzie mowa w tej książce, nie rozwiązuje problemu, że nie umiesz programować, tylko problem, że masz na coś czas raz w tygodniu, a potrzebujesz mieć go codziennie.</strong></p>
+<p>Ile z tego wymaga programowania? Jeśli boisz się tego słowa, dobra wiadomość jest taka, że ani jednej linijki. Nie musisz umieć programować, nie napiszesz w tej książce ani jednego wiersza kodu - wszystko robisz myszą: przeciągasz, klikasz, wpisujesz tekst w pole. Jeśli w którymś miejscu na ekranie pojawi się coś, co wygląda jak kod, zostanie to wyjaśnione dokładnie wtedy, kiedy się pojawi.</p>
+<p>Potrzebujesz trzech rzeczy: przeglądarki internetowej, karty płatniczej do założenia konta na modelu językowym (koszt liczony w groszach za uruchomienie, nie w złotówkach miesięcznie) i dwóch godzin, najlepiej jednym ciągiem - to twój czas do pierwszego działającego systemu, opisanego w rozdziale 1. Każdy z trzech głównych systemów w części drugiej tej książki to potem jeszcze jeden wieczór pracy. Samego n8n nie musisz nigdzie instalować - do konta w n8n karta nie jest potrzebna, dowiesz się dlaczego już w rozdziale 1.</p>
+<p>Będzie moment, w którym się zgubisz. To normalne - w rozdziale 4 celowo pokażę ci błąd, żebyś zobaczył, jak wygląda w moim towarzystwie, zanim zobaczysz go sam. Jeśli utkniesz na dłużej, każdy rozdział kończy się sekcją „Co może pójść nie tak", z dosłownymi komunikatami błędów i sposobem naprawy. Zacznij od niej, zanim zaczniesz szukać w internecie.</p>
+<p>Nie obiecuję ci rewolucji ani konkretnej liczby zaoszczędzonych godzin - to zależy od tego, co akurat robisz w swojej pracy. Obiecuję trzy działające systemy i to, że po drodze przestaniesz się bać słowa, które właśnie zdjęliśmy z piedestału.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <span></span>
+  <a class="nr-nast" href="1.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Uruchamiamy n8n</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

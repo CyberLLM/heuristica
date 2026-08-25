@@ -1,0 +1,350 @@
+{
+  "name": "06-syntezator-researchu",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        64
+      ],
+      "id": "9598f102-c222-47ad-9000-05b395078585",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "WKLEJ_ID_SWOJEGO_ARKUSZA",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -416,
+        64
+      ],
+      "id": "96ea1249-0671-4136-9271-16ae91299a2e",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.Link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -192,
+        64
+      ],
+      "id": "4fed5a95-2220-487f-ad59-0cc6719c2c2c",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "GPT-5"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Jesteś analitykiem. Dostajesz tekst strony internetowej wraz z resztkami nawigacji. Znajdź główny artykuł i streść jego kluczową tezę w jednym zdaniu. Odpowiadasz wyłącznie tym jednym zdaniem, bez wstępu, bez cudzysłowu."
+            },
+            {
+              "content": "={{ $json.tekst }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        256,
+        64
+      ],
+      "id": "3dc1264c-785a-4d5f-8b8c-7276aff24214",
+      "name": "Message a model"
+    },
+    {
+      "parameters": {
+        "html": "={{ $json.data }}",
+        "destinationKey": "tekst",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        32,
+        64
+      ],
+      "id": "88e623b3-55e7-4966-934d-7176bfb859d7",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "WKLEJ_ID_SWOJEGO_ARKUSZA",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 521737207,
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Teza": "={{ $json.output[0].content[0].text }}",
+            "Link": "={{ $('Get row(s) in sheet').item.json.Link }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teza",
+              "displayName": "Teza",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        608,
+        -32
+      ],
+      "id": "3c5851bd-5155-4472-aa2c-bf697799ac2d",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "GPT-5"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Dostajesz listę zdań, z których każde opisuje inne źródło piszące o marketingu, produkcie i zachowaniach użytkowników. Napisz dwa zdania. W pierwszym powiedz, co te źródła mają wspólnego, jaki temat albo założenie wraca u kilku z nich. W drugim powiedz, w czym się rozchodzą albo czego żadne z nich nie porusza. Nie wymieniaj źródeł po kolei, mów o całości."
+            },
+            {
+              "content": "={{ $json.concatenated_output0_content0_text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        832,
+        160
+      ],
+      "id": "ee06c898-dbf7-4926-b5c8-f971ec321ffe",
+      "name": "Message a model1"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "output[0].content[0].text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        608,
+        160
+      ],
+      "id": "fe03d8ed-7ceb-485a-bd8c-041aa4bd16e3",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "WKLEJ_ID_SWOJEGO_ARKUSZA",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 521737207,
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Link": "WNIOSEK OGÓLNY",
+            "Teza": "={{ $json.output[0].content[0].text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Teza",
+              "displayName": "Teza",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1184,
+        160
+      ],
+      "id": "62590ad5-8433-4a58-8123-49fd35bd42fc",
+      "name": "Append row in sheet1"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

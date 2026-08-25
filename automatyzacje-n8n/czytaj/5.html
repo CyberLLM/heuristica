@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor konkurencji — Automatyzacje bez kodowania</title>
+<meta name="description" content="Rozdział 5. Monitoring konkurencji to jedna z tych czynności, które każdy strateg deklaruje, a mało kto naprawdę wykonuje. Nie z lenistwa. Po prostu…">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/5.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Monitor konkurencji — Automatyzacje bez kodowania">
+<meta property="og:description" content="Rozdział 5. Monitoring konkurencji to jedna z tych czynności, które każdy strateg deklaruje, a mało kto naprawdę wykonuje. Nie z lenistwa. Po prostu…">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/5.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monitor konkurencji — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Rozdział 5. Monitoring konkurencji to jedna z tych czynności, które każdy strateg deklaruje, a mało kto naprawdę wykonuje. Nie z lenistwa. Po prostu…">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Rozdział 5</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Rozdział 5</p>
+    <h1>Rozdział 5. Monitor konkurencji</h1>
+<p>Monitoring konkurencji to jedna z tych czynności, które każdy strateg deklaruje, a mało kto naprawdę wykonuje. Nie z lenistwa. Po prostu czytanie dwudziestu newsletterów i sprawdzanie ośmiu stron codziennie przegrywa z każdym pilniejszym zadaniem, a pilniejsze zadanie jest zawsze. <strong>Automatyzacja nie rozwiązuje tu problemu braku czasu, tylko problem braku rytmu.</strong> Maszyna sprawdza codziennie, bo nie ma nic pilniejszego do zrobienia.</p>
+<p>Zbudujesz teraz pierwszy z trzech systemów tego poradnika. Wszystkie węzły, które go tworzą, znasz już z rozdziałów 3 i 4 - poza dwoma, i to właśnie one zamieniają listę artykułów w coś, co samo decyduje, co jest warte twojej uwagi.</p>
+<h2 id="co-zbudujemy">Co zbudujemy</h2>
+<p>System, który każdego ranka sam przeszuka doniesienia prasowe o wybranej marce, dla każdego z nich zapyta model, czy jest istotne, i przyśle ci mailem tylko te, które przeszły przez to sito.</p>
+<h2 id="czas-i-koszt">Czas i koszt</h2>
+<p>Budowa zajmie około dwudziestu minut. Dwa nowe węzły wymagają więcej klikania niż wszystko, co robiłeś do tej pory, a jeden z nich trzeba połączyć w sposób, który na pierwszy rzut oka wygląda dziwnie.</p>
+<p>Koszt jednego uruchomienia to koszt pojedynczego zapytania z rozdziału 4, pomnożony przez liczbę wiadomości z danego dnia. Przy kilkunastu wiadomościach mówimy o ułamku grosza. Warto jednak zapamiętać sam mechanizm mnożenia, bo to on decyduje o rachunku w każdym większym systemie, który kiedykolwiek zbudujesz.</p>
+<h2 id="czego-sie-nauczysz">Czego się nauczysz</h2>
+<ul><li>Jak zamienić dowolne zapytanie prasowe w kanał danych, którego nie trzeba nigdzie zakładać.</li><li>Jak rozdzielić przepływ na dwie ścieżki w zależności od warunku, węzłem „IF".</li><li>Jak przetwarzać elementy jeden po drugim, w kontrolowanym tempie, węzłem „Loop Over Items".</li><li>Jak oprzeć decyzję przepływu na ocenie modelu, a nie na dopasowaniu słowa.</li></ul>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Zanim otworzysz n8n, przygotuj to, z czego przepływ będzie czerpał. Wklej do przeglądarki ten adres:</p><p><a href="https://news.google.com/rss/search?q=LEGO+when:1d&amp;hl=pl&amp;gl=PL&amp;ceid=PL:pl" rel="noopener">https://news.google.com/rss/search?q=LEGO+when:1d&amp;hl=pl&amp;gl=PL&amp;ceid=PL:pl</a></p></div></div>
+<p>Zobaczysz surowy plik pełen znaczników w ostrych nawiasach. Nie przejmuj się, jeśli nic z tego nie rozumiesz. Sprawdź na razie tylko jedną rzecz: czy między znacznikami widać polskie tytuły artykułów. Jeśli tak, to znaczy, że źródło działa.</p>
+<p>Ten adres to zwykłe wyszukiwanie w Google News, tyle że w formie, którą potrafi wczytać maszyna. Fragment po q= to twoje zapytanie, when:1d zawęża wyniki do ostatniej doby, a trzy końcowe parametry ustawiają język i kraj na polski.</p>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>W tej książce śledzimy przykładową markę LEGO. Ty zamień LEGO na nazwę marki, która cię interesuje. Trzy rady z praktyki. Jeśli nazwa znaczy również coś innego, obejmij ją cudzysłowem, bo inaczej monitoring firmy „Sokołów" przyniesie ci także wiadomości z gminy Sokołów. Jeśli chcesz węższe okno, wpisz when:12h. A jeśli po zmianie zapytania plik w przeglądarce jest pusty, znaczy to, że o twojej marce nic dziś nie napisano, i wtedy na czas ćwiczeń wróć do szerszego hasła.</p></aside>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>Utwórz nowy, pusty przepływ. Dodaj węzeł „Schedule Trigger", ustaw „Trigger Interval" na „Days", godzinę na 7am i minutę na 0. To ten sam węzeł, który poznałeś w rozdziale 3.</p></div></div>
+<div class="krok"><div class="krok-nr">3</div><div class="krok-tresc"><p>Dodaj węzeł „RSS Read" i połącz go z wyzwalaczem. W polu „URL" wklej adres przygotowany w kroku 1. Kliknij „Execute step".</p><p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>w panelu OUTPUT listę wiadomości, a nad nią liczbę znalezionych elementów. Przy popularnej marce i oknie jednodniowym może to być kilkanaście pozycji.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-5-1-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-1-800.avif 800w, ../img/rys-5-1-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-1-800.webp 800w, ../img/rys-5-1-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-1-1400.jpg" srcset="../img/rys-5-1-800.jpg 800w, ../img/rys-5-1-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Wynik zapytania prasowego, gotowy do oceny" width="1400" height="712" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.1.</span> Wynik zapytania prasowego, gotowy do oceny</figcaption></figure>
+<div class="krok"><div class="krok-nr">4</div><div class="krok-tresc"><p>Przyjrzyj się teraz kolumnie title. Każdy tytuł kończy się myślnikiem i nazwą źródła - redakcji, na zasadzie: „Wielka gratka dla fanów klocków Lego - Radio Szczecin". To wygodne, bo w jednym polu masz i temat, i źródło, a przy ocenie istotności źródło bywa ważniejsze od nagłówka.</p><p>Zajrzyj też do kolumny content. Zamiast treści artykułu znajdziesz w niej znaczniki HTML z linkiem. Tak wygląda ten kanał i nic z tym nie zrobimy. Pracujemy więc na samym tytule.</p></div></div>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Model nie przeczyta artykułu. Oceni sam nagłówek i nazwę redakcji, czyli mniej więcej tyle, ile ty widzisz, przewijając listę wyników. To wystarcza na tym etapie, którego zadaniem jest odrzucenie oczywistych nietrafień, a nie dogłębna analiza. Nie myl tego z czytaniem ze zrozumieniem: gdy potrzebujesz oceny opartej na treści, trzeba będzie najpierw treść pobrać, a to już inna operacja.</p></aside>
+<h2 id="dodaj-petle">Dodaj pętlę</h2>
+<div class="krok"><div class="krok-nr">5</div><div class="krok-tresc"><p>Kliknij znak plus przy prawej krawędzi węzła „RSS Read". Wpisz „Loop" i wybierz węzeł „Loop Over Items" (pętla po elementach). Na ekranie zobaczysz: nie jeden węzeł, ale dwa. Obok pętli n8n dołożył sam z siebie węzeł z napisem „Replace Me" (zastąp mnie). To nie jest błąd i nie jest to część twojego przepływu. To podpowiedź. n8n pokazuje ci gotowy kształt pętli i mówi wprost: tutaj wstaw pracę, którą chcesz powtarzać dla każdego elementu, a potem zawróć. Popatrz na sam węzeł pętli. Ma on dwa wyjścia po prawej stronie, jedno pod drugim, podpisane „done" (gotowe) i „loop" (pętla). To pierwszy węzeł, który ma dwa wyjścia, i pierwszy, który sam z siebie nie robi nic użytecznego. Cała jego wartość bierze się z tego, jak go połączysz.</p><p>Kliknij zatem węzeł „Replace Me" i usuń go klawiszem Delete. Zbudujesz tę część sam, żeby zobaczyć, z czego się składa.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-5-2-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-2-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-2-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-2-800.jpg" srcset="../img/rys-5-2-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Dwa wyjścia, dwa zupełnie różne znaczenia" width="800" height="413" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.2.</span> Dwa wyjścia, dwa zupełnie różne znaczenia</figcaption></figure>
+<div class="krok"><div class="krok-nr">6</div><div class="krok-tresc"><p>Otwórz węzeł i sprawdź pole „Batch Size" (rozmiar paczki). Zostaw wartość 1 i zamknij panel.</p></div></div>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>„Batch Size" równy 1 znaczy „jeden element na raz". Węzeł podłączony do wyjścia „loop" zobaczy dokładnie jedną wiadomość na każdym okrążeniu. Większa wartość przyspiesza pracę, ale przy zapytaniach do modelu zwiększa też ryzyko błędu o przekroczonym limicie.</p></aside>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Ten przepływ zadziałałby również bez pętli. Pamiętasz zasadę z rozdziału 3, że węzeł wykonuje się raz na każdy element wejściowy? Węzeł OpenAI podpięty wprost pod RSS Read i tak zapytałby model np. osiemnaście razy.</p><p>Różnica polega na tempie i kontroli. Bez pętli n8n wysyła zapytania równolegle, wszystkie naraz, i przy większej liczbie elementów może zakończyć się to błędem o przekroczonym limicie. Z pętlą idą one jedno po drugim, a ty widzisz, na którym elemencie przepływ się potknął. W małym przepływie to wygoda, w rozbudowanym to jedyny sposób, żeby zrozumieć, gdy coś przestanie działać.</p></aside>
+<h2 id="wstaw-ocene-modelu">Wstaw ocenę modelu</h2>
+<div class="krok"><div class="krok-nr">7</div><div class="krok-tresc"><p>Z wyjścia „loop" dodaj węzeł „OpenAI" i wybierz akcję „Message a model", tak jak w rozdziale 4. Wskaż dane dostępowe, które zapisałeś wtedy: pojawią się na liście gotowe, bez ponownego wklejania klucza.</p></div></div>
+<div class="krok"><div class="krok-nr">8</div><div class="krok-tresc"><p>Dodaj wiadomość z rolą „System" i wpisz w niej:</p><p>„Jesteś analitykiem monitorującym rynek dla firmy zajmującej się [twoja branża]. Oceniasz, czy poniższy tytuł prasowy jest dla tej firmy istotny. Odpowiadasz wyłącznie jednym słowem: TAK albo NIE. Bez wyjaśnień, bez kropki, bez żadnego dodatkowego tekstu."</p></div></div>
+<div class="krok"><div class="krok-nr">9</div><div class="krok-tresc"><p>Dodaj drugą wiadomość, z rolą „User", i przeciągnij do niej pole title z panelu danych wejściowych po lewej stronie.</p></div></div>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>pod polem podgląd z prawdziwym tytułem pierwszej wiadomości.</p>
+<div class="krok"><div class="krok-nr">10</div><div class="krok-tresc"><p>Kliknij „Execute step" i sprawdź, co model odpowiedział. Rozwiń w panelu OUTPUT gałąź content, a pod nią 0, i znajdź pole text. Powinno zawierać jedno słowo.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-5-3-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-3-800.avif 800w, ../img/rys-5-3-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-3-800.webp 800w, ../img/rys-5-3-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-3-1400.jpg" srcset="../img/rys-5-3-800.jpg 800w, ../img/rys-5-3-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Polecenie, które zmusza model do odpowiedzi jednym słowem" width="1400" height="708" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.3.</span> Polecenie, które zmusza model do odpowiedzi jednym słowem</figcaption></figure>
+<h2 id="rozdziel-sciezki">Rozdziel ścieżki</h2>
+<div class="krok"><div class="krok-nr">11</div><div class="krok-tresc"><p>Z wyjścia węzła OpenAI dodaj węzeł „IF". Kliknij „Add condition" (dodaj warunek).</p><p>Do górnego pola warunku przeciągnij text z panelu danych wejściowych, czyli odpowiedź modelu. Typ porównania ustaw na „String", operator na „contains" (zawiera), a w dolnym polu wpisz TAK.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-5-4-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-4-800.avif 800w, ../img/rys-5-4-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-4-800.webp 800w, ../img/rys-5-4-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-4-1400.jpg" srcset="../img/rys-5-4-800.jpg 800w, ../img/rys-5-4-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Warunek, który rozdziela wiadomości na dwie ścieżki" width="1400" height="707" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.4.</span> Warunek, który rozdziela wiadomości na dwie ścieżki</figcaption></figure>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>Używamy „contains" zamiast „is equal to" (jest równe) celowo. Model potrafi dokleić kropkę, spację albo cudzysłów i wtedy porównanie na równość zawiedzie, mimo że odpowiedź jest poprawna. „Zawiera" wybacza takie drobiazgi.</p></aside>
+<div class="krok"><div class="krok-nr">12</div><div class="krok-tresc"><p>Zamknij panel. Węzeł IF ma teraz dwa wyjścia: „true" (prawda) u góry i „false" (fałsz) u dołu.</p><p>Z wyjścia „true" dodaj węzeł „Gmail" - „Send a message". Ustaw „Resource" na „Message" i „Operation" na „Send", tak jak w rozdziale 3. W polu „To" wpisz swój adres, w „Subject" na przykład „Monitoring: nowa wiadomość", a do treści przeciągnij title i link, pamiętając o wciśnięciu Entera między jednym a drugim.</p></div></div>
+<h2 id="zamknij-petle">Zamknij pętlę</h2>
+<div class="krok"><div class="krok-nr">13</div><div class="krok-tresc"><p>To najważniejszy krok w tym rozdziale i jedyny, który wygląda nienaturalnie.</p><p>Przeciągnij połączenie od wyjścia węzła „Gmail" z powrotem do wejścia węzła „Loop Over Items". Potem zrób to samo z wyjściem „false" węzła IF.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-5-5-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-5-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-5-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-5-800.jpg" srcset="../img/rys-5-5-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Rozgałęzienie zamknięte w pętli" width="800" height="309" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.5.</span> Rozgałęzienie zamknięte w pętli</figcaption></figure>
+<p>Powód jest prosty, choć nieoczywisty. Węzeł „Loop Over Items" nie wypuści następnego elementu, dopóki nie dostanie sygnału, że poprzedni został obsłużony. Sygnałem jest właśnie ta linia zwrotna. Obie ścieżki muszą wracać, także ta, na której nic się nie stało. Wiadomość odrzucona przez filtr również wymaga zamknięcia sprawy, bo pętla nie rozróżnia sukcesu od pominięcia, tylko obsłużone od nieobsłużonych.</p>
+<p>Wyjście „done", jak widzisz, w tym przypadku wisi puste. Ale tak ma być, więc zostawiamy to w ten sposób.</p>
+<h2 id="uruchom">Uruchom</h2>
+<div class="krok"><div class="krok-nr">14</div><div class="krok-tresc"><p>Kliknij „Execute workflow".</p><p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>węzły zapalające się po kolei, a potem cykl powtarzający się w kółko: OpenAI, IF, czasem Gmail, powrót. Licznik pod węzłem OpenAI rośnie z każdym okrążeniem. Na końcu zapali się wyjście „done".</p></div></div>
+<h2 id="sprawdz-czy-dziala">Sprawdź, czy działa</h2>
+<p>Otwórz skrzynkę pocztową. Powinno w niej być tyle wiadomości, ile tytułów model uznał za istotne.</p>
+<p>Może być ich zero i to również jest poprawny wynik, nie awaria. Znaczy tyle, że dziś nie napisano nic, co dotyczyłoby wybranej marki. Żeby się upewnić, że przepływ naprawdę zadziałał, zajrzyj do węzła IF i sprawdź, ile elementów poszło każdą ze ścieżek. Suma powinna zgadzać się z liczbą wiadomości z węzła RSS Read.</p>
+<p>Zajrzyj też do zakładki „Executions". Uruchomienie powinno być zielone, a przy węźle OpenAI powinna stać liczba wykonań równa liczbie wiadomości.</p>
+<figure class="rysunek"><a href="../img/rys-5-6-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-5-6-800.avif 800w, ../img/rys-5-6-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-5-6-800.webp 800w, ../img/rys-5-6-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-5-6-1400.jpg" srcset="../img/rys-5-6-800.jpg 800w, ../img/rys-5-6-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Poranny przegląd, który robi się sam" width="1400" height="746" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 5.6.</span> Poranny przegląd, który robi się sam</figcaption></figure>
+<h2 id="co-moze-pojsc-nie-tak">Co może pójść nie tak</h2>
+<ul><li>Przepływ nie kończy się i kręci w nieskończoność, albo przetwarza tylko pierwszą wiadomość i staje. To ten sam błąd widziany z dwóch stron: brakuje linii zwrotnej. Sprawdź, czy zarówno wyjście węzła Gmail, jak i wyjście „false" węzła IF wracają do wejścia węzła „Loop Over Items". Obie, nie jedna.</li><li>Dostałeś kilka maili o tej samej sprawie. Ten sam temat opisało kilka redakcji, a dla przepływu to kilka osobnych wiadomości. To nie usterka, tylko to, jak wygląda surowy monitoring prasowy.</li><li>Wszystko przechodzi przez filtr, także rzeczy oczywiście nieistotne. Sprawdź w panelu OUTPUT węzła OpenAI, co model faktycznie napisał. Jeśli odpowiada zdaniem zamiast jednym słowem, słowo TAK pojawi się w nim niemal zawsze i warunek przepuści wszystko. Zaostrz polecenie systemowe.</li><li>Nic nie przechodzi, choć model odpowiada TAK. Warunek w węźle IF wskazuje na złe pole. Sprawdź, czy po lewej stronie warunku jest na pewno text z odpowiedzi modelu, a nie tytuł artykułu.</li></ul>
+<h2 id="wariacje-na-temat">Wariacje na temat</h2>
+<p>Obserwuj dwie marki naraz. Nie potrzebujesz do tego drugiego węzła. Wystarczy zmienić zapytanie w adresie, wpisując q=LEGO+OR+Playmobil+when:1d. Reszta przepływu obsłuży to bez żadnej zmiany.</p>
+<p>Zamiast maila poproś model o jedno zdanie streszczenia. Zmień polecenie tak, żeby zwracało ocenę i krótkie uzasadnienie, i wstaw to uzasadnienie do treści wiadomości. Kosztuje odrobinę więcej, bo model pisze więcej, ale poranny przegląd czyta się wtedy znacznie szybciej.</p>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Monitoring konkurencji nie zaczął się od internetu ani od RSS. W drugiej połowie XIX wieku powstały w Europie i Stanach biura wycinków prasowych: firmy, które za abonament przeglądały stosy gazet i wysyłały klientowi wycięte nożyczkami wzmianki o jego nazwisku, firmie albo branży. Agencje reklamowe należały do ich najwierniejszych klientów.</p><p>Zmieniło się narzędzie i tempo. Sam pomysł jest ten sam od stu pięćdziesięciu lat: ktoś albo coś musi patrzeć codziennie, żebyś ty nie musiał.</p><p>Warto jednak zauważyć, czego ani wycinki, ani twój przepływ nie mierzą. Trzy artykuły o jednym wydarzeniu to nadal jedno wydarzenie. Licząc wzmianki, mierzysz nie tyle to, co się stało, ile to, ilu redakcjom chciało się o tym napisać. Dwie zupełnie różne wielkości, mylone czasem w raportach od dziesięcioleci.</p></aside>
+<h2 id="przeplyw-w-repozytorium">Przepływ w repozytorium</h2>
+<p>Pobierz plik 05-monitor-konkurencji.json ze strony <a href="https://heuristica.pl/automatyzacje-n8n/" rel="noopener">heuristica.pl/automatyzacje-n8n</a> i zaimportuj go tak samo jak w rozdziale 1. Po imporcie wskaż własne dane dostępowe do OpenAI i Gmaila oraz podmień markę w adresie kanału.</p>
+<p>Rozgałęzienie odpowiada na pytanie, co zrobić z tym elementem. Pętla odpowiada na pytanie, co z następnym. Wszystko, co zbudujesz dalej, będzie kombinacją odpowiedzi na te dwa pytania, w coraz bardziej rozbudowanych wariantach.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="4.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Podłączamy AI</span></a>
+  <a class="nr-nast" href="6.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Syntezator researchu</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

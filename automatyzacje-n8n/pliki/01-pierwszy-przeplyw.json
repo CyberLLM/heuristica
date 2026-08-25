@@ -1,0 +1,154 @@
+{
+  "name": "01 - Pierwszy przeplyw",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "dc978597-c6ff-41d1-a594-a1baa27e0505",
+      "name": "Kliknij, żeby uruchomić",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -32
+      ],
+      "notes": "Wyzwalacz. Uruchamia przeplyw po nacisnieciu przycisku."
+    },
+    {
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {}
+      },
+      "id": "bf579291-43e7-4db2-860f-6f0369756d2a",
+      "name": "Pobierz artykuły",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        -32
+      ],
+      "notes": "Pobiera liste artykulow z kanalu RSS. Nie wymaga zadnych danych dostepowych."
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "isoDate",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3dcf8ad0-71cf-4cf3-8b41-3ab1340e4974",
+      "name": "Ustaw od najnowszych",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -32
+      ],
+      "notes": "Sortuje artykuly po dacie publikacji, od najnowszego."
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "id": "8c4aba0d-8f48-42c6-91d2-ed71cdd9aa00",
+      "name": "Zostaw 5 najnowszych",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -32
+      ],
+      "notes": "Obcina liste do 10 pozycji. Tu liczba pod wezlem zmienia sie widocznie."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1",
+              "name": "Tytul",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f2",
+              "name": "Data",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "f3",
+              "name": "Content",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ee3b5135-0169-40b1-90f3-42e8e96653c7",
+      "name": "Zostaw tylko to, co ważne",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        -32
+      ],
+      "notes": "Z kilkunastu pol zostawia trzy. To jest wynik koncowy pokazywany czytelnikowi."
+    }
+  ],
+  "connections": {
+    "Kliknij, żeby uruchomić": {
+      "main": [
+        [
+          {
+            "node": "Pobierz artykuły",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pobierz artykuły": {
+      "main": [
+        [
+          {
+            "node": "Ustaw od najnowszych",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ustaw od najnowszych": {
+      "main": [
+        [
+          {
+            "node": "Zostaw 5 najnowszych",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zostaw 5 najnowszych": {
+      "main": [
+        [
+          {
+            "node": "Zostaw tylko to, co ważne",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  }
+}

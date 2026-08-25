@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sześć klocków, z których zbudujesz resztę — Automatyzacje bez kodowania</title>
+<meta name="description" content="Rozdział 8. Przez siedem rozdziałów tego poradnika mogło ci się wydawać, że uczysz się programu o nazwie n8n - że lista rzeczy do zapamiętania rośnie z…">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/8.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Sześć klocków, z których zbudujesz resztę — Automatyzacje bez kodowania">
+<meta property="og:description" content="Rozdział 8. Przez siedem rozdziałów tego poradnika mogło ci się wydawać, że uczysz się programu o nazwie n8n - że lista rzeczy do zapamiętania rośnie z…">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/8.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sześć klocków, z których zbudujesz resztę — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Rozdział 8. Przez siedem rozdziałów tego poradnika mogło ci się wydawać, że uczysz się programu o nazwie n8n - że lista rzeczy do zapamiętania rośnie z…">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Rozdział 8</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Rozdział 8</p>
+    <h1>Rozdział 8. Sześć klocków, z których zbudujesz resztę</h1>
+<p>Przez siedem rozdziałów tego poradnika mogło ci się wydawać, że uczysz się programu o nazwie n8n - że lista rzeczy do zapamiętania rośnie z każdym kolejnym węzłem i za chwilę przestanie się mieścić w pamięci. Nie rosła. <strong>Poznałeś sześć rzeczy, które węzeł może zrobić z danymi - a wszystko, co zbudujesz od teraz, będzie już tylko ich kombinacją.</strong></p>
+<p>Monitor konkurencji z rozdziału 5, Syntezator researchu z rozdziału 6 i Panel strategiczny z rozdziału 7 wyglądają z daleka jak trzy różne maszyny. Z bliska każda z nich robi dokładnie to samo: coś pobiera, coś odsiewa, coś przekształca, o czymś decyduje, coś zapisuje albo wysyła, i zaczyna się to wszystko w konkretnej, wybranej przez ciebie chwili. Różnią się nie repertuarem ruchów, tylko proporcją, w jakiej po nie sięgają.</p>
+<p>Co dokładnie kryje się pod każdym z tych sześciu słów?</p>
+<h2 id="szesc-klockow">Sześć klocków</h2>
+<p><strong>Pobierz.</strong> „RSS Read" przyniósł nagłówki z sieci w rozdziałach 1, 3 i 5. „HTTP Request" w rozdziale 6 pobrał surową treść całej strony tam, gdzie nie było gotowego kanału RSS. „Google Sheets" w trybie odczytu, „Get row(s) in sheet", przyniósł w tym samym rozdziale listę adresów z twojego własnego arkusza. Kiedy dane wchodzą jako przesłany plik, nie link ani wiersz w arkuszu, pierwszym krokiem jest „Extract from File" z rozdziału 7. Cztery różne źródła, jedna funkcja. <strong>Skąd biorą się dane.</strong></p>
+<p><strong>Odsiej.</strong> „Filter" w rozdziale 3 zostawił tylko tytuły zawierające słowo „AI". „IF" w rozdziale 5 rozdzielił ocenione przez model artykuły na te warte maila i te do pominięcia. Za każdym razem efekt jest ten sam: na wyjściu jest mniej elementów, niż weszło na wejściu, bo część z nich nie spełniła warunku. <strong>Zostaje mniej, niż przyszło.</strong></p>
+<p><strong>Przekształć.</strong> „Markdown" w rozdziale 6 zamienił kod strony w czysty tekst, żeby zmieścić się w pamięci roboczej modelu. „Edit Fields" (Set) w rozdziale 7 wyciągnął z odpowiedzi modelu samo zdanie z tezą, odrzucając resztę. „Summarize" w rozdziałach 6 i 7 sklejał kilka osobnych elementów w jeden tekst, a „Merge" w rozdziale 7 zrobił coś pokrewnego z drugiej strony: złączył trzy oddzielne, równoległe strumienie w jeden, zanim jeszcze było co sklejać. Za każdym razem liczba elementów się nie zmienia albo zmienia się w ustalony, przewidywalny sposób. <strong>Tyle samo rzeczy, inny kształt.</strong></p>
+<p><strong>Oceń.</strong> „Message a model", akcja węzła „OpenAI", pojawiła się po raz pierwszy w rozdziale 4 i wraca w każdym kolejnym: ocenia artykuł na TAK albo NIE w rozdziale 5, streszcza stronę i syntetyzuje sześć streszczeń w rozdziale 6, gra trzech strategów naraz i moderatora nad nimi w rozdziale 7. <strong>Jedyny klocek, który podejmuje decyzję zamiast wykonywać regułę</strong> - i jedyny, po którym to samo uruchomienie przepływu potrafi dwa razy z rzędu dać dwa różne wyniki.</p>
+<p><strong>Zapisz albo wyślij.</strong> „Gmail" wysłał efekt pracy przepływu do skrzynki w rozdziałach 3 i 5. „Google Sheets" w trybie zapisu, „Append row in sheet", dopisał wiersz do arkusza dwukrotnie w rozdziale 6, dla dwóch różnych rodzajów wyniku. „Convert to File" w rozdziale 7 zamienił tekst finalnej rekomendacji w gotowy do pobrania plik. Nie ma znaczenia, czy to mail, wiersz w tabeli, czy plik. <strong>Coś opuszcza przepływ.</strong></p>
+<p><strong>Zdecyduj kiedy.</strong> „Manual trigger" czeka na twoje kliknięcie od rozdziału 1 i wraca w rozdziale 6, bo research robisz wtedy, kiedy akurat go potrzebujesz, nie codziennie o tej samej porze. „Schedule Trigger", poznany w rozdziale 3, ruszył naprawdę dopiero w rozdziale 5 - o stałej godzinie, bez twojego udziału. „Form Trigger" w rozdziale 7 czekał na przesłany plik, dostępny nie tylko dla ciebie, ale dla każdego, komu podasz adres formularza. <strong>Bez tego nic się nie zacznie.</strong></p>
+<figure class="tabela-wrap">
+<div class="tabela-scroll"><table class="tab-klocki">
+<thead><tr><th class="th-klocek">Klocek</th><th>Monitor konkurencji<br><span>rozdział 5</span></th><th>Syntezator researchu<br><span>rozdział 6</span></th><th>Panel strategiczny<br><span>rozdział 7</span></th></tr></thead>
+<tbody><tr><th scope="row">Zdecyduj kiedy</th><td>Schedule Trigger</td><td>Manual trigger</td><td>Form Trigger</td></tr>
+<tr><th scope="row">Pobierz</th><td>RSS Read</td><td>Google Sheets (odczyt)<br>HTTP Request</td><td>Extract from File</td></tr>
+<tr><th scope="row">Odsiej</th><td>IF</td><td>—</td><td>—</td></tr>
+<tr><th scope="row">Przekształć</th><td>—</td><td>Markdown<br>Summarize</td><td>Edit Fields (Set)<br>Merge, Summarize</td></tr>
+<tr><th scope="row">Oceń</th><td>OpenAI<br><span>ocena TAK/NIE</span></td><td>OpenAI <span>(streszczenie)</span><br>OpenAI <span>(synteza)</span></td><td>OpenAI × 3 <span>(stratedzy)</span><br>OpenAI <span>(moderator)</span></td></tr>
+<tr><th scope="row">Zapisz albo wyślij</th><td>Gmail</td><td>Google Sheets (zapis)</td><td>Convert to File</td></tr></tbody></table></div>
+<figcaption>Tab. 8.1. Te same sześć klocków, trzy razy w innych proporcjach.</figcaption>
+</figure>
+<h2 id="gdzie-szukac-reszty">Gdzie szukać reszty</h2>
+<p>Sześć klocków nie oznacza jednak sześciu węzłów. n8n oferuje kilkaset gotowych węzłów dla konkretnych usług - każdy z nich to tylko wygodniejsza, uszyta pod jeden serwis wersja jednej z sześciu funkcji wyżej. Nie da się ich tu wymienić i nie warto próbować - taka lista zestarzeje się, zanim skończysz ją czytać. Zamiast katalogu przydadzą ci się trzy odruchy, które działają niezależnie od tego, jaki serwis akurat chcesz podłączyć.</p>
+<p><strong>Szukaj po nazwie usługi, nie po czynności.</strong> W polu wyszukiwania nad obszarem roboczym wpisujesz „Slack", nie „wyślij wiadomość na czat", tak samo jak wpisywałeś „Gmail", a nie „wyślij maila". Jeśli usługa ma swój węzeł, znajdziesz go w kilka sekund - dokładnie tak, jak znajdowałeś RSS Read, Google Sheets czy OpenAI.</p>
+<p><strong>Jak nie ma węzła, jest HTTP Request.</strong> Ten sam węzeł, którego użyłeś w rozdziale 6 do pobrania treści strony. Każda usługa, która ma dokumentację dla programistów, da się nim obsłużyć - wysyła zapytanie pod wskazany adres i odbiera odpowiedź, obojętnie czy adres należy do bloga, czy do systemu CRM. Nie jest to być może przyjemne, ale jest możliwe, i warto o tym wiedzieć, zanim uznasz, że czegoś się nie da zautomatyzować.</p>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>HTTP Request bez gotowego węzła usługi wymaga więcej od ciebie: musisz sam znaleźć w dokumentacji danego serwisu właściwy adres, dołączyć klucz dostępu w odpowiednim miejscu zapytania i zwykle poeksperymentować, zanim odpowiedź wyjdzie taka, jakiej oczekujesz. To już nie jest ścieżka na wieczór, tylko na dłuższe popołudnie. Zanim się w to zaangażujesz, sprawdź jeszcze raz, czy naprawdę nie ma gotowego węzła - bywa, że jest, tylko nazwany inaczej niż się spodziewasz.</p></aside>
+<p><strong>Gotowce, zanim zaczniesz.</strong> n8n prowadzi bibliotekę przepływów złożonych i udostępnionych przez innych użytkowników. Import działa tak samo jak w rozdziale 1: przeglądasz, wybierasz, wgrywasz do własnego konta. Warto tam zaglądać nie po to, żeby wziąć coś gotowego bez zastanowienia, tylko żeby zobaczyć, jak ktoś inny ułożył te same sześć klocków w zupełnie innym celu niż ty. Przykłady znajdziesz na: <a href="https://n8n.io/workflows/" rel="noopener">https://n8n.io/workflows/</a></p>
+<figure class="rysunek"><a href="../img/rys-8-1-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-8-1-800.avif 800w, ../img/rys-8-1-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-8-1-800.webp 800w, ../img/rys-8-1-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-8-1-1400.jpg" srcset="../img/rys-8-1-800.jpg 800w, ../img/rys-8-1-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Cudze przepływy jako podpowiedź" width="1400" height="831" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 8.1.</span> Cudze przepływy jako podpowiedź</figcaption></figure>
+<h2 id="piec-kwestii-ktore-warto-zapamietac">Pięć kwestii, które warto zapamiętać</h2>
+<ul><li>Węzeł wykonuje się raz na każdy element, który do niego przyszedł.</li><li>Węzeł przekazuje dalej to, co sam wyprodukował, nie to, co dostał.</li><li>Model podejmuje decyzję, więc dwa uruchomienia mogą dać dwa różne wyniki.</li><li>Nieaktywny przepływ nie uruchamia się z harmonogramu.</li><li>Wszystko, co wysyłasz do modelu, kosztuje.</li></ul>
+<h2 id="zamkniecie">Zamknięcie</h2>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Językoznawcy generatywni od czasów Chomsky'ego opisują język ludzki podobną sztuczką: skończona liczba reguł gramatycznych, z których powstaje nieskończona liczba zdań, których nikt wcześniej nie wypowiedział. Sześć klocków z tego rozdziału działa na tej samej zasadzie - nie ogranicza cię do trzech systemów z tej książki, tylko daje gramatykę, którą możesz zastosować do czwartego, piątego i dwudziestego, których jeszcze nie widziałeś.</p></aside>
+<p>n8n nie jest trudne. Jest tylko obszerne. Trudność, jaką czujesz, patrząc na setki nazw węzłów w wyszukiwarce, bierze się z liczby nazw, nie z liczby pojęć. Pojęć jest sześć, i od tego rozdziału już je znasz.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="7.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Strategiczny panel trzech ekspertów</span></a>
+  <a class="nr-nast" href="slowniczek.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Słowniczek</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

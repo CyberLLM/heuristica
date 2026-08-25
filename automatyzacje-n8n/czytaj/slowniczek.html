@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Słowniczek — Automatyzacje bez kodowania</title>
+<meta name="description" content="Dwadzieścia jeden pojęć z tego poradnika, po jednym zdaniu każde: węzeł, przepływ, wyzwalacz, element, token, okno kontekstowe i reszta.">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/slowniczek.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Słowniczek — Automatyzacje bez kodowania">
+<meta property="og:description" content="Dwadzieścia jeden pojęć z tego poradnika, po jednym zdaniu każde: węzeł, przepływ, wyzwalacz, element, token, okno kontekstowe i reszta.">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/slowniczek.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Słowniczek — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Dwadzieścia jeden pojęć z tego poradnika, po jednym zdaniu każde: węzeł, przepływ, wyzwalacz, element, token, okno kontekstowe i reszta.">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Na koniec</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst slowniczek">
+    <p class="kicker">Na koniec</p>
+    <h1>Słowniczek</h1>
+<p>Najważniejsze pojęcia, które pojawiły się w tym poradniku.</p>
+<p>W nawiasie rozdział, w którym dane pojęcie zostało wprowadzone.</p>
+<p><strong>API</strong> (rozdz. 4) - sposób, w jaki jeden program udostępnia swoje funkcje innym programom, bez pokazywania im, jak działa w środku.</p>
+<p><strong>dane dostępowe</strong> (rozdz. 3) - zapisana w n8n zgoda na działanie w twoim imieniu w zewnętrznym serwisie, ustawiana raz i używana potem w każdym węźle, który jej potrzebuje.</p>
+<p><strong>element</strong> (rozdz. 3) - pojedyncza porcja danych płynąca przez przepływ, na przykład jeden artykuł albo jeden wiersz arkusza; węzeł wykonuje się raz na każdy element, który do niego przyszedł.</p>
+<p><strong>historia uruchomień</strong> (rozdz. 3) - zakładka „Executions" na górze widoku przepływu, w której n8n zapisuje każde wykonanie z datą, czasem trwania i informacją, czy się powiodło.</p>
+<p><strong>kanał RSS</strong> (rozdz. 3) - stały adres, pod którym strona udostępnia swoje najnowsze wpisy w formie czytelnej dla maszyny, zwykle kończący się na <code>/feed</code> albo <code>/rss</code>.</p>
+<p><strong>klucz API</strong> (rozdz. 4) - ciąg znaków identyfikujący cię wobec zewnętrznej usługi i pozwalający obciążyć twoje konto za koszt zapytania; pokazywany w pełnej postaci tylko raz, przy tworzeniu.</p>
+<p><strong>model językowy, model</strong> (rozdz. 4) - usługa, która na podstawie polecenia generuje tekst i jako jedyny element przepływu podejmuje decyzję, zamiast wykonywać regułę.</p>
+<p><strong>narzędzie (Tools)</strong> (rozdz. 4) - zewnętrzna funkcja, na przykład wyszukiwanie w Wikipedii, którą model może sam wywołać w trakcie odpowiadania; podłącza się ją od dołu węzła, nie z lewej strony jak dane.</p>
+<p><strong>obszar roboczy</strong> (rozdz. 1) - miejsce na ekranie n8n, na którym budujesz i oglądasz przepływ.</p>
+<p><strong>okno kontekstowe</strong> (rozdz. 6) - pamięć robocza modelu, do której musi się zmieścić wszystko, co mu wysyłasz; po jej przekroczeniu model nie zwraca gorszego wyniku, tylko żaden.</p>
+<p><strong>pętla</strong> (rozdz. 5) - powtarzanie tej samej sekwencji węzłów osobno dla każdego elementu, węzłem „Loop Over Items"; potrzebna wtedy, gdy znaczenie ma tempo albo kolejność.</p>
+<p><strong>polecenie, prompt</strong> (rozdz. 4) - treść wysyłana do modelu, złożona z roli (kim ma być) i zadania (co ma zrobić i w jakiej formie oddać wynik).</p>
+<p><strong>połączenie</strong> (rozdz. 2) - strzałka między dwoma węzłami, przenosząca dane z wyjścia jednego na wejście drugiego bez żadnych zmian.</p>
+<p><strong>przepływ</strong> (rozdz. 1) - zestaw węzłów połączonych strzałkami, który n8n wykonuje automatycznie zamiast ciebie.</p>
+<p><strong>przepływ aktywny</strong> (rozdz. 3) - przepływ włączony do pracy w tle; nieaktywny nie uruchomi się z harmonogramu, choć nadal zadziała po ręcznym kliknięciu „Execute workflow".</p>
+<p><strong>rozgałęzienie</strong> (rozdz. 5) - podział przepływu na dwie ścieżki w zależności od warunku, węzłem „IF"; każdy element idzie jedną z nich, „true" albo „false".</p>
+<p><strong>scalanie</strong> (rozdz. 6) - połączenie wielu osobnych elementów w jeden, węzłem „Summarize"; niezbędne, gdy kolejny krok musi zobaczyć wszystko naraz, bo model nie porówna rzeczy, których nie widzi jednocześnie.</p>
+<p><strong>token</strong> (rozdz. 4) - mała jednostka tekstu, w której liczy się długość polecenia i odpowiedzi, a więc i koszt zapytania do modelu.</p>
+<p><strong>uruchomienie</strong> (rozdz. 1) - pojedyncze wykonanie przepływu od pierwszego węzła do ostatniego.</p>
+<p><strong>węzeł</strong> (rozdz. 2) - pojedynczy element przepływu, który pobiera dane, coś z nimi robi i przekazuje dalej to, co sam wyprodukował, a nie to, co dostał.</p>
+<p><strong>wyzwalacz</strong> (rozdz. 2) - pierwszy węzeł przepływu, decydujący o tym, kiedy całość ma ruszyć: o określonej godzinie, po kliknięciu albo po przesłaniu formularza.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="8.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Sześć klocków, z których zbudujesz resztę</span></a>
+  <span></span>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dodajemy pierwszy własny węzeł — Automatyzacje bez kodowania</title>
+<meta name="description" content="Rozdział 3. W rozdziale 1 zaimportowałeś gotowy przepływ - twoja rola ograniczała się do kliknięcia. Teraz zbudujesz coś od zera samodzielnie.…">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/3.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Dodajemy pierwszy własny węzeł — Automatyzacje bez kodowania">
+<meta property="og:description" content="Rozdział 3. W rozdziale 1 zaimportowałeś gotowy przepływ - twoja rola ograniczała się do kliknięcia. Teraz zbudujesz coś od zera samodzielnie.…">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/3.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dodajemy pierwszy własny węzeł — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Rozdział 3. W rozdziale 1 zaimportowałeś gotowy przepływ - twoja rola ograniczała się do kliknięcia. Teraz zbudujesz coś od zera samodzielnie.…">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Rozdział 3</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Rozdział 3</p>
+    <h1>Rozdział 3. Dodajemy pierwszy własny węzeł</h1>
+<p>W rozdziale 1 zaimportowałeś gotowy przepływ - twoja rola ograniczała się do kliknięcia. Teraz zbudujesz coś od zera samodzielnie. <strong>Zaimportowany przepływ pokazuje, że coś działa; dopiero zbudowany własnoręcznie pokazuje, dlaczego.</strong> Zbudujesz więc prosty system, który pobierze artykuły z bloga, zostawi tylko te na wybrany temat i wyśle je do ciebie mailem. To dokładnie ta sama idea, jaką znajdziesz w rozdziale 5, tyle że na razie bez udziału modelu językowego - tam nauczysz się, jak AI ocenia trafność zamiast prostego dopasowania słowa.</p>
+<h2 id="zaczynamy-od-pustego-przeplywu">Zaczynamy od pustego przepływu</h2>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Wróć do listy swoich przepływów i utwórz nowy, pusty przepływ. Zobaczysz znajomy obszar roboczy z przyciskiem „Add first step" na środku.</p></div></div>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>Kliknij „Add first step" (dodaj pierwszy krok). Na ekranie zobaczysz: listę kategorii wyzwalaczy do wyboru.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-3-1-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-1-800.avif 800w, ../img/rys-3-1-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-1-800.webp 800w, ../img/rys-3-1-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-1-1400.jpg" srcset="../img/rys-3-1-800.jpg 800w, ../img/rys-3-1-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Wybór pierwszego węzła - wyzwalacza" width="1400" height="748" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.1.</span> Wybór pierwszego węzła - wyzwalacza</figcaption></figure>
+<div class="krok"><div class="krok-nr">3</div><div class="krok-tresc"><p>W wyszukiwarce po prawej („Search nodes…") wpisz i wyszukaj „Manual trigger" (uruchom ręcznie) - to dokładnie ten sam typ wyzwalacza, którego używałeś w rozdziale 1. Na ekranie zobaczysz: pojedynczy węzeł na obszarze roboczym, gotowy do rozbudowy.</p></div></div>
+<h2 id="dodajesz-drugi-wezel-pobieranie-danych">Dodajesz drugi węzeł: pobieranie danych</h2>
+<div class="krok"><div class="krok-nr">4</div><div class="krok-tresc"><p>Najedź teraz kursorem poza prawą krawędź węzła wyzwalacza, tam gdzie na końcu linii widzisz mały znak plus. Kliknij go. Na ekranie znowu zobaczysz pole wyszukiwania węzłów.</p></div></div>
+<div class="krok"><div class="krok-nr">5</div><div class="krok-tresc"><p>Wpisz „RSS" w polu wyszukiwania, znajdź i kliknij węzeł „RSS Read" (czytaj RSS) z listy wyników.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-3-2-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-2-800.avif 800w, ../img/rys-3-2-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-2-800.webp 800w, ../img/rys-3-2-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-2-1400.jpg" srcset="../img/rys-3-2-800.jpg 800w, ../img/rys-3-2-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Wyszukiwanie węzła po nazwie" width="1400" height="651" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.2.</span> Wyszukiwanie węzła po nazwie</figcaption></figure>
+<div class="krok"><div class="krok-nr">6</div><div class="krok-tresc"><p>Kliknij dwukrotnie węzeł „RSS Read" i w polu „URL" wklej adres kanału RSS: <code>https://techcrunch.com/feed/</code>. Jeśli wolisz śledzić inny temat, to każdy działający adres RSS zadziała tak samo.</p></div></div>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>Większość blogów firmowych i portali branżowych ma adres RSS kończący się na <code>/feed</code> albo <code>/rss</code>. Jeśli nie wiesz, czy dana strona go ma, to wpisz jej adres w wyszukiwarce razem ze słowem „RSS" - zwykle ktoś już to sprawdził.</p></aside>
+<div class="krok"><div class="krok-nr">7</div><div class="krok-tresc"><p>Kliknij „Execute step" (wykonaj krok) w prawym górnym rogu panelu węzła. Na ekranie zobaczysz listę artykułów w panelu OUTPUT, każdy z autorem, tytułem, linkiem i datą publikacji.</p></div></div>
+<h2 id="dodajesz-trzeci-wezel-filtr">Dodajesz trzeci węzeł: filtr</h2>
+<div class="krok"><div class="krok-nr">8</div><div class="krok-tresc"><p>Kliknij znak plus przy prawej krawędzi węzła „RSS Read". Wpisz „Filter" i kliknij węzeł „Filter" (filtruj) z listy wyników.</p></div></div>
+<div class="krok"><div class="krok-nr">9</div><div class="krok-tresc"><p>Po dwukrotnym kliknięciu węzła kliknij „Add condition" (dodaj warunek). n8n pokaże puste pole na wartość do sprawdzenia. W to pole musisz wstawić tytuł artykułu - i tu po raz pierwszy zrobisz coś nowego: po lewej stronie ekranu, w panelu danych wejściowych, znajdź pole <code>title</code> i przeciągnij je myszą prosto na to puste pole warunku.</p></div></div>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>w polu pojawi się tekst w podwójnym nawiasie klamrowym, coś w rodzaju <code>{{ $json.title }}</code>.</p>
+<div class="krok"><div class="krok-nr">10</div><div class="krok-tresc"><p>Wybierz typ porównania „String" i warunek „contains" (zawiera) z listy. W polu wartości do porównania wpisz słowo, którego szukasz, na przykład „AI" albo „startup" itp.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-3-3-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-3-800.avif 800w, ../img/rys-3-3-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-3-800.webp 800w, ../img/rys-3-3-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-3-1400.jpg" srcset="../img/rys-3-3-800.jpg 800w, ../img/rys-3-3-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Gotowy warunek filtra" width="1400" height="712" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.3.</span> Gotowy warunek filtra</figcaption></figure>
+<div class="krok"><div class="krok-nr">11</div><div class="krok-tresc"><p>Kliknij „Execute step". Na ekranie zobaczysz: krótszą listę w panelu OUTPUT - tylko te artykuły, w których tytule pojawiło się słowo „AI".</p></div></div>
+<h2 id="zanim-dodasz-mail-sprawdz-ile-masz-artykulow">Zanim dodasz mail: sprawdź, ile masz artykułów</h2>
+<p>Zajrzyj jeszcze raz do panelu OUTPUT węzła „Filter" i policz elementy, które przez niego przeszły. Jeśli jest ich np. więcej niż pięć, wróć do warunku i wpisz jakieś inne, węższe słowo. Za chwilę zobaczysz, dlaczego to ma znaczenie.</p>
+<h2 id="dodajesz-czwarty-wezel-wysylka-maila">Dodajesz czwarty węzeł: wysyłka maila</h2>
+<div class="krok"><div class="krok-nr">12</div><div class="krok-tresc"><p>Kliknij znak plus przy prawej krawędzi węzła „Filter". Wpisz „Gmail" i wybierz węzeł „Gmail" z listy wyników.</p></div></div>
+<p>Tu też pojawia się coś, co powtórzy się przy większości węzłów łączących się z usługami zewnętrznymi. Jeden węzeł Gmail potrafi robić wiele różnych rzeczy: wysyłać wiadomości, czytać je, tworzyć wersje robocze, zarządzać etykietami itp. Zanim pokaże ci właściwe pola, musi wiedzieć, którą z tych rzeczy wybierasz.</p>
+<p>Na liście „MESSAGE ACTIONS" wybierz akcję „Send a message" (wyślij wiadomość). Na ekranie zobaczysz: panel węzła.</p>
+<p>W panelu zobaczysz pola „Credential", „Resource", „Operation", „To", „Subject", „Email Type" i „Message" oraz sekcję „Options".</p>
+<figure class="rysunek"><a href="../img/rys-3-4-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-4-800.avif 800w, ../img/rys-3-4-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-4-800.webp 800w, ../img/rys-3-4-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-4-1400.jpg" srcset="../img/rys-3-4-800.jpg 800w, ../img/rys-3-4-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Zasób i operacja. Bez tego wyboru węzeł nie pokaże pól wiadomości" width="1400" height="710" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.4.</span> Zasób i operacja. Bez tego wyboru węzeł nie pokaże pól wiadomości</figcaption></figure>
+<div class="krok"><div class="krok-nr">13</div><div class="krok-tresc"><p>Węzeł prawdopodobnie zgłosi teraz, że brakuje mu danych dostępowych, czyli zgody na wysyłanie maili w twoim imieniu. Kliknij „Create new credential" (utwórz nowe dane dostępowe), a potem „Sign in with Google" (zaloguj się przez Google) i przejdź logowanie w oknie, które się otworzy.</p></div></div>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>powrót do n8n i zielony komunikat potwierdzający, że konto zostało połączone.</p>
+<figure class="rysunek"><a href="../img/rys-3-5-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-5-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-5-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-5-800.jpg" srcset="../img/rys-3-5-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Logowanie przez Google przy pierwszym użyciu węzła Gmail" width="800" height="282" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.5.</span> Logowanie przez Google przy pierwszym użyciu węzła Gmail</figcaption></figure>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>n8n nigdy nie prosi cię o wpisanie hasła do Gmaila wprost. Logujesz się na oficjalnym ekranie Google, a n8n dostaje wyłącznie zgodę na wysyłanie wiadomości w twoim imieniu.</p></aside>
+<p>Teraz wypełnij pola wiadomości:</p>
+<ul><li>„To" (do): twój własny adres e-mail.</li><li>„Subject" (temat): na przykład „Nowe artykuły o AI".</li><li>„Email Type" (typ wiadomości): zostaw „Text" (tekst). Druga opcja, „HTML", przydaje się, gdy chcesz formatować treść, ale teraz tylko by przeszkadzała.</li><li>„Message" (treść): przeciągnij tu pole „title" z lewego panelu danych wejściowych, tak samo jak przy filtrze w kroku 9. Kliknij za wstawionym tekstem, wciśnij Enter, żeby zrobić nową linię, i dopiero teraz przeciągnij pole link. Bez tego oba pola skleją się w jeden nieczytelny ciąg.</li></ul>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>w polu treści dwa fragmenty w podwójnych nawiasach klamrowych, jeden pod drugim, a pod polem podgląd z prawdziwym tytułem i linkiem pierwszego artykułu.</p>
+<figure class="rysunek"><a href="../img/rys-3-6-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-6-800.avif 800w, ../img/rys-3-6-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-6-800.webp 800w, ../img/rys-3-6-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-6-1400.jpg" srcset="../img/rys-3-6-800.jpg 800w, ../img/rys-3-6-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Gotowa wiadomość przed wysłaniem" width="1400" height="719" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.6.</span> Gotowa wiadomość przed wysłaniem</figcaption></figure>
+<p>Zanim klikniesz, dwie rzeczy, o których warto wiedzieć.</p>
+<p>Po pierwsze, „Execute step" w tym węźle naprawdę wysyła wiadomość. Wszystko więc, co tu ustawiłeś, za chwilę pojedzie na twoją skrzynkę.</p>
+<p>Po drugie, nie dostaniesz jednego maila. Dostaniesz tyle maili, ile artykułów przeszło przez filtr. Jeśli filtr przepuścił cztery artykuły, dostaniesz cztery osobne wiadomości, każdą z jednym tytułem. W tym przypadku to nie jest błąd i nie ma co go naprawiać. To jedna z zasad działania n8n i jedna z rzeczy, które warto dobrze rozumieć.</p>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Węzeł wykonuje się raz dla każdego elementu, który do niego przyszedł.</p></aside>
+<p>Pamiętasz liczby pod węzłami z rozdziału 2? Jeśli pod węzłem „Filter" stoi „4 items", to węzeł Gmail wykona się cztery razy: raz z pierwszym artykułem, raz z drugim i tak dalej. Za każdym razem pole title będzie znaczyło coś innego, bo za każdym razem odnosi się do innego elementu.</p>
+<p>Ta sama zasada rządzi wszystkim, co zbudujesz dalej. Kiedy w rozdziale 5 podłączysz model językowy do listy np. dziesięciu artykułów, model dostanie dziesięć osobnych pytań, a nie jedno pytanie o dziesięć artykułów. Zapłacisz też za to dziesięć razy.</p>
+<p>Da się to zmienić, czyli zebrać wszystkie elementy w jeden przed wysyłką. Wrócimy do tego w rozdziale 6, gdzie będzie do tego dobry powód. Na razie zostawiamy jak jest, bo dwa czy cztery maile to i tak niska cena za zrozumienie i zapamiętanie tej zasady :-)</p>
+<div class="krok"><div class="krok-nr">14</div><div class="krok-tresc"><p>Kliknij „Execute step".</p></div></div>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>zieloną obwódkę wokół węzła Gmail i liczbę pod nim odpowiadającą liczbie wysłanych wiadomości.</p>
+<p>Sprawdź, czy działa: otwórz swoją skrzynkę pocztową. Powinny czekać na ciebie nowe wiadomości o temacie, który wpisałeś - np. „Nowe artykuły o AI", tyle sztuk, ile pokazała liczba pod węzłem Gmail. W każdej jeden tytuł i jeden link.</p>
+<figure class="rysunek"><a href="../img/rys-3-7-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-7-800.avif 800w, ../img/rys-3-7-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-7-800.webp 800w, ../img/rys-3-7-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-7-1400.jpg" srcset="../img/rys-3-7-800.jpg 800w, ../img/rys-3-7-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Maile, które właśnie wysłał twój własny przepływ" width="1400" height="189" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.7.</span> Maile, które właśnie wysłał twój własny przepływ</figcaption></figure>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>Na dole każdej wiadomości może pojawić się krótka informacja, że została wysłana automatycznie przez n8n. To domyślne ustawienie węzła. Wyłączysz je w panelu węzła Gmail, w sekcji z opcjami dodatkowymi. Czyli: „Add option" → „Append n8n Attribution" i wyłącz tę opcję.</p></aside>
+<h2 id="a-teraz-czas-na-prawdziwa-automatyzacje">A teraz czas na prawdziwą automatyzację</h2>
+<p>Zbudowałeś przepływ, który zbiera artykuły, odsiewa nieciekawe i przysyła resztę na twoją skrzynkę. Jest tylko jeden problem: żeby to się stało, musisz usiąść przy komputerze, otworzyć n8n i kliknąć. A to jeszcze nie jest automatyzacja.</p>
+<p>Pamiętasz z rozdziału 2, że pierwszy węzeł każdego przepływu decyduje, kiedy przepływ się uruchomi? Do tej pory pracował tam wyzwalacz ręczny, który czeka na twoje kliknięcie. Teraz dołożysz drugi, który nie czeka na nikogo.</p>
+<div class="krok"><div class="krok-nr">15</div><div class="krok-tresc"><p>Kliknij zatem przycisk z plusem w prawym górnym rogu obszaru roboczego. W polu wyszukiwania wpisz „Schedule" i wybierz węzeł „Schedule Trigger" (wyzwalacz harmonogramu). Na ekranie zobaczysz: nowy węzeł stojący samotnie obok twojego przepływu, jeszcze z niczym niepołączony.</p></div></div>
+<div class="krok"><div class="krok-nr">16</div><div class="krok-tresc"><p>W panelu węzła znajdź listę „Trigger Interval" (odstęp między uruchomieniami) i wybierz „Days" (dni). Pojawią się trzy pola. W „Days Between Triggers" (co ile dni) zostaw 1.</p></div></div>
+<div class="krok"><div class="krok-nr">17</div><div class="krok-tresc"><p>W „Trigger at Hour" (o której godzinie) wybierz 7am. W „Trigger at Minute" (w której minucie) wpisz 0 i zamknij panel.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-3-8-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-8-800.avif 800w, ../img/rys-3-8-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-8-800.webp 800w, ../img/rys-3-8-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-8-1400.jpg" srcset="../img/rys-3-8-800.jpg 800w, ../img/rys-3-8-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Codziennie o siódmej rano" width="1400" height="691" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.8.</span> Codziennie o siódmej rano</figcaption></figure>
+<div class="krok"><div class="krok-nr">18</div><div class="krok-tresc"><p>Przeciągnij myszką od kropki na prawej krawędzi węzła „Schedule Trigger" do lewej krawędzi węzła „RSS Read" i puść. Na ekranie zobaczysz: dwie strzałki wchodzące do węzła „RSS Read", jedną od wyzwalacza ręcznego i jedną od harmonogramu. Przepływ, jak widać, może mieć więcej niż jeden wyzwalacz. Ręczny zostaje, bo dzięki niemu nadal uruchomisz wszystko na żądanie, kiedy chcesz coś sprawdzić. Harmonogram robi to samo, tylko sam z siebie, o siódmej rano.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-3-9-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-3-9-800.avif 800w, ../img/rys-3-9-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-3-9-800.webp 800w, ../img/rys-3-9-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-3-9-1400.jpg" srcset="../img/rys-3-9-800.jpg 800w, ../img/rys-3-9-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Dwa wejścia do tego samego przepływu" width="1400" height="724" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 3.9.</span> Dwa wejścia do tego samego przepływu</figcaption></figure>
+<div class="krok"><div class="krok-nr">19</div><div class="krok-tresc"><p>Zapisz przepływ przyciskiem „Publish" (prawy górny róg) - teraz twój przepływ jest już aktywny.</p></div></div>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Nieaktywny przepływ nie uruchamia się według harmonogramu, nawet jeśli harmonogram jest w nim ustawiony. To najczęstsze rozczarowanie początkujących: wszystko poprawnie skonfigurowane, aktywacja zapomniana, rano nic nie przychodzi. Druga strona tej samej zasady: przycisk „Execute workflow" działa niezależnie od aktywacji. Uruchomienie ręczne zadziała nawet przy nieaktywnym przepływie, a aktywny przepływ chodzi po godzinach, kiedy ty nie pilnujesz n8n.</p></aside>
+<h2 id="gdzie-zobaczyc-czy-zadzialalo">Gdzie zobaczyć, czy zadziałało</h2>
+<p>Uruchomienia z harmonogramu nie zostawiają śladu na obszarze roboczym. Nie ma tam zielonych obwódek, bo w chwili wykonania nikt nie patrzył na ekran. Zapis znajdziesz w zakładce „Executions" (uruchomienia) na górze widoku przepływu: lista wszystkich wykonań z datą, godziną, czasem trwania i informacją, czy zakończyły się sukcesem. Zapamiętaj tę zakładkę - to główne miejsce, w którym sprawdza się, dlaczego coś przestało działać, i będziesz do niej wracać w każdym kolejnym rozdziale.</p>
+<h2 id="co-moze-pojsc-nie-tak">Co może pójść nie tak</h2>
+<ul><li>W panelu węzła Gmail nie ma pól „To" ani „Subject". Sprawdź listy „Resource" i „Operation" na górze panelu. Muszą być ustawione na „Message" i „Send". Dopóki nie wybierzesz operacji, węzeł nie wie, jakie pola ci pokazać.</li><li>Dostałeś kilkanaście maili zamiast kilku. Filtr przepuścił za dużo artykułów. Wróć do warunku i wpisz węższe słowo, potem uruchom przepływ jeszcze raz.</li><li>Tytuł i link skleiły się w jedną linię. W polu „Message" brakuje przejścia do nowej linii między przeciągniętymi polami. Kliknij między nimi i wciśnij Enter.</li><li>Węzeł Gmail zgłasza błąd „insufficient permission" (niewystarczające uprawnienia). Połączenie z kontem Google nie objęło wszystkich potrzebnych zgód. Usuń dane dostępowe i połącz konto jeszcze raz, zaznaczając wszystkie proszone uprawnienia.</li><li>Mail nie przyszedł, a węzeł Gmail jest zielony. Sprawdź folder spam. Pierwsza wiadomość z nowo połączonego konta czasem tam trafia.</li></ul>
+<h2 id="wariacje-na-temat">Wariacje na temat</h2>
+<p>Odłącz na chwilę węzeł Gmail, klikając strzałkę między nim a filtrem i usuwając połączenie. Zmień słowo w warunku filtra na coś, co na pewno pojawi się w wielu tytułach, na przykład „the", i uruchom przepływ. Zobacz, jak urosła liczba pod węzłem „Filter". Potem przywróć poprzednie słowo i połączenie.</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="2.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Co widzisz na ekranie</span></a>
+  <a class="nr-nast" href="4.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Podłączamy AI</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

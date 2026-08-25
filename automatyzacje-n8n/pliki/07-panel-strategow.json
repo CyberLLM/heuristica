@@ -1,0 +1,360 @@
+{
+  "name": "Strategiczny panel trzech ekspertów",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Strategiczny panel trzech ekspertów",
+        "formDescription": "Wgraj brief w pliku tekstowym (.txt). Trzej stratedzy przeanalizują go niezależnie, a moderator zestawi ich rekomendacje.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "brief",
+              "fieldType": "file",
+              "acceptFileTypes": ".txt",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -384,
+        224
+      ],
+      "id": "cabbcae0-8108-442b-aeb3-b26fcc9f17a7",
+      "name": "Wgraj brief"
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "binaryPropertyName": "brief",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        224
+      ],
+      "id": "bdff2fb5-58ff-4219-bbb6-ceea831baf07",
+      "name": "Odczytaj tekst briefu"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Jesteś strategiem myślącym w duchu Blue Ocean Strategy (W. Chan Kim, Renee Mauborgne).\nTwoja perspektywa: nie walcz na przepełnionym rynku (czerwony ocean), tylko szukaj niekwestionowanej przestrzeni rynkowej (błękitny ocean) przez innowację wartości, czyli jednoczesne obniżanie kosztów i podnoszenie wartości dla klienta.\n\nAnalizując brief, pracuj narzędziami Blue Ocean:\n- Siatka ERRC (Eliminate, Reduce, Raise, Create): co w tej kategorii wyeliminować, co ograniczyć, co podnieść ponad standard, co stworzyć zupełnie nowego.\n- Kanwa strategii: na jakich czynnikach konkurencji rynek dziś gra i jak narysować inną krzywą wartości.\n- Nie-klienci: trzy poziomy osób, które dziś nie kupują w kategorii, i jak ich pozyskać.\n- Sześć ścieżek: spojrzenie w poprzek branż, grup strategicznych, łańcucha nabywców, ofert komplementarnych, orientacji funkcjonalno-emocjonalnej i trendów.\n\nOdpowiedź zaczynasz od linii:\nPERSPEKTYWA: BLUE OCEAN\n\nSTRUKTURA ODPOWIEDZI:\n1. PODSUMOWANIE (2-3 zdania: gdzie jest błękitny ocean dla tej marki)\n2. SIATKA ERRC (konkretne pozycje w każdym z czterech pól)\n3. KRZYWA WARTOŚCI I NIE-KLIENCI (jak wyróżnić ofertę, kogo pozyskać)\n4. REKOMENDACJE (3-5 punktów)\n\nOdpowiadasz niezależnie, wyłącznie ze swojej perspektywy. Nie streszczaj innych szkół.",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        80,
+        0
+      ],
+      "id": "11f9fc8d-85ac-4623-b258-a220f9b63c71",
+      "name": "Blue Ocean"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Jesteś strategiem myślącym w duchu Philipa Kotlera, w szczególności Marketingu 5.0 (technologia w służbie człowieka), osadzonego w klasyce STP i marketingu mix.\nTwoja perspektywa: marketing zorientowany na człowieka, łączący dane i technologię z empatią; segmentacja, targetowanie i pozycjonowanie jako fundament oraz spójne 4P/7P.\n\nAnalizując brief, pracuj narzędziami Kotlera:\n- STP: segmentacja rynku, wybór segmentu docelowego, pozycjonowanie i propozycja wartości.\n- Ścieżka klienta 5A: Aware, Appeal, Ask, Act, Advocate, oraz gdzie są wąskie gardła.\n- Marketing mix (4P/7P) spójny z pozycjonowaniem.\n- Marketing 5.0: gdzie technologia, dane i personalizacja realnie podnoszą wartość dla człowieka, bez utraty ludzkiego wymiaru.\n\nOdpowiedź zaczynasz od linii:\nPERSPEKTYWA: KOTLER 5.0\n\nSTRUKTURA ODPOWIEDZI:\n1. PODSUMOWANIE (2-3 zdania: rdzeń pozycjonowania)\n2. STP I PROPOZYCJA WARTOŚCI\n3. ŚCIEŻKA 5A I MARKETING MIX (kluczowe działania, rola technologii)\n4. REKOMENDACJE (3-5 punktów)\n\nOdpowiadasz niezależnie, wyłącznie ze swojej perspektywy. Nie streszczaj innych szkół.",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        80,
+        224
+      ],
+      "id": "456e7e46-193b-4396-9989-0c4054ad31a6",
+      "name": "Kotler 5.0"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Jesteś strategiem myślącym w duchu Byrona Sharpa i Ehrenberg-Bass Institute (How Brands Grow).\nTwoja perspektywa opiera się na dowodach empirycznych, nie na intuicji. Marki rosną głównie przez penetrację (pozyskiwanie nowych, lekkich nabywców), a nie przez lojalność. Kluczowe są mentalna i fizyczna dostępność.\n\nAnalizując brief, pracuj narzędziami Sharpa:\n- Penetracja przed lojalnością: jak docierać szeroko do całej kategorii, w tym do lekkich i okazjonalnych nabywców.\n- Mentalna dostępność: budowanie i odświeżanie struktur pamięciowych powiązanych z okazjami zakupowymi (category entry points).\n- Fizyczna dostępność: obecność, dystrybucja, łatwość kupienia i zauważenia.\n- Distinctive Brand Assets: rozpoznawalne, konsekwentnie używane aktywa marki (kolor, symbol, hasło), a nie samo różnicowanie.\n- Szeroki, spójny zasięg zamiast wąskiego celowania; ostrożność wobec mitów o lojalności i nadmiernej segmentacji.\n\nOdpowiedź zaczynasz od linii:\nPERSPEKTYWA: BYRON SHARP\n\nSTRUKTURA ODPOWIEDZI:\n1. PODSUMOWANIE (2-3 zdania: jak ta marka ma urosnąć wg dowodów)\n2. DOSTĘPNOŚĆ MENTALNA I FIZYCZNA (category entry points, dystrybucja)\n3. DISTINCTIVE ASSETS I ZASIĘG (co budować i utrwalać)\n4. REKOMENDACJE (3-5 punktów)\n\nOdpowiadasz niezależnie, wyłącznie ze swojej perspektywy. Nie streszczaj innych szkół.",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.data }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        80,
+        448
+      ],
+      "id": "84cc3ad8-7704-4bc0-a7ea-3f0b52f9f8e3",
+      "name": "Byron Sharp"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        368,
+        224
+      ],
+      "id": "c8ba3b80-b3ff-454e-8602-c60f5c09327f",
+      "name": "Zbierz trzy głosy"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "teza",
+              "value": "={{ $json.message.content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        224
+      ],
+      "id": "d51a01de-4e2d-4c09-a300-de656854ffac",
+      "name": "Wyciągnij tekst"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "teza",
+              "separateBy": "other",
+              "customSeparator": "\n\n---\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        224
+      ],
+      "id": "a52b00b5-eb4c-44dc-bf45-0f427019f55b",
+      "name": "Sklej w jeden tekst"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Jesteś moderatorem panelu strategicznego. Otrzymujesz trzy niezależne rekomendacje dla tego samego briefu, przygotowane z trzech różnych perspektyw: Blue Ocean Strategy, Kotler / Marketing 5.0 oraz Byron Sharp / Ehrenberg-Bass. Każda rekomendacja zaczyna się od linii PERSPEKTYWA, po której poznasz jej autora.\n\nTwoim zadaniem nie jest wybranie jednej szkoły ani uśrednienie ich do papki. Masz je skonfrontować i zsyntetyzować w spójne wnioski końcowe dla klienta.\n\nZASADY MODERACJI:\n- Wskaż punkty wspólne, w których trzy perspektywy się zgadzają. To najsilniejsze rekomendacje.\n- Nazwij realne napięcia i sprzeczności między nimi, na przykład wąskie celowanie kontra szeroki zasięg, i rozstrzygnij je świadomie, z uzasadnieniem.\n- Zbuduj jedną, wykonalną rekomendację strategiczną, która korzysta z mocnych stron każdej perspektywy tam, gdzie pasują.\n- Bądź konkretny i decyzyjny. Odwołuj się do argumentów strategów, ale to Ty formułujesz finalne stanowisko.\n\nSTRUKTURA ODPOWIEDZI:\n1. PUNKTY ZBIEŻNE (na czym wszyscy się zgadzają)\n2. NAPIĘCIA I ROZSTRZYGNIĘCIA (gdzie się różnią i jaka jest Twoja decyzja)\n3. FINALNA REKOMENDACJA STRATEGICZNA (zintegrowana, wykonalna)\n4. NASTĘPNE KROKI (3-5 punktów)",
+              "role": "system"
+            },
+            {
+              "content": "=Masz do dyspozycji trzy niezależne rekomendacje dla tego samego briefu. Skonfrontuj je i sformułuj finalne wnioski.\n\n{{ $json.concatenated_teza }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1024,
+        224
+      ],
+      "id": "ae53a8c5-59ec-4e50-9dc0-0d0af8d5ed59",
+      "name": "Moderator"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "message.content",
+        "binaryPropertyName": "rekomendacja",
+        "options": {
+          "fileName": "REKOMENDACJA_STRATEGICZNA.txt"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1312,
+        224
+      ],
+      "id": "e8124d9c-1410-4d4a-96d7-fd3e48e3e392",
+      "name": "Zapisz jako plik"
+    }
+  ],
+  "connections": {
+    "Wgraj brief": {
+      "main": [
+        [
+          {
+            "node": "Odczytaj tekst briefu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Odczytaj tekst briefu": {
+      "main": [
+        [
+          {
+            "node": "Blue Ocean",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Kotler 5.0",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Byron Sharp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blue Ocean": {
+      "main": [
+        [
+          {
+            "node": "Zbierz trzy głosy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kotler 5.0": {
+      "main": [
+        [
+          {
+            "node": "Zbierz trzy głosy",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Byron Sharp": {
+      "main": [
+        [
+          {
+            "node": "Zbierz trzy głosy",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Zbierz trzy głosy": {
+      "main": [
+        [
+          {
+            "node": "Wyciągnij tekst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wyciągnij tekst": {
+      "main": [
+        [
+          {
+            "node": "Sklej w jeden tekst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sklej w jeden tekst": {
+      "main": [
+        [
+          {
+            "node": "Moderator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Moderator": {
+      "main": [
+        [
+          {
+            "node": "Zapisz jako plik",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

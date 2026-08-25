@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podłączamy AI — Automatyzacje bez kodowania</title>
+<meta name="description" content="Rozdział 4. Do tej pory każdy węzeł w twoim przepływie był doskonale przewidywalny: przy tych samych danych na wejściu robił zawsze dokładnie to samo.…">
+<link rel="canonical" href="https://heuristica.pl/automatyzacje-n8n/czytaj/4.html">
+<meta name="author" content="Marek Staniszewski">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Automatyzacje bez kodowania">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Podłączamy AI — Automatyzacje bez kodowania">
+<meta property="og:description" content="Rozdział 4. Do tej pory każdy węzeł w twoim przepływie był doskonale przewidywalny: przy tych samych danych na wejściu robił zawsze dokładnie to samo.…">
+<meta property="og:url" content="https://heuristica.pl/automatyzacje-n8n/czytaj/4.html">
+<meta property="og:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Podłączamy AI — Automatyzacje bez kodowania">
+<meta name="twitter:description" content="Rozdział 4. Do tej pory każdy węzeł w twoim przepływie był doskonale przewidywalny: przy tych samych danych na wejściu robił zawsze dokładnie to samo.…">
+<meta name="twitter:image" content="https://heuristica.pl/automatyzacje-n8n/img/okladka.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0E2745">
+<link rel="preload" as="font" type="font/woff2" href="../fonts/Literata-Variable-normal-latin-ext.woff2" crossorigin>
+<link rel="stylesheet" href="../css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDHLBXLXT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent','default',{'analytics_storage':'denied'});
+  gtag('config','G-QDHLBXLXT4');
+  try{ if(localStorage.getItem('zgoda_ga')==='tak'){ gtag('consent','update',{'analytics_storage':'granted'}); } }catch(e){}
+</script>
+</head>
+<body class="strona-lektury">
+<div class="postep" id="postep"></div>
+<header class="pasek">
+  <div class="pasek-srodek">
+    <a class="pasek-wstecz" href="../index.html">‹ Spis treści</a>
+    <span class="pasek-tytul">Rozdział 4</span>
+    <a class="btn btn-maly" href="../pliki/automatyzacje-n8n-przeplywy.zip">Pobierz przepływy</a>
+  </div>
+</header>
+<main class="lektura">
+  <article class="tekst">
+    <p class="kicker">Rozdział 4</p>
+    <h1>Rozdział 4. Podłączamy AI</h1>
+<p>Do tej pory każdy węzeł w twoim przepływie był doskonale przewidywalny: przy tych samych danych na wejściu robił zawsze dokładnie to samo. Filtr przepuszczał to, co pasowało do warunku, i nic poza tym. Teraz dołożysz pierwszy węzeł, który przy tym samym pytaniu potrafi odpowiedzieć dwa razy inaczej. <strong>Wszystko, co dziś sprzedaje się pod słowem „AI", sprowadza się w przepływie do jednej zmiany: jeden z kroków przestaje wykonywać regułę i zaczyna podejmować decyzję.</strong></p>
+<h2 id="pytanie-na-start-co-to-jest-klucz-api-i-skad-go-wziac">Pytanie na start: co to jest klucz API i skąd go wziąć?</h2>
+<p>Zanim węzeł sztucznej inteligencji - np. wybrany model ChatGPT od OpenAI - cokolwiek zrobi, będziesz potrzebować klucza API - czyli ciągu znaków, który mówi serwerom OpenAI, że to naprawdę ty wysyłasz zapytanie i że wolno cię obciążyć za jego koszt. To w zasadzie ten sam mechanizm jak dane dostępowe do Gmaila z rozdziału 3, tyle że tym razem nie logujesz się przez Google, tylko wklejasz gotowy kod.</p>
+<p>Samo API (Application Programming Interface) to zaś zestaw narzędzi, protokołów i definicji, które umożliwiają różnym aplikacjom komunikację ze sobą. API działa w tym przypadku jak pośrednik, który pozwala jednej aplikacji korzystać z funkcjonalności innej bez konieczności poznawania jej wewnętrznej struktury.</p>
+<figure class="rysunek"><a href="../img/rys-4-0-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-0-800.avif 800w, ../img/rys-4-0-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-0-800.webp 800w, ../img/rys-4-0-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-0-1400.jpg" srcset="../img/rys-4-0-800.jpg 800w, ../img/rys-4-0-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Jak działa klucz API" width="1400" height="912" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.0.</span> Jak działa klucz API</figcaption></figure>
+<div class="krok"><div class="krok-nr">1</div><div class="krok-tresc"><p>Otwórz w nowej karcie przeglądarki stronę <a href="https://platform.openai.com" rel="noopener">platform.openai.com</a> i zaloguj się na swoje konto (albo załóż nowe, jeśli jeszcze go nie masz). Możesz też wejść bezpośrednio na stronę: <a href="https://platform.openai.com/organization/api-keys" rel="noopener">https://platform.openai.com/organization/api-keys</a></p></div></div>
+<div class="krok"><div class="krok-nr">2</div><div class="krok-tresc"><p>Z menu po lewej stronie wybierz „API keys" (klucze API), a potem kliknij „Create new secret key" (utwórz nowy tajny klucz).</p></div></div>
+<figure class="rysunek"><a href="../img/rys-4-1-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-1-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-1-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-1-800.jpg" srcset="../img/rys-4-1-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Tworzenie nowego klucza API na koncie OpenAI" width="800" height="461" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.1.</span> Tworzenie nowego klucza API na koncie OpenAI</figcaption></figure>
+<div class="krok"><div class="krok-nr">3</div><div class="krok-tresc"><p>Nadaj kluczowi nazwę, na przykład „n8n", i potwierdź utworzenie. Na ekranie zobaczysz: swój nowy klucz w całości - <strong>to jedyny moment, w którym zobaczysz go w pełnej postaci</strong>. Skopiuj go od razu przyciskiem obok i zapisz tymczasowo w bezpiecznym miejscu, na przykład w menedżerze haseł.</p></div></div>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Zanim pójdziesz dalej, sprawdź w zakładce „Billing" (rozliczenia) swojego konta OpenAI, czy masz podpiętą metodę płatności i choć niewielki limit wydatków. Nowe konto bez włączonego rozliczenia zwraca dokładnie ten sam błąd, co zły klucz - a wygląda identycznie, jakbyś zrobił coś źle, mimo że klucz jest poprawny.</p></aside>
+<h2 id="dodajesz-wezel-openai-do-przeplywu">Dodajesz węzeł OpenAI do przepływu</h2>
+<div class="krok"><div class="krok-nr">4</div><div class="krok-tresc"><p>Wróć do n8n i utwórz nowy, pusty przepływ - tak jak w rozdziale 3. Dodaj węzeł „Manual trigger" (uruchom ręcznie), już znajomy z poprzednich rozdziałów.</p></div></div>
+<div class="krok"><div class="krok-nr">5</div><div class="krok-tresc"><p>Kliknij znak plus przy prawej krawędzi wyzwalacza. W polu wyszukiwania wpisz „OpenAI". Zamiast pojedynczego wyniku zobaczysz listę akcji pogrupowanych w sekcje: TEXT ACTIONS, IMAGE ACTIONS, AUDIO ACTIONS i inne. W sekcji TEXT ACTIONS kliknij „Message a model" (wyślij wiadomość do modelu). Na ekranie zobaczysz: nowy węzeł na obszarze roboczym i otwarty panel z polami „Credential to connect with", „Model" i „Messages".</p></div></div>
+<figure class="rysunek"><a href="../img/rys-4-2-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-2-800.avif 800w, ../img/rys-4-2-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-2-800.webp 800w, ../img/rys-4-2-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-2-1400.jpg" srcset="../img/rys-4-2-800.jpg 800w, ../img/rys-4-2-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Jeden węzeł i wiele rzeczy do zrobienia. Wybierasz je od razu przy dodawaniu" width="1400" height="723" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.2.</span> Jeden węzeł i wiele rzeczy do zrobienia. Wybierasz je od razu przy dodawaniu</figcaption></figure>
+<div class="krok"><div class="krok-nr">6</div><div class="krok-tresc"><p>Otwórz węzeł dwukrotnym kliknięciem. Na samej górze panelu jest pole „Credential" (dane dostępowe). Rozwiń je i wybierz „Create new credential" (utwórz nowe dane dostępowe).</p></div></div>
+<div class="krok"><div class="krok-nr">7</div><div class="krok-tresc"><p>Otworzy się osobne okno z jednym polem: „API Key". Wklej w nie klucz skopiowany w kroku 3 (uważaj, żeby nie złapać spacji na początku ani na końcu). Kliknij „Save" (zapisz).</p></div></div>
+<div class="krok"><div class="krok-nr">8</div><div class="krok-tresc"><p>Na ekranie zobaczysz: zielony komunikat potwierdzający, że połączenie działa. Zamknij okno danych dostępowych. W polu „Credential" widnieje teraz nazwa twojego nowego połączenia, na przykład „OpenAI account".</p></div></div>
+<p>Klucz wklejasz w n8n tylko raz. Od tej chwili będzie się pojawiał na liście w każdym nowym węźle OpenAI, który dodasz w dowolnym przepływie. To samo dotyczy połączenia z Gmailem z rozdziału 3. Wszystkie zapisane dane dostępowe znajdziesz w menu bocznym n8n, w sekcji „Credentials", i tam też je usuniesz albo podmienisz, gdy klucz przestanie działać.</p>
+<div class="krok"><div class="krok-nr">9</div><div class="krok-tresc"><p>W polu „Model" wybierz najtańszy dostępny model z rodziny GPT-4o - w chwili pisania jest to gpt-4o-mini. Lista modeli pobiera się na żywo z twojego konta OpenAI, więc może wyglądać inaczej niż na zrzucie.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-4-3-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-3-800.avif 800w, ../img/rys-4-3-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-3-800.webp 800w, ../img/rys-4-3-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-3-1400.jpg" srcset="../img/rys-4-3-800.jpg 800w, ../img/rys-4-3-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Lista dostępnych modeli" width="1400" height="708" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.3.</span> Lista dostępnych modeli</figcaption></figure>
+<h2 id="piszesz-pierwsze-polecenie">Piszesz pierwsze polecenie</h2>
+<p>Dobre polecenie dla modelu działa trochę tak jak dobre zlecenie dla nowego stażysty - musi powiedzieć mu, kim ma być, co konkretnie ma zrobić i w jakiej formie oddać wynik.</p>
+<div class="krok"><div class="krok-nr">10</div><div class="krok-tresc"><p>W sekcji „Messages" (wiadomości) ustaw na liście „Type" wartość „text". Następnie kliknij „Add Message" (dodaj wiadomość) i ustaw „Role" (rola) na „System". W polu tekstowym opisz, kim ma być model i jak się zachowywać, na przykład: „Jesteś asystentem redakcyjnym pracującym dla managera marketingu. Piszesz zwięźle, po polsku, bez lania wody."</p></div></div>
+<div class="krok"><div class="krok-nr">11</div><div class="krok-tresc"><p>Dodaj drugą wiadomość, tym razem z rolą „User" (użytkownik). To jest właściwe zadanie - konkretny tekst do przetworzenia, na przykład: „Streść poniższy akapit w trzech zdaniach, tak żeby dało się go wkleić do newslettera:" i wklej dowolny fragment tekstu, choćby opis produktu ze swojej strony.</p></div></div>
+<div class="krok"><div class="krok-nr">12</div><div class="krok-tresc"><p>Kliknij „Execute step". Na ekranie zobaczysz: w panelu OUTPUT rozwinięte drzewko z kilkoma pozycjami, między innymi id, type, status i content. W polu text pojawi się twoje streszczenie.</p></div></div>
+<p>Model nie odpowiada samym tekstem. Odpowiada całą kartą informacji o odpowiedzi: kiedy powstała, jaki ma numer, czy zakończyła się poprawnie i dopiero na końcu, co właściwie napisał.</p>
+<p>Z tej karty interesuje cię w tej chwili jedno pole, text. Reszta przyda się później. Zobaczysz też dwa pola opisane czerwonym [empty array]. To nie jest błąd. To znaczy „tu nic nie ma", bo model nie miał czego dopisać.</p>
+<figure class="rysunek"><a href="../img/rys-4-4-1400.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-4-800.avif 800w, ../img/rys-4-4-1400.avif 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-4-800.webp 800w, ../img/rys-4-4-1400.webp 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-4-1400.jpg" srcset="../img/rys-4-4-800.jpg 800w, ../img/rys-4-4-1400.jpg 1400w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Polecenie systemowe i polecenie użytkownika oraz odpowiedź modelu" width="1400" height="710" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.4.</span> Polecenie systemowe i polecenie użytkownika oraz odpowiedź modelu</figcaption></figure>
+<p>Zmień teraz jedno słowo w poleceniu systemowym - na przykład każ modelowi pisać żartobliwie zamiast rzeczowo - i uruchom węzeł jeszcze raz. Teraz przy tej samej treści wejściowej pojawi się inny ton na wyjściu.</p>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Reguła „kim jesteś, co masz zrobić, w jakiej formie oddać" nie jest wynalazkiem promptowania. David Ogilvy, jeden z twórców nowoczesnej reklamy, powtarzał zespołom kreatywnym, że dobry brief ogranicza, a ograniczenie rodzi lepszą pracę niż pełna dowolność. To, co dziś nazywamy „dobrym promptem", działało tak samo na copywriterów w latach sześćdziesiątych, jak dziś działa na model językowy.</p></aside>
+<h2 id="model-dostaje-narzedzie">Model dostaje narzędzie</h2>
+<p>Zerknij jeszcze raz na swój przepływ. Pod węzłem „Message a model" wisi jakaś dziwna wypustka podpisana „Tools" (narzędzia) ze znakiem plus. Wszystkie połączenia, które robiłeś do tej pory, biegły z lewej na prawo. To jedno biegnie z dołu do góry i znaczy coś zupełnie innego.</p>
+<p>Połączenie z lewej strony wnosi dane do przetworzenia. Połączenie od dołu nie wnosi danych. Wyposaża węzeł. Mówi modelowi: „masz do dyspozycji jeszcze to coś".</p>
+<figure class="rysunek"><a href="../img/rys-4-5-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-5-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-5-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-5-800.jpg" srcset="../img/rys-4-5-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Tu można dodać modelowi narzędzia" width="800" height="420" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.5.</span> Tu można dodać modelowi narzędzia</figcaption></figure>
+<div class="krok"><div class="krok-nr">13</div><div class="krok-tresc"><p>Kliknij plus przy „Tools". W polu wyszukiwania wpisz „Wikipedia" i wybierz węzeł „Wikipedia".</p></div></div>
+<p class="ekran"><span class="ekran-etykieta">Na ekranie zobaczysz</span>nowy, mniejszy węzeł doczepiony od spodu do węzła „Message a model", połączony z nim krótką linią. Nie ma w nim nic do ustawiania („This node does not have any parameters"). Zamknij zatem panel.</p>
+<div class="krok"><div class="krok-nr">14</div><div class="krok-tresc"><p>Wróć do węzła „Message a model" i podmień obie wiadomości. W wiadomości z rolą „System" wpisz:</p></div></div>
+<p>„Odpowiadasz wyłącznie na podstawie sprawdzonych informacji. Przed odpowiedzią sprawdź fakty w Wikipedii. Jeśli nie masz pewności, napisz NIE WIEM."</p>
+<p>W wiadomości z rolą „User" wpisz konkretne pytanie o fakty, na przykład:</p>
+<p>„W którym roku powstała agencja reklamowa Ogilvy i kto ją założył? Podaj też jedno zdanie o tym, czym zasłynęła najbardziej."</p>
+<div class="krok"><div class="krok-nr">15</div><div class="krok-tresc"><p>Kliknij „Execute step" i przyjrzyj się panelowi OUTPUT. Oprócz samej odpowiedzi zobaczysz w nim ślad po tym, że model sięgnął po narzędzie: wpis z zapytaniem, które sam ułożył, i z tym, co Wikipedia mu odesłała.</p></div></div>
+<figure class="rysunek"><a href="../img/rys-4-6-800.jpg" target="_blank" rel="noopener"><picture><source type="image/avif" srcset="../img/rys-4-6-800.avif 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><source type="image/webp" srcset="../img/rys-4-6-800.webp 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px"><img src="../img/rys-4-6-800.jpg" srcset="../img/rys-4-6-800.jpg 800w" sizes="(max-width: 44rem) calc(100vw - 2.5rem), 703px" alt="Dwa rodzaje połączeń. Jedno wnosi dane, drugie możliwości" width="800" height="576" loading="lazy" decoding="async"></picture></a><figcaption><span class="rys-nr">Rys. 4.6.</span> Dwa rodzaje połączeń. Jedno wnosi dane, drugie możliwości</figcaption></figure>
+<aside class="ramka ramka-uwaga"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">!</span><span class="ramka-rodzaj">UWAGA</span></div><p>Model, w zależności od stopnia swojego zaawansowania, sam też często decyduje, czy sięgnąć po narzędzie. Nie wykonuje twojej instrukcji tak, jak węzeł wykonuje ustawienie. Może użyć Wikipedii, może uznać, że wie wystarczająco dużo, i odpowiedzieć z pamięci. Uruchom to samo polecenie trzy razy pod rząd, a możesz dostać trzy różne zachowania. To nie jest wada narzędzia ani twój błąd w konfiguracji. To podstawowa różnica między węzłem a modelem: węzeł robi zawsze to samo, model podejmuje decyzję. Warto to zapamiętać, bo z tej jednej właściwości bierze się większość rozczarowań systemami opartymi na AI - i dlatego wszystko, co w tej książce zależy od oceny modelu, trzeba od czasu do czasu sprawdzić ręcznie.</p></aside>
+<aside class="ramka ramka-ciekawostka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">?</span><span class="ramka-rodzaj">DLA CIEKAWYCH</span></div><p>Wikipedia jest tu tylko najprostszym przykładem, bo nie wymaga żadnej rejestracji. W tym samym miejscu podłącza się wyszukiwarkę Google, twoją bazę produktów, kalendarz albo firmowe repozytorium dokumentów. Zasada nie zmienia się ani trochę: model nie przestaje być modelem, tylko przestaje być zamknięty w tym, co zapamiętał podczas nauki.</p></aside>
+<h2 id="ile-to-kosztuje">Ile to kosztuje</h2>
+<p>Gmail z rozdziału 3 był darmowy - wysyłanie maili w twoim imieniu nic nie kosztowało. Węzeł OpenAI jest inny: każde „Execute step" to prawdziwe zapytanie do serwerów OpenAI, a ty płacisz za nie według długości zarówno polecenia, jak i odpowiedzi, liczonej w małych jednostkach tekstu zwanych tokenami. Tańsze modele, takie jak gpt-4o-mini, kosztują ułamki centa za pojedyncze uruchomienie.</p>
+<p>Sto takich uruchomień, jak to, które właśnie wykonałeś, kosztuje przy najtańszym modelu około dwóch centów, czyli mniej niż dziesięć groszy. Tysiąc kosztuje mniej niż złotówkę. Nie znaczy to, że koszt jest nieistotny. Rachunek zaczyna być jednak widoczny dopiero wtedy, gdy przepływ działa sam, codziennie, na kilkudziesięciu elementach naraz. Do tego wrócimy w rozdziale 5.</p>
+<aside class="ramka ramka-wskazowka"><div class="ramka-glowa"><span class="ramka-ikona" aria-hidden="true">✦</span><span class="ramka-rodzaj">WSKAZÓWKA</span></div><p>Podczas testowania i poprawiania polecenia zostań przy tańszym modelu - różnica w jakości rzadko usprawiedliwia różnicę w cenie na tym etapie. Przełącz się na mocniejszy model dopiero wtedy, gdy wiesz już dokładnie, jakiego wyniku oczekujesz.</p></aside>
+<h2 id="co-moze-pojsc-nie-tak">Co może pójść nie tak</h2>
+<ul><li>Węzeł zgłasza błąd „401 Unauthorized: Incorrect API key provided". Klucz API jest błędny albo niekompletny - sprawdź, czy skopiowałeś go w całości, bez spacji na początku lub końcu.</li><li>Ten sam błąd 401 pojawia się mimo poprawnego klucza. Na koncie OpenAI nie ma podpiętej metody płatności albo ustawionego limitu wydatków - sprawdź zakładkę „Billing".</li><li>Węzeł zgłasza błąd o przekroczonym limicie zapytań albo braku środków (komunikat zawiera „rate limit" albo „insufficient_quota"). Poczekaj chwilę i spróbuj ponownie, a jeśli się powtarza, sprawdź limit wydatków na koncie OpenAI.</li><li>Zamknąłeś stronę OpenAI, zanim skopiowałeś klucz, i teraz nie możesz go nigdzie znaleźć. Klucze API są pokazywane w pełnej postaci tylko raz - wróć do „API keys" i utwórz nowy.</li><li>Węzeł zgłasza błąd, że wybrany model nie istnieje. Nazwa modelu w rozwijanym polu mogła się zmienić od czasu napisania tego rozdziału - wybierz najbliższy odpowiednik z rodziny GPT.</li></ul>
+<h2 id="wariacje-na-temat">Wariacje na temat</h2>
+<p>Zmień model na inny z tej samej rodziny i zapuść to samo polecenie jeszcze raz. Porównaj różnicę w jakości odpowiedzi.</p>
+<p>Przepisz polecenie systemowe tak, żeby zmienić formę wyniku - punktory zamiast zdań, inny język, krótszy albo dłuższy tekst. Ta sama treść wejściowa da bardzo różne wyniki, w zależności od tego, jak dokładnie opiszesz oczekiwaną formę.</p>
+<p>Model językowy nie ma pojęcia o twojej marce, dopóki mu o niej nie powiesz - a to jest dokładnie ta sama zasada, która rządziła każdym dobrym briefem, zanim ktokolwiek wymyślił słowo „prompt".</p>
+  </article>
+  <nav class="nawigacja-rozdzialow">
+  <a class="nr-poprz" href="3.html"><span class="nr-kier">← Poprzednio</span><span class="nr-tytul">Dodajemy pierwszy własny węzeł</span></a>
+  <a class="nr-nast" href="5.html"><span class="nr-kier">Dalej →</span><span class="nr-tytul">Monitor konkurencji</span></a>
+</nav>
+</main>
+<footer class="stopka">
+  <div class="srodek">
+    <p class="stopka-tytul">Automatyzacje bez kodowania</p>
+    <p class="stopka-meta">Marek Staniszewski · <a href="https://heuristica.pl">Heuristica</a> · 2026</p>
+    <p class="stopka-meta"><a href="../index.html">Spis treści</a> · <a href="../index.html#pliki">Pliki do pobrania</a> · <a href="../karta-redakcyjna.html">Karta redakcyjna</a></p>
+    <p class="stopka-licencja">Treść na licencji <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl" rel="license noopener">CC BY-NC-SA 4.0</a></p>
+  </div>
+</footer>
+<div id="baner-cookies" class="baner-cookies" hidden>
+  <p>Ta strona liczy odwiedziny przez Google Analytics. Zgadzasz się?</p>
+  <div class="baner-akcje">
+    <button id="cookies-tak" class="btn btn-maly">Zgadzam się</button>
+    <button id="cookies-nie" class="btn btn-maly btn-cichy">Nie teraz</button>
+  </div>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

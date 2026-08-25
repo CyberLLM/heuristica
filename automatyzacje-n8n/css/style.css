@@ -1,0 +1,278 @@
+/* Automatyzacje bez kodowania - wydanie online
+   Paleta wzięta wprost z okładki: kremowy papier, granat, pomarańcz.
+   Dwa kroje o ostrym podziale ról (zasada z playbooka): szeryf do czytania,
+   grotesk wyłącznie do nawigacji. Playfair tylko na tytuły - nawiązanie do okładki. */
+
+@font-face{font-family:'Literata';src:url('../fonts/Literata-Variable-normal-latin-ext.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Literata';src:url('../fonts/Literata-Variable-normal-latin.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Literata';src:url('../fonts/Literata-Variable-italic-latin-ext.woff2') format('woff2');font-weight:200 900;font-style:italic;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Literata';src:url('../fonts/Literata-Variable-italic-latin.woff2') format('woff2');font-weight:200 900;font-style:italic;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122;}
+@font-face{font-family:'Archivo';src:url('../fonts/Archivo-Variable-normal-latin-ext.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Archivo';src:url('../fonts/Archivo-Variable-normal-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122;}
+@font-face{font-family:'Playfair Display';src:url('../fonts/PlayfairDisplay-Variable-latin-ext.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap;
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Playfair Display';src:url('../fonts/PlayfairDisplay-Variable-latin.woff2') format('woff2');font-weight:400 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122;}
+
+:root{
+  --papier:#FBF6EA;          /* tło okładki */
+  --papier-cien:#F3EBD9;
+  --papier-czysty:#FFFDF7;
+  --granat:#0E2745;          /* tytuł z okładki */
+  --granat-mocny:#061F3D;
+  --tekst:#1F2C3D;
+  --tekst-cichy:#5C6B7E;
+  --tekst-slaby:#8794A5;
+  --akcent:#DD5C33;          /* pomarańczowy kwadrat z okładki */
+  --akcent-ciemny:#B8451F;
+  --akcent-tlo:#FBEDE6;
+  --linia:#E3DAC6;
+  --linia-mocna:#CFC3A9;
+  --szer:38rem;
+  --font-tekst:'Literata',Georgia,serif;
+  --font-ui:'Archivo',system-ui,-apple-system,Segoe UI,sans-serif;
+  --font-tytul:'Playfair Display',Georgia,serif;
+  --pasek-h:56px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--pasek-h) + 1rem)}
+body{margin:0;background:var(--papier);color:var(--tekst);font-family:var(--font-tekst);
+  font-size:clamp(16.5px,.55vw + 15px,18.5px);line-height:1.62;
+  font-optical-sizing:auto;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--akcent-ciemny);text-underline-offset:.16em;text-decoration-thickness:.06em}
+a:hover{color:var(--akcent)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;
+  background:var(--papier-cien);padding:.08em .26em;border-radius:3px;word-break:break-word}
+.srodek{max-width:64rem;margin:0 auto;padding:0 1.25rem}
+.srodek.waski{max-width:46rem}
+.kicker{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--akcent-ciemny);font-weight:600;margin:0 0 .5rem}
+
+/* ---------- przyciski ---------- */
+.btn{display:inline-block;font-family:var(--font-ui);font-weight:600;font-size:.92rem;
+  background:var(--granat);color:var(--papier-czysty);border:1px solid var(--granat);
+  padding:.62rem 1.15rem;border-radius:7px;text-decoration:none;cursor:pointer;
+  transition:background .15s,transform .15s}
+.btn:hover{background:var(--akcent);border-color:var(--akcent);color:#fff;transform:translateY(-1px)}
+.btn-duzy{padding:.85rem 1.6rem;font-size:1rem}
+.btn-maly{padding:.42rem .8rem;font-size:.82rem}
+.btn-cichy{background:transparent;color:var(--granat)}
+.btn-cichy:hover{background:var(--granat);color:var(--papier-czysty);border-color:var(--granat)}
+
+/* ---------- pasek górny ---------- */
+.pasek{position:sticky;top:0;z-index:50;height:var(--pasek-h);
+  background:color-mix(in srgb,var(--papier) 88%,transparent);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linia)}
+.pasek-srodek{max-width:64rem;margin:0 auto;padding:0 1.25rem;height:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.pasek-wstecz,.pasek-marka{font-family:var(--font-ui);font-size:.88rem;font-weight:600;
+  color:var(--granat);text-decoration:none}
+.pasek-wstecz:hover,.pasek-marka:hover{color:var(--akcent)}
+.pasek-tytul{font-family:var(--font-ui);font-size:.82rem;color:var(--tekst-cichy);
+  letter-spacing:.06em;text-transform:uppercase;font-weight:500;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.postep{position:fixed;top:0;left:0;height:3px;width:0;background:var(--akcent);z-index:60;transition:width .1s linear}
+
+/* ---------- strona główna ---------- */
+.hero{padding:3.5rem 0 3rem;border-bottom:1px solid var(--linia)}
+.hero-srodek{max-width:64rem;margin:0 auto;padding:0 1.25rem;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.hero h1{font-family:var(--font-tytul);font-weight:700;color:var(--granat-mocny);
+  font-size:clamp(2.4rem,5.5vw,3.9rem);line-height:1.02;margin:0 0 .5rem;letter-spacing:-.015em}
+.hero-podtytul{font-family:var(--font-ui);font-size:clamp(1.05rem,2vw,1.3rem);
+  color:var(--tekst-cichy);margin:0 0 1.4rem;font-weight:500}
+.hero-opis{font-size:1.05rem;margin:0 0 1.8rem;max-width:32rem}
+.hero-akcje{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.hero-autor{font-family:var(--font-ui);font-size:.86rem;color:var(--tekst-slaby);margin:0;
+  letter-spacing:.03em}
+.hero-okladka img{border-radius:4px;box-shadow:0 18px 44px rgba(14,39,69,.2),0 3px 10px rgba(14,39,69,.1)}
+
+.pas{padding:3.2rem 0;border-bottom:1px solid var(--linia)}
+.pas-tint{background:var(--papier-cien)}
+.pas h2{font-family:var(--font-tytul);font-size:clamp(1.6rem,3vw,2.1rem);color:var(--granat-mocny);
+  margin:0 0 1.4rem;font-weight:700}
+.pas-wstep{color:var(--tekst-cichy);margin:0 0 1.4rem}
+
+.karty{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.1rem}
+.karta{background:var(--papier-czysty);border:1px solid var(--linia);border-radius:10px;
+  padding:1.4rem 1.3rem;position:relative}
+.karta-nr{position:absolute;top:1.1rem;right:1.2rem;font-family:var(--font-tytul);font-size:2.2rem;
+  font-weight:700;color:var(--linia-mocna);line-height:1}
+.karta h3{font-family:var(--font-ui);font-size:1.05rem;color:var(--granat);margin:0 0 .5rem;
+  font-weight:700;padding-right:2rem}
+.karta p{margin:0;font-size:.95rem;color:var(--tekst-cichy)}
+
+/* spis treści */
+.spis-czesc{font-family:var(--font-ui);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tekst-slaby);font-weight:700;margin:1.8rem 0 .6rem}
+.spis-czesc:first-child{margin-top:0}
+ol.spis{list-style:none;margin:0;padding:0;border-top:1px solid var(--linia)}
+ol.spis li{border-bottom:1px solid var(--linia)}
+ol.spis a{display:flex;gap:1rem;align-items:baseline;padding:.85rem .3rem;text-decoration:none;
+  color:var(--tekst);transition:background .12s,padding .12s}
+ol.spis a:hover{background:var(--papier-czysty);padding-left:.7rem;color:var(--granat)}
+.spis-etykieta{font-family:var(--font-ui);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--akcent-ciemny);font-weight:700;flex:0 0 6.5rem}
+.spis-tytul{font-weight:500}
+
+.pobierz-akcje{display:flex;gap:.75rem;flex-wrap:wrap;margin:0 0 .5rem}
+
+/* pliki */
+.lista-plikow{list-style:none;margin:1.6rem 0 0;padding:0;border-top:1px solid var(--linia)}
+.lista-plikow li{display:grid;grid-template-columns:auto auto 1fr;gap:.4rem 1rem;align-items:baseline;
+  padding:.85rem .2rem;border-bottom:1px solid var(--linia)}
+.lista-plikow code{background:transparent;padding:0;font-size:.92rem;color:var(--granat);font-weight:600}
+.plik-rozdzial{font-family:var(--font-ui);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--akcent-ciemny);font-weight:700;white-space:nowrap}
+.plik-opis{font-size:.9rem;color:var(--tekst-cichy);grid-column:1/-1}
+
+/* ---------- lektura ---------- */
+.lektura{padding:2.5rem 1.25rem 1rem}
+.tekst{max-width:var(--szer);margin:0 auto}
+.tekst h1{font-family:var(--font-tytul);font-weight:700;color:var(--granat-mocny);
+  font-size:clamp(1.9rem,4.2vw,2.75rem);line-height:1.08;margin:0 0 1.8rem;letter-spacing:-.012em}
+.tekst h2{font-family:var(--font-ui);font-weight:700;color:var(--granat);
+  font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.25;margin:2.8rem 0 .9rem;
+  padding-top:1.1rem;border-top:2px solid var(--linia)}
+.tekst p{margin:0 0 1.05rem}
+.tekst strong{font-weight:700;color:var(--granat-mocny)}
+.tekst ul{margin:0 0 1.2rem;padding-left:1.15rem}
+.tekst ul li{margin-bottom:.5rem}
+.tekst ul li::marker{color:var(--akcent)}
+
+/* kroki instrukcji */
+.krok{display:grid;grid-template-columns:2rem 1fr;gap:.9rem;margin:0 0 1.15rem;align-items:start}
+.krok-nr{font-family:var(--font-ui);font-weight:700;font-size:.82rem;color:var(--akcent-ciemny);
+  background:var(--akcent-tlo);border-radius:50%;width:2rem;height:2rem;
+  display:flex;align-items:center;justify-content:center;margin-top:.12rem}
+.krok-tresc>p{margin:0 0 .55rem}
+.krok-tresc>p:last-child{margin-bottom:0}
+
+/* potwierdzenie sukcesu */
+.ekran{background:var(--papier-czysty);border-left:3px solid var(--granat);
+  padding:.7rem .95rem;margin:.6rem 0 1rem;font-size:.95rem;border-radius:0 5px 5px 0}
+.ekran-etykieta{display:block;font-family:var(--font-ui);font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--tekst-slaby);font-weight:700;margin-bottom:.2rem}
+
+/* ramki */
+.ramka{margin:1.8rem 0;padding:1.15rem 1.3rem;border-radius:9px;border:1px solid var(--linia);
+  background:var(--papier-czysty);font-size:.96rem}
+.ramka p{margin:0 0 .7rem}
+.ramka p:last-child{margin-bottom:0}
+.ramka-glowa{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.ramka-ikona{width:1.35rem;height:1.35rem;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-family:var(--font-ui);font-size:.78rem;font-weight:700;
+  background:var(--granat);color:var(--papier-czysty);flex:none}
+.ramka-rodzaj{font-family:var(--font-ui);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:700;color:var(--tekst-cichy)}
+.ramka-uwaga{border-left:3px solid var(--akcent);background:var(--akcent-tlo)}
+.ramka-uwaga .ramka-ikona{background:var(--akcent)}
+.ramka-uwaga .ramka-rodzaj{color:var(--akcent-ciemny)}
+.ramka-wskazowka{border-left:3px solid var(--granat)}
+.ramka-ciekawostka{border-left:3px solid var(--linia-mocna);background:var(--papier-cien);font-style:italic}
+.ramka-ciekawostka .ramka-ikona{background:var(--tekst-slaby)}
+.ramka-ciekawostka em,.ramka-ciekawostka strong{font-style:normal}
+.ramka-alternatywa{border-left:3px solid var(--tekst-slaby)}
+
+/* rysunki */
+.rysunek{margin:1.9rem 0;padding:0}
+.rysunek img{border:1px solid var(--linia);border-radius:7px;background:var(--papier-czysty);
+  box-shadow:0 2px 10px rgba(14,39,69,.06)}
+.rysunek figcaption{font-family:var(--font-ui);font-size:.82rem;color:var(--tekst-cichy);
+  margin-top:.6rem;line-height:1.45}
+.rys-nr{color:var(--akcent-ciemny);font-weight:700}
+
+/* tabela */
+.tabela-wrap{margin:2rem 0;padding:0}
+.tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--linia);border-radius:8px}
+table.tab-klocki{border-collapse:collapse;width:100%;font-family:var(--font-ui);font-size:.82rem;
+  background:var(--papier-czysty);min-width:38rem}
+table.tab-klocki th,table.tab-klocki td{padding:.65rem .8rem;text-align:left;vertical-align:top;
+  border-bottom:1px solid var(--linia)}
+table.tab-klocki thead th{background:var(--granat);color:var(--papier-czysty);font-weight:600;
+  font-size:.78rem;line-height:1.3}
+table.tab-klocki thead th span{font-weight:400;opacity:.72;font-size:.72rem}
+table.tab-klocki tbody th{font-weight:700;color:var(--granat);white-space:nowrap;background:var(--papier-cien)}
+table.tab-klocki td span{color:var(--tekst-slaby);font-size:.75rem}
+table.tab-klocki tbody tr:last-child th,table.tab-klocki tbody tr:last-child td{border-bottom:0}
+.tabela-wrap figcaption{font-family:var(--font-ui);font-size:.82rem;color:var(--tekst-cichy);margin-top:.6rem}
+
+/* nawigacja rozdziałów */
+.nawigacja-rozdzialow{max-width:var(--szer);margin:3rem auto 0;display:grid;
+  grid-template-columns:1fr 1fr;gap:.9rem;padding-top:1.6rem;border-top:1px solid var(--linia)}
+.nawigacja-rozdzialow a{display:block;padding:.95rem 1.1rem;border:1px solid var(--linia);
+  border-radius:9px;text-decoration:none;background:var(--papier-czysty);transition:border-color .15s,transform .15s}
+.nawigacja-rozdzialow a:hover{border-color:var(--akcent);transform:translateY(-1px)}
+.nr-nast{text-align:right}
+.nr-kier{display:block;font-family:var(--font-ui);font-size:.68rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--akcent-ciemny);font-weight:700;margin-bottom:.2rem}
+.nr-tytul{display:block;font-family:var(--font-ui);font-size:.92rem;color:var(--granat);font-weight:500;line-height:1.3}
+
+/* podpis autora pod przedmową */
+.podpis{margin:0;font-family:var(--font-ui);font-weight:600;color:var(--granat);line-height:1.45}
+.podpis + .podpis{font-weight:400;color:var(--tekst-slaby);font-size:.88rem}
+p:not(.podpis) + .podpis{margin-top:2rem;padding-top:1.3rem;border-top:1px solid var(--linia)}
+
+/* słowniczek - hasła jako lista definicji */
+.slowniczek p:has(> strong:first-child){padding:.85rem 0 .85rem 1rem;margin:0;
+  border-bottom:1px solid var(--linia);border-left:2px solid transparent;font-size:.97rem;
+  transition:border-color .15s,background .15s}
+.slowniczek p:has(> strong:first-child):hover{border-left-color:var(--akcent);background:var(--papier-czysty)}
+.slowniczek p > strong:first-child{font-family:var(--font-ui);font-size:.95rem;color:var(--granat-mocny);
+  display:inline-block;margin-right:.15rem}
+
+/* karta redakcyjna */
+.karta-redakcyjna .kr-podtytul{font-family:var(--font-ui);color:var(--tekst-cichy);
+  font-size:1.05rem;margin:-1.3rem 0 2rem}
+.kr-dane{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.4rem;margin:0 0 2.4rem;
+  padding:1.3rem 0;border-top:1px solid var(--linia);border-bottom:1px solid var(--linia);font-size:.95rem}
+.kr-dane dt{font-family:var(--font-ui);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tekst-slaby);font-weight:700;padding-top:.2rem}
+.kr-dane dd{margin:0}
+.kr-oswiadczenie{background:var(--akcent-tlo);border-left:3px solid var(--akcent);
+  border-radius:0 8px 8px 0;padding:1.15rem 1.3rem;margin:0 0 1.4rem}
+.kr-oswiadczenie p{margin:0;font-size:.97rem}
+
+/* stopka */
+.stopka{margin-top:3.5rem;padding:2.4rem 0;border-top:1px solid var(--linia);background:var(--papier-cien)}
+.stopka .srodek{text-align:center}
+.stopka-tytul{font-family:var(--font-tytul);font-size:1.15rem;color:var(--granat);margin:0 0 .3rem;font-weight:700}
+.stopka-meta{font-family:var(--font-ui);font-size:.85rem;color:var(--tekst-cichy);margin:0 0 .35rem}
+.stopka-licencja{font-family:var(--font-ui);font-size:.78rem;color:var(--tekst-slaby);margin:.8rem 0 0}
+
+/* baner cookies */
+.baner-cookies{position:fixed;left:1rem;right:1rem;bottom:1rem;max-width:34rem;margin:0 auto;z-index:80;
+  background:var(--granat);color:var(--papier);border-radius:11px;padding:1rem 1.2rem;
+  display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  box-shadow:0 10px 34px rgba(6,31,61,.3);font-family:var(--font-ui);font-size:.86rem}
+.baner-cookies[hidden]{display:none}
+.baner-cookies p{margin:0}
+.baner-akcje{display:flex;gap:.5rem}
+.baner-cookies .btn{background:var(--akcent);border-color:var(--akcent);color:#fff}
+.baner-cookies .btn-cichy{background:transparent;border-color:rgba(251,246,234,.35);color:var(--papier)}
+
+@media (max-width:760px){
+  .hero-srodek{grid-template-columns:1fr;gap:2rem}
+  .hero-okladka{order:-1;max-width:15rem;margin:0 auto}
+  .nawigacja-rozdzialow{grid-template-columns:1fr}
+  .nr-nast{text-align:left}
+  .pasek-tytul{display:none}
+  ol.spis a{flex-direction:column;gap:.15rem}
+  .spis-etykieta{flex:none}
+  .krok{grid-template-columns:1.7rem 1fr;gap:.7rem}
+  .krok-nr{width:1.7rem;height:1.7rem;font-size:.76rem}
+}
+
+@media print{
+  .pasek,.postep,.nawigacja-rozdzialow,.baner-cookies,.hero-akcje{display:none}
+  body{background:#fff}
+  .tekst{max-width:none}
+}

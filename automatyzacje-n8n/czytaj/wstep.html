@@ -48,7 +48,7 @@
     <h1>Przedmowa</h1>
 <p>Większości narzędzi AI uczyłem się od… AI.</p>
 <p>Istnieją rzecz jasna zyliardy tutoriali, artykułów, filmów na YouTube czy webinarów płatnych i bezpłatnych, gdzie wszystko jest dokładnie omówione.</p>
-<p>Poznając jednak takie rozwiązania jak Make.com, Apify, Pinecone czy inne narzędzia - choćby Google Colab, Jupyter, notatniki Wolfram Language itp., których chciałem użyć w różnych projektach - pytam najczęściej Claude'a lub ChatGPT i robię kolejne eksperymenty, dopytując model o szczegóły.</p>
+<p>Poznając jednak takie rozwiązania jak np. Make.com (dawniej Integromat), Apify, Pinecone Vector Database czy środowiska notebookowe (Google Colaboratory, Jupyter Notebook, Wolfram Language Notebooks), których chciałem użyć w różnych projektach - pytam najczęściej Claude'a lub ChatGPT i robię kolejne eksperymenty, dopytując model o szczegóły.</p>
 <p>LLM jako tutor ma wiele wad. Odpowiedzi są często niepotrzebnie zbyt obszerne (nawet po promptowym napominaniu), czasem zaś zbyt zaawansowane albo banalne - czyli nieadekwatne do poziomu wiedzy. Model pomimo tego, że wie już wiele na mój temat nie zawsze trafnie odczytuje aktualne intencje i potrzeby informacyjne.</p>
 <p>Dużą zaletą takiej nauki jest jednak fakt, że model przez cały czas niezmordowanie i cierpliwie coś tłumaczy - jest nieustannie dostępny i pozostaje niewzruszony przy zadawaniu nawet najgłupszych pytań…</p>
 <p>Podobnie uczyłem się też obsługi platformy n8n. Obecnie używam jej do wielu projektów jako wsparcia np. w chatbotach osadzanych na stronach www czy modułów CRM.</p>
@@ -61,8 +61,11 @@
 <p>Każdy rozdział redagowałem, usuwając to, co uznałem za zbyteczne, i uzupełniając własnymi notatkami.</p>
 <p>Wszystkie opisywane przez Claude operacje testowałem ręcznie na n8n, sprawdzając wykonania, i nanosiłem poprawki do generowanych opisów. Każdy ważniejszy krok dokumentowany był również zrzutem ekranu obrazującym omawiane zagadnienie.</p>
 <h2 id="na-ile-byl-to-eksperyment-udany">Na ile był to eksperyment udany?</h2>
+<p>Patrząc na to z perspektywy czasu spędzonego przy kierowaniu agentem i korygowaniu tego, co dostarczał w kolejnych etapach mam wrażenie, że podobny poradnik - tej samej objętości - napisałbym samodzielnie w tym samym czasie. Kwestię jakości muszę tu pominąć ponieważ nie mam najmniejszego pojęcia czy byłby on wtedy lepszy czy gorszy. Nie mam też na razie pomysłu w jaki sposób można by to faktycznie sprawdzić i zmierzyć.</p>
+<p>Charakter całego tego procesu najlepiej zaś chyba oddaje popularyzujący się ostatnio nieformalny termin w postaci „bot sitting". Bo faktycznie większość działań, jakie musiałem tu podejmować sprowadzało się do „niańczenia" agenta AI i ciągłego pilnowania żeby dostarczał użyteczne wyniki.</p>
+<h2 id="na-ile-sa-one-faktycznie-uzyteczne">Na ile są one faktycznie użyteczne?</h2>
 <p>Ten osąd pozostawiam już Czytelnikom, którzy także lubią eksperymentować i zechcą spróbować uczyć się n8n w ten właśnie sposób. Zapraszam również do zgłaszania poprawek, uwag, sugestii zmian czy kierunków rozbudowy tego ebooka. Projekt ma charakter otwarty i dzięki takim uwagom mogą powstawać kolejne, ulepszone wersje służące kolejnym Czytelnikom.</p>
-<p>Tyle ode mnie. Resztę słów poniżej napisało już AI…</p>
+<p>Tyle ode mnie. Resztę słów poniżej pisało już AI…</p>
 <p class="podpis">Marek Staniszewski</p>
 <p class="podpis">Sierpień 2026</p>
 <h2 id="wstep-zawrzyjmy-pewien-kontrakt">Wstęp: Zawrzyjmy pewien kontrakt…</h2>
@@ -71,7 +74,7 @@
 <p>To, co tu robimy, nie jest zresztą nowe. Marketerzy programowali swoje narzędzia, odkąd istnieje arkusz kalkulacyjny: makro liczące marże, reguła w skrzynce mailowej przekierowująca leady do właściwej osoby. n8n jest kolejnym wcieleniem tego samego pomysłu. Różnica jest jedna: tym razem jeden z kroków potrafi przeczytać tekst i ocenić, czy jest istotny. <strong>Automatyzacja, o której będzie mowa w tej książce, nie rozwiązuje problemu, że nie umiesz programować, tylko problem, że masz na coś czas raz w tygodniu, a potrzebujesz mieć go codziennie.</strong></p>
 <p>Ile z tego wymaga programowania? Jeśli boisz się tego słowa, dobra wiadomość jest taka, że ani jednej linijki. Nie musisz umieć programować, nie napiszesz w tej książce ani jednego wiersza kodu - wszystko robisz myszą: przeciągasz, klikasz, wpisujesz tekst w pole. Jeśli w którymś miejscu na ekranie pojawi się coś, co wygląda jak kod, zostanie to wyjaśnione dokładnie wtedy, kiedy się pojawi.</p>
 <p>Potrzebujesz trzech rzeczy: przeglądarki internetowej, karty płatniczej do założenia konta na modelu językowym (koszt liczony w groszach za uruchomienie, nie w złotówkach miesięcznie) i dwóch godzin, najlepiej jednym ciągiem - to twój czas do pierwszego działającego systemu, opisanego w rozdziale 1. Każdy z trzech głównych systemów w części drugiej tej książki to potem jeszcze jeden wieczór pracy. Samego n8n nie musisz nigdzie instalować - do konta w n8n karta nie jest potrzebna, dowiesz się dlaczego już w rozdziale 1.</p>
-<p>Będzie moment, w którym się zgubisz. To normalne - w rozdziale 4 celowo pokażę ci błąd, żebyś zobaczył, jak wygląda w moim towarzystwie, zanim zobaczysz go sam. Jeśli utkniesz na dłużej, każdy rozdział kończy się sekcją „Co może pójść nie tak", z dosłownymi komunikatami błędów i sposobem naprawy. Zacznij od niej, zanim zaczniesz szukać w internecie.</p>
+<p>Będzie moment, w którym się zgubisz. To normalne - w rozdziale 4 celowo pokażę ci błąd, żebyś zobaczył, jak wygląda w moim towarzystwie, zanim zobaczysz go sam. Jeśli utkniesz na dłużej, w rozdziałach 2-7 znajdziesz sekcję „Co może pójść nie tak", z dosłownymi komunikatami błędów i sposobem naprawy. Zacznij od niej, zanim zaczniesz szukać w internecie.</p>
 <p>Nie obiecuję ci rewolucji ani konkretnej liczby zaoszczędzonych godzin - to zależy od tego, co akurat robisz w swojej pracy. Obiecuję trzy działające systemy i to, że po drodze przestaniesz się bać słowa, które właśnie zdjęliśmy z piedestału.</p>
   </article>
   <nav class="nawigacja-rozdzialow">

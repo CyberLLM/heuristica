@@ -222,42 +222,63 @@
     }
 
     .services-tabs {
-      max-width: 980px;
-      margin: 0 auto 50px;
-      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin: 0 auto 48px auto;
+      padding: 6px;
       list-style: none;
-      display: flex;
-      flex-wrap: wrap;
+      background: #10151f;
       border: 1px solid #2d3d4a;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #141923;
+      border-radius: 8px;
     }
     .services-tabs li {
-      flex: 1 1 180px;
       margin: 0;
-      text-align: center;
-      border-right: 1px solid #2d3d4a;
-      transition: background 0.2s;
-    }
-    .services-tabs li:last-child {
-      border-right: none;
+      padding: 0;
+      list-style: none;
     }
     .services-tabs li a {
-      display: block;
-      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 10px 6px;
+      border-radius: 6px;
+      background: transparent;
+      color: #9ea7b3;
       text-decoration: none;
-      color: #d4a574;
       font-weight: 600;
-      font-size: 0.85em;
-      letter-spacing: 0.3px;
-      transition: background 0.2s, color 0.2s;
+      font-size: 0.76em;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      line-height: 1.35;
+      text-align: center;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
       cursor: pointer;
     }
-    .services-tabs li a:hover,
-    .services-tabs li.active a {
-      background: #2d5a4e;
+    .services-tabs li a .tab-num {
+      font-size: 0.85em;
+      color: #d4a574;
+      font-weight: 700;
+      margin-bottom: 3px;
+      opacity: 0.8;
+      letter-spacing: 1px;
+    }
+    .services-tabs li a:hover {
+      background: rgba(255, 255, 255, 0.04);
       color: #e8e6e1;
+    }
+    .services-tabs li.active a {
+      background: #1c2433;
+      color: #ffffff;
+      border-color: #d4a574;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+    .services-tabs li.active a .tab-num {
+      opacity: 1;
+      color: #d4a574;
     }
 
     .services-content {
@@ -267,7 +288,7 @@
       display: block;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 820px) {
       .hero-section h1 {
         font-size: 1.8em;
       }
@@ -281,14 +302,30 @@
         grid-template-columns: 1fr 1fr;
       }
       .services-tabs {
-        flex-direction: column;
-      }
-      .services-tabs li {
-        border-right: none;
-        border-bottom: 1px solid #2d3d4a;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
       }
       .services-tabs li:last-child {
-        border-bottom: none;
+        grid-column: 1 / -1;
+      }
+    }
+    @media (max-width: 500px) {
+      .services-tabs {
+        grid-template-columns: 1fr;
+      }
+      .services-tabs li:last-child {
+        grid-column: auto;
+      }
+      .services-tabs li a {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 12px 16px;
+        gap: 12px;
+        text-align: left;
+        min-height: auto;
+      }
+      .services-tabs li a .tab-num {
+        margin-bottom: 0;
       }
     }
   </style>
@@ -307,11 +344,11 @@
 
   <div class="container">
     <ul class="services-tabs">
-      <li class="active"><a data-tab="redesign" onclick="switchService('redesign', this)">1. AI PROCESS REDESIGN</a></li>
-      <li><a data-tab="workflows" onclick="switchService('workflows', this)">2. WORKFLOWS &amp; AGENCI</a></li>
-      <li><a data-tab="kompetencje" onclick="switchService('kompetencje', this)">3. ROZWÓJ KOMPETENCJI</a></li>
-      <li><a data-tab="strategia" onclick="switchService('strategia', this)">4. STRATEGIA &amp; CONSULTING</a></li>
-      <li><a data-tab="infrastruktura" onclick="switchService('infrastruktura', this)">5. WEB &amp; INFRASTRUKTURA</a></li>
+      <li class="active"><a data-tab="redesign" onclick="switchService('redesign', this)"><span class="tab-num">01</span><span>AI Process Redesign</span></a></li>
+      <li><a data-tab="workflows" onclick="switchService('workflows', this)"><span class="tab-num">02</span><span>Workflows &amp; Agenci</span></a></li>
+      <li><a data-tab="kompetencje" onclick="switchService('kompetencje', this)"><span class="tab-num">03</span><span>Rozwój kompetencji</span></a></li>
+      <li><a data-tab="strategia" onclick="switchService('strategia', this)"><span class="tab-num">04</span><span>Strategia &amp; Consulting</span></a></li>
+      <li><a data-tab="infrastruktura" onclick="switchService('infrastruktura', this)"><span class="tab-num">05</span><span>Web &amp; Infrastruktura</span></a></li>
     </ul>
 
     <!-- ==================== TAB 1: AI PROCESS REDESIGN ==================== -->

@@ -193,3 +193,316 @@ a:hover {
   -moz-columns: 1 !important;
 }
 
+/* ===== NOWE KOMPONENTY PROCESOWE I STRUKTURALNE ===== */
+.btn-primary {
+  display: inline-block;
+  padding: 13px 26px;
+  background: var(--accent-primary);
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.95em;
+}
+.btn-primary:hover {
+  background: #396f60;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 13px 26px;
+  background: var(--accent-secondary);
+  color: #0f1419 !important;
+  text-decoration: none !important;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.95em;
+}
+.btn-secondary:hover {
+  background: #e2b788;
+  color: #0f1419 !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+}
+
+/* Callout cytaty i wyróżnienia */
+.quote-box {
+  background: rgba(212, 165, 116, 0.08);
+  border-left: 4px solid var(--accent-secondary);
+  padding: 16px 22px;
+  margin: 24px 0;
+  border-radius: 0 6px 6px 0;
+}
+.quote-box p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.02em;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* 6-krokowy model Heuristica */
+.process-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 28px 0 36px 0;
+}
+.process-card-step {
+  background: #151a24;
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 6px;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.process-card-step:hover {
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+}
+.step-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  background: rgba(212, 165, 116, 0.12);
+  padding: 3px 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.process-card-step h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.05em;
+  color: var(--text-primary);
+}
+.process-card-step p {
+  margin: 0;
+  font-size: 0.88em;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* 3 Filary */
+.pillars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 28px 0;
+}
+.pillar-card {
+  background: #151a24;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 26px 28px;
+  transition: border-color 0.2s;
+}
+.pillar-card:hover {
+  border-color: var(--accent-secondary);
+}
+.pillar-tag {
+  color: var(--accent-secondary);
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.pillar-card h3 {
+  margin-top: 2px;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  color: var(--text-primary);
+}
+.pillar-lead {
+  font-size: 1em;
+  color: var(--accent-secondary);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.pillar-list {
+  columns: 1 !important;
+  -webkit-columns: 1 !important;
+  -moz-columns: 1 !important;
+  padding-left: 20px;
+  margin: 14px 0;
+  list-style: none;
+}
+.pillar-list li {
+  color: var(--text-primary);
+  font-size: 0.92em;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 14px;
+}
+.pillar-list li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+.pillar-result {
+  background: rgba(45, 90, 78, 0.2);
+  border: 1px solid rgba(45, 90, 78, 0.4);
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 16px 0 18px 0;
+  font-size: 0.9em;
+  color: var(--text-primary);
+}
+
+/* Capability levels */
+.capability-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+.level-card {
+  background: #1b212f;
+  border: 1px solid var(--border-color);
+  padding: 16px 18px;
+  border-radius: 4px;
+}
+.level-badge {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.level-card h4 {
+  font-size: 1em;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+}
+.level-card p {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Trajektoria zmiany - ewolucja */
+.evolution-box {
+  background: #131822;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 24px;
+  margin: 32px 0;
+}
+.evolution-tracks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 18px;
+}
+@media (max-width: 768px) {
+  .evolution-tracks {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+.track-col h4 {
+  font-size: 1em;
+  color: var(--accent-secondary);
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.track-step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.track-step-item {
+  background: #1a1f2e;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.track-step-item.highlight {
+  border-color: rgba(212, 165, 116, 0.3);
+  background: #1d2536;
+}
+.track-step-num {
+  color: var(--accent-secondary);
+  font-weight: 700;
+  font-size: 0.82em;
+  min-width: 18px;
+}
+
+/* Diagram procesu TO-BE w Redesign */
+.pipeline-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #131822;
+  border: 1px solid var(--border-color);
+  padding: 22px 14px;
+  border-radius: 6px;
+  margin: 24px 0;
+}
+.pipeline-node {
+  background: #1e2636;
+  border: 1px solid var(--accent-secondary);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.82em;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.pipeline-arrow {
+  color: var(--accent-secondary);
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Clean list utility */
+.clean-list {
+  columns: 1 !important;
+  -webkit-columns: 1 !important;
+  -moz-columns: 1 !important;
+  list-style: none;
+  padding: 0;
+  margin: 18px 0;
+}
+.clean-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+.clean-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent-secondary);
+  font-weight: 700;
+}
+
+

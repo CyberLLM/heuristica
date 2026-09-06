@@ -11,19 +11,19 @@
   gtag('config', 'G-QDHLBXLXT4');
 </script>  
   <meta charset="UTF-8">
-  <title>Usługi | HEURISTICA</title>
+  <title>Usługi • Projektujemy pracę z AI | HEURISTICA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="canonical" href="https://heuristica.pl/uslugi">
-  <meta name="description" content="Budujemy kompletną obecność online dla firm: strona internetowa, chatbot AI, analityka, automatyzacje. Domena, hosting, SEO, reklama — wszystko w jednym pakiecie.">
-  <meta property="og:title" content="Kompletna obecność online dla firm — Heuristica" />
-  <meta property="og:description" content="Strona, chatbot AI, Google Ads i automatyzacje w jednym pakiecie. Gotowe w 3 tygodnie." />
+  <meta name="description" content="Projektujemy procesy pracy z AI: AI Process Redesign, automatyzacje, agenci AI, RAG, rozwój kompetencji zespołów i doradztwo strategiczne. Zobacz ofertę Heuristica.">
+  <meta property="og:title" content="Usługi • Projektujemy pracę z AI | Heuristica" />
+  <meta property="og:description" content="Od diagnozy i projektu workflow Human + AI, po działające automatyzacje, agentów i przygotowanie zespołów." />
   <meta property="og:image" content="https://heuristica.pl/img/og-uslugi.jpg" />
   <meta property="og:url" content="https://heuristica.pl/uslugi.html" />
-  <link rel="stylesheet" href="style.css?v=premium-2026-4">
+  <link rel="stylesheet" href="style.css?v=premium-2026-workdesign">
   <style>
     .hero-section {
       text-align: center;
@@ -222,17 +222,19 @@
     }
 
     .services-tabs {
-      max-width: 600px;
-      margin: 0 auto 60px;
+      max-width: 980px;
+      margin: 0 auto 50px;
       padding: 0;
       list-style: none;
       display: flex;
-      gap: 0;
-      border-top: 1px solid #2d3d4a;
-      border-bottom: 1px solid #2d3d4a;
+      flex-wrap: wrap;
+      border: 1px solid #2d3d4a;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #141923;
     }
     .services-tabs li {
-      flex: 1;
+      flex: 1 1 180px;
       margin: 0;
       text-align: center;
       border-right: 1px solid #2d3d4a;
@@ -243,11 +245,12 @@
     }
     .services-tabs li a {
       display: block;
-      padding: 12px 16px;
+      padding: 14px 10px;
       text-decoration: none;
       color: #d4a574;
       font-weight: 600;
-      font-size: 0.95em;
+      font-size: 0.85em;
+      letter-spacing: 0.3px;
       transition: background 0.2s, color 0.2s;
       cursor: pointer;
     }
@@ -304,255 +307,250 @@
 
   <div class="container">
     <ul class="services-tabs">
-      <li class="active"><a onclick="switchService('kompletna')">KOMPLETNA OBECNOŚĆ ONLINE</a></li>
-      <li><a onclick="switchService('narzedzia')">NARZĘDZIA I AUTOMATYZACJE</a></li>
-      <li><a onclick="switchService('warsztaty')">WARSZTATY</a></li>
+      <li class="active"><a data-tab="redesign" onclick="switchService('redesign', this)">1. AI PROCESS REDESIGN</a></li>
+      <li><a data-tab="workflows" onclick="switchService('workflows', this)">2. WORKFLOWS &amp; AGENCI</a></li>
+      <li><a data-tab="kompetencje" onclick="switchService('kompetencje', this)">3. ROZWÓJ KOMPETENCJI</a></li>
+      <li><a data-tab="strategia" onclick="switchService('strategia', this)">4. STRATEGIA &amp; CONSULTING</a></li>
+      <li><a data-tab="infrastruktura" onclick="switchService('infrastruktura', this)">5. WEB &amp; INFRASTRUKTURA</a></li>
     </ul>
 
-    <div class="services-content active" id="kompletna">
-    <div class="hero-section">
-      <h1>Kompletna obecność online</h1>
-      <p>Budujemy strony, osadzamy chatboty AI i automatyzacje — wszystko co potrzebne, żeby firma była widoczna w sieci 24/7.</p>
-      <p>Jeden pakiet. Jedna wycena. Zero zbędnych zależności.</p>
-    </div>
+    <!-- ==================== TAB 1: AI PROCESS REDESIGN ==================== -->
+    <div class="services-content active" id="redesign">
+      <div class="hero-section">
+        <h1>AI Process Redesign</h1>
+        <p>Analizujemy sposób pracy zespołu i projektujemy proces na nowo: określamy, które zadania powinien wykonywać człowiek, które AI, a które można całkowicie zautomatyzować.</p>
+        <p>Nie zaczynamy od wdrożenia kolejnego programu. Zaczynamy od zrozumienia przepływu wartości.</p>
+      </div>
 
-    <div class="for-whom-section">
-      <p><strong>Dla kogo:</strong> Branże usługowe (B2C), edukacja i rozwój, małe firmy usługowe B2B — dla doradców i lekarzy, coachów, terapeutów, kancelarii, firm budowlanych, pośredników nieruchomości.</p>
-    </div>
+      <!-- Diagram procesu -->
+      <div class="pipeline-flow">
+        <div class="pipeline-node">AS-IS</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">MAPOWANIE</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">AI OPPORTUNITIES</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">HUMAN / AI / AUTOMATION</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">TO-BE WORKFLOW</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">PROTOTYP</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node">WDROŻENIE</div>
+      </div>
 
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>Domena i hosting</h3>
-        <p>Rejestrujemy domenę, konfigurujemy serwer, SSL i wszystko co potrzebne do obecności w sieci. Szybko, bezpiecznie, bez balaganu.</p>
-      </div>
-      <div class="service-card">
-        <h3>Dedykowany serwer</h3>
-        <p>Twoja strona działa na dedykowanym serwerze VPS — nie na współdzielonym hostingu. Szybciej, bezpieczniej, bez sąsiadów którzy spowalniają Twój ruch.</p>
-      </div>
-      <div class="service-card">
-        <h3>Strona internetowa</h3>
-        <p>Szybka, responsywna, dostosowana do mobile. SEO gotowe od pierwszego dnia. Klienci znajdują Cię w Google.</p>
-      </div>
-      <div class="service-card">
-        <h3>Analityka i reklama</h3>
-        <p>Google Analytics, Google Search Console i kampanie Google Ads. Analizujemy skąd przychodzą klienci i jak zwiększyć ich liczbę.</p>
-      </div>
-      <div class="service-card">
-        <h3>Chatbot AI</h3>
-        <p>Zna Twoje usługi, odpowiada na pytania i zbiera kontakty — nawet gdy biuro jest zamknięte. 24/7 na stronie.</p>
-      </div>
-      <div class="service-card">
-        <h3>Automatyzacje</h3>
-        <p>Formularze, rezerwacje, powiadomienia — procesy, które wcześniej wymagały ręcznej obsługi. Oszczędzamy czas zespołu.</p>
-      </div>
-    </div>
-
-    <div class="process-section">
-      <h2>Jak pracujemy</h2>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <h4>Discovery</h4>
-          <p>Poznajemy Twoją firmę, branżę i klientów. Tworzymy plan.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>1. Mapowanie procesu AS-IS</h3>
+          <p>Szczegółowa diagnoza obecnego sposobu pracy, ról, punktów przestojów i źródeł strat czasu w zespole.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <h4>Build</h4>
-          <p>Budujemy stronę, integrujemy chatbot, konfigurujemy analitykę i kampanie.</p>
+        <div class="service-card">
+          <h3>2. Analiza zadań i przepływu informacji</h3>
+          <p>Rozbicie procesu na jednostkowe zadania decyzyjne, powtarzalne i analityczne — od wejścia danych po rezultat.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <h4>Akceptacja</h4>
-          <p>Pokazujemy gotową stronę przed wdrożeniem. Wprowadzamy poprawki. Nic nie idzie na żywo bez Twojej zgody.</p>
+        <div class="service-card">
+          <h3>3. Identyfikacja AI Opportunities</h3>
+          <p>Precyzyjne wskazanie miejsc, w których wdrożenie AI i agentów przyniesie najwyższy mierzalny zysk (ROI) i oszczędność czasu.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <h4>Deploy</h4>
-          <p>Wdrażamy, testujemy, wychodzimy na żywo.</p>
+        <div class="service-card">
+          <h3>4. Human + AI Task Allocation</h3>
+          <p>Opracowanie przejrzystego podziału pracy: zadania dla reguł automatycznych, zadania dla modeli AI oraz obszary wymagające ludzkiego osądu.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">5</div>
-          <h4>Support</h4>
-          <p>Jesteśmy dostępni — pytania, zmiany, optymalizacje.</p>
+        <div class="service-card">
+          <h3>5. Projekt procesu TO-BE</h3>
+          <p>Docelowa architektura workflow łącząca ludzi, systemy firmowe, narzędzia AI oraz bezpieczne bazy wiedzy w jeden spójny system.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">6</div>
-          <h4>Grow</h4>
-          <p>Analizujemy dane z Analytics i Ads. Raportujemy co działa — i co zrobić, żeby przychodziło więcej klientów.</p>
+        <div class="service-card">
+          <h3>6. Prototyp i Roadmapa</h3>
+          <p>Budowa działającego prototypu na realnym wycinku procesu oraz harmonogram wdrożenia z estymacją zysków czasowych.</p>
         </div>
       </div>
-    </div>
 
-    <div class="cta-section">
-      <p>Powiedz czym się zajmujesz — pokażemy jak mogłoby to wyglądać u Ciebie.</p>
-      <a href="#" class="btn-cta" data-tally-open="obAOEx">Umów rozmowę</a>
-    </div>
-    </div>
+      <div class="for-whom-section">
+        <p><strong>Rezultat prac:</strong> Kompletna mapa procesu + matryca możliwości AI + projekt nowego workflow TO-BE + działający prototyp + harmonogram wdrożenia i governance.</p>
+      </div>
 
-    <div class="services-content" id="narzedzia">
-    <div class="hero-section">
-      <h1>Narzędzia i automatyzacje</h1>
-      <p>Budujemy dedykowane narzędzia cyfrowe, które rozwiązują konkretne problemy biznesowe.</p>
-      <p>Każde narzędzie powstaje pod konkretny proces — nie gotowy szablon dopasowywany na siłę.</p>
-    </div>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>Generatory dokumentów</h3>
-        <p>Oferty, umowy, raporty — generowane automatycznie na podstawie danych. Zero ręcznego przepisywania.</p>
-      </div>
-      <div class="service-card">
-        <h3>Analizatory danych</h3>
-        <p>Narzędzia, które przetwarzają dane wejściowe i dostarczają gotowe wnioski — szybciej niż arkusz kalkulacyjny.</p>
-      </div>
-      <div class="service-card">
-        <h3>Chatboty wewnętrzne</h3>
-        <p>Boty obsługujące pytania zespołu, FAQ, onboarding pracowników. Wiedza firmowa zawsze pod ręką.</p>
-      </div>
-      <div class="service-card">
-        <h3>Formularze z logiką</h3>
-        <p>Inteligentne formularze, które dostosowują pytania do odpowiedzi i automatycznie przekazują dane do właściwych miejsc.</p>
-      </div>
-      <div class="service-card">
-        <h3>Automatyczne powiadomienia</h3>
-        <p>Email, SMS, Slack, Telegram — informacje trafiają do właściwych osób w odpowiednim momencie, bez ręcznego wysyłania.</p>
-      </div>
-      <div class="service-card">
-        <h3>Integracje między systemami</h3>
-        <p>CRM, arkusze, sklep, baza — łączymy systemy, które dotąd nie rozmawiały ze sobą. Dane przepływają automatycznie.</p>
+      <div class="cta-section">
+        <p>Chcesz sprawdzić, jak przeprojektować wybrany proces w Twojej firmie?</p>
+        <a href="#" class="btn-cta" data-tally-open="obAOEx">Przeanalizujmy proces</a>
       </div>
     </div>
 
-    <div class="process-section">
-      <h2>Jak pracujemy</h2>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <h4>Rozmowa o procesie</h4>
-          <p>Pytamy gdzie Twój zespół traci czas, gdzie pojawiają się błędy i gdzie klienci czekają dłużej niż powinni.</p>
+    <!-- ==================== TAB 2: AI WORKFLOWS, AUTOMATYZACJE I AGENCI ==================== -->
+    <div class="services-content" id="workflows">
+      <div class="hero-section">
+        <h1>AI Workflows, Automatyzacje i Agenci</h1>
+        <p>Budujemy konkretne systemy pracy wykorzystujące AI, dane i automatyzację.</p>
+        <p style="color: #d4a574; font-weight: 600;">Nie zaczynamy od narzędzia. Zaczynamy od procesu.</p>
+      </div>
+
+      <div class="quote-box" style="max-width: 800px; margin: 0 auto 36px;">
+        <p>„Procesy działają same. Zespół skupia się na tym, co wymaga ludzkiego osądu.<br>AI przejmuje zadania operacyjne — człowiek zachowuje odpowiedzialność i kontrolę.”</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Agenci AI i asystenci zadaniowi</h3>
+          <p>Dedykowani agenci realizujący wieloetapowe zadania: research rynkowy, weryfikacja dokumentacji przetargowej, obsługa zapytań klientów, kwalifikacja leadów.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <h4>Projekt rozwiązania</h4>
-          <p>Na podstawie diagnozy projektujemy narzędzie skrojone pod Twój sposób pracy — nie ogólny szablon.</p>
+        <div class="service-card">
+          <h3>Automatyzacja procesów (Workflows)</h3>
+          <p>Orkiestracja procesów biznesowych (n8n, Make, webhooki, custom scripts) łącząca systemy firmowe i eliminująca manualne przepisywanie danych.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <h4>Warstwa AI (jeśli pasuje)</h4>
-          <p>Tam gdzie możliwe, integrujemy AI — do analizy dokumentów, generowania treści, klasyfikacji zapytań, wsparcia decyzji.</p>
+        <div class="service-card">
+          <h3>RAG i Wewnętrzne Bazy Wiedzy</h3>
+          <p>Bezpieczne podłączanie wiedzy firmowej pod modele językowe — dokumenty, procedury, know-how dostępne dla zespołu w ułamku sekundy.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <h4>Build &amp; testy</h4>
-          <p>Budujemy, testujemy na realnych danych, iterujemy aż działa tak jak powinno.</p>
+        <div class="service-card">
+          <h3>Generatory dokumentów i ofert</h3>
+          <p>Automatyczne tworzenie spersonalizowanych ofert handlowych, raportów, umów i podsumowań na podstawie danych źródłowych.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">5</div>
-          <h4>Wdrożenie</h4>
-          <p>Uruchamiamy narzędzie w Twoim środowisku. Szkolimy zespół. Dokumentujemy.</p>
+        <div class="service-card">
+          <h3>Analizatory danych i transkryptów</h3>
+          <p>Błyskawiczne streszczanie i wyciąganie wniosków ze spotkań, transkryptów rozmów z klientami oraz ankiet w czasie rzeczywistym.</p>
         </div>
-        <div class="process-step">
-          <div class="step-num">6</div>
-          <h4>Efekt</h4>
-          <p>Procesy działają same. Zespół skupia się na tym co wymaga ludzkiego osądu. Klienci dostają odpowiedź szybciej.</p>
+        <div class="service-card">
+          <h3>Integracje API i custom UI</h3>
+          <p>Dedykowane interfejsy wewnętrzne i mikroaplikacje odpowiadające na specyficzne wąskie gardła w organizacji.</p>
         </div>
       </div>
-    </div>
 
-    <div class="for-whom-section">
-      <p>Coraz więcej narzędzi które budujemy wykorzystuje AI — do analizy dokumentów, generowania treści, klasyfikacji zapytań czy wsparcia decyzji. Integrujemy sztuczną inteligencję jako warstwę która przyspiesza działanie i redukuje powtarzalną pracę, <strong>zachowując pełną kontrolę po stronie człowieka.</strong></p>
-    </div>
-
-    <div class="cta-section">
-      <p>Powiedz jaki proces chciałbyś zautomatyzować — porozmawiajmy czy i jak możemy to zbudować.</p>
-      <a href="#" class="btn-cta" data-tally-open="obAOEx">Porozmawiajmy</a>
-    </div>
-    </div>
-
-    <div class="services-content" id="warsztaty">
-    <div class="workshops-section" style="margin-top: 0; border-top: none; padding-top: 0;">
-      <h2>Warsztaty i szkolenia</h2>
-      <p>Oprócz budowy obecności online, prowadzimy warsztaty dla zespołów chcących pogłębiać wiedzę z AI, kreatywności i strategii.</p>
-
-      <div class="workshop-item" id="ai">
-        <h3>Sztuczna inteligencja w marketingu strategicznym</h3>
-        <p><b>Warsztaty stacjonarne lub online</b></p>
-
-        <img src="img/AI_odA_web.jpg" alt="AI od A do I — program warsztatu" style="width:100%;max-width:800px;display:block;margin:20px auto 32px;border-radius:8px;">
-
-        <p><b>Wprowadzenie do AI:</b></p>
-        <ul>
-          <li>Przegląd historii AI, kluczowe koncepcje i terminologia</li>
-          <li>Uczenie maszynowe i uczenie głębokie</li>
-          <li>Sieci neuronowe i jak działają</li>
-        </ul>
-
-        <p><b>AI generatywna:</b></p>
-        <ul>
-          <li>Modele językowe (LLM) – ChatGPT, Gemini, Claude, DeepSeek</li>
-          <li>Transformery, tokenizacja, embedding, mechanizm uwagi</li>
-          <li>Parametry LLM (temperatura, top_p itp.)</li>
-          <li>GEO vs SEO – mierzenie kondycji marki w LLM</li>
-        </ul>
-
-        <p><b>Prompt engineering i Reasoning:</b></p>
-        <ul>
-          <li>Konstrukcja skutecznych promptów</li>
-          <li>Prompt jako interfejs do zadania</li>
-          <li>Role, cele, kryteria jakości</li>
-          <li>Strategie: Few-shot, Chain of Thought, Tree of Thoughts</li>
-          <li>Praktyczne ćwiczenia</li>
-        </ul>
-
-        <p><b>Narzędzia AI i Agenty w Marketingu:</b></p>
-        <ul>
-          <li>Automatyzacja workflow (n8n, Make)</li>
-          <li>Agenci AI vs chatboty</li>
-          <li>Generowanie obrazów, filmów, dźwięków</li>
-          <li>Chatboty i RAG (retrieval augmented generation)</li>
-          <li>Custom GPT</li>
-        </ul>
-
-        <p><b>Bezpieczeństwo i ograniczenia:</b></p>
-        <ul>
-          <li>Hallucynacje, prompt injection, governance</li>
-        </ul>
+      <div class="for-whom-section">
+        <p>Wdrażamy systemy, które natychmiast uwalniają czas kluczowych pracowników. <strong>Człowiek zachowuje pełną kontrolę w modelu Human-in-the-loop.</strong></p>
       </div>
 
-      <div class="workshop-item" id="inwentyka">
-        <h3>Inwentyka – czyli jak wymyślać sprawniej</h3>
-        <p><b>Warsztaty zamknięte dla zespołów – także w formule online</b></p>
-
-        <p>Warsztaty dla firm chcących stymulować kreatywne myślenie pracowników. Dostarczamy zestaw prostych, intuicyjnych narzędzi twórczych do codziennego użytku.</p>
-
-        <p><b>Główny cel:</b> Otwarcie na nowe sposoby rozwiązywania problemów. Opracowaliśmy 24 karty inspiracji dla inwencji, które można stosować zaraz po zajęciach.</p>
-
-        <p><b>Agenda:</b></p>
-        <ul>
-          <li>Psychologia twórczości</li>
-          <li>Blokady i przeszkody dla twórczego myślenia</li>
-          <li>Myślenie dywergentne i insight</li>
-          <li>Techniki twórcze: SCAMPER, bisocjacja, analogie, analiza morfologiczna</li>
-          <li>Design thinking: strukturyzacja celów, persona, prototypowanie</li>
-        </ul>
-
-        <p><b>Format:</b> Forma podstawowa cały dzień (9:00–17:00). Forma rozszerzona – 2 dni z dodatkową sekcją storytelling.</p>
-
-        <p><b>Wymogi:</b> Min. 6 osób, zalecane mieszane zespoły. Sala, projektor, flipchart.</p>
-
-        <p><b>Prowadzący:</b> Marek Staniszewski</p>
-
-        <p><b>Wycena:</b> Ustalana indywidualnie w zależności od liczby uczestników i wymagań.</p>
-
-        <p>Chcesz wiedzieć więcej? <a href="#" data-tally-open="obAOEx">Skontaktuj się z nami.</a></p>
+      <div class="cta-section">
+        <p>Opowiedz nam o powtarzalnych procesach, które pochłaniają czas Twojego zespołu.</p>
+        <a href="#" class="btn-cta" data-tally-open="obAOEx">Porozmawiajmy o automatyzacji</a>
       </div>
     </div>
 
-    <div class="cta-section">
-      <p>Zainteresowany warsztatem? Umów rozmowę — omówimy szczegóły i dostępne terminy.</p>
-      <a href="#" class="btn-cta" data-tally-open="obAOEx">Umów rozmowę</a>
+    <!-- ==================== TAB 3: SZKOLENIA I ROZWÓJ KOMPETENCJI ==================== -->
+    <div class="services-content" id="kompetencje">
+      <div class="hero-section">
+        <h1>Szkolenia i rozwój kompetencji AI</h1>
+        <p>Przygotowujemy ludzi do pracy w organizacji wspieranej przez AI i agentów.</p>
+        <p style="color: #d4a574; font-weight: 600;">Od pojedynczego promptu do projektowania i nadzorowania systemów pracy.</p>
+      </div>
+
+      <div class="capability-levels" style="max-width: 900px; margin: 30px auto 50px;">
+        <div class="level-card">
+          <div class="level-badge">Poziom 1</div>
+          <h4>AI USER</h4>
+          <p>Sprawny prompting, zaawansowany research, analiza danych i tworzenie treści. Umiejętność krytycznej weryfikacji odpowiedzi modeli i minimalizowania halucynacji.</p>
+        </div>
+        <div class="level-card">
+          <div class="level-badge">Poziom 2</div>
+          <h4>AI WORKFLOW DESIGNER</h4>
+          <p>Projektowanie własnych procesów pracy, łączenie klocków automatyzacji, konfigurowanie asystentów zadaniowych i przepływów informacji.</p>
+        </div>
+        <div class="level-card">
+          <div class="level-badge">Poziom 3</div>
+          <h4>AI LEADER / SUPERVISOR</h4>
+          <p>Delegowanie zadań do agentów, nadzór nad jakością, zarządzanie ryzykiem, Human-in-the-loop oraz budowanie kultury pracy z AI w firmie.</p>
+        </div>
+      </div>
+
+      <div class="workshops-section" style="margin-top: 0; border-top: 1px solid #2d3d4a; padding-top: 40px;">
+        <h2>Program warsztatowy: AI od A do I</h2>
+        <p>Kompleksowe warsztaty praktyczne dla zespołów chcących realnie wdrożyć sztuczną inteligencję w codziennej pracy.</p>
+
+        <div class="workshop-item" id="ai-program">
+          <h3>Sztuczna inteligencja w organizacji i marketingu strategicznym</h3>
+          <p><b>Formuła stacjonarna lub online • Praca na realnych case'ach firmy</b></p>
+
+          <img src="img/AI_odA_web.jpg" alt="AI od A do I — program warsztatu" style="width:100%;max-width:800px;display:block;margin:20px auto 32px;border-radius:8px;">
+
+          <p><b>Kluczowe moduły programu:</b></p>
+          <ul>
+            <li>Modele językowe (LLM) – ChatGPT, Claude, Gemini, DeepSeek i ich praktyczne zastosowania</li>
+            <li>Prompt engineering i Reasoning – techniki zaawansowanego sterowania modelami (CoT, Few-shot)</li>
+            <li>Narzędzia AI i Agenty – automatyzacja workflow (n8n, Make), bazy RAG, asystenci procesowi</li>
+            <li>Bezpieczeństwo danych, governance i wytyczne Human-in-the-loop</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <p>Chcesz podnieść kompetencje zespołu lub przygotować kadrę do roli supervisorów AI?</p>
+        <a href="#" class="btn-cta" data-tally-open="obAOEx">Umów szkolenie dla zespołu</a>
+      </div>
     </div>
+
+    <!-- ==================== TAB 4: STRATEGIA I CONSULTING ==================== -->
+    <div class="services-content" id="strategia">
+      <div class="hero-section">
+        <h1>Strategia i Consulting</h1>
+        <p>Łączymy myślenie strategiczne, inwentykę i facylitację innowacji.</p>
+        <p>Pomagamy zarządom i liderom podejmować trafne decyzje w warunkach dynamicznych zmian technologicznych.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Warsztaty strategiczne dla Zarządów</h3>
+          <p>Diagnoza wyzwań rynkowych, priorytetyzacja projektów technologicznych i wyznaczenie precyzyjnej roadmapy transformacji biznesowej.</p>
+        </div>
+        <div class="service-card">
+          <h3>Inwentyka – Myślenie twórcze</h3>
+          <p>Autorski program warsztatowy oparty o 24 karty inwencji Marka Staniszewskiego. Otwarcie zespołu na niestandardowe rozwiązania problemów i przełamywanie rutyny.</p>
+        </div>
+        <div class="service-card">
+          <h3>Audyt procesowy i AI Readiness</h3>
+          <p>Ocena dojrzałości procesowej, jakości danych i kompetencji zespołu przed rozpoczęciem kosztownych wdrożeń technologicznych.</p>
+        </div>
+      </div>
+
+      <div class="workshops-section" style="margin-top: 20px; border-top: 1px solid #2d3d4a; padding-top: 30px;">
+        <div class="workshop-item" id="inwentyka-desc">
+          <h3>Inwentyka – czyli jak wymyślać sprawniej</h3>
+          <p><b>Warsztaty zamknięte dla zespołów – stacjonarnie lub online</b></p>
+          <p>Dostarczamy zestaw prostych, intuicyjnych narzędzi twórczych do codziennego użytku. Opracowaliśmy 24 karty inspiracji dla inwencji, które można stosować natychmiast po zajęciach.</p>
+          <p><b>Agenda obejmuje:</b> psychologię twórczości, techniki twórcze (SCAMPER, bisocjacja, analogie), design thinking oraz prototypowanie rozwiązań.</p>
+          <p><b>Prowadzący:</b> Marek Staniszewski</p>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <p>Szukasz doświadczonego partnera do poprowadzenia warsztatu strategicznego lub doradztwa?</p>
+        <a href="#" class="btn-cta" data-tally-open="obAOEx">Skonsultuj strategię</a>
+      </div>
     </div>
+
+    <!-- ==================== TAB 5: WEB & INFRASTRUKTURA (UZUPEŁNIAJĄCE) ==================== -->
+    <div class="services-content" id="infrastruktura">
+      <div class="hero-section">
+        <h1>Infrastruktura i obecność online</h1>
+        <p>Usługi uzupełniające — solidna, bezpieczna baza technologiczna pod systemy biznesowe, landing pages i procesy AI.</p>
+        <p>Zapewniamy stabilne zaplecze techniczne bez zbędnych pośredników.</p>
+      </div>
+
+      <div class="for-whom-section">
+        <p><strong>Dla kogo:</strong> Klienci potrzebujący kompletnego wdrożenia: od dedykowanego serwera pod automatyzacje i bazy danych, przez zoptymalizowaną stronę WWW, po analitykę i pozyskiwanie klientów.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Dedykowany serwer VPS</h3>
+          <p>Twoje aplikacje i automatyzacje działają na dedykowanym serwerze VPS z pełną konfiguracją SSL i bezpieczeństwem danych.</p>
+        </div>
+        <div class="service-card">
+          <h3>Szybka strona internetowa</h3>
+          <p>Lekka, responsywna, dostosowana do urządzeń mobilnych. Zoptymalizowana pod SEO, konwersję i integrację z agentami AI.</p>
+        </div>
+        <div class="service-card">
+          <h3>Analityka i reklama Google Ads</h3>
+          <p>Google Analytics 4, Search Console oraz skuteczne kampanie Google Ads generujące ruch i mierzalny zwrot z inwestycji.</p>
+        </div>
+        <div class="service-card">
+          <h3>Domena, hosting i utrzymanie</h3>
+          <p>Rejestracja domen, konfiguracja DNS, poczty i bieżąca opieka techniczna nad stabilnością środowiska online.</p>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <p>Potrzebujesz sprawnego wdrożenia strony lub dedykowanej infrastruktury serwerowej?</p>
+        <a href="#" class="btn-cta" data-tally-open="obAOEx">Zapytaj o infrastrukturę</a>
+      </div>
     </div>
   </div>
 
@@ -564,18 +562,41 @@
     (C) 2026 Heuristica. Marek Staniszewski | <a href="polityka.html">Polityka prywatności</a>
   </div>
   <script>
-    function switchService(serviceId) {
+    function switchService(serviceId, tabEl) {
       const allContents = document.querySelectorAll('.services-content');
       allContents.forEach(content => content.classList.remove('active'));
 
       const allTabs = document.querySelectorAll('.services-tabs li');
       allTabs.forEach(tab => tab.classList.remove('active'));
 
-      document.getElementById(serviceId).classList.add('active');
-      event.target.parentElement.classList.add('active');
+      const targetContent = document.getElementById(serviceId);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+
+      if (tabEl && tabEl.parentElement) {
+        tabEl.parentElement.classList.add('active');
+      } else {
+        const tabLink = document.querySelector(`.services-tabs a[data-tab="${serviceId}"]`);
+        if (tabLink && tabLink.parentElement) {
+          tabLink.parentElement.classList.add('active');
+        }
+      }
+
+      if (history.replaceState) {
+        history.replaceState(null, null, '#' + serviceId);
+      }
 
       return false;
     }
+
+    // Auto-switch tab based on hash in URL
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        switchService(hash);
+      }
+    });
   </script>
   <script async src="https://tally.so/widgets/embed.js"></script>
   <script>

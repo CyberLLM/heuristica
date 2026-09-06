@@ -20,88 +20,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <title>HEURISTICA • Strategic AI Support</title>
+  <title>HEURISTICA • Projektujemy pracę z AI</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Heuristica - marketing strategiczny, szkolenia i narzędzia AI. Pomagamy markom osiągać więcej łącząc strategię, kreatywność i nowe technologie. Warsztaty, szkolenia, coaching zespołów.">
-  <meta name="keywords" content="strategia marketingowa, AI marketing, warsztaty biznesowe, storytelling, inwentyka, coaching zespołów, Warszawa">
+  <meta name="description" content="Projektujemy procesy pracy, w których człowiek, AI i automatyzacja działają jako jeden system. Analiza procesów, workflow Human + AI, agenci i przygotowanie zespołów.">
+  <meta name="keywords" content="AI process redesign, projektowanie pracy z AI, automatyzacja procesów, agenci AI, workflow AI, Marek Staniszewski, transformacja cyfrowa, szkolenia AI">
   <meta name="author" content="Marek Staniszewski">
   
   <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Heuristica - strategia & design">
-  <meta property="og:description" content="Marketing strategiczny i narzędzia AI. Warsztaty, szkolenia, coaching biznesowy.">
+  <meta property="og:title" content="HEURISTICA • Projektujemy pracę z AI">
+  <meta property="og:description" content="Pomagamy firmom przeprojektować procesy, wdrożyć AI i automatyzacje oraz przygotować zespoły do pracy z agentami.">
   <meta property="og:image" content="https://heuristica.pl/img/collage.jpg">
   <meta property="og:url" content="https://heuristica.pl">
   <meta property="og:type" content="website">
   
-  <link rel="stylesheet" href="style.css?v=premium-2026">
-  <style>
-    /* DODATKOWE STYLE DLA NOWEJ SEKCJI USŁUG */
-    .services-single-column {
-      margin: 30px 0;
-      width: 100%;
-      columns: 1 !important;
-      -webkit-columns: 1 !important;
-      -moz-columns: 1 !important;
-    }
-    
-    .service-block {
-      margin-bottom: 25px;
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-    
-    .services-single-column h3 {
-      font-size: 1.3em;
-      margin: 0 0 20px 0;
-      color: #22394d;
-      font-weight: bold;
-    }
-    
-    .service-block h4 {
-      font-size: 1.1em;
-      margin: 0 0 10px 0;
-      color: #22394d;
-      font-weight: bold;
-    }
-    
-    .service-block ul {
-      list-style-type: none;
-      padding-left: 25px;
-      margin: 0 0 15px 0;
-      columns: 1 !important;
-      -webkit-columns: 1 !important;
-      -moz-columns: 1 !important;
-    }
-    
-    .service-block li {
-      position: relative;
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-    
-    .service-block li:before {
-      content: "→";
-      position: absolute;
-      left: -18px;
-      color: #d4a574;
-      font-weight: 600;
-    }
-
-    /* Dark theme colors for service section */
-    .services-single-column h3 {
-      color: #d4a574 !important;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .service-block h4 {
-      color: #d4a574 !important;
-    }
-
-    .service-block li {
-      color: #e8e6e1;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css?v=premium-2026-workdesign">
 </head>
 <body>
   <div class="nav">
@@ -116,104 +49,243 @@
   </div>
 
   <div class="container">
-    <h1>Wdrażamy AI w marketingu aby realnie zwiększyć efektywność Twojego zespołu</h1>
-    <p style="font-size: 1.05em; line-height: 1.8; margin-bottom: 28px;">Od strategii po konkretne narzędzia — pomagamy firmom uporządkować marketing i wykorzystać AI tam, gdzie daje mierzalny efekt.</p>
+    <!-- HERO SECTION -->
+    <h1>Projektujemy pracę z AI</h1>
+    <p style="font-size: 1.15em; line-height: 1.75; margin-bottom: 28px; color: #e8e6e1;">
+      Analizujemy procesy, projektujemy workflow Human + AI, budujemy automatyzacje i agentów oraz przygotowujemy zespoły do nowego sposobu pracy.
+    </p>
 
-    <div style="display: flex; gap: 16px; margin: 32px 0 48px 0; flex-wrap: wrap; align-items: center;">
-      <a href="#" data-tally-open="obAOEx" style="display: inline-block; padding: 12px 28px; background: #2d5a4e; color: #e8e6e1; text-decoration: none; border-radius: 4px; font-weight: 600; transition: opacity 0.2s;">👉 Umów rozmowę</a>
-      <a href="#jak-pracujemy" style="display: inline-block; padding: 12px 28px; background: #d4a574; color: #0f1419; text-decoration: none; border-radius: 4px; font-weight: 600; transition: opacity 0.2s;">👉 Zobacz, jak pracujemy</a>
-      <button id="listenBtn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: #d4a574; border: 1.5px solid #d4a574; border-radius: 4px; font-weight: 600; font-size: 0.95em; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(212,165,116,0.1)'" onmouseout="this.style.background='transparent'">▶ Słuchaj strony</button>
+    <div style="display: flex; gap: 14px; margin: 32px 0 44px 0; flex-wrap: wrap; align-items: center;">
+      <a href="#" data-tally-open="obAOEx" class="btn-primary">Porozmawiajmy o procesie</a>
+      <a href="#jak-pracujemy" class="btn-secondary">Zobacz, jak pracujemy</a>
+      <button id="listenBtn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: transparent; color: #d4a574; border: 1.5px solid #d4a574; border-radius: 4px; font-weight: 600; font-size: 0.9em; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(212,165,116,0.1)'" onmouseout="this.style.background='transparent'">▶ Słuchaj strony</button>
     </div>
 
-    <h2>Co zyskujesz?</h2>
-    <ul style="list-style: none; padding: 0; margin: 24px 0;">
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">✓</span> Skrócenie czasu pracy zespołu marketingu (np. tworzenie ofert, treści, analiz)</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">✓</span> Szybsze testowanie kampanii i podejmowanie decyzji</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">✓</span> Uporządkowaną strategię marketingową opartą na danych</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">✓</span> Realne wdrożenia AI (asystenci, automatyzacje, analizy) — nie prezentacje</li>
+    <!-- SEKCJA: PROBLEM KLIENTA -->
+    <h2>AI to nie kolejny program. To nowy sposób organizacji pracy.</h2>
+    <p>
+      Firmy mają już dostęp do ChatGPT, Copilot, Gemini i innych zaawansowanych modeli. Problemem coraz rzadziej jest brak samej technologii czy dostępu do narzędzi.
+    </p>
+    <p>Realne wyzwanie polega na tym:</p>
+    <ul class="clean-list">
+      <li><strong>Gdzie AI rzeczywiście ma sens</strong> w kontekście konkretnego modelu biznesowego,</li>
+      <li><strong>Które zadania warto delegować</strong>, a które procesy wymagają głębokiego przeprojektowania,</li>
+      <li><strong>Co automatyzować end-to-end</strong>, a gdzie kluczowe decyzje musi zachować człowiek,</li>
+      <li><strong>Jak połączyć ludzi, dane, narzędzia i agentów</strong> w jeden stabilny i efektywny mechanizm.</li>
     </ul>
 
-    <div style="text-align: center; margin: 48px 0;">
-      <img src="img/collage.jpg"
-           alt="Warsztaty strategii marketingowej i szkolenia AI - Heuristica Warszawa"
-           title="Szkolenia biznesowe prowadzone przez Marka Staniszewskiego"
-           style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid #2d3d4a;">
+    <div class="quote-box">
+      <p>„Nie wdrażamy AI dla samego AI. Projektujemy lepszy, mierzalny sposób pracy.”</p>
     </div>
 
-    <h2 id="jak-pracujemy">W czym pomagamy</h2>
-    <p>Pracujemy z firmami, które chcą:</p>
+    <!-- SEKCJA: MODEL HEURISTICA -->
+    <h2 id="jak-pracujemy">Jak pracujemy: Model Heuristica</h2>
+    <p>
+      Od diagnozy problemu do działającego ekosystemu. Przeprowadzamy organizację przez ustrukturyzowany model 6 kroków:
+    </p>
 
-    <div class="services-single-column">
-      <div class="service-block">
-        <h4>1. Zrozumieć, jak wykorzystać AI w biznesie i marketingu</h4>
-        <p style="color: #e8e6e1; margin: 10px 0 14px 0;">Warsztaty strategiczne kończące się konkretną decyzją: gdzie AI ma sens, a gdzie nie.</p>
+    <div class="process-grid-6">
+      <div class="process-card-step">
+        <span class="step-badge">Krok 1</span>
+        <h4>Diagnoza</h4>
+        <p>Analizujemy proces, zadania, dane i źródła strat czasu w zespole.</p>
       </div>
 
-      <div class="service-block">
-        <h4>2. Uporządkować marketing i zwiększyć jego efektywność</h4>
-        <p style="color: #e8e6e1; margin: 10px 0 14px 0;">Łączymy strategię z praktyką aby marketing przestał być „kosztem", a stawał się narzędziem wzrostu.</p>
+      <div class="process-card-step">
+        <span class="step-badge">Krok 2</span>
+        <h4>AI Process Redesign</h4>
+        <p>Projektujemy nowy podział pracy między człowieka, AI i automatyzację.</p>
       </div>
 
-      <div class="service-block">
-        <h4>3. Wdrożyć konkretne rozwiązania AI</h4>
-        <p style="color: #e8e6e1; margin: 10px 0 14px 0;">Projektujemy i budujemy:</p>
-        <ul>
-          <li>Asystentów dla sprzedaży, marketingu i HR</li>
-          <li>Automatyzacje procesów</li>
-          <li>Systemy pracy z treścią i danymi</li>
+      <div class="process-card-step">
+        <span class="step-badge">Krok 3</span>
+        <h4>Prototyp</h4>
+        <p>Budujemy i testujemy rozwiązanie na realnym wycinku procesu.</p>
+      </div>
+
+      <div class="process-card-step">
+        <span class="step-badge">Krok 4</span>
+        <h4>Wdrożenie</h4>
+        <p>Integrujemy narzędzia, automatyzacje, agentów i bezpieczny przepływ danych.</p>
+      </div>
+
+      <div class="process-card-step">
+        <span class="step-badge">Krok 5</span>
+        <h4>Kompetencje</h4>
+        <p>Przygotowujemy zespół i liderów do pracy w nowym modelu operacyjnym.</p>
+      </div>
+
+      <div class="process-card-step">
+        <span class="step-badge">Krok 6</span>
+        <h4>Optymalizacja</h4>
+        <p>Mierzymy efekty, zbieramy feedback i stale rozwijamy workflow.</p>
+      </div>
+    </div>
+
+    <!-- SEKCJA: TRZY GŁÓWNE OBSZARY OFERTY -->
+    <h2>Trzy główne obszary oferty</h2>
+    <p>Pomagamy organizacjom kompleksowo — od warstwy koncepcyjnej, przez inżynierię workflow, po rozwój ludzi:</p>
+
+    <div class="pillars-container">
+      <!-- FILAR A -->
+      <div class="pillar-card">
+        <div class="pillar-tag">Filar A • Analiza i Architektura</div>
+        <h3>AI Discovery &amp; Process Redesign</h3>
+        <p class="pillar-lead">Pomagamy znaleźć miejsca, w których AI może realnie zmienić sposób pracy.</p>
+        <p><strong>Zakres działań:</strong></p>
+        <ul class="pillar-list">
+          <li>Mapowanie procesów AS-IS i identyfikacja wąskich gardeł</li>
+          <li>Analiza zadań i przepływu informacji w zespołach</li>
+          <li>Identyfikacja i priorytetyzacja use case'ów AI pod kątem ROI</li>
+          <li>Ocena potencjału automatyzacji i gotowości danych</li>
+          <li>Human + AI task allocation (alokacja zadań człowiek vs algorytm)</li>
+          <li>Projekt docelowego procesu TO-BE</li>
+          <li>Praktyczna roadmapa wdrożenia zmian</li>
         </ul>
+        <div class="pillar-result">
+          <strong>Rezultat:</strong> Kompletna mapa procesu + matryca możliwości + projekt nowego workflow + precyzyjna roadmapa wdrożenia.
+        </div>
+        <div style="margin-top: 18px;">
+          <a href="#" data-tally-open="obAOEx" class="btn-secondary">Przeanalizujmy proces</a>
+        </div>
       </div>
 
-      <div class="service-block">
-        <h4>4. Przeszkolić zespół i liderów</h4>
-        <p style="color: #e8e6e1; margin: 10px 0 14px 0;">Pokazujemy, jak korzystać z AI w codziennej pracy — bez teorii, na realnych przykładach z firmy.</p>
+      <!-- FILAR B -->
+      <div class="pillar-card">
+        <div class="pillar-tag">Filar B • Systemy i Wdrożenia</div>
+        <h3>AI Workflows, Automatyzacje i Agenci</h3>
+        <p class="pillar-lead">Budujemy konkretne systemy pracy wykorzystujące AI, dane i automatyzację.</p>
+        <div class="quote-box" style="margin: 16px 0 20px 0;">
+          <p>„Nie zaczynamy od narzędzia. Zaczynamy od procesu.<br>Procesy działają same. Zespół skupia się na tym, co wymaga ludzkiego osądu.”</p>
+        </div>
+        <p><strong>Zakres technologiczny i wykonawczy:</strong></p>
+        <ul class="pillar-list">
+          <li>Autonomiczne workflow AI i orkiestracja zadań</li>
+          <li>Automatyzacje procesów biznesowych (n8n, Make, custom scripts)</li>
+          <li>Dedykowani asystenci cyfrowi oraz agenci zadaniowi</li>
+          <li>RAG (Retrieval-Augmented Generation) na bazach wiedzy firmy</li>
+          <li>Inteligentne analizatory danych i generatory dokumentacji</li>
+          <li>Integracje API, webhooki i dedykowane narzędzia wewnętrzne</li>
+        </ul>
+        <div class="pillar-result">
+          <strong>Zasada wdrożenia:</strong> AI przejmuje powtarzalne etapy operacyjne. Człowiek zachowuje osąd, kontrolę jakości (Human-in-the-loop) i odpowiedzialność biznesową.
+        </div>
+        <div style="margin-top: 18px;">
+          <a href="uslugi.html#workflows" class="btn-secondary">Poznaj rozwiązania workflow</a>
+        </div>
+      </div>
+
+      <!-- FILAR C -->
+      <div class="pillar-card">
+        <div class="pillar-tag">Filar C • Ludzie i Organizacja</div>
+        <h3>AI Capability Building</h3>
+        <p class="pillar-lead">Przygotowujemy ludzi do pracy w organizacji wspieranej przez AI i agentów.</p>
+        <p>Budujemy kompetencje w zespole na trzech komplementarnych poziomach zaawansowania:</p>
+
+        <div class="capability-levels">
+          <div class="level-card">
+            <div class="level-badge">Poziom 1</div>
+            <h4>AI USER</h4>
+            <p>Sprawny prompting, pogłębiony research, wielowymiarowa analiza danych i szybkie tworzenie treści wysokiej jakości.</p>
+          </div>
+          <div class="level-card">
+            <div class="level-badge">Poziom 2</div>
+            <h4>AI WORKFLOW DESIGNER</h4>
+            <p>Projektowanie własnych procesów pracy, łączenie klocków automatyzacji i konfigurowanie asystentów zadaniowych.</p>
+          </div>
+          <div class="level-card">
+            <div class="level-badge">Poziom 3</div>
+            <h4>AI LEADER / SUPERVISOR</h4>
+            <p>Delegowanie zadań do systemów AI, nadzór nad agentami, kontrola ryzyk, governance i zarządzanie w modelu Human-in-the-loop.</p>
+          </div>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="uslugi.html#kompetencje" class="btn-secondary">Zobacz programy szkoleniowe</a>
+        </div>
       </div>
     </div>
 
-    <h2>Przykładowe usługi</h2>
-    <div class="services-single-column">
-      <div class="service-block">
-        <h4>Warsztat dla Zespołów (1 dzień)</h4>
-        <p style="color: #e8e6e1;">→ gdzie AI ma sens w Twojej firmie i jakie decyzje podjąć</p>
+    <!-- SEKCJA: TRAJEKTORIA ZMIANY -->
+    <h2>Trajektoria zmiany: Technologia a organizacja pracy</h2>
+    <p>
+      Ewolucja AI nie sprowadza się do lepszego generowania tekstu. Zmienia się fundamentalny paradygmat: od odpytywania bota do zarządzania systemem wykonawczym.
+    </p>
+
+    <div class="evolution-box">
+      <div class="evolution-tracks">
+        <!-- TOR 1: TECHNOLOGIA -->
+        <div class="track-col">
+          <h4>Tor 1: Technologia</h4>
+          <div class="track-step-list">
+            <div class="track-step-item"><span class="track-step-num">1</span> Chatbot (odpowiedzi na pytania)</div>
+            <div class="track-step-item"><span class="track-step-num">2</span> Reasoning model (wnioskowanie i logika)</div>
+            <div class="track-step-item"><span class="track-step-num">3</span> Tool-using model (wywoływanie narzędzi)</div>
+            <div class="track-step-item"><span class="track-step-num">4</span> Agent (samodzielne zadania)</div>
+            <div class="track-step-item"><span class="track-step-num">5</span> Long-horizon agent (wieloetapowe cele)</div>
+            <div class="track-step-item"><span class="track-step-num">6</span> Computer-use agent (interakcja z UI)</div>
+            <div class="track-step-item"><span class="track-step-num">7</span> Multi-agent (współpraca agentów)</div>
+            <div class="track-step-item highlight"><span class="track-step-num">8</span> Proactive agent (autonomiczne inicjowanie)</div>
+          </div>
+        </div>
+
+        <!-- TOR 2: ORGANIZACJA PRACY -->
+        <div class="track-col">
+          <h4>Tor 2: Organizacja pracy</h4>
+          <div class="track-step-list">
+            <div class="track-step-item"><span class="track-step-num">1</span> Piszący prompty</div>
+            <div class="track-step-item"><span class="track-step-num">2</span> Współpracujący z AI</div>
+            <div class="track-step-item"><span class="track-step-num">3</span> Delegujący zadania</div>
+            <div class="track-step-item"><span class="track-step-num">4</span> Projektant workflow</div>
+            <div class="track-step-item"><span class="track-step-num">5</span> Supervisor agentów</div>
+            <div class="track-step-item highlight"><span class="track-step-num">6</span> Projektant systemu pracy</div>
+          </div>
+        </div>
       </div>
 
-      <div class="service-block">
-        <h4>Audyt marketingu + AI (2–3 tygodnie)</h4>
-        <p style="color: #e8e6e1;">→ co działa, co nie działa i gdzie są największe rezerwy</p>
-      </div>
-
-      <div class="service-block">
-        <h4>Wdrożenie rozwiązania AI (4–8 tygodni)</h4>
-        <p style="color: #e8e6e1;">→ konkretne narzędzia dopasowane do Twojego zespołu</p>
-      </div>
-
-      <div class="service-block">
-        <h4>Szkolenia i programy rozwojowe</h4>
-        <p style="color: #e8e6e1;">→ zespół, który realnie korzysta z AI w pracy</p>
+      <div class="quote-box" style="margin-top: 24px; margin-bottom: 0;">
+        <p>
+          „Technologia przesuwa się od generowania odpowiedzi do wykonywania pracy.<br>
+          Rola człowieka przesuwa się od pisania promptów do projektowania systemu pracy.”
+        </p>
       </div>
     </div>
 
-    <h2>Przykłady efektów</h2>
-    <ul style="list-style: none; padding: 0; margin: 24px 0;">
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">•</span> Skrócenie czasu przygotowania ofert z kilku godzin do kilku minut</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">•</span> Automatyzacja analiz opinii klientów (setki odpowiedzi → wnioski w kilka minut)</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">•</span> Usprawnienie pracy zespołów marketingowych dzięki asystentom AI</li>
-      <li style="margin-bottom: 14px; padding-left: 24px; position: relative; color: #e8e6e1;"><span style="position: absolute; left: 0; color: #d4a574;">•</span> Redukcja kosztów operacyjnych poprzez automatyzację procesów</li>
+    <!-- SEKCJA: PRZYKŁADY EFEKTÓW -->
+    <h2>Przykłady efektów biznesowych</h2>
+    <ul class="clean-list">
+      <li><strong>Skrócenie czasu przygotowania ofert:</strong> z kilku godzin do kilku minut przy zachowaniu pełnej spójności merytorycznej i cenowej.</li>
+      <li><strong>Automatyzacja syntezy danych:</strong> setki ankiet i transkryptów rozmów z klientami przekształcane w ustrukturyzowane wnioski i rekomendacje w czasie rzeczywistym.</li>
+      <li><strong>Autonomiczne workflow operacyjne:</strong> eliminacja manualnego przepisywania danych pomiędzy CRM, arkuszami i narzędziami komunikacji.</li>
+      <li><strong>Redukcja kosztów i zyskanie skali:</strong> zespół skupia się wyłącznie na relacjach, strategii i decyzjach wymagających ludzkiego osądu.</li>
     </ul>
 
-    <h2>Dla kogo pracujemy</h2>
-    <ul style="list-style: none; padding: 0; margin: 24px 0;">
-      <li style="margin-bottom: 12px; color: #e8e6e1;">Firmy B2B i B2C</li>
-      <li style="margin-bottom: 12px; color: #e8e6e1;">Zespoły marketingowe i sprzedażowe</li>
-      <li style="margin-bottom: 12px; color: #e8e6e1;">Zarządy i liderzy, którzy chcą podejmować lepsze decyzje szybciej</li>
-      <li style="margin-bottom: 12px; color: #e8e6e1;">NGO i organizacje pozarządowe</li>
-    </ul>
+    <!-- FOTO & O HEURISTICA -->
+    <div style="text-align: center; margin: 44px 0;">
+      <img src="img/collage.jpg"
+           alt="Projektowanie procesów Human + AI i warsztaty strategiczne - Heuristica Warszawa"
+           title="Warsztaty i projektowanie pracy z AI - Marek Staniszewski"
+           style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid #2d3d4a;">
+    </div>
 
-    <h2>Heuristica</h2>
-    <p>Łączymy strategię marketingową z praktycznym wykorzystaniem AI. Pracujemy warsztatowo, blisko zespołów - od diagnozy do wdrożenia.</p>
-    
-    <h2 id="kontakt">Kontakt</h2>
-    <p>Kontakt <a href="mailto:staniszewski@heuristica.pl">staniszewski🐒heuristica.pl</a></p>
+    <h2>O Heuristica</h2>
+    <p>
+      Łączymy myślenie strategiczne, inżynierię procesów i praktyczne wdrażanie sztucznej inteligencji. Pracujemy bezpośrednio z zarządami, liderami operacyjnymi i zespołami — od diagnozy i projektu nowego sposobu pracy, przez automatyzacje i agentów, aż po przygotowanie ludzi do nowej rzeczywistości.
+    </p>
+    <p>
+      Założycielem Heuristica jest <strong>Marek Staniszewski</strong> — strateg, facylitator innowacji, autor książek i programów szkoleniowych z zakresu myślenia koncepcyjnego oraz wdrażania technologii w biznesie.
+    </p>
+
+    <!-- SEKCJA CTA KOŃCOWE -->
+    <h2 id="kontakt">Porozmawiajmy o procesie</h2>
+    <p>
+      Nie zaczynamy od narzucania oprogramowania. Zaczynamy od zrozumienia, jak dziś pracuje Twój zespół i gdzie powstają straty czasu.
+    </p>
+    <div style="margin: 28px 0;">
+      <a href="#" data-tally-open="obAOEx" class="btn-primary" style="font-size: 1.05em; padding: 15px 32px;">Umów rozmowę o procesie</a>
+    </div>
+    <p style="font-size: 0.95em; color: var(--text-muted);">
+      Napisz bezpośrednio: <a href="mailto:staniszewski@heuristica.pl" style="color: var(--accent-secondary); text-decoration: underline;">staniszewski@heuristica.pl</a>
+    </p>
   </div>
 
   <!-- Structured Data JSON-LD -->
@@ -222,7 +294,7 @@
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Heuristica",
-    "description": "Marketing strategiczny i narzędzia AI",
+    "description": "Projektujemy procesy pracy, w których człowiek, AI i automatyzacja działają jako jeden system.",
     "url": "https://heuristica.pl",
     "email": "staniszewski@heuristica.pl",
     "address": {
@@ -235,7 +307,13 @@
       "@type": "Person",
       "name": "Marek Staniszewski"
     },
-    "serviceType": ["Strategia marketingowa", "Szkolenia AI", "Narzędzia AI", "Warsztaty biznesowe", "Coaching zespołów"]
+    "serviceType": [
+      "AI Process Redesign",
+      "AI Workflows i automatyzacje",
+      "Agenci AI",
+      "AI Capability Building",
+      "Strategia i organizacja pracy z AI"
+    ]
   }
   </script>
 

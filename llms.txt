@@ -1,77 +1,55 @@
-# Heuristica - Marketing strategiczny & narzędzia AI
+# Heuristica — szkolenia AI, strategia i automatyzacje dla firm
 
-> https://heuristica.pl
+> Heuristica to firma doradczo-szkoleniowa z Warszawy, założona i prowadzona przez Marka Staniszewskiego. Prowadzi szkolenia AI i warsztaty strategiczne oraz projektuje automatyzacje, asystentów i agentów AI dla firm. Współpraca stacjonarna i zdalna w Polsce.
 
-## O firmie
+Aktualizacja opisu: 2026-10-24.
 
-Heuristica to firma consultingowa specjalizująca się w strategii marketingowej, szkoleniach biznesowych i wdrażaniu rozwiązań AI. Wspieramy firmy, instytucje i zespoły w skutecznej transformacji - od idei do wdrożenia.
+## Firma i osoba
 
-Firma wpisana do Bazy Usług Rozwojowych PARP oraz Rejestru Instytucji Szkoleniowych.
+- Marka: Heuristica (historycznie także Heuristica Strategy Design).
+- Nazwa działalności podana w dokumentach witryny: Heuristica – Staniszewski Marek.
+- Założyciel i prowadzący: Marek Staniszewski — strateg marketingowy, trener AI, autor książek i narzędzi warsztatowych.
+- Adres: ul. Bukowińska 26C/11, 02-703 Warszawa, Polska.
+- NIP: 7141338822.
+- E-mail: staniszewski@heuristica.pl.
+- Telefon: +48 603 783 597.
+- Strona: https://heuristica.pl/.
 
-## Zakres usług
+## Oferta
 
-### AI Strategy & Advisory
-- Projektowanie strategii wykorzystania AI w marketingu i biznesie
-- Warsztaty strategiczne z liderami (AI-Ready Leadership)
+- [Przegląd usług](https://heuristica.pl/uslugi): projektowanie procesów pracy z AI, automatyzacje i agenci, szkolenia, strategia oraz infrastruktura.
+- [AI Process Redesign](https://heuristica.pl/uslugi#redesign): analiza pracy zespołu i podział zadań pomiędzy ludzi, AI oraz automatyzację.
+- [Automatyzacje i agenci AI](https://heuristica.pl/uslugi#workflows): workflow n8n i Make, asystenci zadaniowi, systemy RAG, integracje i analiza danych.
+- [Szkolenia AI dla firm](https://heuristica.pl/uslugi#kompetencje): praktyczne zastosowania AI w organizacji i marketingu, prompt engineering, automatyzacje, bezpieczeństwo i nadzór nad pracą z AI.
+- [Strategia i inwentyka](https://heuristica.pl/uslugi#strategia): warsztaty strategiczne, myślenie twórcze i audyt gotowości do wdrożenia AI.
+- [Infrastruktura](https://heuristica.pl/uslugi#infrastruktura): zaplecze serwerowe, strony internetowe i utrzymanie środowiska dla procesów biznesowych.
 
-### AI Automation & Assistants
-- Budowa i konfiguracja wewnętrznych asystentów GPT (dla działów handlowych, HR, marketingu)
-- Projektowanie agentów AI (agentic AI) i chatbotów RAG
+## Dorobek i materiały
 
-### AI-Driven Market Research
-- Automatyzacja analiz konsumenckich i insightów (AI-assisted research)
-- Generatywna segmentacja, persony, potrzeby, predykcja zachowań
-- Analiza opinii (voice of customer) z użyciem LLM i NLP
+- [Marek Staniszewski](https://heuristica.pl/kim): biografia, kwalifikacje, doświadczenie dydaktyczne i linki do profili zewnętrznych.
+- [Klienci](https://heuristica.pl/klienci): wybrane firmy i instytucje, dla których realizowano projekty doradcze, rozwojowe, szkolenia lub warsztaty. Lista nie oznacza, że każda realizacja była wdrożeniem AI.
+- [Automatyzacje bez kodowania](https://heuristica.pl/automatyzacje-n8n/): bezpłatny poradnik n8n w marketingu, rozdziały HTML, PDF i przepływy do ćwiczeń.
+- [Karta redakcyjna poradnika](https://heuristica.pl/automatyzacje-n8n/karta-redakcyjna.html): autor, wydawca, licencja i opis sposobu przygotowania treści.
+- [Przewodnik po promptowaniu](https://heuristica.pl/prompting): materiał edukacyjny Marka Staniszewskiego.
+- [Inspiracje](https://heuristica.pl/inspiracje): książki, webinary, artykuły i autorskie aplikacje AI.
+- [Narzędzia warsztatowe](https://heuristica.pl/narzedzia): Karty Inwencji, Karty Opowieści oraz pozostałe karty rozwojowe i facylitacyjne. Autorstwo i współautorstwo poszczególnych zestawów opisuje strona.
 
-### AI Content Intelligence
-- Trening zespołów marketingowych w prompt engineeringu i współpracy z LLM
-- Systemy wspierające tworzenie i ocenę treści reklamowych (AI copy-testing, idea scoring)
-- AI do generowania komunikatów i dopasowania do person/buyer journey
+## Zewnętrzne profile i źródła
 
-### AI Education & Enablement
-- Szkolenia z AI w marketingu i strategii (dla zarządów i zespołów)
-- Projektowanie programów rozwojowych AI-ready (akademie AI)
-- Mentoring dla liderów innowacji
+- [INE PAN — wykładowca EMBA](https://emba.inepan.pl/wykladowca/marek-staniszewski/).
+- [SWPS — kadra Nowoczesnej komunikacji marketingowej](https://www0.swps.pl/oferta/wroclaw/podyplomowe/informatyka-nowe-technologie/nowoczesna-komunikacja-marketingowa).
+- [IBD Business School — trener](https://ibd.pl/trenerzy/marek-staniszewski/).
+- [POT — profil prelegenta](https://www.pot.gov.pl/kongresturystyki/person139/marek-staniszewski/).
+- [LinkedIn Marka Staniszewskiego](https://www.linkedin.com/in/staniszewskimarek/).
+- [GitHub Marka Staniszewskiego](https://github.com/staniszewskimarek).
+- [Hugging Face Marka Staniszewskiego](https://huggingface.co/Marek4321).
 
-## Warsztaty i szkolenia
+Profile osoby nie są osobnymi profilami firmowymi Heuristici. Heuristica z Warszawy, heuristica.pl, nie jest produktem heuristi.ca ani firmą Heuristica Sàrl z Genewy.
 
-- **Sztuczna Inteligencja w Marketingu Strategicznym** - wprowadzenie do AI, modele językowe LLM, prompt engineering, narzędzia AI
-- **Storytelling** - warsztaty komunikacji narracyjnej
-- **Inwentyka** - techniki kreatywnego myślenia i generowania innowacyjnych rozwiązań
-- **Consumer Insight i Archetypy** - warsztat analizy konsumenckiej
-- **Skuteczny Marketing** - warsztaty marketingowe
-- **Warsztaty Strategiczne** - szkolenia strategiczne
-- **Brand Coaching** - coaching marki
-- **Strategy Design** - projektowanie strategii
+## Dokumenty i nawigacja
 
-## Narzędzia autorskie
+- [Polityka prywatności i dane działalności](https://heuristica.pl/polityka).
+- [Regulamin i dane sprzedawcy](https://heuristica.pl/regulamin).
+- [Mapa strony](https://heuristica.pl/sitemap.xml).
 
-Karty szkoleniowe i narzędzia facylitacyjne:
-- Karty Inwencji
-- Karty Opowieści
-- Karty Transformacji
-- Karty PersonaliTY
-- Karty Vita Inspira
-- Ko-Kartki (jako współautor)
-
-## Lokalizacja i kontakt
-
-**Siedziba**: Warszawa, 02-703, Polska
-**Email**: staniszewski@heuristica.pl
-**Założyciel**: Marek Staniszewski - konsultant ds. strategii, certyfikowany trener biznesu, certyfikowany coach zespołów
-
-## Struktura strony
-
-- `/` - Strona główna z opisem usług
-- `/kim.html` - O Marku Staniszewskim (kwalifikacje, doświadczenie, wykształcenie)
-- `/uslugi.html` - Szczegółowy opis warsztatów i szkoleń
-- `/narzedzia.html` - Informacje o narzędziach szkoleniowych
-- `/klienci.html` - Portfolio klientów
-- `/inspiracje.html` - Materiały edukacyjne i inspiracje
-- `/polityka.html` - Polityka prywatności
-- `/regulamin.html` - Regulamin usług
-- `/sitemap.xml` - Mapa strony
-
-## Słowa kluczowe
-
-strategia marketingowa, AI w marketingu, warsztaty biznesowe, szkolenia AI, prompt engineering, LLM, asystenci AI, chatboty, inwentyka, storytelling, coaching zespołów, trening biznesowy, strategia komunikacji, Warszawa
+Ceny, terminy i dostępność należy sprawdzać na stronach konkretnych ofert lub bezpośrednio u organizatora.

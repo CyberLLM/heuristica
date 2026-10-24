@@ -506,3 +506,19 @@ a:hover {
 }
 
 
+
+/* Materiały powiązane z ofertą */
+.related-work {
+  margin: 28px 0;
+  padding: 22px 24px;
+  border: 1px solid var(--border-color, #2d3d4a);
+  border-radius: 8px;
+  background: var(--bg-secondary, #15232e);
+}
+.related-work h2 { font-size: 1.2rem; margin-top: 0; }
+.related-work p:last-child { margin-bottom: 0; }
+.related-work ul { columns: 1; padding-left: 22px; }
+.related-work li { margin-bottom: 10px; }
+.related-work a, .company-details a { text-decoration: underline; text-underline-offset: 3px; }
+.company-details { font-style: normal; line-height: 1.8; margin: 24px 0; }
+@media (max-width: 600px) { .related-work { padding: 18px; } }

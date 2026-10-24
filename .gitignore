@@ -5,6 +5,10 @@ cybersec_energetyka_2022_2026.pptx
 img/eon-workshop.png
 
 # Pliki konfiguracji Claude (zawierają wrażliwe dane)
-CLAUDE.md
+# Claude.md / CLAUDE.md — niezależnie od wielkości liter i katalogu
+**/[cC][lL][aA][uU][dD][eE].[mM][dD]
 .claude/
-biblioteka-test/CLAUDE.md
+
+# Lokalne raporty, materiał badawczy i skrypty robocze — bez publikacji
+/raporty/
+/research/

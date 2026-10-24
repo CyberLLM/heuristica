@@ -34,7 +34,7 @@
   <meta property="og:url" content="https://heuristica.pl">
   <meta property="og:type" content="website">
   
-  <link rel="stylesheet" href="style.css?v=premium-2026-workdesign">
+  <link rel="stylesheet" href="style.css?v=geo-2026-10-24">
 </head>
 <body>
   <div class="nav">
@@ -265,11 +265,16 @@
       Łączymy myślenie strategiczne, inżynierię procesów i praktyczne wdrażanie sztucznej inteligencji. Pracujemy bezpośrednio z zarządami, liderami operacyjnymi i zespołami — od diagnozy i projektu nowego sposobu pracy, przez automatyzacje i agentów, aż po przygotowanie ludzi do nowej rzeczywistości.
     </p>
     <p>
-      Założycielem Heuristica jest <strong>Marek Staniszewski</strong> — strateg, facylitator innowacji, autor książek i programów szkoleniowych z zakresu myślenia koncepcyjnego oraz wdrażania technologii w biznesie.
+      Założycielem Heuristica jest <a href="kim.html"><strong>Marek Staniszewski</strong></a> — strateg, facylitator innowacji, autor książek i programów szkoleniowych z zakresu myślenia koncepcyjnego oraz wdrażania technologii w biznesie.
     </p>
     <p>
       Jako trener AI i automatyzacji z 30-letnim doświadczeniem w strategii, Marek prowadzi szkolenia AI dla firm i instytucji publicznych oraz warsztaty ze sztucznej inteligencji dla zarządów i zespołów. Konsulting AI realizujemy w Warszawie i zdalnie w całej Polsce.
     </p>
+
+    <section class="related-work">
+        <h2>Poznaj nasze materiały i doświadczenie</h2>
+        <p>Sprawdź <a href="automatyzacje-n8n/">poradnik n8n dla marketingu</a>, <a href="inspiracje.html#moje-ksiazki">książki o strategii</a> oraz <a href="kim.html#doswiadczenie">profile Marka na stronach uczelni i organizatorów szkoleń</a>.</p>
+      </section>
 
     <!-- SEKCJA CTA KOŃCOWE -->
     <h2 id="kontakt">Porozmawiajmy o procesie</h2>
@@ -282,60 +287,139 @@
     <p style="font-size: 0.95em; color: var(--text-muted);">
       Napisz bezpośrednio: <a href="mailto:staniszewski@heuristica.pl" style="color: var(--accent-secondary); text-decoration: underline;">staniszewski@heuristica.pl</a>
     </p>
+    <address class="company-details">
+      <strong>Heuristica – Staniszewski Marek</strong><br>
+      ul. Bukowińska 26C/11, 02-703 Warszawa<br>
+      NIP: 7141338822 · <a href="tel:+48603783597">+48 603 783 597</a>
+    </address>
   </div>
 
   <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Heuristica",
-    "description": "Projektujemy procesy pracy, w których człowiek, AI i automatyzacja działają jako jeden system.",
-    "url": "https://heuristica.pl",
-    "logo": "https://heuristica.pl/img/logo.png",
-    "image": "https://heuristica.pl/img/collage.jpg",
-    "email": "staniszewski@heuristica.pl",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Warszawa",
-      "postalCode": "02-703",
-      "addressCountry": "PL"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://heuristica.pl/#heuristica",
+      "name": "Heuristica",
+      "alternateName": "Heuristica Strategy Design",
+      "url": "https://heuristica.pl/",
+      "description": "Szkolenia AI, konsulting strategiczny oraz automatyzacje i agenci AI dla firm. Warszawa i współpraca zdalna.",
+      "logo": "https://heuristica.pl/img/logo.png",
+      "image": "https://heuristica.pl/img/collage.jpg",
+      "email": "staniszewski@heuristica.pl",
+      "telephone": "+48603783597",
+      "taxID": "7141338822",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Bukowińska 26C/11",
+        "addressLocality": "Warszawa",
+        "postalCode": "02-703",
+        "addressCountry": "PL"
+      },
+      "founder": {
+        "@id": "https://heuristica.pl/kim#marek-staniszewski"
+      },
+      "areaServed": "PL",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Usługi Heuristica",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Projektowanie procesów pracy z AI",
+              "url": "https://heuristica.pl/uslugi#redesign",
+              "provider": {
+                "@id": "https://heuristica.pl/#heuristica"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Automatyzacje i agenci AI",
+              "url": "https://heuristica.pl/uslugi#workflows",
+              "provider": {
+                "@id": "https://heuristica.pl/#heuristica"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Szkolenia AI dla firm",
+              "url": "https://heuristica.pl/uslugi#kompetencje",
+              "provider": {
+                "@id": "https://heuristica.pl/#heuristica"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategia i inwentyka",
+              "url": "https://heuristica.pl/uslugi#strategia",
+              "provider": {
+                "@id": "https://heuristica.pl/#heuristica"
+              }
+            }
+          }
+        ]
+      }
     },
-    "sameAs": [
-      "https://www.linkedin.com/in/staniszewskimarek/",
-      "https://www.youtube.com/@marekstaniszewski7424",
-      "https://github.com/staniszewskimarek"
-    ],
-    "areaServed": "PL",
-    "founder": {
+    {
       "@type": "Person",
+      "@id": "https://heuristica.pl/kim#marek-staniszewski",
       "name": "Marek Staniszewski",
       "url": "https://heuristica.pl/kim",
-      "jobTitle": "AI Strategist, Business Trainer",
-      "knowsAbout": ["Artificial Intelligence", "AI Strategy", "Marketing", "AI Training", "Process Automation"],
+      "image": "https://heuristica.pl/img/MS_new.png",
+      "jobTitle": "Strateg marketingowy i trener AI",
+      "worksFor": {
+        "@id": "https://heuristica.pl/#heuristica"
+      },
+      "knowsAbout": [
+        "Strategia marketingowa",
+        "AI w marketingu",
+        "Prompt engineering",
+        "Automatyzacje n8n",
+        "Inwentyka",
+        "Storytelling"
+      ],
       "affiliation": {
         "@type": "EducationalOrganization",
+        "@id": "https://emba.inepan.pl/#organization",
         "name": "Instytut Nauk Ekonomicznych PAN",
-        "url": "https://ine.pan.pl/"
+        "url": "https://emba.inepan.pl/"
       },
       "sameAs": [
         "https://www.linkedin.com/in/staniszewskimarek/",
         "https://www.youtube.com/@marekstaniszewski7424",
         "https://github.com/staniszewskimarek",
         "https://huggingface.co/Marek4321"
+      ],
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://emba.inepan.pl/wykladowca/marek-staniszewski/"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://ibd.pl/trenerzy/marek-staniszewski/"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://www.pot.gov.pl/kongresturystyki/person139/marek-staniszewski/"
+        }
       ]
-    },
-    "serviceType": [
-      "Szkolenia AI dla firm",
-      "Warsztaty ze sztucznej inteligencji",
-      "Konsulting AI",
-      "AI Process Redesign",
-      "AI Workflows i automatyzacje",
-      "Agenci AI",
-      "AI Capability Building",
-      "Strategia i organizacja pracy z AI"
-    ]
-  }
+    }
+  ]
+}
   </script>
 
   <div class="footer">

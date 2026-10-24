@@ -31,6 +31,8 @@ Aktualizacja opisu: 2026-10-24.
 - [Automatyzacje bez kodowania](https://heuristica.pl/automatyzacje-n8n/): bezpłatny poradnik n8n w marketingu, rozdziały HTML, PDF i przepływy do ćwiczeń.
 - [Karta redakcyjna poradnika](https://heuristica.pl/automatyzacje-n8n/karta-redakcyjna.html): autor, wydawca, licencja i opis sposobu przygotowania treści.
 - [Przewodnik po promptowaniu](https://heuristica.pl/prompting): materiał edukacyjny Marka Staniszewskiego.
+- [Blog Heuristica](https://heuristica.pl/blog/): pełne artykuły Marka Staniszewskiego o AI, strategii, marketingu i badaniach.
+- [Jak robić badania marketingowe z AI](https://heuristica.pl/blog/badania-marketingowe-ai-silicon-sampling/): trzy metody wykorzystania LLM w badaniach i ograniczenia syntetycznych odpowiedzi.
 - [Inspiracje](https://heuristica.pl/inspiracje): książki, webinary, artykuły i autorskie aplikacje AI.
 - [Narzędzia warsztatowe](https://heuristica.pl/narzedzia): Karty Inwencji, Karty Opowieści oraz pozostałe karty rozwojowe i facylitacyjne. Autorstwo i współautorstwo poszczególnych zestawów opisuje strona.
 

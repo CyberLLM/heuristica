@@ -22,6 +22,10 @@
     .blog-article .formula{text-align:center;font-size:1.35rem}
     .blog-article blockquote{border-left:3px solid var(--accent-secondary,#d4a574);padding:10px 22px;margin:25px 0;font-size:1.2rem}
     .blog-related{margin-top:64px;padding-top:24px;border-top:1px solid var(--border-color,#2d3d4a)}
+    .listen-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 30px}
+    .listen-controls button{font:inherit;padding:10px 15px;border:1px solid var(--accent-secondary,#d4a574);border-radius:6px;background:transparent;color:var(--text-primary,#e8e6e1);cursor:pointer}
+    .listen-controls button:hover,.listen-controls button:focus-visible{background:var(--accent-secondary,#d4a574);color:#17212b;outline:2px solid currentColor;outline-offset:2px}
+    .listen-status{flex-basis:100%;margin:0!important;color:var(--text-muted,#a8adb2);font-size:.95rem!important}
     @media(max-width:640px){.blog-shell{padding:20px 16px 56px}.blog-article p{font-size:1rem}}
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Pułapka kontynuacji – czyli dlaczego AI raczej nie zbuduje dobrego scenariusza strategicznego","datePublished":"2026-08-28","dateModified":"2026-08-28","author":{"@type":"Person","name":"Marek Staniszewski","url":"https://heuristica.pl/kim.html"},"publisher":{"@type":"Organization","name":"Heuristica","url":"https://heuristica.pl/"},"mainEntityOfPage":"https://heuristica.pl/blog/pulapka-kontynuacji/","inLanguage":"pl"}</script>
@@ -29,6 +33,13 @@
 <body><main class="blog-shell">
   <nav class="blog-top" aria-label="Nawigacja"><a href="/">Heuristica</a> / <a href="/blog/">Blog</a></nav>
   <article class="blog-article"><header><p><a href="/blog/">Blog Heuristica</a></p><h1>Pułapka kontynuacji – czyli dlaczego AI raczej nie zbuduje dobrego scenariusza strategicznego</h1><p class="blog-meta"><a href="/kim.html">Marek Staniszewski</a> · <time datetime="2026-08-28">28 sierpnia 2026</time></p></header>
+  <div class="listen-controls" aria-label="Odsłuch artykułu">
+    <button id="speech-start" type="button">▶ Słuchaj artykułu</button>
+    <button id="speech-pause" type="button" hidden>⏸ Wstrzymaj</button>
+    <button id="speech-stop" type="button" hidden>■ Zatrzymaj</button>
+    <p id="speech-status" class="listen-status" role="status" aria-live="polite"></p>
+  </div>
+  <div class="blog-content">
   <figure><img src="images/figure-01.png" alt="Rysunek rozgałęziających się możliwych przyszłości między teraźniejszością a horyzontem decyzji." loading="lazy"></figure>
 <h2>Strategia jako hipoteza nt. przyszłości</h2>
 <p>Strategia marki, jak każda inna strategia jest w gruncie rzeczy swoistym zakładem o przyszłość. Wybieramy więc jakieś pozycjonowanie, alokujemy budżet, decydujemy w jakim segmencie chcemy być za trzy lata itd. A wszystkie te decyzje opieramy na założeniu jak naszym zdaniem będzie wyglądał ten przyszły świat, w którym marka ma działać. Założenia tego nie da się jednak w żaden sposób zweryfikować dzisiaj.</p>
@@ -173,6 +184,80 @@
 <p><a href="https://marketingprzykawie.pl/artykuly/creative-strategy-fingerprint-czyli-dlaczego-ai-raczej-nie-wymysli-kolejnego-iphonea/">Creative Strategy Fingerprints – czyli dlaczego AI raczej nie wymyśli kolejnego iPhone’a (framework SCAMPER)</a></p>
 <p><a href="https://marketingprzykawie.pl/artykuly/w-reklamach-generowanych-przez-llm-kreatywny-bias-to-regula/">Creative Code Fingerprints – czyli dlaczego AI wciąż wymyśla takie same reklamy (10 kodów reklamy TV)</a></p>
 <p><a href="https://marketingprzykawie.pl/artykuly/bias-strategiczny-llm-ow-udowodniony-w-tescie-stworz-pozycjonowanie-marki/">Brand Positioning Fingerprints – czyli dlaczego AI zawsze pozycjonuje markę tak samo (kody strategii marki)</a></p>
+  </div>
   </article>
   <aside class="blog-related"><p>Więcej o pracy Marka Staniszewskiego i ofercie Heuristici:</p><ul><li><a href="/kim.html">Marek Staniszewski — doświadczenie i dorobek</a></li><li><a href="/uslugi.html">Usługi i warsztaty Heuristica</a></li><li><a href="/inspiracje.html">Inspiracje i publikacje</a></li></ul></aside>
-</main></body></html>
+</main>
+<script>
+(() => {
+  const startButton = document.getElementById('speech-start');
+  const pauseButton = document.getElementById('speech-pause');
+  const stopButton = document.getElementById('speech-stop');
+  const status = document.getElementById('speech-status');
+  const content = document.querySelector('.blog-content');
+  if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
+    startButton.disabled = true;
+    status.textContent = 'Ta przeglądarka nie obsługuje syntezy mowy.';
+    return;
+  }
+  let chunks = [];
+  let position = 0;
+  let session = 0;
+  const synth = window.speechSynthesis;
+  const setControls = (active) => {
+    startButton.hidden = active;
+    pauseButton.hidden = !active;
+    stopButton.hidden = !active;
+  };
+  const speakNext = (currentSession) => {
+    if (currentSession !== session) return;
+    if (position >= chunks.length) {
+      setControls(false);
+      status.textContent = 'Odsłuch zakończony.';
+      return;
+    }
+    const utterance = new SpeechSynthesisUtterance(chunks[position++]);
+    utterance.lang = 'pl-PL';
+    utterance.rate = 1;
+    const polishVoice = synth.getVoices().find(voice => voice.lang && voice.lang.toLowerCase().startsWith('pl'));
+    if (polishVoice) utterance.voice = polishVoice;
+    utterance.onend = () => speakNext(currentSession);
+    utterance.onerror = (event) => {
+      if (currentSession !== session || event.error === 'canceled' || event.error === 'interrupted') return;
+      speakNext(currentSession);
+    };
+    synth.speak(utterance);
+  };
+  startButton.addEventListener('click', () => {
+    synth.cancel();
+    chunks = Array.from(content.querySelectorAll('h2,p,blockquote'))
+      .map(element => element.textContent.trim())
+      .filter(Boolean);
+    position = 0;
+    session += 1;
+    pauseButton.textContent = '⏸ Wstrzymaj';
+    setControls(true);
+    status.textContent = 'Odtwarzanie artykułu.';
+    speakNext(session);
+  });
+  pauseButton.addEventListener('click', () => {
+    if (synth.paused) {
+      synth.resume();
+      pauseButton.textContent = '⏸ Wstrzymaj';
+      status.textContent = 'Odtwarzanie artykułu.';
+    } else {
+      synth.pause();
+      pauseButton.textContent = '▶ Wznów';
+      status.textContent = 'Odsłuch wstrzymany.';
+    }
+  });
+  stopButton.addEventListener('click', () => {
+    session += 1;
+    synth.cancel();
+    position = 0;
+    setControls(false);
+    status.textContent = 'Odsłuch zatrzymany.';
+  });
+})();
+</script>
+</body></html>

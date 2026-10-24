@@ -59,3 +59,6 @@ Profile osoby nie są osobnymi profilami firmowymi Heuristici. Heuristica z Wars
 - [Mapa strony](https://heuristica.pl/sitemap.xml).
 
 Ceny, terminy i dostępność należy sprawdzać na stronach konkretnych ofert lub bezpośrednio u organizatora.
+
+- [Strategic Sandbox, czyli w jaki sposób AI zmienia mój warsztat i sposób myślenia o strategii…](https://heuristica.pl/blog/strategic-sandbox/): Marek Staniszewski pokazuje, jak wykorzystuje aplikację Strategic Sandbox do pracy nad strategią: od celu i analizy rynku po hipotezy, działania, symulację i mierniki.
+- [Wieże Hanoi w chińskim pokoju, czyli słów kilka nt. iluzji myślenia o bezmyślności AI](https://heuristica.pl/blog/wieze-hanoi-chinski-pokoj-ai/): Marek Staniszewski analizuje eksperyment Apple o modelach rozumujących, metaforę chińskiego pokoju i zadanie Wież Hanoi, pytając, co testy mówią o myśleniu AI.

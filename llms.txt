@@ -32,6 +32,8 @@ Aktualizacja opisu: 2026-10-24.
 - [Karta redakcyjna poradnika](https://heuristica.pl/automatyzacje-n8n/karta-redakcyjna.html): autor, wydawca, licencja i opis sposobu przygotowania treści.
 - [Przewodnik po promptowaniu](https://heuristica.pl/prompting): materiał edukacyjny Marka Staniszewskiego.
 - [Blog Heuristica](https://heuristica.pl/blog/): pełne artykuły Marka Staniszewskiego o AI, strategii, marketingu i badaniach.
+- [Zanim zaczniesz budować agenta AI, zmapuj proces...](https://heuristica.pl/blog/zanim-zaczniesz-budowac-agenta-ai/): Przed wdrożeniem agenta AI warto zmapować proces, uporządkować dane i określić mierniki sukcesu. Marek Staniszewski przedstawia praktyczną checklistę.
+- [Czy strategię można zakodować? Czyli kilka luźnych uwag o strukturalizmie, machine learning, aproksymacji i ruchomych celach…](https://heuristica.pl/blog/czy-strategie-mozna-zakodowac/): Marek Staniszewski rozważa, czy strategię można sformalizować i zakodować jako model, oraz gdzie kończą się możliwości aproksymacji i machine learningu.
 - [Fable 5 i muzykoterapia](https://heuristica.pl/blog/fable-5-muzykoterapia-cyberbron/): eksperyment Marka Staniszewskiego z modelem Fable 5 i aplikacją rekomendującą muzykę.
 - [Krótka historia voice agentów](https://heuristica.pl/blog/krotka-historia-voice-agentow/): od vocodera i rozpoznawania mowy do agentów głosowych czasu rzeczywistego.
 - [Jak robić badania marketingowe z AI](https://heuristica.pl/blog/badania-marketingowe-ai-silicon-sampling/): trzy metody wykorzystania LLM w badaniach i ograniczenia syntetycznych odpowiedzi.
